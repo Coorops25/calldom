@@ -57,15 +57,9 @@ export default function Services({ onNavigate }: ServicesProps) {
       </div>
 
       <div className="border-t border-white/10">
-        {services.map((svc, i) => (
-          <motion.div
-            key={svc.id}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: "-10%" }}
-            className="group grid lg:grid-cols-2 min-h-[75vh] border-b border-white/10 overflow-hidden relative transition-colors duration-500 hover:bg-white/[0.02]"
-          >
-            <div className={`p-10 lg:p-20 flex flex-col justify-center ${i % 2 !== 0 ? 'lg:order-last' : ''}`}>
+        {services.map((svc, i) => {
+          const textCol = (
+            <div key="text" className="p-10 lg:p-20 flex flex-col justify-center">
               <div className="font-mono text-6xl font-light text-navy-light mb-8 text-stroke-teal">
                 {svc.id}
               </div>
@@ -82,19 +76,20 @@ export default function Services({ onNavigate }: ServicesProps) {
                   </span>
                 ))}
               </div>
-              <button 
+              <button
                 onClick={() => onNavigate?.(svc.id)}
                 className="inline-flex items-center gap-4 font-mono text-xs tracking-[0.2em] uppercase text-teal group/link hover:text-white transition-colors"
               >
-                Explorar 
+                Explorar
                 <span className="w-8 h-px bg-teal relative transition-all duration-300 group-hover/link:w-12 after:content-[''] after:absolute after:right-0 after:-top-[3px] after:w-2 after:h-2 after:border-r after:border-t after:border-teal after:rotate-45" />
               </button>
             </div>
+          );
 
-            <div className={`relative min-h-[40vh] lg:min-h-auto overflow-hidden flex items-center justify-center ${i % 2 !== 0 ? 'lg:order-first' : ''}`}>
+          const iconCol = (
+            <div key="icon" className="relative min-h-[40vh] lg:min-h-auto overflow-hidden flex items-center justify-center">
               <div className={`absolute inset-0 bg-gradient-to-br ${svc.gradient} transition-transform duration-1000 ease-out group-hover:scale-105`} />
-              
-              <HexagonBackground 
+              <HexagonBackground
                 className="absolute inset-0 bg-transparent"
                 hexagonSize={40}
                 hexagonMargin={4}
@@ -114,8 +109,20 @@ export default function Services({ onNavigate }: ServicesProps) {
                 </div>
               </HexagonBackground>
             </div>
-          </motion.div>
-        ))}
+          );
+
+          return (
+            <motion.div
+              key={svc.id}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, margin: "-10%" }}
+              className="group grid lg:grid-cols-2 min-h-[75vh] border-b border-white/10 overflow-hidden relative transition-colors duration-500 hover:bg-white/[0.02]"
+            >
+              {i % 2 === 0 ? [textCol, iconCol] : [iconCol, textCol]}
+            </motion.div>
+          );
+        })}
       </div>
     </section>
   );
