@@ -3,7 +3,11 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import { ChevronDown } from 'lucide-react';
 import CircularText from '../ui/CircularText';
 
-export default function Hero() {
+interface Props {
+  onNavigate?: (view: string) => void;
+}
+
+export default function Hero({ onNavigate }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 500], [0, 200]);
@@ -162,7 +166,7 @@ export default function Hero() {
           className="flex flex-wrap justify-center gap-5 mt-12"
         >
           <button 
-            onClick={() => window.open('https://ccgrupo.com.co/contacto/', '_blank')}
+            onClick={() => onNavigate?.('contact')}
             className="group relative font-mono text-[0.65rem] tracking-[0.2em] uppercase px-10 py-4 bg-gradient-to-br from-teal-dark to-teal text-white overflow-hidden transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_40px_rgba(0,180,216,0.35)]"
           >
             <span className="relative z-10">Comenzar ahora</span>

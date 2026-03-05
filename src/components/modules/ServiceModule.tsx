@@ -9,9 +9,10 @@ import { getServiceById } from '../../data';
 interface ServiceModuleProps {
   serviceId: string;
   onBack: () => void;
+  onNavigate?: (view: string) => void;
 }
 
-export default function ServiceModule({ serviceId, onBack }: ServiceModuleProps) {
+export default function ServiceModule({ serviceId, onBack, onNavigate }: ServiceModuleProps) {
   const service = getServiceById(serviceId);
   const [imageError, setImageError] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -278,7 +279,7 @@ export default function ServiceModule({ serviceId, onBack }: ServiceModuleProps)
               Agenda una consultoría gratuita y descubre cómo nuestra solución de {service.title} puede escalar tu negocio.
             </p>
             <button
-              onClick={() => window.open('https://ccgrupo.com.co/contacto/', '_blank')}
+              onClick={() => onNavigate?.('contact')}
               className="font-mono text-sm tracking-[0.25em] uppercase px-10 py-4 bg-teal text-navy-deep hover:bg-white transition-all duration-300"
             >
               Agendar Demo

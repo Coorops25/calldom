@@ -65,7 +65,7 @@ export default function App() {
               <Navbar onNavigate={handleNavigate} />
 
               <main className="relative z-10">
-                <Hero />
+                <Hero onNavigate={handleNavigate} />
                 <Marquee />
                 <About />
                 <Services onNavigate={handleNavigate} />
@@ -82,6 +82,7 @@ export default function App() {
             <ServiceModule
               serviceId={currentView}
               onBack={handleBackToHome}
+              onNavigate={handleNavigate}
             />
           )}
         </>
