@@ -13,6 +13,7 @@ const navLinks = [
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [logoError, setLogoError] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,12 +44,23 @@ export default function Navbar() {
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       >
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => scrollToSection('#hero')}>
-          <div className="w-8 h-8 border-2 border-teal rounded-md flex items-center justify-center font-mono text-[0.55rem] font-bold text-teal">
-            CCG
-          </div>
-          <div className="font-mono text-[0.65rem] tracking-[0.25em] uppercase text-white font-normal hidden sm:block">
-            Contact Center <span className="text-teal font-semibold">Grupo</span>
-          </div>
+          {!logoError ? (
+            <img 
+              src="https://www.ccgrupo.com.co/wp-content/uploads/2025/03/logo-original-b-.webp" 
+              alt="CCGrupo Logo" 
+              className="h-12 w-auto object-contain"
+              onError={() => setLogoError(true)}
+            />
+          ) : (
+            <>
+              <div className="w-8 h-8 border-2 border-teal rounded-md flex items-center justify-center font-mono text-[0.55rem] font-bold text-teal">
+                CCG
+              </div>
+              <div className="font-mono text-[0.65rem] tracking-[0.25em] uppercase text-white font-normal hidden sm:block">
+                Contact Center <span className="text-teal font-semibold">Grupo</span>
+              </div>
+            </>
+          )}
         </div>
 
         <ul className="hidden md:flex gap-10">

@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import SplitText from '../ui/SplitText';
 
 const clients = [
   "Salud Total", "Compensar", "Colsubsidio", "Famisanar", "Sanitas", 
@@ -19,14 +20,19 @@ export default function Clients() {
             <div className="w-8 h-px bg-teal" />
             05 / 05 — Clientes
           </motion.div>
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="font-display text-[clamp(2rem,3.5vw,3rem)]"
-          >
-            Nuestros <em className="italic text-gradient">Clientes</em>
-          </motion.h2>
+          
+          <div className="font-display text-[clamp(2rem,3.5vw,3rem)]">
+          <SplitText
+              className="inline-block"
+              delay={40}
+              duration={1}
+              splitType="chars"
+              from={{ opacity: 0, y: 20 }}
+              to={{ opacity: 1, y: 0 }}
+            >
+              Nuestros <em className="italic text-gradient">Clientes</em>
+            </SplitText>
+          </div>
         </div>
         <motion.div 
           initial={{ opacity: 0 }}

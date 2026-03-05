@@ -1,6 +1,8 @@
 import { motion, useInView } from 'motion/react';
 import { useRef, useState, useEffect } from 'react';
 import ScrambledText from '../ui/ScrambledText';
+import SplitText from '../ui/SplitText';
+import LiquidEther from '../ui/LiquidEther';
 
 function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
   const [count, setCount] = useState(0);
@@ -34,7 +36,26 @@ function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
 
 export default function About() {
   return (
-    <section id="about" className="py-32 px-6 md:px-14 lg:px-28 grid lg:grid-cols-2 gap-24 items-center">
+    <section id="about" className="py-32 px-6 md:px-14 lg:px-28 grid lg:grid-cols-2 gap-24 items-center relative overflow-hidden">
+      <div className="absolute inset-0 opacity-20 pointer-events-none -z-10">
+        <LiquidEther
+          colors={['#0f1d35', '#0077b6', '#060d1f']}
+          mouseForce={20}
+          cursorSize={100}
+          isViscous
+          viscous={30}
+          iterationsViscous={32}
+          iterationsPoisson={32}
+          resolution={0.5}
+          isBounce={false}
+          autoDemo
+          autoSpeed={0.5}
+          autoIntensity={2.2}
+          takeoverDuration={0.25}
+          autoResumeDelay={3000}
+          autoRampDuration={0.6}
+        />
+      </div>
       <div className="space-y-8">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -46,29 +67,42 @@ export default function About() {
           02 / 05 — Nosotros
         </motion.div>
         
-        <motion.h2 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="font-display text-[clamp(2.5rem,4.5vw,4rem)] leading-[1.1]"
-        >
-          Más de 15 años transformando el <em className="italic text-gradient">BPO</em> en Colombia
-        </motion.h2>
+        <div className="font-display text-[clamp(2.5rem,4.5vw,4rem)] leading-[1.1]">
+          <SplitText
+            className="inline-block"
+            delay={30}
+            duration={1}
+            splitType="words"
+            from={{ opacity: 0, y: 20 }}
+            to={{ opacity: 1, y: 0 }}
+          >
+            Más de 15 años transformando el <span className="text-teal font-medium italic">BPO</span> en Colombia
+          </SplitText>
+        </div>
 
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
+          className="text-lg font-light leading-relaxed text-gray-200"
         >
            <ScrambledText 
-            className="text-lg font-light leading-relaxed text-gray-200"
+            className="inline"
             scrambleChars="!@#$%^&*()_+-=[]{}|;:,.<>?/~"
             radius={150}
             duration={0.8}
           >
-            Somos un BPO de nueva generación, especializado en un ecosistema de soluciones de Contact Center con Inteligencia Artificial. Fusionamos Talento Humano y Agentes Virtuales Autónomos con flujos omnicanal para operaciones de ventas y soporte altamente eficientes.
+            Somos un 
+          </ScrambledText>
+          <em className="italic text-gradient font-medium">BPO</em>
+          <ScrambledText 
+            className="inline"
+            scrambleChars="!@#$%^&*()_+-=[]{}|;:,.<>?/~"
+            radius={150}
+            duration={0.8}
+          >
+             de nueva generación, especializado en un ecosistema de soluciones de Contact Center con Inteligencia Artificial. Fusionamos Talento Humano y Agentes Virtuales Autónomos con flujos omnicanal para operaciones de ventas y soporte altamente eficientes.
           </ScrambledText>
         </motion.div>
 
@@ -79,7 +113,7 @@ export default function About() {
           transition={{ delay: 0.3 }}
           className="text-lg font-light leading-relaxed text-gray-200"
         >
-          Evolucionamos el BPO tradicional hacia modelos basados en <strong className="text-white font-medium">productividad, datos y autonomía operativa</strong>.
+          Evolucionamos el <em className="italic text-gradient">BPO</em> tradicional hacia modelos basados en <strong className="text-white font-medium">productividad, datos y autonomía operativa</strong>.
         </motion.p>
 
         <motion.div 

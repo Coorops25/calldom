@@ -1,3 +1,8 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 import { useState, useEffect } from 'react';
 import { AnimatePresence } from 'motion/react';
 import Preloader from './components/ui/Preloader';
@@ -12,9 +17,11 @@ import Reasons from './components/sections/Reasons';
 import Clients from './components/sections/Clients';
 import CTA from './components/sections/CTA';
 import Footer from './components/layout/Footer';
+import ServiceModule from './components/modules/ServiceModule';
 
 export default function App() {
   const [loading, setLoading] = useState(true);
+  const [currentView, setCurrentView] = useState<'home' | string>('home');
 
   // Prevent scrolling while loading
   useEffect(() => {
@@ -25,6 +32,22 @@ export default function App() {
     }
   }, [loading]);
 
+  const handleNavigate = (view: string) => {
+    setCurrentView(view);
+    window.scrollTo(0, 0);
+  };
+
+  const handleBackToHome = () => {
+    setCurrentView('home');
+    // Optional: scroll to services section after a small delay
+    setTimeout(() => {
+      const element = document.getElementById('services');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
+
   return (
     <>
       <AnimatePresence mode="wait">
@@ -34,20 +57,30 @@ export default function App() {
       {!loading && (
         <>
           <CustomCursor />
-          <BackgroundEffects />
-          <Navbar />
+          
+          {currentView === 'home' ? (
+            <>
+              <BackgroundEffects />
+              <Navbar />
+              
+              <main className="relative z-10">
+                <Hero />
+                <Marquee />
+                <About />
+                <Services onNavigate={handleNavigate} />
+                <Reasons />
+                <Clients />
+                <CTA />
+              </main>
 
-          <main className="relative z-10">
-            <Hero />
-            <Marquee />
-            <About />
-            <Services />
-            <Reasons />
-            <Clients />
-            <CTA />
-          </main>
-
-          <Footer />
+              <Footer />
+            </>
+          ) : (
+            <ServiceModule 
+              serviceId={currentView} 
+              onBack={handleBackToHome} 
+            />
+          )}
         </>
       )}
     </>

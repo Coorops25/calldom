@@ -1,12 +1,30 @@
 import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
+import SplitText from '../ui/SplitText';
+import LiquidEther from '../ui/LiquidEther';
 
 export default function CTA() {
   return (
     <section className="py-56 px-6 relative overflow-hidden text-center">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-radial-teal opacity-10 blur-[100px] pointer-events-none rounded-full" 
-           style={{ background: 'radial-gradient(circle, rgba(0,180,216,0.15), transparent 65%)' }}
-      />
+      <div className="absolute inset-0 opacity-20 pointer-events-none">
+        <LiquidEther
+          colors={['#023e8a', '#0077b6', '#0096c7']}
+          mouseForce={20}
+          cursorSize={100}
+          isViscous
+          viscous={30}
+          iterationsViscous={32}
+          iterationsPoisson={32}
+          resolution={0.5}
+          isBounce={false}
+          autoDemo
+          autoSpeed={0.5}
+          autoIntensity={2.2}
+          takeoverDuration={0.25}
+          autoResumeDelay={3000}
+          autoRampDuration={0.6}
+        />
+      </div>
       
       <div className="relative z-10 max-w-4xl mx-auto">
         <motion.div 
@@ -18,15 +36,19 @@ export default function CTA() {
           ¿Listo para transformar tu operación?
         </motion.div>
         
-        <motion.h2 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="font-display text-[clamp(3rem,7vw,6.5rem)] leading-[1.1] mb-8"
-        >
-          Hablemos del <em className="italic text-gradient">futuro</em> de tu empresa
-        </motion.h2>
+        <div className="font-display text-[clamp(3rem,7vw,6.5rem)] leading-[1.1] mb-8">
+          <SplitText
+            className="inline-block"
+            delay={40}
+            duration={1}
+            splitType="words"
+            from={{ opacity: 0, y: 30 }}
+            to={{ opacity: 1, y: 0 }}
+            textAlign="center"
+          >
+            Hablemos del <em className="italic font-bold text-teal-bright animate-pulse inline-block drop-shadow-[0_0_25px_rgba(0,229,255,0.8)]">futuro</em> de tu empresa
+          </SplitText>
+        </div>
         
         <motion.p 
           initial={{ opacity: 0, y: 20 }}

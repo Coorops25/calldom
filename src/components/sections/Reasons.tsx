@@ -1,5 +1,7 @@
 import { motion } from 'motion/react';
 import { Brain, BarChart3, Globe2, Settings, Link2, Stethoscope } from 'lucide-react';
+import ScrollStack, { ScrollStackItem } from '../ui/ScrollStack';
+import SplitText from '../ui/SplitText';
 
 const reasons = [
   {
@@ -36,8 +38,8 @@ const reasons = [
 
 export default function Reasons() {
   return (
-    <section id="reasons" className="py-32 px-6 md:px-14 lg:px-28">
-      <div className="max-w-3xl mb-20">
+    <section id="reasons" className="py-20 px-6 md:px-14 lg:px-28">
+      <div className="max-w-3xl mb-12">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -47,45 +49,50 @@ export default function Reasons() {
           <div className="w-8 h-px bg-teal" />
           04 / 05 — Diferencial
         </motion.div>
-        <motion.h2 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="font-display text-[clamp(2.5rem,4.5vw,4.2rem)] leading-tight"
-        >
-          ¿Por qué elegir a Contact Center <em className="italic text-gradient">Grupo?</em>
-        </motion.h2>
+        
+        <div className="font-display text-[clamp(2.5rem,4.5vw,4.2rem)] leading-tight">
+          <SplitText
+            className="inline-block"
+            delay={30}
+            duration={1}
+            splitType="words"
+            from={{ opacity: 0, y: 20 }}
+            to={{ opacity: 1, y: 0 }}
+          >
+            ¿Por qué elegir a Contact Center <em className="italic text-gradient">Grupo?</em>
+          </SplitText>
+        </div>
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/10 border border-white/10">
-        {reasons.map((reason, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
-            className="bg-navy-deep p-12 relative group overflow-hidden"
-          >
-            <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-teal-dark to-teal-bright transform scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100" />
-            <div className="absolute inset-0 bg-white/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            
-            <div className="relative z-10">
-              <div className="font-mono text-[0.55rem] tracking-[0.2em] text-teal mb-8">
+      <div className="h-[800px] w-full border border-white/10 rounded-3xl overflow-hidden bg-navy-mid/30 backdrop-blur-sm">
+        <ScrollStack 
+          itemDistance={50} 
+          itemStackDistance={20}
+          stackPosition="15%"
+          scaleEndPosition="5%"
+          itemScale={0.05}
+        >
+          {reasons.map((reason, i) => (
+            <ScrollStackItem key={i} itemClassName="flex flex-col justify-center bg-navy-deep border border-white/10">
+              <div className="font-mono text-[0.55rem] tracking-[0.2em] text-teal mb-6">
                 0{i + 1}
               </div>
-              <div className="w-12 h-12 rounded-xl bg-teal/10 border border-teal/20 flex items-center justify-center text-teal mb-6">
-                <reason.icon size={24} strokeWidth={1.5} />
+              <div className="flex items-start gap-6">
+                <div className="w-16 h-16 rounded-xl bg-teal/10 border border-teal/20 flex items-center justify-center text-teal shrink-0">
+                  <reason.icon size={32} strokeWidth={1.5} />
+                </div>
+                <div>
+                  <h4 className="font-display text-3xl mb-4 text-white">
+                    {reason.title}
+                  </h4>
+                  <p className="text-lg font-light leading-relaxed text-gray-200 max-w-xl">
+                    {reason.desc}
+                  </p>
+                </div>
               </div>
-              <h4 className="font-display text-2xl mb-4 text-white group-hover:text-teal transition-colors duration-300">
-                {reason.title}
-              </h4>
-              <p className="text-sm font-light leading-relaxed text-gray-200">
-                {reason.desc}
-              </p>
-            </div>
-          </motion.div>
-        ))}
+            </ScrollStackItem>
+          ))}
+        </ScrollStack>
       </div>
     </section>
   );

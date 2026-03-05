@@ -1,17 +1,51 @@
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Linkedin, Instagram, Facebook, Youtube, Twitter } from 'lucide-react';
 
 export default function Footer() {
+  const [isHovered, setIsHovered] = useState(false);
+  const [logoError, setLogoError] = useState(false);
+
   return (
     <footer className="bg-navy pt-20 pb-12 px-6 md:px-14 lg:px-28 border-t border-white/10">
       <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
         <div className="lg:col-span-2">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-8 h-8 border-2 border-teal rounded-md flex items-center justify-center font-mono text-[0.55rem] font-bold text-teal">
-              CCG
-            </div>
-            <div className="font-mono text-[0.65rem] tracking-[0.25em] uppercase text-white font-normal">
-              Contact Center <span className="text-teal font-semibold">Grupo</span>
-            </div>
+          <div 
+            className="flex items-center gap-3 mb-6 cursor-pointer min-h-[2.5rem]"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <AnimatePresence mode="wait">
+              {!logoError && !isHovered ? (
+                <motion.img 
+                  key="logo-img"
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -5 }}
+                  transition={{ duration: 0.3 }}
+                  src="https://www.ccgrupo.com.co/wp-content/uploads/2025/03/logo-original-b-.webp" 
+                  alt="CCGrupo Logo" 
+                  className="h-10 w-auto object-contain"
+                  onError={() => setLogoError(true)}
+                />
+              ) : (
+                <motion.div 
+                  key="logo-text"
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -5 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex items-center gap-3"
+                >
+                  <div className="w-8 h-8 border-2 border-teal rounded-md flex items-center justify-center font-mono text-[0.55rem] font-bold text-teal">
+                    CCG
+                  </div>
+                  <div className="font-mono text-[0.65rem] tracking-[0.25em] uppercase text-white font-normal">
+                    Contact Center <span className="text-teal font-semibold">Grupo</span>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
           <p className="text-sm font-light leading-relaxed text-gray-200 max-w-xs">
             BPO de nueva generación. Ecosistema de soluciones de Contact Center con IA. Más de 15 años transformando operaciones.
@@ -57,7 +91,7 @@ export default function Footer() {
 
       <div className="pt-10 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
         <span className="font-mono text-[0.5rem] tracking-[0.15em] uppercase text-gray-300">
-          © 2026 Contact Center Grupo S.A.S.
+          © 2025 Contact Center Grupo S.A.S.
         </span>
 
         <div className="flex gap-4">
@@ -66,7 +100,7 @@ export default function Footer() {
             { Icon: Instagram, href: 'https://www.instagram.com/contact_center_grupo/' },
             { Icon: Facebook, href: 'https://www.facebook.com/CONTACTCENTERGROUP' },
             { Icon: Youtube, href: 'https://www.youtube.com/channel/UCK1VihHdl_RjnuLkG5rhopQ' },
-            { Icon: Twitter, href: 'https://twitter.com' }
+            { Icon: Twitter, href: 'https://twitter.com' } // Placeholder for TikTok/X
           ].map(({ Icon, href }, i) => (
             <a 
               key={i} 

@@ -141,7 +141,7 @@ export default function Hero() {
               animate={{ y: 0 }}
               transition={{ delay: 2.5, duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
             >
-              Personas que <span className="text-stroke">conectan</span>
+              Personas que <span className="italic text-gradient">conectan</span>
             </motion.div>
           </div>
         </h1>
