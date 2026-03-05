@@ -30,7 +30,7 @@ export default function Clients() {
               from={{ opacity: 0, y: 20 }}
               to={{ opacity: 1, y: 0 }}
             >
-              Nuestros <em className="italic text-gradient">Clientes</em>
+              Nuestros <em className="italic text-teal">Clientes</em>
             </SplitText>
           </div>
         </div>

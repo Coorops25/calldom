@@ -1,38 +1,9 @@
 import { motion } from 'motion/react';
-import { ArrowRight, Zap, Headphones, Globe } from 'lucide-react';
+import { Zap } from 'lucide-react';
 import CircularText from '../ui/CircularText';
 import SplitText from '../ui/SplitText';
 import { HexagonBackground } from '../ui/hexagon-background';
-
-const services = [
-  {
-    id: '01',
-    title: 'Automatización',
-    desc: 'Agiliza tus comunicaciones, automatiza procesos y brinda respuestas instantáneas. Menos esfuerzo, máxima eficiencia con IA de última generación.',
-    tags: ['Chatbots IA', 'RPA', 'n8n', 'Power BI', 'NLP'],
-    link: 'https://ccgrupo.com.co/automatizacion/',
-    icon: Zap,
-    gradient: 'from-[#071a2c] via-navy-deep to-[#0a1e30]'
-  },
-  {
-    id: '02',
-    title: 'Contact Center',
-    desc: 'Gestionamos y optimizamos tus operaciones con talento bilingüe de primer nivel, garantizando la mejor experiencia para tus clientes a nivel global.',
-    tags: ['Ventas', 'Soporte', 'Nearshore', 'Multilingüe', 'Marcación Predictiva'],
-    link: 'https://ccgrupo.com.co/contact-center/',
-    icon: Headphones,
-    gradient: 'from-[#0c0f24] via-navy-deep to-[#10162e]'
-  },
-  {
-    id: '03',
-    title: 'Omnicanalidad',
-    desc: 'Unifica todos tus canales de comunicación en una sola plataforma. Agentes autónomos, mensajes masivos y chatbots inteligentes para un servicio fluido y eficiente.',
-    tags: ['WhatsApp', 'Email', 'SMS Masivos', 'Agentes Autónomos', 'Voz'],
-    link: 'https://ccgrupo.com.co/omnicanalidad/',
-    icon: Globe,
-    gradient: 'from-[#0d1a1e] via-navy-deep to-[#091a22]'
-  }
-];
+import { servicesData as services } from '../../data';
 
 interface ServicesProps {
   onNavigate?: (view: string) => void;
@@ -92,11 +63,9 @@ export default function Services({ onNavigate }: ServicesProps) {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-10%" }}
-            className={`group grid lg:grid-cols-2 min-h-[75vh] border-b border-white/10 overflow-hidden relative transition-colors duration-500 hover:bg-white/[0.02] ${
-              i % 2 !== 0 ? 'lg:rtl' : ''
-            }`}
+            className="group grid lg:grid-cols-2 min-h-[75vh] border-b border-white/10 overflow-hidden relative transition-colors duration-500 hover:bg-white/[0.02]"
           >
-            <div className={`p-10 lg:p-20 flex flex-col justify-center ${i % 2 !== 0 ? 'lg:ltr' : ''}`}>
+            <div className={`p-10 lg:p-20 flex flex-col justify-center ${i % 2 !== 0 ? 'lg:order-last' : ''}`}>
               <div className="font-mono text-6xl font-light text-navy-light mb-8 text-stroke-teal">
                 {svc.id}
               </div>
@@ -122,7 +91,7 @@ export default function Services({ onNavigate }: ServicesProps) {
               </button>
             </div>
 
-            <div className={`relative min-h-[40vh] lg:min-h-auto overflow-hidden flex items-center justify-center ${i % 2 !== 0 ? 'lg:ltr' : ''}`}>
+            <div className={`relative min-h-[40vh] lg:min-h-auto overflow-hidden flex items-center justify-center ${i % 2 !== 0 ? 'lg:order-first' : ''}`}>
               <div className={`absolute inset-0 bg-gradient-to-br ${svc.gradient} transition-transform duration-1000 ease-out group-hover:scale-105`} />
               
               <HexagonBackground 
