@@ -1,7 +1,9 @@
-import { motion } from 'motion/react';
-import { ArrowLeft, CheckCircle } from 'lucide-react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { ArrowLeft, CheckCircle, ChevronDown } from 'lucide-react';
 import Footer from '../layout/Footer';
 import BackgroundEffects from '../ui/BackgroundEffects';
+import { HexagonBackground } from '../ui/hexagon-background';
 import { getServiceById } from '../../data';
 
 interface ServiceModuleProps {
@@ -11,23 +13,27 @@ interface ServiceModuleProps {
 
 export default function ServiceModule({ serviceId, onBack }: ServiceModuleProps) {
   const service = getServiceById(serviceId);
+  const [imageError, setImageError] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   if (!service) return null;
+
+  const showIconPlaceholder = !service.details.heroImage || imageError;
 
   return (
     <div className="min-h-screen bg-navy text-white relative">
       <BackgroundEffects />
-      
+
       {/* Custom Navbar for Module */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-6 md:px-14 py-6 flex justify-between items-center bg-navy-deep/85 backdrop-blur-xl border-b border-white/5">
         <div className="flex items-center gap-3 cursor-pointer" onClick={onBack}>
-           <img 
-              src="https://www.ccgrupo.com.co/wp-content/uploads/2025/03/logo-original-b-.webp" 
-              alt="CCGrupo Logo" 
-              className="h-10 w-auto object-contain"
-            />
+          <img
+            src="https://www.ccgrupo.com.co/wp-content/uploads/2025/03/logo-original-b-.webp"
+            alt="CCGrupo Logo"
+            className="h-10 w-auto object-contain"
+          />
         </div>
-        <button 
+        <button
           onClick={onBack}
           className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-teal hover:text-white transition-colors"
         >
@@ -37,6 +43,7 @@ export default function ServiceModule({ serviceId, onBack }: ServiceModuleProps)
       </nav>
 
       <main className="pt-32 pb-20 px-6 md:px-14 lg:px-28 relative z-10">
+
         {/* Hero Section */}
         <div className="grid lg:grid-cols-2 gap-16 items-center mb-24">
           <motion.div
@@ -48,9 +55,14 @@ export default function ServiceModule({ serviceId, onBack }: ServiceModuleProps)
               <div className="w-8 h-px bg-teal" />
               Servicio {service.id}
             </div>
-            <h1 className="font-display text-[clamp(3rem,5vw,5rem)] leading-[1.1] mb-8">
+            <h1 className="font-display text-[clamp(3rem,5vw,5rem)] leading-[1.1] mb-2">
               {service.title}
             </h1>
+            {service.subtitle && (
+              <p className="font-mono text-sm tracking-[0.2em] uppercase text-teal mb-8">
+                {service.subtitle}
+              </p>
+            )}
             <p className="text-xl font-light leading-relaxed text-gray-200 mb-10">
               {service.details.longDesc}
             </p>
@@ -62,22 +74,49 @@ export default function ServiceModule({ serviceId, onBack }: ServiceModuleProps)
               ))}
             </div>
           </motion.div>
-          
+
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
-            <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 relative group">
-              <div className="absolute inset-0 bg-teal/20 mix-blend-overlay z-10" />
-              <img 
-                src={service.details.heroImage} 
-                alt={service.title} 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-            </div>
-            {/* Decorative Element */}
+            {showIconPlaceholder ? (
+              <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-teal/20 relative">
+                <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient}`} />
+                <HexagonBackground
+                  className="absolute inset-0 bg-transparent"
+                  hexagonSize={40}
+                  hexagonMargin={4}
+                  hexagonProps={{
+                    className: "before:bg-white/5 dark:before:bg-white/5 after:bg-transparent dark:after:bg-transparent"
+                  }}
+                >
+                  <div className="flex items-center justify-center h-full w-full relative z-10">
+                    <div className="text-center">
+                      <div className="w-24 h-24 border border-teal/30 rounded-3xl flex items-center justify-center bg-navy-deep/60 backdrop-blur-md mx-auto mb-4">
+                        <service.icon size={48} className="text-teal" strokeWidth={0.75} />
+                      </div>
+                      <div className="font-mono text-[0.55rem] tracking-[0.3em] uppercase text-gray-300">
+                        {service.title}
+                      </div>
+                    </div>
+                  </div>
+                </HexagonBackground>
+              </div>
+            ) : (
+              <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 relative group">
+                <div className="absolute inset-0 bg-teal/20 mix-blend-overlay z-10" />
+                <img
+                  src={service.details.heroImage}
+                  alt={service.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  onError={() => setImageError(true)}
+                />
+              </div>
+            )}
+
+            {/* Decorative icon badge */}
             <div className="absolute -bottom-10 -left-10 w-40 h-40 border border-teal/20 rounded-full flex items-center justify-center bg-navy-deep/80 backdrop-blur-md">
               <service.icon size={48} className="text-teal" strokeWidth={1} />
             </div>
@@ -90,12 +129,12 @@ export default function ServiceModule({ serviceId, onBack }: ServiceModuleProps)
             <h3 className="font-display text-3xl mb-8">Características</h3>
             <ul className="space-y-6">
               {service.details.features.map((feature, i) => (
-                <motion.li 
+                <motion.li
                   key={i}
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
+                  transition={{ delay: i * 0.08 }}
                   className="flex items-start gap-4 group"
                 >
                   <CheckCircle size={20} className="text-teal shrink-0 mt-1 group-hover:text-white transition-colors" />
@@ -104,7 +143,7 @@ export default function ServiceModule({ serviceId, onBack }: ServiceModuleProps)
               ))}
             </ul>
           </div>
-          
+
           <div className="lg:col-span-2">
             <h3 className="font-display text-3xl mb-8">Beneficios Clave</h3>
             <div className="grid sm:grid-cols-2 gap-6">
@@ -125,14 +164,120 @@ export default function ServiceModule({ serviceId, onBack }: ServiceModuleProps)
           </div>
         </div>
 
+        {/* Sub-products (AVA Suite, etc.) */}
+        {service.subProducts && service.subProducts.length > 0 && (
+          <div className="mt-24 border-t border-white/10 pt-20">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mb-12"
+            >
+              <div className="flex items-center gap-4 font-mono text-xs tracking-[0.35em] uppercase text-teal mb-4">
+                <div className="w-8 h-px bg-teal" />
+                Suite de Productos
+              </div>
+              <h3 className="font-display text-4xl">Nuestros Agentes</h3>
+            </motion.div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {service.subProducts.map((product, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="p-8 border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] hover:border-teal/30 transition-all duration-300 rounded-2xl group"
+                >
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-12 h-12 rounded-xl border border-teal/20 bg-teal/5 flex items-center justify-center shrink-0 group-hover:border-teal/50 transition-colors">
+                      <product.icon size={22} className="text-teal" strokeWidth={1.5} />
+                    </div>
+                    <div>
+                      <div className="font-mono text-[0.5rem] tracking-[0.2em] uppercase text-gray-400 mb-0.5">
+                        AVA {product.number}
+                      </div>
+                      <h4 className="font-display text-lg leading-tight">{product.name}</h4>
+                    </div>
+                  </div>
+                  {product.tagline && (
+                    <div className="font-mono text-[0.55rem] tracking-[0.2em] uppercase text-teal mb-3 px-3 py-1 border border-teal/30 rounded-full inline-block bg-teal/5">
+                      {product.tagline}
+                    </div>
+                  )}
+                  <p className="text-gray-300 font-light text-sm leading-relaxed">{product.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* FAQ */}
+        {service.details.faq && service.details.faq.length > 0 && (
+          <div className="mt-24 border-t border-white/10 pt-20">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mb-12"
+            >
+              <div className="flex items-center gap-4 font-mono text-xs tracking-[0.35em] uppercase text-teal mb-4">
+                <div className="w-8 h-px bg-teal" />
+                Preguntas Frecuentes
+              </div>
+              <h3 className="font-display text-4xl">FAQ</h3>
+            </motion.div>
+
+            <div className="max-w-3xl space-y-3">
+              {service.details.faq.map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                  className="border border-white/10 rounded-xl overflow-hidden"
+                >
+                  <button
+                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                    className="w-full flex items-center justify-between p-6 text-left hover:bg-white/[0.03] transition-colors"
+                  >
+                    <span className="font-body font-medium text-white pr-4">{item.question}</span>
+                    <ChevronDown
+                      size={18}
+                      className={`text-teal shrink-0 transition-transform duration-300 ${openFaq === i ? 'rotate-180' : ''}`}
+                    />
+                  </button>
+                  <AnimatePresence>
+                    {openFaq === i && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <p className="px-6 pb-6 text-gray-300 font-light leading-relaxed border-t border-white/5 pt-4">
+                          {item.answer}
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* CTA */}
-        <div className="mt-32 p-12 md:p-20 border border-white/10 rounded-3xl bg-gradient-to-br from-teal/10 to-transparent text-center relative overflow-hidden">
+        <div className="mt-24 p-12 md:p-20 border border-white/10 rounded-3xl bg-gradient-to-br from-teal/10 to-transparent text-center relative overflow-hidden">
           <div className="relative z-10">
             <h2 className="font-display text-4xl md:text-5xl mb-6">¿Listo para transformar tu operación?</h2>
             <p className="text-xl font-light text-gray-300 mb-10 max-w-2xl mx-auto">
               Agenda una consultoría gratuita y descubre cómo nuestra solución de {service.title} puede escalar tu negocio.
             </p>
-            <button 
+            <button
               onClick={() => window.open('https://ccgrupo.com.co/contacto/', '_blank')}
               className="font-mono text-sm tracking-[0.25em] uppercase px-10 py-4 bg-teal text-navy-deep hover:bg-white transition-all duration-300"
             >
