@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { Zap } from 'lucide-react';
+import { ArrowRight, Zap, Headphones, Globe } from 'lucide-react';
 import CircularText from '../ui/CircularText';
 import SplitText from '../ui/SplitText';
 import { HexagonBackground } from '../ui/hexagon-background';
@@ -13,7 +13,7 @@ export default function Services({ onNavigate }: ServicesProps) {
   return (
     <section id="services" className="pt-24 relative">
       <div className="px-6 md:px-14 lg:px-28 pb-20 relative">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -22,7 +22,7 @@ export default function Services({ onNavigate }: ServicesProps) {
           <div className="w-8 h-px bg-teal" />
           03 / 05 — Servicios
         </motion.div>
-        
+
         <div className="font-display text-[clamp(4rem,10vw,9rem)] leading-[0.95]">
           <SplitText
             className="inline-block"
@@ -58,6 +58,8 @@ export default function Services({ onNavigate }: ServicesProps) {
 
       <div className="border-t border-white/10">
         {services.map((svc, i) => {
+          const isReversed = i % 2 !== 0;
+
           const textCol = (
             <div key="text" className="p-10 lg:p-20 flex flex-col justify-center">
               <div className="font-mono text-6xl font-light text-navy-light mb-8 text-stroke-teal">
@@ -89,6 +91,7 @@ export default function Services({ onNavigate }: ServicesProps) {
           const iconCol = (
             <div key="icon" className="relative min-h-[40vh] lg:min-h-auto overflow-hidden flex items-center justify-center">
               <div className={`absolute inset-0 bg-gradient-to-br ${svc.gradient} transition-transform duration-1000 ease-out group-hover:scale-105`} />
+
               <HexagonBackground
                 className="absolute inset-0 bg-transparent"
                 hexagonSize={40}
@@ -119,7 +122,7 @@ export default function Services({ onNavigate }: ServicesProps) {
               viewport={{ once: true, margin: "-10%" }}
               className="group grid lg:grid-cols-2 min-h-[75vh] border-b border-white/10 overflow-hidden relative transition-colors duration-500 hover:bg-white/[0.02]"
             >
-              {i % 2 === 0 ? [textCol, iconCol] : [iconCol, textCol]}
+              {isReversed ? [iconCol, textCol] : [textCol, iconCol]}
             </motion.div>
           );
         })}
