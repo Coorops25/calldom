@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
+import { useTheme } from '../../hooks/useTheme';
 
 const navLinks = [
   { name: 'Inicio', href: '#hero' },
@@ -14,11 +15,10 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [logoError, setLogoError] = useState(false);
+  const { isDark, toggle } = useTheme();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -26,9 +26,7 @@ export default function Navbar() {
   const scrollToSection = (href: string) => {
     setIsMobileMenuOpen(false);
     const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    if (element) element.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -43,11 +41,12 @@ export default function Navbar() {
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       >
+        {/* Logo */}
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => scrollToSection('#hero')}>
           {!logoError ? (
-            <img 
-              src="https://www.ccgrupo.com.co/wp-content/uploads/2025/03/logo-original-b-.webp" 
-              alt="CCGrupo Logo" 
+            <img
+              src="https://www.ccgrupo.com.co/wp-content/uploads/2025/03/logo-original-b-.webp"
+              alt="CCGrupo Logo"
               className="h-12 w-auto object-contain"
               onError={() => setLogoError(true)}
             />
@@ -56,37 +55,58 @@ export default function Navbar() {
               <div className="w-8 h-8 border-2 border-teal rounded-md flex items-center justify-center font-mono text-[0.55rem] font-bold text-teal">
                 CCG
               </div>
-              <div className="font-mono text-[0.65rem] tracking-[0.25em] uppercase text-white font-normal hidden sm:block">
+              <div className="font-mono text-[0.65rem] tracking-[0.25em] uppercase font-normal hidden sm:block">
                 Contact Center <span className="text-teal font-semibold">Grupo</span>
               </div>
             </>
           )}
         </div>
 
-        <ul className="hidden md:flex gap-10">
-          {navLinks.map((link) => (
-            <li key={link.name}>
-              <button
-                onClick={() => scrollToSection(link.href)}
-                className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-gray-200 hover:text-white transition-colors relative group pb-1"
-              >
-                {link.name}
-                <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-teal transition-all duration-300 group-hover:w-full" />
-              </button>
-            </li>
-          ))}
-        </ul>
+        {/* Desktop nav — right aligned */}
+        <div className="hidden md:flex items-center gap-10">
+          <ul className="flex gap-10">
+            {navLinks.map((link) => (
+              <li key={link.name}>
+                <button
+                  onClick={() => scrollToSection(link.href)}
+                  className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-gray-200 hover:text-teal transition-colors relative group pb-1"
+                >
+                  {link.name}
+                  <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-teal transition-all duration-300 group-hover:w-full" />
+                </button>
+              </li>
+            ))}
+          </ul>
 
-        <div className="flex items-center gap-4">
+          {/* Theme toggle */}
+          <button
+            onClick={toggle}
+            aria-label="Cambiar tema"
+            className="w-8 h-8 flex items-center justify-center text-gray-200 hover:text-teal transition-colors"
+          >
+            {isDark ? <Sun size={16} /> : <Moon size={16} />}
+          </button>
+
+          {/* CTA */}
           <button
             onClick={() => window.open('https://ccgrupo.com.co/contacto/', '_blank')}
-            className="hidden md:block font-mono text-[0.6rem] uppercase tracking-[0.2em] px-7 py-2.5 border border-teal/40 text-teal hover:bg-teal hover:text-navy-deep hover:border-teal hover:shadow-[0_0_30px_rgba(0,180,216,0.25)] transition-all duration-300"
+            className="font-mono text-[0.6rem] uppercase tracking-[0.2em] px-7 py-2.5 border border-teal/40 text-teal hover:bg-teal hover:text-navy-deep hover:border-teal hover:shadow-[0_0_30px_rgba(0,180,216,0.25)] transition-all duration-300"
           >
             Contacto
           </button>
-          
+        </div>
+
+        {/* Mobile right side */}
+        <div className="flex md:hidden items-center gap-3">
           <button
-            className="md:hidden text-white p-2"
+            onClick={toggle}
+            aria-label="Cambiar tema"
+            className="text-gray-200 hover:text-teal transition-colors p-2"
+          >
+            {isDark ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
+          <button
+            className="text-white p-2"
             onClick={() => setIsMobileMenuOpen(true)}
           >
             <Menu size={24} />
@@ -94,6 +114,7 @@ export default function Navbar() {
         </div>
       </motion.nav>
 
+      {/* Mobile menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div

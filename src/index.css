@@ -1,23 +1,52 @@
 @import "tailwindcss";
 
-@theme {
-  --font-display: "Playfair Display", Georgia, serif;
-  --font-body: "Outfit", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", "Courier New", monospace;
+/* ─── Design tokens ──────────────────────────────── */
 
-  --color-navy-deep: #060d1f;
-  --color-navy: #0b1628;
-  --color-navy-mid: #0f1d35;
-  --color-navy-light: #162545;
-  --color-teal: #00b4d8;
+:root {
+  --c-bg-deep:  #060d1f;
+  --c-bg:       #0b1628;
+  --c-bg-mid:   #0f1d35;
+  --c-bg-light: #162545;
+  --c-g100:     #c8d6e5;
+  --c-g200:     #8d99ae;
+  --c-g300:     #576574;
+  --c-g400:     #2d3748;
+  --c-fg:       #ffffff;
+  --c-border:   rgba(255, 255, 255, 0.1);
+}
+
+html.light {
+  color-scheme: light;
+  --c-bg-deep:  #f0f4f8;
+  --c-bg:       #ffffff;
+  --c-bg-mid:   #e2ebf4;
+  --c-bg-light: #ccdaeb;
+  --c-g100:     #0b1f38;
+  --c-g200:     #1e3a5c;
+  --c-g300:     #3a5a80;
+  --c-g400:     #5a7a9a;
+  --c-fg:       #0b1628;
+  --c-border:   rgba(11, 22, 40, 0.1);
+}
+
+@theme {
+  --font-display:      "Playfair Display", Georgia, serif;
+  --font-body:         "Outfit", system-ui, sans-serif;
+  --font-mono:         "JetBrains Mono", "Courier New", monospace;
+
+  --color-navy-deep:   var(--c-bg-deep);
+  --color-navy:        var(--c-bg);
+  --color-navy-mid:    var(--c-bg-mid);
+  --color-navy-light:  var(--c-bg-light);
+  --color-teal:        #00b4d8;
   --color-teal-bright: #00e5ff;
-  --color-teal-dark: #0077b6;
-  --color-blue: #0096c7;
-  --color-white-pure: #ffffff;
-  --color-gray-100: #c8d6e5;
-  --color-gray-200: #8d99ae;
-  --color-gray-300: #576574;
-  --color-gray-400: #2d3748;
+  --color-teal-dark:   #0077b6;
+  --color-blue:        #0096c7;
+  --color-white-pure:  #ffffff;
+  --color-gray-100:    var(--c-g100);
+  --color-gray-200:    var(--c-g200);
+  --color-gray-300:    var(--c-g300);
+  --color-gray-400:    var(--c-g400);
 }
 
 @layer base {
@@ -25,7 +54,9 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-navy-deep text-white font-body antialiased overflow-x-hidden;
+    background-color: var(--c-bg-deep);
+    color: var(--c-fg);
+    @apply font-body antialiased overflow-x-hidden;
   }
 }
 
@@ -43,17 +74,41 @@
   }
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
+/* ─── Light mode overrides ───────────────────────── */
+
+html.light {
+  /* text-white → navy */
+  & .text-white {
+    color: var(--c-fg);
+  }
+
+  /* white borders → navy borders */
+  & [class*="border-white"] {
+    border-color: var(--c-border);
+  }
+
+  /* subtle white bg overlays → subtle navy */
+  & [class*="bg-white/"] {
+    background-color: rgba(11, 22, 40, 0.04);
+  }
+
+  /* cursor blend mode: screen invisible on light bg */
+  & .mix-blend-screen {
+    mix-blend-mode: multiply;
+  }
+
+  /* outlined text strokes */
+  & .text-stroke {
+    -webkit-text-stroke: 1px rgba(11, 22, 40, 0.1);
+  }
+  & .text-stroke-teal {
+    -webkit-text-stroke: 1px rgba(0, 119, 182, 0.3);
+  }
 }
-::-webkit-scrollbar-track {
-  background: #060d1f;
-}
-::-webkit-scrollbar-thumb {
-  background: #162545;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #00b4d8;
-}
+
+/* ─── Custom Scrollbar ───────────────────────────── */
+
+::-webkit-scrollbar              { width: 8px; }
+::-webkit-scrollbar-track        { background: var(--c-bg-deep); }
+::-webkit-scrollbar-thumb        { background: var(--c-bg-light); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover  { background: #00b4d8; }
