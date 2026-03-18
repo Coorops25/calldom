@@ -6,9 +6,14 @@ import Footer from '../layout/Footer';
 import { useLang } from '../../i18n';
 
 const pdfUrls: Record<number, string> = {
-  0: '/policies/politica-datos-personales.pdf',
-  1: '/policies/politica-seguridad.pdf',
-  2: '/policies/politica-privacidad.pdf',
+  0: '/policies/politica-acoso-laboral.pdf',
+  1: '/policies/politica-emergencia.pdf',
+  2: '/policies/politica-sg-sst.pdf',
+  3: '/policies/politica-alcohol.pdf',
+  4: '/policies/politica-acoso-sexual.pdf',
+  5: '/policies/politica-teletrabajo.pdf',
+  6: '/policies/politica-igualdad-genero.pdf',
+  7: '/policies/politica-desconexion-laboral.pdf',
 };
 
 interface Props { onBack: () => void; }
