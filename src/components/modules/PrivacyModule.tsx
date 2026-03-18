@@ -6,9 +6,9 @@ import Footer from '../layout/Footer';
 import { useLang } from '../../i18n';
 
 const pdfUrls: Record<number, string> = {
-  0: 'https://REEMPLAZAR/politica-datos-personales.pdf',
-  1: 'https://REEMPLAZAR/politica-seguridad.pdf',
-  2: 'https://REEMPLAZAR/politica-privacidad.pdf',
+  0: '/policies/politica-datos-personales.pdf',
+  1: '/policies/politica-seguridad.pdf',
+  2: '/policies/politica-privacidad.pdf',
 };
 
 interface Props { onBack: () => void; }
