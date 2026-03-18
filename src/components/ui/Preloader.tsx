@@ -26,14 +26,22 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
       exit={{ opacity: 0, pointerEvents: 'none' }}
       transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className="font-mono text-xs tracking-[0.5em] uppercase text-gray-200">
-        Contact Center <b className="text-teal font-medium">Grupo</b>
-      </div>
+      {/* Logo centrado */}
+      <motion.img
+        src="https://www.ccgrupo.com.co/wp-content/uploads/2025/03/logo-original-b-.webp"
+        alt="CCGrupo"
+        className="h-14 w-auto object-contain"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+      />
+
       <div className="font-display text-[clamp(4rem,12vw,9rem)] leading-none text-gradient">
         {count}
       </div>
       <div className="w-[180px] h-[1px] bg-gray-400 overflow-hidden">
-        <motion.div 
+        <motion.div
           className="h-full bg-gradient-to-r from-teal-dark to-teal-bright"
           style={{ width: `${count}%` }}
         />

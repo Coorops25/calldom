@@ -75,11 +75,11 @@ export default function About() {
           className="text-lg font-light leading-relaxed text-gray-200"
         >
           <ScrambledText className="inline" scrambleChars="!@#$%^&*()_+-=[]{}|;:,.<>?/~" radius={150} duration={0.8}>
-            {t.about.descPre}{' '}
+            {`${t.about.descPre} `}
           </ScrambledText>
           <em className="italic text-gradient font-medium">BPO</em>
           <ScrambledText className="inline" scrambleChars="!@#$%^&*()_+-=[]{}|;:,.<>?/~" radius={150} duration={0.8}>
-            {' '}{t.about.descPost}
+            {` ${t.about.descPost}`}
           </ScrambledText>
         </motion.div>
 
