@@ -140,7 +140,6 @@ const translations = {
       viewDoc:    'Ver documento →',
       policies: [
         { title: 'Política de Acoso Laboral',                              desc: 'Lineamientos para prevenir, corregir y sancionar el acoso laboral en el entorno de trabajo.' },
-        { title: 'Política de Emergencia',                                 desc: 'Protocolos y procedimientos de actuación ante situaciones de emergencia en la organización.' },
         { title: 'Política SG-SST',                                        desc: 'Sistema de Gestión de Seguridad y Salud en el Trabajo: compromisos y directrices para un entorno seguro.' },
         { title: 'Política de Alcohol y Otros',                            desc: 'Normas sobre el consumo de alcohol, sustancias psicoactivas y tabaco en el ambiente laboral.' },
         { title: 'Política de Acoso Sexual',                               desc: 'Mecanismos de prevención y atención del acoso sexual en el lugar de trabajo.' },
@@ -289,7 +288,6 @@ const translations = {
       viewDoc:    'View document →',
       policies: [
         { title: 'Workplace Harassment Policy',               desc: 'Guidelines to prevent, correct and sanction workplace harassment within the organization.' },
-        { title: 'Emergency Policy',                          desc: 'Protocols and procedures for action in emergency situations within the organization.' },
         { title: 'Occupational Health & Safety (SG-SST)',     desc: 'Occupational Health and Safety Management System: commitments and guidelines for a safe work environment.' },
         { title: 'Alcohol & Substance Policy',                desc: 'Rules on the consumption of alcohol, psychoactive substances and tobacco in the workplace.' },
         { title: 'Sexual Harassment Policy',                  desc: 'Prevention and response mechanisms for sexual harassment in the workplace.' },

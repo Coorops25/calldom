@@ -6,14 +6,13 @@ import Footer from '../layout/Footer';
 import { useLang } from '../../i18n';
 
 const pdfUrls: Record<number, string> = {
-  0: '/policies/politica-acoso-laboral.pdf',
-  1: '/policies/politica-emergencia.pdf',
-  2: '/policies/politica-sg-sst.pdf',
-  3: '/policies/politica-alcohol.pdf',
-  4: '/policies/politica-acoso-sexual.pdf',
-  5: '/policies/politica-teletrabajo.pdf',
-  6: '/policies/politica-igualdad-genero.pdf',
-  7: '/policies/politica-desconexion-laboral.pdf',
+  0: '/policies/acoso_laboral.pdf',
+  1: '/policies/POLITICA-SG-SST.pdf',
+  2: '/policies/Politica-de-alcohol-y-otros.pdf',
+  3: '/policies/pag.web-REV-JURIDICA-POLITICA-DE-PREVENCION-CONTRA-EL-ACOSO-SEXUAL-EN-EL-ENTORNO-LABORAL-CONTACT-CENTER-GRUPO-S.A.S.pdf',
+  4: '/policies/PAGINA-WEB-POLITICA-TELETRABAJO.pdf',
+  5: '/policies/PAGINA-WEB-POLITICA-IGUALDAD-Y-EQUIDAD-LABORAL-CON-ENFOQUE-DE-GENERO.pdf',
+  6: '/policies/PAGINA-WEB-POLITICA-DESCONEXION-LABORAL.pdf',
 };
 
 interface Props { onBack: () => void; }
