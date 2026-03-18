@@ -1,5 +1,103 @@
 @import "tailwindcss";
 
+/* ─── Local fonts ────────────────────────────────── */
+
+@font-face {
+  font-family: "Share";
+  src: url("/fonts/Share/Share-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Share";
+  src: url("/fonts/Share/Share-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Share";
+  src: url("/fonts/Share/Share-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Share";
+  src: url("/fonts/Share/Share-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Share Tech";
+  src: url("/fonts/Share_Tech/ShareTech-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fira Sans";
+  src: url("/fonts/Fira_Sans/FiraSans-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fira Sans";
+  src: url("/fonts/Fira_Sans/FiraSans-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fira Sans";
+  src: url("/fonts/Fira_Sans/FiraSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fira Sans";
+  src: url("/fonts/Fira_Sans/FiraSans-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fira Sans";
+  src: url("/fonts/Fira_Sans/FiraSans-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fira Sans";
+  src: url("/fonts/Fira_Sans/FiraSans-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fira Sans";
+  src: url("/fonts/Fira_Sans/FiraSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ─── Design tokens ──────────────────────────────── */
 
 :root {
@@ -30,8 +128,9 @@ html.light {
 }
 
 @theme {
-  --font-display:      "Playfair Display", Georgia, serif;
-  --font-body:         "Outfit", system-ui, sans-serif;
+  --font-display:      "Share", Georgia, serif;
+  --font-subheading:   "Share Tech", "JetBrains Mono", monospace;
+  --font-body:         "Fira Sans", system-ui, sans-serif;
   --font-mono:         "JetBrains Mono", "Courier New", monospace;
 
   --color-navy-deep:   var(--c-bg-deep);
@@ -57,6 +156,12 @@ html.light {
     background-color: var(--c-bg-deep);
     color: var(--c-fg);
     @apply font-body antialiased overflow-x-hidden;
+  }
+  h1 {
+    @apply font-display;
+  }
+  h2 {
+    font-family: var(--font-subheading);
   }
 }
 
@@ -84,7 +189,7 @@ html.light {
 
   /* white borders → navy borders */
   & [class*="border-white"] {
-    border-color: var(--c-border);
+    border-color: rgba(11, 22, 40, 0.12);
   }
 
   /* subtle white bg overlays → subtle navy */
@@ -97,13 +202,48 @@ html.light {
     mix-blend-mode: multiply;
   }
 
-  /* outlined text strokes */
+  /* outlined text strokes — needs strong contrast on light bg */
   & .text-stroke {
-    -webkit-text-stroke: 1px rgba(11, 22, 40, 0.1);
+    -webkit-text-stroke: 1.5px rgba(11, 22, 40, 0.45);
   }
   & .text-stroke-teal {
-    -webkit-text-stroke: 1px rgba(0, 119, 182, 0.3);
+    -webkit-text-stroke: 1.5px rgba(0, 100, 160, 0.55);
   }
+
+  /* ── Nav: add shadow so it stands out from the page ── */
+  & nav {
+    box-shadow: 0 2px 24px rgba(11, 22, 40, 0.09), 0 1px 0 rgba(11, 22, 40, 0.13);
+  }
+
+  /* ── Logo: invert white logo to dark navy on light bg ── */
+  & .logo-auto {
+    filter: brightness(0) saturate(100%);
+  }
+
+  /* ── Scrollbar light theme ── */
+  scrollbar-color: var(--c-bg-light) var(--c-bg-mid);
+
+  /* ── Section dividers: stronger contrast ── */
+  & .border-t,
+  & .border-b {
+    border-color: rgba(11, 22, 40, 0.1);
+  }
+
+  /* ── Reasons card container: visible border ── */
+  & .rounded-3xl {
+    border-color: rgba(11, 22, 40, 0.14) !important;
+    background-color: rgba(11, 22, 40, 0.04);
+  }
+
+  /* ── Client card bg: keep visible on light page ── */
+  & .bg-navy-deep {
+    box-shadow: inset 0 0 0 1px rgba(11, 22, 40, 0.08);
+  }
+
+  /* ── Gray text tones: ensure readability ── */
+  & .text-gray-100 { color: var(--c-g100); }
+  & .text-gray-200 { color: var(--c-g200); }
+  & .text-gray-300 { color: var(--c-g300); }
 }
 
 /* ─── Custom Scrollbar ───────────────────────────── */

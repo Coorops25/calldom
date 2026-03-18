@@ -1,15 +1,18 @@
 import { motion } from 'motion/react';
-import { ArrowRight, Zap, Headphones, Globe } from 'lucide-react';
+import { Zap } from 'lucide-react';
 import CircularText from '../ui/CircularText';
 import SplitText from '../ui/SplitText';
 import { HexagonBackground } from '../ui/hexagon-background';
 import { servicesData as services } from '../../data';
+import { useLang } from '../../i18n';
 
 interface ServicesProps {
   onNavigate?: (view: string) => void;
 }
 
 export default function Services({ onNavigate }: ServicesProps) {
+  const { t, lang } = useLang();
+
   return (
     <section id="services" className="pt-24 relative">
       <div className="px-6 md:px-14 lg:px-28 pb-20 relative">
@@ -20,20 +23,12 @@ export default function Services({ onNavigate }: ServicesProps) {
           className="flex items-center gap-4 font-mono text-xs tracking-[0.35em] uppercase text-teal mb-6"
         >
           <div className="w-8 h-px bg-teal" />
-          03 / 05 — Servicios
+          {t.services.label}
         </motion.div>
 
         <div className="font-display text-[clamp(4rem,10vw,9rem)] leading-[0.95]">
-          <SplitText
-            className="inline-block"
-            delay={50}
-            duration={1.2}
-            splitType="chars"
-            from={{ opacity: 0, y: 40 }}
-            to={{ opacity: 1, y: 0 }}
-          >
-            Nuestro<br />
-            <span className="text-stroke text-transparent">ecosistema</span>
+          <SplitText className="inline-block" delay={50} duration={1.2} splitType="chars" from={{ opacity: 0, y: 40 }} to={{ opacity: 1, y: 0 }}>
+            {lang === 'en' ? <>Our<br /><span className="text-stroke text-transparent">ecosystem</span></> : <>Nuestro<br /><span className="text-stroke text-transparent">ecosistema</span></>}
           </SplitText>
         </div>
 
@@ -59,6 +54,9 @@ export default function Services({ onNavigate }: ServicesProps) {
       <div className="border-t border-white/10">
         {services.map((svc, i) => {
           const isReversed = i % 2 !== 0;
+          const svcT = t.services.items[svc.id as keyof typeof t.services.items];
+          const title = svcT?.title ?? svc.title;
+          const desc  = svcT?.desc  ?? svc.desc;
 
           const textCol = (
             <div key="text" className="p-10 lg:p-20 flex flex-col justify-center">
@@ -66,10 +64,10 @@ export default function Services({ onNavigate }: ServicesProps) {
                 {svc.id}
               </div>
               <h3 className="font-display text-[clamp(2.5rem,4vw,3.8rem)] leading-tight mb-6">
-                {svc.title}
+                {title}
               </h3>
               <p className="text-lg font-light leading-relaxed text-gray-200 max-w-md mb-8">
-                {svc.desc}
+                {desc}
               </p>
               <div className="flex flex-wrap gap-2 mb-10">
                 {svc.tags.map(tag => (
@@ -82,7 +80,7 @@ export default function Services({ onNavigate }: ServicesProps) {
                 onClick={() => onNavigate?.(svc.id)}
                 className="inline-flex items-center gap-4 font-mono text-xs tracking-[0.2em] uppercase text-teal group/link hover:text-white transition-colors"
               >
-                Explorar
+                {t.services.explore}
                 <span className="w-8 h-px bg-teal relative transition-all duration-300 group-hover/link:w-12 after:content-[''] after:absolute after:right-0 after:-top-[3px] after:w-2 after:h-2 after:border-r after:border-t after:border-teal after:rotate-45" />
               </button>
             </div>
@@ -91,13 +89,12 @@ export default function Services({ onNavigate }: ServicesProps) {
           const iconCol = (
             <div key="icon" className="relative min-h-[40vh] lg:min-h-auto overflow-hidden flex items-center justify-center">
               <div className={`absolute inset-0 bg-gradient-to-br ${svc.gradient} transition-transform duration-1000 ease-out group-hover:scale-105`} />
-
               <HexagonBackground
                 className="absolute inset-0 bg-transparent"
                 hexagonSize={40}
                 hexagonMargin={4}
                 hexagonProps={{
-                  className: "before:bg-white/5 dark:before:bg-white/5 after:bg-transparent dark:after:bg-transparent hover:before:bg-teal/30 dark:hover:before:bg-teal/30 transition-colors duration-500"
+                  className: 'before:bg-white/5 dark:before:bg-white/5 after:bg-transparent dark:after:bg-transparent hover:before:bg-teal/30 dark:hover:before:bg-teal/30 transition-colors duration-500',
                 }}
               >
                 <div className="flex items-center justify-center h-full w-full">
@@ -106,7 +103,7 @@ export default function Services({ onNavigate }: ServicesProps) {
                       <svc.icon size={32} strokeWidth={1.5} />
                     </div>
                     <div className="font-mono text-[0.5rem] tracking-[0.3em] uppercase text-gray-300">
-                      {svc.title} Inteligente
+                      {title}
                     </div>
                   </div>
                 </div>
@@ -119,7 +116,7 @@ export default function Services({ onNavigate }: ServicesProps) {
               key={svc.id}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              viewport={{ once: true, margin: "-10%" }}
+              viewport={{ once: true, margin: '-10%' }}
               className="group grid lg:grid-cols-2 min-h-[75vh] border-b border-white/10 overflow-hidden relative transition-colors duration-500 hover:bg-white/[0.02]"
             >
               {isReversed ? [iconCol, textCol] : [textCol, iconCol]}

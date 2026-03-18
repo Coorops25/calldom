@@ -31,7 +31,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
           <img
             src="https://www.ccgrupo.com.co/wp-content/uploads/2025/03/logo-original-b-.webp"
             alt="CCGrupo Logo"
-            className="h-10 w-auto object-contain"
+            className="h-10 w-auto object-contain logo-auto"
           />
         </div>
         <button
@@ -90,7 +90,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
                   hexagonSize={40}
                   hexagonMargin={4}
                   hexagonProps={{
-                    className: "before:bg-white/5 dark:before:bg-white/5 after:bg-transparent dark:after:bg-transparent"
+                    className: "before:bg-white/5 dark:before:bg-white/5 after:bg-transparent dark:after:bg-transparent hover:before:bg-teal/30 dark:hover:before:bg-teal/30 transition-colors duration-500"
                   }}
                 >
                   <div className="flex items-center justify-center h-full w-full relative z-10">

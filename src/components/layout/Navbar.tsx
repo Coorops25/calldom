@@ -2,24 +2,18 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
-
-const navLinks = [
-  { name: 'Inicio', href: '#hero' },
-  { name: 'Nosotros', href: '#about' },
-  { name: 'Servicios', href: '#services' },
-  { name: 'Diferencial', href: '#reasons' },
-  { name: 'Clientes', href: '#clients' },
-];
+import { useLang } from '../../i18n';
 
 interface Props {
   onNavigate?: (view: string) => void;
 }
 
 export default function Navbar({ onNavigate }: Props) {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [logoError, setLogoError] = useState(false);
-  const { isDark, toggle } = useTheme();
+  const [isScrolled, setIsScrolled]       = useState(false);
+  const [isMobileMenuOpen, setMobileOpen] = useState(false);
+  const [logoError, setLogoError]         = useState(false);
+  const { isDark, toggle }                = useTheme();
+  const { lang, t, toggleLang }           = useLang();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -28,7 +22,7 @@ export default function Navbar({ onNavigate }: Props) {
   }, []);
 
   const scrollToSection = (href: string) => {
-    setIsMobileMenuOpen(false);
+    setMobileOpen(false);
     const element = document.querySelector(href);
     if (element) element.scrollIntoView({ behavior: 'smooth' });
   };
@@ -51,7 +45,7 @@ export default function Navbar({ onNavigate }: Props) {
             <img
               src="https://www.ccgrupo.com.co/wp-content/uploads/2025/03/logo-original-b-.webp"
               alt="CCGrupo Logo"
-              className="h-12 w-auto object-contain"
+              className="h-12 w-auto object-contain logo-auto"
               onError={() => setLogoError(true)}
             />
           ) : (
@@ -66,10 +60,10 @@ export default function Navbar({ onNavigate }: Props) {
           )}
         </div>
 
-        {/* Desktop nav — right aligned */}
-        <div className="hidden md:flex items-center gap-10">
-          <ul className="flex gap-10">
-            {navLinks.map((link) => (
+        {/* Desktop nav */}
+        <div className="hidden md:flex items-center gap-8">
+          <ul className="flex gap-8">
+            {t.nav.links.map((link) => (
               <li key={link.name}>
                 <button
                   onClick={() => scrollToSection(link.href)}
@@ -81,6 +75,23 @@ export default function Navbar({ onNavigate }: Props) {
               </li>
             ))}
           </ul>
+
+          {/* Language toggle */}
+          <div className="flex items-center gap-1.5 font-mono text-[0.55rem] tracking-[0.1em] select-none">
+            <button
+              onClick={() => lang !== 'es' && toggleLang()}
+              className={`transition-colors ${lang === 'es' ? 'text-teal font-semibold' : 'text-gray-300 hover:text-gray-100'}`}
+            >
+              ES
+            </button>
+            <span className="text-gray-400">|</span>
+            <button
+              onClick={() => lang !== 'en' && toggleLang()}
+              className={`transition-colors ${lang === 'en' ? 'text-teal font-semibold' : 'text-gray-300 hover:text-gray-100'}`}
+            >
+              EN
+            </button>
+          </div>
 
           {/* Theme toggle */}
           <button
@@ -96,24 +107,40 @@ export default function Navbar({ onNavigate }: Props) {
             onClick={() => onNavigate?.('contact')}
             className="font-mono text-[0.6rem] uppercase tracking-[0.2em] px-7 py-2.5 border border-teal/40 text-teal hover:bg-teal hover:text-navy-deep hover:border-teal hover:shadow-[0_0_30px_rgba(0,180,216,0.25)] transition-all duration-300"
           >
-            Contacto
+            {t.nav.contact}
           </button>
         </div>
 
         {/* Mobile right side */}
         <div className="flex md:hidden items-center gap-3">
+          {/* Mobile lang toggle */}
+          <div className="flex items-center gap-1 font-mono text-[0.55rem] tracking-[0.1em]">
+            <button
+              onClick={() => lang !== 'es' && toggleLang()}
+              className={`transition-colors ${lang === 'es' ? 'text-teal' : 'text-gray-300'}`}
+            >
+              ES
+            </button>
+            <span className="text-gray-400">|</span>
+            <button
+              onClick={() => lang !== 'en' && toggleLang()}
+              className={`transition-colors ${lang === 'en' ? 'text-teal' : 'text-gray-300'}`}
+            >
+              EN
+            </button>
+          </div>
           <button
             onClick={toggle}
             aria-label="Cambiar tema"
-            className="text-gray-200 hover:text-teal transition-colors p-2"
+            className="text-gray-200 hover:text-teal transition-colors p-1"
           >
-            {isDark ? <Sun size={18} /> : <Moon size={18} />}
+            {isDark ? <Sun size={16} /> : <Moon size={16} />}
           </button>
           <button
-            className="text-white p-2"
-            onClick={() => setIsMobileMenuOpen(true)}
+            className="text-white p-1"
+            onClick={() => setMobileOpen(true)}
           >
-            <Menu size={24} />
+            <Menu size={22} />
           </button>
         </div>
       </motion.nav>
@@ -129,13 +156,13 @@ export default function Navbar({ onNavigate }: Props) {
           >
             <button
               className="absolute top-6 right-6 text-white p-2"
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={() => setMobileOpen(false)}
             >
               <X size={32} />
             </button>
 
             <ul className="flex flex-col items-center w-full max-w-md">
-              {navLinks.map((link, index) => (
+              {t.nav.links.map((link, index) => (
                 <motion.li
                   key={link.name}
                   initial={{ y: 30, opacity: 0 }}
@@ -161,10 +188,10 @@ export default function Navbar({ onNavigate }: Props) {
               className="mt-12"
             >
               <button
-                onClick={() => { setIsMobileMenuOpen(false); onNavigate?.('contact'); }}
+                onClick={() => { setMobileOpen(false); onNavigate?.('contact'); }}
                 className="font-mono text-xs tracking-[0.25em] uppercase px-10 py-4 bg-gradient-to-br from-teal-dark to-teal text-white hover:shadow-[0_8px_40px_rgba(0,180,216,0.35)] transition-all duration-300"
               >
-                Contacto
+                {t.nav.contact}
               </button>
             </motion.div>
           </motion.div>

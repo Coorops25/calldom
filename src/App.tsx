@@ -5,6 +5,7 @@
 
 import { useState, useEffect } from 'react';
 import { AnimatePresence } from 'motion/react';
+import { LangProvider } from './i18n';
 import Preloader from './components/ui/Preloader';
 import CustomCursor from './components/ui/CustomCursor';
 import BackgroundEffects from './components/ui/BackgroundEffects';
@@ -19,6 +20,7 @@ import CTA from './components/sections/CTA';
 import Footer from './components/layout/Footer';
 import ServiceModule from './components/modules/ServiceModule';
 import ContactModule from './components/modules/ContactModule';
+import PrivacyModule from './components/modules/PrivacyModule';
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -50,6 +52,7 @@ export default function App() {
   };
 
   return (
+    <LangProvider>
     <>
       <AnimatePresence mode="wait">
         {loading && <Preloader onComplete={() => setLoading(false)} />}
@@ -74,10 +77,12 @@ export default function App() {
                 <CTA onNavigate={handleNavigate} />
               </main>
 
-              <Footer />
+              <Footer onNavigate={handleNavigate} />
             </>
           ) : currentView === 'contact' ? (
             <ContactModule onBack={handleBackToHome} />
+          ) : currentView === 'privacy' ? (
+            <PrivacyModule onBack={handleBackToHome} />
           ) : (
             <ServiceModule
               serviceId={currentView}
@@ -88,5 +93,6 @@ export default function App() {
         </>
       )}
     </>
+    </LangProvider>
   );
 }

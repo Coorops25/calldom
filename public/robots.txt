@@ -1,2 +1,7 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://ccgrupo.com.co/sitemap.xml
+Host: https://ccgrupo.com.co
+
+Crawl-delay: 1

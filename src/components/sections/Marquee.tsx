@@ -1,17 +1,16 @@
 import { motion } from 'motion/react';
-
-const items = [
-  "Automatización", "Contact Center", "Omnicanalidad", "Agentes Autónomos", 
-  "Power BI", "Inteligencia Artificial", "Mensajes Masivos", "BPO Inteligente"
-];
+import { useLang } from '../../i18n';
 
 export default function Marquee() {
+  const { t } = useLang();
+  const items = t.marquee.items;
+
   return (
     <div className="py-6 border-y border-white/10 bg-white/[0.03] overflow-hidden">
-      <motion.div 
+      <motion.div
         className="flex w-max"
-        animate={{ x: "-50%" }}
-        transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
+        animate={{ x: '-50%' }}
+        transition={{ duration: 35, repeat: Infinity, ease: 'linear' }}
       >
         {[...items, ...items, ...items, ...items].map((item, i) => (
           <div key={i} className="flex items-center gap-8 px-8 whitespace-nowrap">

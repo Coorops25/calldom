@@ -1,35 +1,41 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Linkedin, Instagram, Facebook, Youtube, Twitter } from 'lucide-react';
+import { useLang } from '../../i18n';
 
-export default function Footer() {
+interface Props {
+  onNavigate?: (view: string) => void;
+}
+
+export default function Footer({ onNavigate }: Props) {
   const [isHovered, setIsHovered] = useState(false);
-  const [logoError, setLogoError] = useState(false);
+  const [logoError, setLogoError]  = useState(false);
+  const { t } = useLang();
 
   return (
     <footer className="bg-navy pt-20 pb-12 px-6 md:px-14 lg:px-28 border-t border-white/10">
       <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
         <div className="lg:col-span-2">
-          <div 
+          <div
             className="flex items-center gap-3 mb-6 cursor-pointer min-h-[2.5rem]"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
             <AnimatePresence mode="wait">
               {!logoError && !isHovered ? (
-                <motion.img 
+                <motion.img
                   key="logo-img"
                   initial={{ opacity: 0, y: 5 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -5 }}
                   transition={{ duration: 0.3 }}
-                  src="https://www.ccgrupo.com.co/wp-content/uploads/2025/03/logo-original-b-.webp" 
-                  alt="CCGrupo Logo" 
-                  className="h-10 w-auto object-contain"
+                  src="https://www.ccgrupo.com.co/wp-content/uploads/2025/03/logo-original-b-.webp"
+                  alt="CCGrupo Logo"
+                  className="h-10 w-auto object-contain logo-auto"
                   onError={() => setLogoError(true)}
                 />
               ) : (
-                <motion.div 
+                <motion.div
                   key="logo-text"
                   initial={{ opacity: 0, y: 5 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -48,41 +54,37 @@ export default function Footer() {
             </AnimatePresence>
           </div>
           <p className="text-sm font-light leading-relaxed text-gray-200 max-w-xs">
-            BPO de nueva generación. Ecosistema de soluciones de Contact Center con IA. Más de 15 años transformando operaciones.
+            {t.footer.desc}
           </p>
         </div>
 
         <div>
-          <h5 className="font-mono text-[0.55rem] tracking-[0.25em] uppercase text-gray-300 mb-6">Servicios</h5>
+          <h5 className="font-mono text-[0.55rem] tracking-[0.25em] uppercase text-gray-300 mb-6">{t.footer.servicesTitle}</h5>
           <ul className="space-y-4">
-            {['Automatización', 'Contact Center', 'Omnicanalidad', 'Mensajes Masivos', 'Agentes Autónomos'].map(item => (
+            {t.footer.serviceLinks.map(item => (
               <li key={item}>
-                <a href="#" className="text-sm font-light text-gray-200 hover:text-teal transition-colors">
-                  {item}
-                </a>
+                <a href="#" className="text-sm font-light text-gray-200 hover:text-teal transition-colors">{item}</a>
               </li>
             ))}
           </ul>
         </div>
 
         <div>
-          <h5 className="font-mono text-[0.55rem] tracking-[0.25em] uppercase text-gray-300 mb-6">Empresa</h5>
+          <h5 className="font-mono text-[0.55rem] tracking-[0.25em] uppercase text-gray-300 mb-6">{t.footer.companyTitle}</h5>
           <ul className="space-y-4">
-            {['Nosotros', 'Contacto', 'Posting'].map(item => (
+            {t.footer.companyLinks.map(item => (
               <li key={item}>
-                <a href="#" className="text-sm font-light text-gray-200 hover:text-teal transition-colors">
-                  {item}
-                </a>
+                <a href="#" className="text-sm font-light text-gray-200 hover:text-teal transition-colors">{item}</a>
               </li>
             ))}
           </ul>
         </div>
 
         <div>
-          <h5 className="font-mono text-[0.55rem] tracking-[0.25em] uppercase text-gray-300 mb-6">Contacto</h5>
+          <h5 className="font-mono text-[0.55rem] tracking-[0.25em] uppercase text-gray-300 mb-6">{t.footer.contactTitle}</h5>
           <div className="space-y-4 text-sm font-light text-gray-200">
             <p>Cra. 20 #133 – 74, La Calleja</p>
-            <p>Bogotá, Colombia</p>
+            <p>{t.footer.location}</p>
             <a href="mailto:info@ccgrupo.com.co" className="block hover:text-teal transition-colors">info@ccgrupo.com.co</a>
             <p>(601) 7443732</p>
           </div>
@@ -90,22 +92,30 @@ export default function Footer() {
       </div>
 
       <div className="pt-10 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
-        <span className="font-mono text-[0.5rem] tracking-[0.15em] uppercase text-gray-300">
-          © 2025 Contact Center Grupo S.A.S.
-        </span>
+        <div className="flex flex-col sm:flex-row items-center gap-4">
+          <span className="font-mono text-[0.5rem] tracking-[0.15em] uppercase text-gray-300">
+            {t.footer.copyright}
+          </span>
+          <button
+            onClick={() => onNavigate?.('privacy')}
+            className="font-mono text-[0.5rem] tracking-[0.15em] uppercase text-gray-300 hover:text-teal transition-colors"
+          >
+            {t.footer.privacy}
+          </button>
+        </div>
 
         <div className="flex gap-4">
           {[
             { Icon: Linkedin, href: 'https://www.linkedin.com/company/contact-center-grupo-sas' },
             { Icon: Instagram, href: 'https://www.instagram.com/contact_center_grupo/' },
             { Icon: Facebook, href: 'https://www.facebook.com/CONTACTCENTERGROUP' },
-            { Icon: Youtube, href: 'https://www.youtube.com/channel/UCK1VihHdl_RjnuLkG5rhopQ' },
-            { Icon: Twitter, href: 'https://twitter.com' } // Placeholder for TikTok/X
+            { Icon: Youtube,  href: 'https://www.youtube.com/channel/UCK1VihHdl_RjnuLkG5rhopQ' },
+            { Icon: Twitter,  href: 'https://twitter.com' },
           ].map(({ Icon, href }, i) => (
-            <a 
-              key={i} 
-              href={href} 
-              target="_blank" 
+            <a
+              key={i}
+              href={href}
+              target="_blank"
               rel="noreferrer"
               className="w-9 h-9 border border-white/10 rounded-lg flex items-center justify-center text-gray-200 hover:border-teal hover:text-teal hover:bg-teal/10 transition-all duration-300"
             >
@@ -115,7 +125,7 @@ export default function Footer() {
         </div>
 
         <span className="font-mono text-[0.5rem] tracking-[0.15em] uppercase text-gray-300">
-          Bogotá, Colombia
+          {t.footer.location}
         </span>
       </div>
     </footer>
