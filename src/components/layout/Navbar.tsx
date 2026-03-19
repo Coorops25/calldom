@@ -12,6 +12,7 @@ export default function Navbar({ onNavigate }: Props) {
   const [isScrolled, setIsScrolled]       = useState(false);
   const [isMobileMenuOpen, setMobileOpen] = useState(false);
   const [logoError, setLogoError]         = useState(false);
+  const [isLogoHovered, setIsLogoHovered] = useState(false);
   const { isDark, toggle }                = useTheme();
   const { lang, t, toggleLang }           = useLang();
 
@@ -40,24 +41,43 @@ export default function Navbar({ onNavigate }: Props) {
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       >
         {/* Logo */}
-        <div className="flex items-center gap-3 cursor-pointer" onClick={() => scrollToSection('#hero')}>
-          {!logoError ? (
-            <img
-              src="https://www.ccgrupo.com.co/wp-content/uploads/2025/03/logo-original-b-.webp"
-              alt="CCGrupo Logo"
-              className="h-12 w-auto object-contain logo-auto"
-              onError={() => setLogoError(true)}
-            />
-          ) : (
-            <>
-              <div className="w-8 h-8 border-2 border-teal rounded-md flex items-center justify-center font-mono text-[0.55rem] font-bold text-teal">
-                CCG
-              </div>
-              <div className="font-mono text-[0.65rem] tracking-[0.25em] uppercase font-normal hidden sm:block">
-                Contact Center <span className="text-teal font-semibold">Grupo</span>
-              </div>
-            </>
-          )}
+        <div
+          className="flex items-center gap-3 cursor-pointer min-h-[3rem]"
+          onClick={() => scrollToSection('#hero')}
+          onMouseEnter={() => setIsLogoHovered(true)}
+          onMouseLeave={() => setIsLogoHovered(false)}
+        >
+          <AnimatePresence mode="wait">
+            {!logoError && !isLogoHovered ? (
+              <motion.img
+                key="logo-img"
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -5 }}
+                transition={{ duration: 0.3 }}
+                src="https://www.ccgrupo.com.co/wp-content/uploads/2025/03/logo-original-b-.webp"
+                alt="CCGrupo Logo"
+                className="h-12 w-auto object-contain logo-auto"
+                onError={() => setLogoError(true)}
+              />
+            ) : (
+              <motion.div
+                key="logo-text"
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -5 }}
+                transition={{ duration: 0.3 }}
+                className="flex items-center gap-3"
+              >
+                <div className="w-8 h-8 border-2 border-teal rounded-md flex items-center justify-center font-mono text-[0.55rem] font-bold text-teal">
+                  CCG
+                </div>
+                <div className="font-mono text-[0.65rem] tracking-[0.25em] uppercase font-normal hidden sm:block">
+                  Contact Center <span className="text-teal font-semibold">Grupo</span>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* Desktop nav */}

@@ -5,6 +5,7 @@ import Footer from '../layout/Footer';
 import BackgroundEffects from '../ui/BackgroundEffects';
 import { HexagonBackground } from '../ui/hexagon-background';
 import { getServiceById } from '../../data';
+import { useLang } from '../../i18n';
 
 interface ServiceModuleProps {
   serviceId: string;
@@ -15,9 +16,16 @@ interface ServiceModuleProps {
 export default function ServiceModule({ serviceId, onBack, onNavigate }: ServiceModuleProps) {
   const service = getServiceById(serviceId);
   const [imageError, setImageError] = useState(false);
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [openFaq, setOpenFaq]       = useState<number | null>(null);
+  const { t } = useLang();
 
   if (!service) return null;
+
+  const sm      = t.serviceModule;
+  const sd      = t.serviceDetails[serviceId as keyof typeof t.serviceDetails];
+  const si      = t.services.items[serviceId as keyof typeof t.services.items];
+  const title   = si?.title    ?? service.title;
+  const subtitle = si?.subtitle ?? service.subtitle;
 
   const showIconPlaceholder = !service.details.heroImage || imageError;
 
@@ -39,7 +47,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
           className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-teal hover:text-white transition-colors"
         >
           <ArrowLeft size={16} />
-          Volver
+          {t.back}
         </button>
       </nav>
 
@@ -54,21 +62,21 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
           >
             <div className="flex items-center gap-4 font-mono text-xs tracking-[0.35em] uppercase text-teal mb-6">
               <div className="w-8 h-px bg-teal" />
-              Servicio {service.id}
+              {sm.servicePrefix} {service.id}
             </div>
             <h1 className="font-display text-[clamp(3rem,5vw,5rem)] leading-[1.1] mb-2">
-              {service.title}
+              {title}
             </h1>
-            {service.subtitle && (
+            {subtitle && (
               <p className="font-mono text-sm tracking-[0.2em] uppercase text-teal mb-8">
-                {service.subtitle}
+                {subtitle}
               </p>
             )}
             <p className="text-xl font-light leading-relaxed text-gray-200 mb-10">
-              {service.details.longDesc}
+              {sd?.longDesc ?? service.details.longDesc}
             </p>
             <div className="flex flex-wrap gap-3">
-              {service.tags.map(tag => (
+              {(sd?.tags ?? service.tags).map(tag => (
                 <span key={tag} className="font-mono text-xs tracking-wider uppercase px-4 py-2 border border-white/10 rounded-full text-teal bg-teal/5">
                   {tag}
                 </span>
@@ -99,7 +107,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
                         <service.icon size={48} className="text-teal" strokeWidth={0.75} />
                       </div>
                       <div className="font-mono text-[0.55rem] tracking-[0.3em] uppercase text-gray-300">
-                        {service.title}
+                        {title}
                       </div>
                     </div>
                   </div>
@@ -110,7 +118,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
                 <div className="absolute inset-0 bg-teal/20 mix-blend-overlay z-10" />
                 <img
                   src={service.details.heroImage}
-                  alt={service.title}
+                  alt={title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   onError={() => setImageError(true)}
                 />
@@ -127,9 +135,9 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
         {/* Features & Benefits */}
         <div className="grid lg:grid-cols-3 gap-12 border-t border-white/10 pt-20">
           <div className="lg:col-span-1">
-            <h3 className="font-display text-3xl mb-8">Características</h3>
+            <h3 className="font-display text-3xl mb-8">{sm.features}</h3>
             <ul className="space-y-6">
-              {service.details.features.map((feature, i) => (
+              {(sd?.features ?? service.details.features).map((feature, i) => (
                 <motion.li
                   key={i}
                   initial={{ opacity: 0, y: 10 }}
@@ -146,9 +154,9 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
           </div>
 
           <div className="lg:col-span-2">
-            <h3 className="font-display text-3xl mb-8">Beneficios Clave</h3>
+            <h3 className="font-display text-3xl mb-8">{sm.benefits}</h3>
             <div className="grid sm:grid-cols-2 gap-6">
-              {service.details.benefits.map((benefit, i) => (
+              {(sd?.benefits ?? service.details.benefits).map((benefit, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 20 }}
@@ -176,9 +184,9 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
             >
               <div className="flex items-center gap-4 font-mono text-xs tracking-[0.35em] uppercase text-teal mb-4">
                 <div className="w-8 h-px bg-teal" />
-                Suite de Productos
+                {sm.productSuite}
               </div>
-              <h3 className="font-display text-4xl">Nuestros Agentes</h3>
+              <h3 className="font-display text-4xl">{sm.ourAgents}</h3>
             </motion.div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -215,7 +223,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
         )}
 
         {/* FAQ */}
-        {service.details.faq && service.details.faq.length > 0 && (
+        {(sd?.faq ?? service.details.faq) && (sd?.faq ?? service.details.faq)!.length > 0 && (
           <div className="mt-24 border-t border-white/10 pt-20">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -225,13 +233,13 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
             >
               <div className="flex items-center gap-4 font-mono text-xs tracking-[0.35em] uppercase text-teal mb-4">
                 <div className="w-8 h-px bg-teal" />
-                Preguntas Frecuentes
+                {sm.faqLabel}
               </div>
               <h3 className="font-display text-4xl">FAQ</h3>
             </motion.div>
 
             <div className="max-w-3xl space-y-3">
-              {service.details.faq.map((item, i) => (
+              {(sd?.faq ?? service.details.faq)!.map((item, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 10 }}
@@ -274,15 +282,15 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
         {/* CTA */}
         <div className="mt-24 p-12 md:p-20 border border-white/10 rounded-3xl bg-gradient-to-br from-teal/10 to-transparent text-center relative overflow-hidden">
           <div className="relative z-10">
-            <h2 className="font-display text-4xl md:text-5xl mb-6">¿Listo para transformar tu operación?</h2>
+            <h2 className="font-display text-4xl md:text-5xl mb-6">{sm.ctaTitle}</h2>
             <p className="text-xl font-light text-gray-300 mb-10 max-w-2xl mx-auto">
-              Agenda una consultoría gratuita y descubre cómo nuestra solución de {service.title} puede escalar tu negocio.
+              {sm.ctaDescPre} {title} {sm.ctaDescPost}
             </p>
             <button
               onClick={() => onNavigate?.('contact')}
               className="font-mono text-sm tracking-[0.25em] uppercase px-10 py-4 bg-teal text-navy-deep hover:bg-white transition-all duration-300"
             >
-              Agendar Demo
+              {sm.ctaButton}
             </button>
           </div>
         </div>
