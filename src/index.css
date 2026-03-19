@@ -182,68 +182,125 @@ html.light {
 /* ─── Light mode overrides ───────────────────────── */
 
 html.light {
-  /* text-white → navy */
-  & .text-white {
-    color: var(--c-fg);
-  }
-
-  /* white borders → navy borders */
-  & [class*="border-white"] {
-    border-color: rgba(11, 22, 40, 0.12);
-  }
-
-  /* subtle white bg overlays → subtle navy */
-  & [class*="bg-white/"] {
-    background-color: rgba(11, 22, 40, 0.04);
-  }
-
-  /* cursor blend mode: screen invisible on light bg */
-  & .mix-blend-screen {
-    mix-blend-mode: multiply;
-  }
-
-  /* outlined text strokes — needs strong contrast on light bg */
-  & .text-stroke {
-    -webkit-text-stroke: 1.5px rgba(11, 22, 40, 0.45);
-  }
-  & .text-stroke-teal {
-    -webkit-text-stroke: 1.5px rgba(0, 100, 160, 0.55);
-  }
-
-  /* ── Nav: add shadow so it stands out from the page ── */
-  & nav {
-    box-shadow: 0 2px 24px rgba(11, 22, 40, 0.09), 0 1px 0 rgba(11, 22, 40, 0.13);
-  }
-
-  /* ── Logo: invert white logo to dark navy on light bg ── */
-  & .logo-auto {
-    filter: brightness(0) saturate(100%);
-  }
-
-  /* ── Scrollbar light theme ── */
-  scrollbar-color: var(--c-bg-light) var(--c-bg-mid);
-
-  /* ── Section dividers: stronger contrast ── */
-  & .border-t,
-  & .border-b {
-    border-color: rgba(11, 22, 40, 0.1);
-  }
-
-  /* ── Reasons card container: visible border ── */
-  & .rounded-3xl {
-    border-color: rgba(11, 22, 40, 0.14) !important;
-    background-color: rgba(11, 22, 40, 0.04);
-  }
-
-  /* ── Client card bg: keep visible on light page ── */
-  & .bg-navy-deep {
-    box-shadow: inset 0 0 0 1px rgba(11, 22, 40, 0.08);
-  }
-
-  /* ── Gray text tones: ensure readability ── */
+  /* ── Base text ── */
+  & .text-white   { color: var(--c-fg); }
   & .text-gray-100 { color: var(--c-g100); }
   & .text-gray-200 { color: var(--c-g200); }
   & .text-gray-300 { color: var(--c-g300); }
+
+  /* ── Text gradient: deeper teal so it reads on white (was #00e5ff = 1.7:1) ── */
+  & .text-gradient {
+    background: linear-gradient(135deg, #005b94 0%, #0090c0 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* ── Outlined hero text ── */
+  & .text-stroke      { -webkit-text-stroke: 1.5px rgba(11, 22, 40, 0.45); }
+  & .text-stroke-teal { -webkit-text-stroke: 1.5px rgba(0, 100, 160, 0.55); }
+
+  /* ── Logo ── */
+  & .logo-auto { filter: brightness(0) saturate(100%); }
+
+  /* ── Cursor ── */
+  & .mix-blend-screen { mix-blend-mode: multiply; }
+
+  /* ── Scrollbar ── */
+  scrollbar-color: var(--c-bg-light) var(--c-bg-mid);
+
+  /* ── Nav: clear definition on light bg ── */
+  & nav {
+    box-shadow: 0 2px 32px rgba(11, 22, 40, 0.1), 0 1px 0 rgba(11, 22, 40, 0.12);
+  }
+
+  /* ── All white borders → subtle navy ── */
+  & [class*="border-white"] {
+    border-color: rgba(11, 22, 40, 0.1);
+  }
+
+  /* ── Section dividers ── */
+  & .border-t, & .border-b {
+    border-color: rgba(11, 22, 40, 0.12);
+  }
+
+  /* ── White bg overlays default → very subtle navy tint ── */
+  & [class*="bg-white/"] {
+    background-color: rgba(11, 22, 40, 0.03);
+  }
+
+  /* ── Hero badge pill: teal-tinted surface ── */
+  & .bg-white\/5 {
+    background-color: rgba(0, 100, 180, 0.07) !important;
+    border-color: rgba(0, 100, 180, 0.22) !important;
+  }
+
+  /* ── Marquee band: distinct tinted strip ── */
+  & .bg-white\/\[0\.03\] {
+    background-color: rgba(0, 100, 180, 0.05) !important;
+  }
+
+  /* ── Card surfaces: real white + elevation (vs near-invisible opacity) ── */
+  & .bg-white\/\[0\.02\] {
+    background-color: #ffffff !important;
+    box-shadow: 0 2px 14px rgba(11, 22, 40, 0.07), 0 0 0 1px rgba(11, 22, 40, 0.06) !important;
+  }
+  & .bg-white\/\[0\.05\] {
+    background-color: #ffffff !important;
+    box-shadow: 0 4px 22px rgba(11, 22, 40, 0.09), 0 0 0 1px rgba(11, 22, 40, 0.07) !important;
+  }
+
+  /* ── Hover states: visible interaction feedback ── */
+  & .hover\:bg-white\/\[0\.03\]:hover { background-color: #f2f8ff !important; }
+  & .hover\:bg-white\/\[0\.05\]:hover { background-color: #ecf5ff !important; }
+  & .hover\:bg-white\/\[0\.02\]:hover { background-color: rgba(0, 100, 180, 0.03) !important; }
+
+  /* ── Service row hover ── */
+  & .hover\:bg-white\/\[0\.02\] { --hover-ready: 1; }
+
+  /* ── Service icon panels: premium light gradient (dark navy-deep var breaks in light) ── */
+  & .service-panel-bg {
+    background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 55%, #f0f9ff 100%) !important;
+  }
+
+  /* ── Client name carousel cards: white surface with separation ── */
+  & .bg-navy-deep {
+    background-color: #ffffff;
+    box-shadow: 0 2px 12px rgba(11, 22, 40, 0.08), 0 0 0 1px rgba(11, 22, 40, 0.07);
+  }
+
+  /* ── Reasons scroll container ── */
+  & .bg-navy-mid\/30 {
+    background-color: rgba(0, 100, 180, 0.05) !important;
+    border-color: rgba(0, 100, 180, 0.15) !important;
+  }
+
+  /* ── Reasons stack cards (bg-navy-deep + border) ── */
+  & .bg-navy-deep.border {
+    background-color: #ffffff !important;
+    box-shadow: 0 8px 40px rgba(11, 22, 40, 0.1), 0 2px 8px rgba(11, 22, 40, 0.06) !important;
+  }
+
+  /* ── Rounded containers (Reasons 3xl, CTA 3xl) ── */
+  & .rounded-3xl {
+    border-color: rgba(11, 22, 40, 0.12) !important;
+  }
+
+  /* ── CTA section: blue-tinted gradient ── */
+  & .from-teal\/10 {
+    --tw-gradient-from: rgba(0, 100, 180, 0.08) var(--tw-gradient-from-position) !important;
+  }
+
+  /* ── Modal/overlay backgrounds ── */
+  & .bg-navy-deep\/85  { background-color: rgba(255, 255, 255, 0.9) !important; }
+  & .bg-navy-deep\/95  { background-color: rgba(248, 252, 255, 0.97) !important; }
+  & .bg-navy-mid\/40   { background-color: rgba(0, 100, 180, 0.06) !important; }
+
+  /* ── Tag pills in service cards ── */
+  & .rounded-full.border.text-teal {
+    border-color: rgba(0, 100, 180, 0.3) !important;
+    background-color: rgba(0, 100, 180, 0.05) !important;
+  }
 }
 
 /* ─── Custom Scrollbar ───────────────────────────── */

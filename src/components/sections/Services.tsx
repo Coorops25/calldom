@@ -88,7 +88,7 @@ export default function Services({ onNavigate }: ServicesProps) {
 
           const iconCol = (
             <div key="icon" className="relative min-h-[40vh] lg:min-h-auto overflow-hidden flex items-center justify-center">
-              <div className={`absolute inset-0 bg-gradient-to-br ${svc.gradient} transition-transform duration-1000 ease-out group-hover:scale-105`} />
+              <div className={`service-panel-bg absolute inset-0 bg-gradient-to-br ${svc.gradient} transition-transform duration-1000 ease-out group-hover:scale-105`} />
               <HexagonBackground
                 className="absolute inset-0 bg-transparent"
                 hexagonSize={40}

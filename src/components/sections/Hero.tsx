@@ -40,9 +40,12 @@ export default function Hero({ onNavigate }: Props) {
       }
       draw() {
         if (!ctx) return;
+        const light = document.documentElement.classList.contains('light');
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0,180,216,${this.o})`;
+        ctx.fillStyle = light
+          ? `rgba(0,100,180,${this.o * 2.8})`
+          : `rgba(0,180,216,${this.o})`;
         ctx.fill();
       }
     }
@@ -52,6 +55,7 @@ export default function Hero({ onNavigate }: Props) {
     const animate = () => {
       ctx.clearRect(0, 0, w, h);
       particles.forEach(p => { p.update(); p.draw(); });
+      const light = document.documentElement.classList.contains('light');
       particles.forEach((p1, i) => {
         particles.slice(i + 1).forEach(p2 => {
           const dx = p1.x - p2.x, dy = p1.y - p2.y;
@@ -60,7 +64,9 @@ export default function Hero({ onNavigate }: Props) {
             ctx.beginPath();
             ctx.moveTo(p1.x, p1.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(0,180,216,${0.05 * (1 - d / 150)})`;
+            ctx.strokeStyle = light
+              ? `rgba(0,100,180,${0.15 * (1 - d / 150)})`
+              : `rgba(0,180,216,${0.05 * (1 - d / 150)})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
