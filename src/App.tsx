@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { AnimatePresence } from 'motion/react';
 import { LangProvider } from './i18n';
 import Preloader from './components/ui/Preloader';
@@ -18,9 +18,10 @@ import Reasons from './components/sections/Reasons';
 import Clients from './components/sections/Clients';
 import CTA from './components/sections/CTA';
 import Footer from './components/layout/Footer';
-import ServiceModule from './components/modules/ServiceModule';
-import ContactModule from './components/modules/ContactModule';
-import PrivacyModule from './components/modules/PrivacyModule';
+
+const ServiceModule = lazy(() => import('./components/modules/ServiceModule'));
+const ContactModule = lazy(() => import('./components/modules/ContactModule'));
+const PrivacyModule = lazy(() => import('./components/modules/PrivacyModule'));
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -80,15 +81,21 @@ export default function App() {
               <Footer onNavigate={handleNavigate} />
             </>
           ) : currentView === 'contact' ? (
-            <ContactModule onBack={handleBackToHome} />
+            <Suspense fallback={null}>
+              <ContactModule onBack={handleBackToHome} />
+            </Suspense>
           ) : currentView === 'privacy' ? (
-            <PrivacyModule onBack={handleBackToHome} />
+            <Suspense fallback={null}>
+              <PrivacyModule onBack={handleBackToHome} />
+            </Suspense>
           ) : (
-            <ServiceModule
-              serviceId={currentView}
-              onBack={handleBackToHome}
-              onNavigate={handleNavigate}
-            />
+            <Suspense fallback={null}>
+              <ServiceModule
+                serviceId={currentView}
+                onBack={handleBackToHome}
+                onNavigate={handleNavigate}
+              />
+            </Suspense>
           )}
         </>
       )}

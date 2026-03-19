@@ -1,9 +1,10 @@
 import { motion, useInView } from 'motion/react';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, lazy, Suspense } from 'react';
 import ScrambledText from '../ui/ScrambledText';
 import SplitText from '../ui/SplitText';
-import LiquidEther from '../ui/LiquidEther';
 import { useLang } from '../../i18n';
+
+const LiquidEther = lazy(() => import('../ui/LiquidEther'));
 
 function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
   const [count, setCount] = useState(0);
@@ -41,13 +42,15 @@ export default function About() {
   return (
     <section id="about" className="py-32 px-6 md:px-14 lg:px-28 grid lg:grid-cols-2 gap-24 items-center relative overflow-hidden">
       <div className="absolute inset-0 opacity-20 pointer-events-none -z-10">
-        <LiquidEther
-          colors={['#0f1d35', '#0077b6', '#060d1f']}
-          mouseForce={20} cursorSize={100} isViscous viscous={30}
-          iterationsViscous={32} iterationsPoisson={32} resolution={0.5}
-          isBounce={false} autoDemo autoSpeed={0.5} autoIntensity={2.2}
-          takeoverDuration={0.25} autoResumeDelay={3000} autoRampDuration={0.6}
-        />
+        <Suspense fallback={null}>
+          <LiquidEther
+            colors={['#0f1d35', '#0077b6', '#060d1f']}
+            mouseForce={20} cursorSize={100} isViscous viscous={30}
+            iterationsViscous={32} iterationsPoisson={32} resolution={0.5}
+            isBounce={false} autoDemo autoSpeed={0.5} autoIntensity={2.2}
+            takeoverDuration={0.25} autoResumeDelay={3000} autoRampDuration={0.6}
+          />
+        </Suspense>
       </div>
 
       <div className="space-y-8">

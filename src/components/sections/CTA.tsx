@@ -1,8 +1,10 @@
+import { lazy, Suspense } from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import SplitText from '../ui/SplitText';
-import LiquidEther from '../ui/LiquidEther';
 import { useLang } from '../../i18n';
+
+const LiquidEther = lazy(() => import('../ui/LiquidEther'));
 
 interface Props {
   onNavigate?: (view: string) => void;
@@ -14,13 +16,15 @@ export default function CTA({ onNavigate }: Props) {
   return (
     <section className="py-56 px-6 relative overflow-hidden text-center">
       <div className="absolute inset-0 opacity-20 pointer-events-none">
-        <LiquidEther
-          colors={['#023e8a', '#0077b6', '#0096c7']}
-          mouseForce={20} cursorSize={100} isViscous viscous={30}
-          iterationsViscous={32} iterationsPoisson={32} resolution={0.5}
-          isBounce={false} autoDemo autoSpeed={0.5} autoIntensity={2.2}
-          takeoverDuration={0.25} autoResumeDelay={3000} autoRampDuration={0.6}
-        />
+        <Suspense fallback={null}>
+          <LiquidEther
+            colors={['#023e8a', '#0077b6', '#0096c7']}
+            mouseForce={20} cursorSize={100} isViscous viscous={30}
+            iterationsViscous={32} iterationsPoisson={32} resolution={0.5}
+            isBounce={false} autoDemo autoSpeed={0.5} autoIntensity={2.2}
+            takeoverDuration={0.25} autoResumeDelay={3000} autoRampDuration={0.6}
+          />
+        </Suspense>
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto">
