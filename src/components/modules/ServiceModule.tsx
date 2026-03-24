@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowLeft, CheckCircle, ChevronDown, Network, Zap, BarChart3 } from 'lucide-react';
 import Footer from '../layout/Footer';
@@ -21,13 +21,53 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
 
   if (!service) return null;
 
-  const sm      = t.serviceModule;
-  const sd      = t.serviceDetails[serviceId as keyof typeof t.serviceDetails];
-  const si      = t.services.items[serviceId as keyof typeof t.services.items];
-  const title   = si?.title    ?? service.title;
+  const sm       = t.serviceModule;
+  const sd       = t.serviceDetails[serviceId as keyof typeof t.serviceDetails];
+  const si       = t.services.items[serviceId as keyof typeof t.services.items];
+  const title    = si?.title    ?? service.title;
   const subtitle = si?.subtitle ?? service.subtitle;
 
   const showIconPlaceholder = !service.details.heroImage || imageError;
+
+  // ── SEO: BreadcrumbList + hreflang per service page ──────────────────────
+  useEffect(() => {
+    const BASE = 'https://ccgrupo.com.co';
+    const path = `/servicio/${serviceId}`;
+
+    // Inject hreflang + canonical
+    const linkDefs = [
+      { rel: 'canonical',  href: `${BASE}${path}` },
+      { rel: 'alternate',  href: `${BASE}${path}`,     hreflang: 'es-co' },
+      { rel: 'alternate',  href: `${BASE}/en${path}`,  hreflang: 'en'    },
+      { rel: 'alternate',  href: `${BASE}${path}`,     hreflang: 'x-default' },
+    ];
+    const linkEls = linkDefs.map(attrs => {
+      const el = document.createElement('link');
+      Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
+      el.setAttribute('data-service', serviceId);
+      document.head.appendChild(el);
+      return el;
+    });
+
+    // Inject BreadcrumbList JSON-LD
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.setAttribute('data-service', serviceId);
+    script.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Inicio',    item: `${BASE}/`         },
+        { '@type': 'ListItem', position: 2, name: 'Servicios', item: `${BASE}/#services` },
+        { '@type': 'ListItem', position: 3, name: title,       item: `${BASE}${path}`   },
+      ],
+    });
+    document.head.appendChild(script);
+
+    return () => {
+      [...linkEls, script].forEach(el => el.remove());
+    };
+  }, [serviceId, title]);
 
   return (
     <div className="min-h-screen bg-navy text-white relative">

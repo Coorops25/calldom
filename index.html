@@ -17,7 +17,7 @@
     <meta property="og:url" content="https://ccgrupo.com.co/" />
     <meta property="og:title" content="CCGrupo | BPO Colombia — CX, Ventas, IA y Digital Studio" />
     <meta property="og:description" content="Transformamos los procesos de las empresas para que sean más productivas, mejoren su atención y generen más ventas. CX · Leads & Ventas · Agentes Autónomos · Digital Studio." />
-    <meta property="og:image" content="https://ccgrupo.com.co/og-image.jpg" />
+    <meta property="og:image" content="https://ccgrupo.com.co/og-image.svg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="CCGrupo — BPO de Nueva Generación en Colombia" />
@@ -31,7 +31,7 @@
     <meta name="twitter:creator" content="@ccgrupo" />
     <meta name="twitter:title" content="CCGrupo | BPO Colombia — CX, Ventas, IA y Digital Studio" />
     <meta name="twitter:description" content="Transformamos los procesos de las empresas para que sean más productivas, mejoren su atención y generen más ventas." />
-    <meta name="twitter:image" content="https://ccgrupo.com.co/og-image.jpg" />
+    <meta name="twitter:image" content="https://ccgrupo.com.co/og-image.svg" />
 
     <!-- ─── Geo ───────────────────────────────────────────────────────────── -->
     <meta name="geo.region" content="CO-DC" />
@@ -251,9 +251,31 @@
     }
     </script>
 
-    <!-- ─── Favicons & Assets ─────────────────────────────────────────────── -->
+    <!-- ─── Favicons & PWA ───────────────────────────────────────────────── -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="shortcut icon" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#00b4d8" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="CCGrupo" />
+
+    <!-- ─── Google Analytics 4 (loads only when VITE_GA_ID is set) ─────────── -->
+    <script>
+      (function(){
+        var id='%VITE_GA_ID%';
+        if(!id||id==='%VITE_GA_ID%'||id.length<6)return;
+        var s=document.createElement('script');
+        s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+id;
+        document.head.appendChild(s);
+        window.dataLayer=window.dataLayer||[];
+        function gtag(){window.dataLayer.push(arguments);}
+        window.gtag=gtag;
+        gtag('js',new Date());gtag('config',id,{anonymize_ip:true});
+      })();
+    </script>
 
     <!-- ─── Fonts ─────────────────────────────────────────────────────────── -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

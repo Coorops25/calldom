@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ArrowLeft, MapPin, Mail, Phone, Clock, Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { ArrowLeft, MapPin, Mail, Phone, Clock, Send, CheckCircle, AlertCircle, XCircle } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 import { useLang } from '../../i18n';
+
+const EJ_SERVICE  = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const EJ_TEMPLATE = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const EJ_KEY      = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+const EMAILJS_CONFIGURED = !!(EJ_SERVICE && EJ_TEMPLATE && EJ_KEY &&
+  !EJ_SERVICE.includes('xxxxxxx'));
 
 const services = [
   '01 — CX – Experiencia del Cliente',
@@ -23,10 +30,11 @@ export default function ContactModule({ onBack }: Props) {
   const { t } = useLang();
   const ct = t.contact;
 
-  const [form, setForm]         = useState<FormState>(empty);
-  const [errors, setErrors]     = useState<Partial<FormState>>({});
+  const [form, setForm]           = useState<FormState>(empty);
+  const [errors, setErrors]       = useState<Partial<FormState>>({});
   const [submitted, setSubmitted] = useState(false);
-  const [sending, setSending]   = useState(false);
+  const [sending, setSending]     = useState(false);
+  const [sendError, setSendError] = useState(false);
 
   const contactInfo = [
     { icon: MapPin, label: ct.infoLabels.location, value: 'Cra. 20 #133 – 74, La Calleja', sub: ct.infoSubs.location },
@@ -57,9 +65,40 @@ export default function ContactModule({ onBack }: Props) {
     e.preventDefault();
     if (!validate()) return;
     setSending(true);
-    await new Promise(r => setTimeout(r, 1400));
-    setSending(false);
-    setSubmitted(true);
+    setSendError(false);
+
+    if (EMAILJS_CONFIGURED) {
+      try {
+        await emailjs.send(
+          EJ_SERVICE!,
+          EJ_TEMPLATE!,
+          {
+            from_name:  form.nombre,
+            company:    form.empresa,
+            from_email: form.email,
+            phone:      form.telefono,
+            service:    form.servicio,
+            message:    form.mensaje,
+            reply_to:   form.email,
+          },
+          EJ_KEY!
+        );
+        setSubmitted(true);
+      } catch {
+        setSendError(true);
+      } finally {
+        setSending(false);
+      }
+    } else {
+      // Fallback: mailto link when EmailJS not configured
+      const subject = encodeURIComponent(`Contacto CCGrupo — ${form.servicio}`);
+      const body    = encodeURIComponent(
+        `Nombre: ${form.nombre}\nEmpresa: ${form.empresa}\nEmail: ${form.email}\nTeléfono: ${form.telefono}\nServicio: ${form.servicio}\n\n${form.mensaje}`
+      );
+      window.location.href = `mailto:info@ccgrupo.com.co?subject=${subject}&body=${body}`;
+      setSending(false);
+      setSubmitted(true);
+    }
   };
 
   const inputBase =
@@ -218,6 +257,20 @@ export default function ContactModule({ onBack }: Props) {
                     {!sending && <Send size={14} className="relative z-10 transition-transform duration-300 group-hover:translate-x-1" />}
                     <div className="absolute inset-0 bg-gradient-to-br from-teal to-teal-bright opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </motion.button>
+
+                  <AnimatePresence>
+                    {sendError && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0 }}
+                        className="flex items-center gap-2 font-mono text-[0.55rem] text-red-400 justify-center"
+                      >
+                        <XCircle size={12} />
+                        Error al enviar. Intenta de nuevo o escríbenos a info@ccgrupo.com.co
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
 
                   <p className="font-mono text-[0.52rem] tracking-[0.15em] text-gray-300 text-center">
                     {ct.fields.privacyNote}

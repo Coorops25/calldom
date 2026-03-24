@@ -7,6 +7,7 @@ import { useState, useEffect, lazy, Suspense } from 'react';
 import { AnimatePresence } from 'motion/react';
 import { LangProvider } from './i18n';
 import Preloader from './components/ui/Preloader';
+import PageLoader from './components/ui/PageLoader';
 import CustomCursor from './components/ui/CustomCursor';
 import BackgroundEffects from './components/ui/BackgroundEffects';
 import Navbar from './components/layout/Navbar';
@@ -23,9 +24,10 @@ import FloatingCTA from './components/ui/FloatingCTA';
 import ScrollTracker from './components/ui/ScrollTracker';
 import CornerLabels from './components/ui/CornerLabels';
 
-const ServiceModule = lazy(() => import('./components/modules/ServiceModule'));
-const ContactModule = lazy(() => import('./components/modules/ContactModule'));
-const PrivacyModule = lazy(() => import('./components/modules/PrivacyModule'));
+const ServiceModule  = lazy(() => import('./components/modules/ServiceModule'));
+const ContactModule  = lazy(() => import('./components/modules/ContactModule'));
+const PrivacyModule  = lazy(() => import('./components/modules/PrivacyModule'));
+const NotFoundModule = lazy(() => import('./components/modules/NotFoundModule'));
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -90,20 +92,24 @@ export default function App() {
               <Footer onNavigate={handleNavigate} />
             </>
           ) : currentView === 'contact' ? (
-            <Suspense fallback={null}>
+            <Suspense fallback={<PageLoader />}>
               <ContactModule onBack={handleBackToHome} />
             </Suspense>
           ) : currentView === 'privacy' ? (
-            <Suspense fallback={null}>
+            <Suspense fallback={<PageLoader />}>
               <PrivacyModule onBack={handleBackToHome} />
             </Suspense>
-          ) : (
-            <Suspense fallback={null}>
+          ) : ['01','02','03','04'].includes(currentView) ? (
+            <Suspense fallback={<PageLoader />}>
               <ServiceModule
                 serviceId={currentView}
                 onBack={handleBackToHome}
                 onNavigate={handleNavigate}
               />
+            </Suspense>
+          ) : (
+            <Suspense fallback={<PageLoader />}>
+              <NotFoundModule onBack={handleBackToHome} />
             </Suspense>
           )}
         </>
