@@ -73,8 +73,14 @@ export default function Footer({ onNavigate }: Props) {
           <h5 className="font-mono text-[0.55rem] tracking-[0.25em] uppercase text-gray-300 mb-6">{t.footer.companyTitle}</h5>
           <ul className="space-y-4">
             {t.footer.companyLinks.map(item => (
-              <li key={item}>
-                <a href="#" className="text-sm font-light text-gray-200 hover:text-teal transition-colors">{item}</a>
+              <li key={item.name}>
+                {item.href.startsWith('http') ? (
+                  <a href={item.href} target="_blank" rel="noreferrer" className="text-sm font-light text-gray-200 hover:text-teal transition-colors">{item.name}</a>
+                ) : item.href === 'contact' ? (
+                  <button onClick={() => onNavigate?.('contact')} className="text-sm font-light text-gray-200 hover:text-teal transition-colors">{item.name}</button>
+                ) : (
+                  <a href={item.href} className="text-sm font-light text-gray-200 hover:text-teal transition-colors">{item.name}</a>
+                )}
               </li>
             ))}
           </ul>
