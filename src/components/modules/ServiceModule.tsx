@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ArrowLeft, CheckCircle, ChevronDown } from 'lucide-react';
+import { ArrowLeft, CheckCircle, ChevronDown, Network, Zap, BarChart3 } from 'lucide-react';
 import Footer from '../layout/Footer';
 import BackgroundEffects from '../ui/BackgroundEffects';
 import { HexagonBackground } from '../ui/hexagon-background';
@@ -280,48 +280,60 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
         )}
 
         {/* Base Unificada */}
-        <div className="mt-24 border-t border-white/10 pt-20">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-10"
-          >
-            <div className="flex items-center gap-4 font-mono text-xs tracking-[0.35em] uppercase text-teal mb-4">
-              <div className="w-8 h-px bg-teal" />
-              {sm.baseBlock.label}
-            </div>
-            <p className="font-display text-2xl md:text-3xl leading-snug max-w-3xl text-white">
-              {sm.baseBlock.title}
-            </p>
-          </motion.div>
-
-          <div className="grid sm:grid-cols-3 gap-6 mb-8">
-            {sm.baseBlock.pillars.map((pillar, i) => (
+        {(() => {
+          const PILLAR_ICONS = [Network, Zap, BarChart3];
+          return (
+            <div className="mt-24 border-t border-white/10 pt-20">
               <motion.div
-                key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="p-8 border border-teal/20 bg-teal/5 rounded-2xl"
+                className="text-center mb-14"
               >
-                <div className="font-mono text-[0.5rem] tracking-[0.25em] uppercase text-teal mb-3">0{i + 1}</div>
-                <h4 className="font-mono text-sm uppercase tracking-widest text-white mb-3">{pillar.title}</h4>
-                <p className="text-gray-300 font-light text-sm leading-relaxed">{pillar.desc}</p>
+                <div className="inline-flex items-center gap-3 font-mono text-[0.6rem] tracking-[0.35em] uppercase text-teal mb-5">
+                  <div className="w-6 h-px bg-teal" />
+                  {sm.baseBlock.label}
+                  <div className="w-6 h-px bg-teal" />
+                </div>
+                <p className="font-display text-2xl md:text-4xl leading-snug text-white max-w-3xl mx-auto">
+                  {sm.baseBlock.title}
+                </p>
               </motion.div>
-            ))}
-          </div>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="font-mono text-[0.6rem] tracking-[0.2em] uppercase text-gray-400 border-l-2 border-teal/40 pl-4"
-          >
-            {sm.baseBlock.guarantee}
-          </motion.p>
-        </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
+                {sm.baseBlock.pillars.map((pillar, i) => {
+                  const PillarIcon = PILLAR_ICONS[i];
+                  return (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }}
+                      className="flex flex-col items-center text-center p-8 border border-teal/20 bg-teal/5 rounded-2xl"
+                    >
+                      <div className="w-14 h-14 rounded-xl border border-teal/30 bg-teal/10 flex items-center justify-center mb-5">
+                        <PillarIcon size={24} className="text-teal" strokeWidth={1.5} />
+                      </div>
+                      <div className="font-mono text-[0.45rem] tracking-[0.3em] uppercase text-teal/60 mb-2">0{i + 1}</div>
+                      <h4 className="font-mono text-sm uppercase tracking-widest text-white mb-3">{pillar.title}</h4>
+                      <p className="text-gray-300 font-light text-sm leading-relaxed">{pillar.desc}</p>
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                className="text-center font-mono text-[0.55rem] tracking-[0.2em] uppercase text-gray-400 max-w-2xl mx-auto"
+              >
+                {sm.baseBlock.guarantee}
+              </motion.p>
+            </div>
+          );
+        })()}
 
         {/* CTA */}
         <div className="mt-24 p-12 md:p-20 border border-white/10 rounded-3xl bg-gradient-to-br from-teal/10 to-transparent text-center relative overflow-hidden">
