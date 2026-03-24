@@ -15,9 +15,13 @@ import Marquee from './components/sections/Marquee';
 import About from './components/sections/About';
 import Services from './components/sections/Services';
 import Reasons from './components/sections/Reasons';
+import Sectors from './components/sections/Sectors';
 import Clients from './components/sections/Clients';
 import CTA from './components/sections/CTA';
 import Footer from './components/layout/Footer';
+import FloatingCTA from './components/ui/FloatingCTA';
+import ScrollTracker from './components/ui/ScrollTracker';
+import CornerLabels from './components/ui/CornerLabels';
 
 const ServiceModule = lazy(() => import('./components/modules/ServiceModule'));
 const ContactModule = lazy(() => import('./components/modules/ContactModule'));
@@ -68,12 +72,17 @@ export default function App() {
               <BackgroundEffects />
               <Navbar onNavigate={handleNavigate} />
 
+              <ScrollTracker />
+              <CornerLabels />
+              <FloatingCTA onNavigate={handleNavigate} />
+
               <main className="relative z-10">
                 <Hero onNavigate={handleNavigate} />
                 <Marquee />
                 <About />
                 <Services onNavigate={handleNavigate} />
                 <Reasons />
+                <Sectors />
                 <Clients />
                 <CTA onNavigate={handleNavigate} />
               </main>

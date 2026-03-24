@@ -69,6 +69,19 @@ const translations = {
         { title: 'Orientados a Resultados',         desc: 'No solo implementamos tecnología. Conectamos la operación con objetivos de negocio y medimos el impacto real en productividad, ventas y experiencia.' },
       ],
     },
+    sectors: {
+      label:   'Sectores',
+      heading: 'Industrias que impulsamos',
+      sub:     'Operamos en los sectores más exigentes con soluciones adaptadas a cada industria.',
+      items: [
+        { name: 'Salud',      desc: 'Agendamiento, soporte a pacientes y gestión de citas con omnicanalidad.' },
+        { name: 'Finanzas',   desc: 'Cobranza, servicio al cliente y cumplimiento normativo con alta trazabilidad.' },
+        { name: 'Retail',     desc: 'Atención posventa, gestión de pedidos y fidelización de clientes.' },
+        { name: 'Gobierno',   desc: 'Líneas de atención ciudadana, PQR y operaciones de alto volumen.' },
+        { name: 'Educación',  desc: 'Captación de estudiantes, soporte académico y plataformas e-learning.' },
+        { name: 'Logística',  desc: 'Seguimiento de envíos, atención de novedades y coordinación operativa.' },
+      ],
+    },
     clients: {
       label:      '05 / 05 — Clientes',
       headingPre: 'Nuestros',
@@ -265,6 +278,19 @@ const translations = {
         { title: 'True Omnichannel',              desc: 'WhatsApp, email, SMS, chatbots and voice unified in a single platform for zero friction and consistent cross-channel experience.' },
         { title: 'Executive Visibility',          desc: 'Real-time dashboards with Looker Studio and Power BI. Full operational traceability for data-driven decisions.' },
         { title: 'Results-Oriented',              desc: 'We don\'t just implement technology. We connect operations to business goals and measure real impact on productivity, sales and experience.' },
+      ],
+    },
+    sectors: {
+      label:   'Sectors',
+      heading: 'Industries we power',
+      sub:     'We operate in the most demanding sectors with solutions tailored to each industry.',
+      items: [
+        { name: 'Healthcare',   desc: 'Scheduling, patient support and appointment management with omnichannel coverage.' },
+        { name: 'Finance',      desc: 'Collections, customer service and regulatory compliance with full traceability.' },
+        { name: 'Retail',       desc: 'After-sales service, order management and customer loyalty programs.' },
+        { name: 'Government',   desc: 'Citizen service lines, PQR management and high-volume operations.' },
+        { name: 'Education',    desc: 'Student recruitment, academic support and e-learning platforms.' },
+        { name: 'Logistics',    desc: 'Shipment tracking, incident resolution and operational coordination.' },
       ],
     },
     clients: {
