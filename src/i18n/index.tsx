@@ -101,7 +101,12 @@ const translations = {
       servicesTitle: 'Servicios',
       companyTitle:  'Empresa',
       contactTitle:  'Contacto',
-      serviceLinks:  ['CX – Experiencia del Cliente', 'Leads & Ventas', 'Agentes Autónomos', 'Digital Studio'],
+      serviceLinks:  [
+        { name: 'CX – Experiencia del Cliente', id: '01' },
+        { name: 'Leads & Ventas',               id: '02' },
+        { name: 'Agentes Autónomos',            id: '03' },
+        { name: 'Digital Studio',               id: '04' },
+      ],
       companyLinks:  [
         { name: 'Nosotros', href: '#about' },
         { name: 'Contacto', href: 'contact' },
@@ -316,7 +321,12 @@ const translations = {
       servicesTitle: 'Services',
       companyTitle:  'Company',
       contactTitle:  'Contact',
-      serviceLinks:  ['CX – Customer Experience', 'Leads & Sales', 'Autonomous Agents', 'Digital Studio'],
+      serviceLinks:  [
+        { name: 'CX – Customer Experience', id: '01' },
+        { name: 'Leads & Sales',            id: '02' },
+        { name: 'Autonomous Agents',        id: '03' },
+        { name: 'Digital Studio',           id: '04' },
+      ],
       companyLinks:  [
         { name: 'About',   href: '#about' },
         { name: 'Contact', href: 'contact' },

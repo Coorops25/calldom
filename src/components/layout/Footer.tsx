@@ -62,8 +62,13 @@ export default function Footer({ onNavigate }: Props) {
           <h5 className="font-mono text-[0.55rem] tracking-[0.25em] uppercase text-gray-300 mb-6">{t.footer.servicesTitle}</h5>
           <ul className="space-y-4">
             {t.footer.serviceLinks.map(item => (
-              <li key={item}>
-                <a href="#" className="text-sm font-light text-gray-200 hover:text-teal transition-colors">{item}</a>
+              <li key={item.id}>
+                <button
+                  onClick={() => { onNavigate?.(item.id); window.scrollTo(0, 0); }}
+                  className="text-sm font-light text-gray-200 hover:text-teal transition-colors text-left"
+                >
+                  {item.name}
+                </button>
               </li>
             ))}
           </ul>
@@ -92,7 +97,7 @@ export default function Footer({ onNavigate }: Props) {
             <p>Cra. 20 #133 – 74, La Calleja</p>
             <p>{t.footer.location}</p>
             <a href="mailto:info@ccgrupo.com.co" className="block hover:text-teal transition-colors">info@ccgrupo.com.co</a>
-            <p>(601) 7443732</p>
+            <a href="tel:+60117443732" className="block hover:text-teal transition-colors">(601) 7443732</a>
           </div>
         </div>
       </div>
