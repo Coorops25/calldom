@@ -46,8 +46,16 @@ export default function Reasons() {
         </motion.div>
 
         <div className="font-display text-[clamp(2.5rem,4.5vw,4.2rem)] leading-tight">
-          <SplitText className="inline-block" delay={30} duration={1} splitType="words" from={{ opacity: 0, y: 20 }} to={{ opacity: 1, y: 0 }}>
-            {t.reasons.headingPre} Contact Center <em className="italic text-gradient">{t.reasons.headingEm}</em>
+          <SplitText
+            key={`reasons-heading-${lang}`}
+            className="inline-block"
+            delay={30}
+            duration={1}
+            splitType="words"
+            from={{ opacity: 0, y: 20 }}
+            to={{ opacity: 1, y: 0 }}
+          >
+            {t.reasons.headingPre} <em className="italic text-gradient">{t.reasons.headingEm}</em>
           </SplitText>
         </div>
       </div>

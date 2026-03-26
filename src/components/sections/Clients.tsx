@@ -17,7 +17,7 @@ const CLIENTS = [
 ];
 
 export default function Clients() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   // Per-slot error state stored by index
   const errRef = useRef<Record<number, boolean>>({});
   const [, forceRender] = useState(0);
@@ -43,7 +43,15 @@ export default function Clients() {
           </motion.div>
 
           <div className="font-display text-[clamp(2rem,3.5vw,3rem)]">
-            <SplitText className="inline-block" delay={40} duration={1} splitType="chars" from={{ opacity: 0, y: 20 }} to={{ opacity: 1, y: 0 }}>
+            <SplitText
+              key={`clients-heading-${lang}`}
+              className="inline-block"
+              delay={40}
+              duration={1}
+              splitType="chars"
+              from={{ opacity: 0, y: 20 }}
+              to={{ opacity: 1, y: 0 }}
+            >
               {t.clients.headingPre} <em className="italic text-teal">{t.clients.headingEm}</em>
             </SplitText>
           </div>

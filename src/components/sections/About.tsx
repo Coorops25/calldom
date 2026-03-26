@@ -31,7 +31,7 @@ function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
 }
 
 export default function About() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const stats = [
     { val: 15, suffix: '+', label: t.about.stats[0] },
     { val: 40, suffix: '%', label: t.about.stats[1] },
@@ -65,7 +65,15 @@ export default function About() {
         </motion.div>
 
         <div className="font-display text-[clamp(2.5rem,4.5vw,4rem)] leading-[1.1]">
-          <SplitText className="inline-block" delay={30} duration={1} splitType="words" from={{ opacity: 0, y: 20 }} to={{ opacity: 1, y: 0 }}>
+          <SplitText
+            key={`about-heading-${lang}`}
+            className="inline-block"
+            delay={30}
+            duration={1}
+            splitType="words"
+            from={{ opacity: 0, y: 20 }}
+            to={{ opacity: 1, y: 0 }}
+          >
             {t.about.headingPre} <span className="text-teal font-medium italic">BPO</span> {t.about.headingPost}
           </SplitText>
         </div>

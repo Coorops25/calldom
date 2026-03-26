@@ -48,7 +48,16 @@ export default function CTA({ onNavigate }: Props) {
         </motion.div>
 
         <div className="font-display text-[clamp(3rem,7vw,6.5rem)] leading-[1.1] mb-8">
-          <SplitText className="inline-block" delay={40} duration={1} splitType="words" from={{ opacity: 0, y: 30 }} to={{ opacity: 1, y: 0 }} textAlign="center">
+          <SplitText
+            key={`cta-heading-${lang}`}
+            className="inline-block"
+            delay={40}
+            duration={1}
+            splitType="words"
+            from={{ opacity: 0, y: 30 }}
+            to={{ opacity: 1, y: 0 }}
+            textAlign="center"
+          >
             {ctaCopy.headingPre} <em className="italic font-bold text-teal-bright animate-pulse inline-block drop-shadow-[0_0_25px_rgba(0,229,255,0.8)]">{ctaCopy.headingEm}</em> {ctaCopy.headingPost}
           </SplitText>
         </div>

@@ -52,7 +52,15 @@ export default function Services({ onNavigate }: ServicesProps) {
         </motion.div>
 
         <div className="font-display text-[clamp(4rem,10vw,9rem)] leading-[0.95]">
-          <SplitText className="inline-block" delay={50} duration={1.2} splitType="chars" from={{ opacity: 0, y: 40 }} to={{ opacity: 1, y: 0 }}>
+          <SplitText
+            key={`services-heading-${lang}`}
+            className="inline-block"
+            delay={50}
+            duration={1.2}
+            splitType="chars"
+            from={{ opacity: 0, y: 40 }}
+            to={{ opacity: 1, y: 0 }}
+          >
             {lang === 'en'
               ? <>Our<br /><span className="text-stroke text-transparent">ecosystem</span></>
               : <>Nuestro<br /><span className="text-stroke text-transparent">ecosistema</span></>}
