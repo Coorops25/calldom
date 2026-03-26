@@ -35,7 +35,6 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [currentView, setCurrentView] = useState<'home' | string>('home');
 
-  // Prevent scrolling while loading
   useEffect(() => {
     if (loading) {
       document.body.style.overflow = 'hidden';
@@ -51,7 +50,12 @@ export default function App() {
 
   const handleBackToHome = () => {
     setCurrentView('home');
-    document.title = 'CCGrupo | BPO Colombia — CX, Ventas, IA y Digital Studio';
+    const lang = (typeof window !== 'undefined' ? localStorage.getItem('lang') : 'es') === 'en' ? 'en' : 'es';
+    document.title =
+      lang === 'en'
+        ? 'CCGrupo | CX, Sales, AI and Digital Studio'
+        : 'CCGrupo | CX, Ventas, IA y Digital Studio';
+
     setTimeout(() => {
       const element = document.getElementById('services');
       if (element) element.scrollIntoView({ behavior: 'smooth' });
@@ -97,7 +101,7 @@ export default function App() {
               <Suspense fallback={<PageLoader />}>
                 <PrivacyModule onBack={handleBackToHome} />
               </Suspense>
-            ) : ['01','02','03','04'].includes(currentView) ? (
+            ) : ['01', '02', '03', '04'].includes(currentView) ? (
               <Suspense fallback={<PageLoader />}>
                 <ServiceModule
                   serviceId={currentView}

@@ -1,4 +1,4 @@
-// @ts-nocheck — React 19 class component typing quirk with this tsconfig
+// @ts-nocheck - React 19 class component typing quirk with this tsconfig
 import React from 'react';
 
 interface Props {
@@ -8,6 +8,11 @@ interface Props {
 
 interface State {
   hasError: boolean;
+}
+
+function getLang() {
+  if (typeof window === 'undefined') return 'es';
+  return localStorage.getItem('lang') === 'en' ? 'en' : 'es';
 }
 
 export default class ErrorBoundary extends React.Component {
@@ -28,6 +33,19 @@ export default class ErrorBoundary extends React.Component {
     if (!hasError) return children;
     if (fallback) return fallback;
 
+    const isEn = getLang() === 'en';
+    const copy = isEn
+      ? {
+          title: 'Unexpected error',
+          desc: 'Something went wrong. Please reload the page or email us at',
+          reload: 'Reload page',
+        }
+      : {
+          title: 'Error inesperado',
+          desc: 'Algo salio mal. Por favor recarga la pagina o escribenos a',
+          reload: 'Recargar pagina',
+        };
+
     return (
       <div className="min-h-screen bg-navy-deep text-white flex items-center justify-center px-6">
         <div className="text-center max-w-md">
@@ -35,10 +53,10 @@ export default class ErrorBoundary extends React.Component {
             <span className="font-mono text-sm font-bold text-red-400">!</span>
           </div>
           <div className="font-mono text-[0.55rem] tracking-[0.3em] uppercase text-red-400 mb-3">
-            Error inesperado
+            {copy.title}
           </div>
           <p className="text-gray-300 font-light text-sm leading-relaxed mb-8">
-            Algo salió mal. Por favor recarga la página o escríbenos a{' '}
+            {copy.desc}{' '}
             <a href="mailto:info@ccgrupo.com.co" className="text-teal hover:underline">
               info@ccgrupo.com.co
             </a>
@@ -47,7 +65,7 @@ export default class ErrorBoundary extends React.Component {
             onClick={() => window.location.reload()}
             className="font-mono text-[0.6rem] tracking-[0.2em] uppercase px-8 py-3 border border-white/20 text-white hover:border-teal hover:text-teal transition-all duration-300"
           >
-            Recargar página
+            {copy.reload}
           </button>
         </div>
       </div>

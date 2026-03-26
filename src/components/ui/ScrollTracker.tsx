@@ -12,12 +12,12 @@ const SECTIONS = [
 
 export default function ScrollTracker() {
   const [active, setActive] = useState(0);
-  const { t } = useLang();
+  const { t, lang } = useLang();
 
   // Nav labels + sector label
   const labels = [
     ...t.nav.links.map(l => l.name),
-    t.nav.links[2]?.name ?? 'Sectores', // fallback placeholder at index 4 (sectors)
+    t.nav.links[2]?.name ?? (lang === 'en' ? 'Sectors' : 'Sectores'), // fallback placeholder at index 4 (sectors)
   ];
   // Rebuild to match SECTIONS order (insert sectors between reasons and clients)
   const sectionLabels = [
@@ -25,7 +25,7 @@ export default function ScrollTracker() {
     labels[1], // nosotros/about
     labels[2], // servicios/services
     labels[3], // diferencial/reasons
-    t.sectors?.label ?? 'Sectores',
+    t.sectors?.label ?? (lang === 'en' ? 'Sectors' : 'Sectores'),
     labels[4], // clientes/clients
   ];
 
@@ -56,7 +56,7 @@ export default function ScrollTracker() {
   return (
     <div className="fixed left-10 top-1/2 -translate-y-1/2 z-[9000] hidden lg:flex flex-col items-center gap-2">
       <span className="font-mono text-[0.5rem] tracking-[0.2em] uppercase text-gray-300 [writing-mode:vertical-lr] rotate-180 mb-3 select-none">
-        scroll
+        {lang === 'en' ? 'scroll' : 'desplazar'}
       </span>
       {SECTIONS.map(({ id }, index) => (
         <button
