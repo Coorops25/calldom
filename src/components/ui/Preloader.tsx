@@ -35,7 +35,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
         <motion.img
           src={logoSrc}
           alt="CCGrupo"
-          className="h-20 w-auto object-contain"
+          className="h-28 md:h-32 w-auto object-contain"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -50,7 +50,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
       )}
 
       <div className="font-display text-[clamp(4rem,12vw,9rem)] leading-none text-gradient">
-        {count}
+        {count}%
       </div>
       <div className="w-[180px] h-[1px] bg-gray-400 overflow-hidden">
         <motion.div
