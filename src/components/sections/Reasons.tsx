@@ -8,8 +8,13 @@ const icons = [Globe2, Settings, BarChart3, Link2, Brain, BarChart3];
 
 export default function Reasons() {
   const { t, lang } = useLang();
-  const reasonsHeadingPre = t.reasons.headingPre.replace(/^¿/, '').trim();
-  const reasonsHeadingEm = t.reasons.headingEm.replace(/\?$/, '').trim();
+  const normalizeQuestionPart = (value: string) =>
+    value.replace(/^(?:\u00C2)?(?:\u00BF)\s*/, '').replace(/\?\s*$/, '').trim();
+  const reasonsHeadingPre = normalizeQuestionPart(t.reasons.headingPre);
+  const reasonsHeadingEm = normalizeQuestionPart(t.reasons.headingEm);
+  const headingPrefix = lang === 'es' ? '\u00BF' : '';
+  const headingFocus = `${reasonsHeadingEm}?`;
+
   const reasonsEs = [
     {
       title: 'Omnicanalidad como pilar del exito:',
@@ -32,6 +37,7 @@ export default function Reasons() {
       desc: 'Combinamos IA con equipos humanos para lograr soluciones agiles, cercanas y escalables. La tecnologia nos impulsa, pero las personas nos inspiran.',
     },
   ];
+
   const reasonItems = lang === 'en' ? t.reasons.items : reasonsEs;
 
   return (
@@ -57,7 +63,8 @@ export default function Reasons() {
             from={{ opacity: 0, y: 20 }}
             to={{ opacity: 1, y: 0 }}
           >
-            {lang === 'es' ? '¿' : ''}{reasonsHeadingPre} <em className="italic text-gradient">{reasonsHeadingEm}</em>?
+            {headingPrefix}{reasonsHeadingPre}{' '}
+            <em className="italic text-gradient inline-block align-baseline whitespace-nowrap">{headingFocus}</em>
           </SplitText>
         </div>
       </div>
