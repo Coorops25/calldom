@@ -4,6 +4,7 @@ import { ArrowLeft, CheckCircle, ChevronDown, Network, Zap, BarChart3 } from 'lu
 import Footer from '../layout/Footer';
 import BackgroundEffects from '../ui/BackgroundEffects';
 import { HexagonBackground } from '../ui/hexagon-background';
+import ThemedLogo from '../ui/ThemedLogo';
 import { getServiceById } from '../../data';
 import { useLang } from '../../i18n';
 
@@ -13,11 +14,39 @@ interface ServiceModuleProps {
   onNavigate?: (view: string) => void;
 }
 
+const AUTONOMOUS_SUBPRODUCTS_EN: Record<string, { name: string; tagline?: string; desc: string }> = {
+  '01': {
+    name: 'AVA Assistant',
+    tagline: 'Flagship Product',
+    desc: 'Autonomous personal assistant available 24/7 through WhatsApp, Signal and Telegram. Executes tasks, answers requests and supports internal and commercial processes with no interruptions.',
+  },
+  '02': {
+    name: 'AVA Chat',
+    desc: 'AI-powered support on WebChat, WhatsApp and chat channels. Resolves inquiries, manages requests and escalates to a human when needed.',
+  },
+  '03': {
+    name: 'AVA Bot',
+    desc: 'AI voice agent for inbound and outbound calls. It speaks, understands and acts in real time with natural intonation and advanced language processing.',
+  },
+  '04': {
+    name: 'AVA Leads',
+    desc: 'Qualifies, nurtures and automatically follows up leads until booking or close. Integrates with CRM and notifies the human team at the right moment.',
+  },
+  '05': {
+    name: 'AVA Social',
+    desc: 'Agent that manages social networks by answering messages, handling comments and reactions as a 24/7 digital community manager.',
+  },
+  '06': {
+    name: 'WhatsApp AI',
+    desc: 'Support and sales channel powered by AI directly in WhatsApp Business. Automates responses, qualifies leads and closes opportunities in the highest-usage channel.',
+  },
+};
+
 export default function ServiceModule({ serviceId, onBack, onNavigate }: ServiceModuleProps) {
   const service = getServiceById(serviceId);
   const [imageError, setImageError] = useState(false);
   const [openFaq, setOpenFaq]       = useState<number | null>(null);
-  const { t } = useLang();
+  const { t, lang } = useLang();
 
   if (!service) return null;
 
@@ -26,17 +55,26 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
   const si       = t.services.items[serviceId as keyof typeof t.services.items];
   const title    = si?.title    ?? service.title;
   const subtitle = si?.subtitle ?? service.subtitle;
-
   const showIconPlaceholder = !service.details.heroImage || imageError;
 
-  // ── SEO: dynamic page title ───────────────────────────────────────────────
+  const homeCrumb = t.nav.links[0]?.name ?? (lang === 'en' ? 'Home' : 'Inicio');
+  const servicesCrumb = t.nav.links[2]?.name ?? (lang === 'en' ? 'Services' : 'Servicios');
+  const backHomeLabel = lang === 'en' ? 'Back to home' : 'Volver al inicio';
+
+  const localizedSubProducts = service.subProducts?.map((product) => {
+    if (lang !== 'en' || service.id !== '03') return product;
+    const translated = AUTONOMOUS_SUBPRODUCTS_EN[product.number];
+    return translated ? { ...product, ...translated } : product;
+  });
+
+  // SEO: dynamic page title
   useEffect(() => {
     const prev = document.title;
     document.title = `${title} | CCGrupo`;
     return () => { document.title = prev; };
   }, [title]);
 
-  // ── SEO: dynamic OG / Twitter / description meta ─────────────────────────
+  // SEO: dynamic OG / Twitter / description meta
   useEffect(() => {
     const BASE = 'https://ccgrupo.com.co';
     const path = `/servicio/${serviceId}`;
@@ -72,14 +110,13 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
         if (el && prev[key] !== undefined) el.setAttribute(attr, prev[key]);
       });
     };
-  }, [serviceId, title, sd?.longDesc]);
+  }, [serviceId, title, sd?.longDesc, service.details.longDesc]);
 
-  // ── SEO: BreadcrumbList + hreflang per service page ──────────────────────
+  // SEO: BreadcrumbList + hreflang per service page
   useEffect(() => {
     const BASE = 'https://ccgrupo.com.co';
     const path = `/servicio/${serviceId}`;
 
-    // Inject hreflang + canonical
     const linkDefs = [
       { rel: 'canonical',  href: `${BASE}${path}` },
       { rel: 'alternate',  href: `${BASE}${path}`,     hreflang: 'es-co' },
@@ -94,7 +131,6 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
       return el;
     });
 
-    // Inject BreadcrumbList JSON-LD
     const script = document.createElement('script');
     script.type = 'application/ld+json';
     script.setAttribute('data-service', serviceId);
@@ -102,9 +138,9 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Inicio',    item: `${BASE}/`         },
-        { '@type': 'ListItem', position: 2, name: 'Servicios', item: `${BASE}/#services` },
-        { '@type': 'ListItem', position: 3, name: title,       item: `${BASE}${path}`   },
+        { '@type': 'ListItem', position: 1, name: homeCrumb,     item: `${BASE}/`          },
+        { '@type': 'ListItem', position: 2, name: servicesCrumb, item: `${BASE}/#services` },
+        { '@type': 'ListItem', position: 3, name: title,         item: `${BASE}${path}`    },
       ],
     });
     document.head.appendChild(script);
@@ -112,7 +148,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
     return () => {
       [...linkEls, script].forEach(el => el.remove());
     };
-  }, [serviceId, title]);
+  }, [serviceId, title, homeCrumb, servicesCrumb]);
 
   return (
     <div className="min-h-screen bg-navy text-white relative">
@@ -122,14 +158,18 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
       <nav className="fixed top-0 left-0 right-0 z-50 px-6 md:px-14 py-6 flex justify-between items-center bg-navy-deep/85 backdrop-blur-xl border-b border-white/5">
         <button
           type="button"
-          aria-label="Volver al inicio"
+          aria-label={backHomeLabel}
           className="flex items-center gap-3 cursor-pointer bg-transparent border-0 p-0"
           onClick={onBack}
         >
-          <img
-            src="https://www.ccgrupo.com.co/wp-content/uploads/2025/03/logo-original-b-.webp"
+          <ThemedLogo
             alt="CCGrupo Logo"
-            className="h-10 w-auto object-contain logo-auto"
+            className="h-10 w-auto object-contain"
+            fallback={(
+              <div className="w-8 h-8 border-2 border-teal rounded-md flex items-center justify-center font-mono text-[0.55rem] font-bold text-teal">
+                CCG
+              </div>
+            )}
           />
         </button>
         <button
@@ -142,7 +182,6 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
       </nav>
 
       <main className="pt-32 pb-20 px-6 md:px-14 lg:px-28 relative z-10">
-
         {/* Hero Section */}
         <div className="grid lg:grid-cols-2 gap-16 items-center mb-24">
           <motion.div
@@ -188,7 +227,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
                   hexagonSize={40}
                   hexagonMargin={4}
                   hexagonProps={{
-                    className: "before:bg-white/5 dark:before:bg-white/5 after:bg-transparent dark:after:bg-transparent hover:before:bg-teal/30 dark:hover:before:bg-teal/30 transition-colors duration-500"
+                    className: 'before:bg-white/5 dark:before:bg-white/5 after:bg-transparent dark:after:bg-transparent hover:before:bg-teal/30 dark:hover:before:bg-teal/30 transition-colors duration-500',
                   }}
                 >
                   <div className="flex items-center justify-center h-full w-full relative z-10">
@@ -265,7 +304,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
         </div>
 
         {/* Sub-products (AVA Suite, etc.) */}
-        {service.subProducts && service.subProducts.length > 0 && (
+        {localizedSubProducts && localizedSubProducts.length > 0 && (
           <div className="mt-24 border-t border-white/10 pt-20">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -281,7 +320,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
             </motion.div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {service.subProducts.map((product, i) => (
+              {localizedSubProducts.map((product, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 24 }}

@@ -28,7 +28,9 @@ export default function Services({ onNavigate }: ServicesProps) {
 
         <div className="font-display text-[clamp(4rem,10vw,9rem)] leading-[0.95]">
           <SplitText className="inline-block" delay={50} duration={1.2} splitType="chars" from={{ opacity: 0, y: 40 }} to={{ opacity: 1, y: 0 }}>
-            {lang === 'en' ? <>Our<br /><span className="text-stroke text-transparent">ecosystem</span></> : <>Nuestro<br /><span className="text-stroke text-transparent">ecosistema</span></>}
+            {lang === 'en'
+              ? <>Our<br /><span className="text-stroke text-transparent">ecosystem</span></>
+              : <>Nuestro<br /><span className="text-stroke text-transparent">ecosistema</span></>}
           </SplitText>
         </div>
 
@@ -40,7 +42,9 @@ export default function Services({ onNavigate }: ServicesProps) {
           className="absolute top-0 right-6 md:right-14 lg:right-28 hidden lg:block"
         >
           <CircularText
-            text="AUTOMATIZACIÓN*OMNICANALIDAD*CONTACT*CENTER*"
+            text={lang === 'en'
+              ? 'AUTOMATION*OMNICHANNEL*CONTACT*CENTER*'
+              : 'AUTOMATIZACION*OMNICANALIDAD*CONTACT*CENTER*'}
             onHover="goBonkers"
             spinDuration={25}
             className="text-teal font-mono text-[10px]"
@@ -55,8 +59,10 @@ export default function Services({ onNavigate }: ServicesProps) {
         {services.map((svc, i) => {
           const isReversed = i % 2 !== 0;
           const svcT = t.services.items[svc.id as keyof typeof t.services.items];
+          const svcDetailT = t.serviceDetails[svc.id as keyof typeof t.serviceDetails];
           const title = svcT?.title ?? svc.title;
           const desc  = svcT?.desc  ?? svc.desc;
+          const tags  = svcDetailT?.tags ?? svc.tags;
 
           const textCol = (
             <div key="text" className="p-10 lg:p-20 flex flex-col justify-center">
@@ -70,7 +76,7 @@ export default function Services({ onNavigate }: ServicesProps) {
                 {desc}
               </p>
               <div className="flex flex-wrap gap-2 mb-10">
-                {svc.tags.map(tag => (
+                {tags.map(tag => (
                   <span key={tag} className="font-mono text-[0.5rem] tracking-[0.15em] uppercase px-4 py-2 border border-white/10 text-gray-200 transition-all duration-300 hover:border-teal hover:text-teal hover:bg-teal/10">
                     {tag}
                   </span>

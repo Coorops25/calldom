@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
 import { useLang } from '../../i18n';
+import ThemedLogo from '../ui/ThemedLogo';
 
 interface Props {
   onNavigate?: (view: string) => void;
@@ -11,10 +12,18 @@ interface Props {
 export default function Navbar({ onNavigate }: Props) {
   const [isScrolled, setIsScrolled]       = useState(false);
   const [isMobileMenuOpen, setMobileOpen] = useState(false);
-  const [logoError, setLogoError]         = useState(false);
   const [isLogoHovered, setIsLogoHovered] = useState(false);
   const { isDark, toggle }                = useTheme();
   const { lang, t, toggleLang }           = useLang();
+
+  const labels = {
+    goHome: lang === 'en' ? 'Go home' : 'Ir al inicio',
+    languageGroup: lang === 'en' ? 'Select language' : 'Seleccionar idioma',
+    themeToggle: lang === 'en' ? 'Toggle theme' : 'Cambiar tema',
+    openMenu: lang === 'en' ? 'Open navigation menu' : 'Abrir menu de navegacion',
+    closeMenu: lang === 'en' ? 'Close navigation menu' : 'Cerrar menu de navegacion',
+    menuDialog: lang === 'en' ? 'Navigation menu' : 'Menu de navegacion',
+  };
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -27,6 +36,12 @@ export default function Navbar({ onNavigate }: Props) {
     const element = document.querySelector(href);
     if (element) element.scrollIntoView({ behavior: 'smooth' });
   };
+
+  const logoFallback = (
+    <div className="w-8 h-8 border-2 border-teal rounded-md flex items-center justify-center font-mono text-[0.55rem] font-bold text-teal">
+      CCG
+    </div>
+  );
 
   return (
     <>
@@ -43,25 +58,27 @@ export default function Navbar({ onNavigate }: Props) {
         {/* Logo */}
         <button
           type="button"
-          aria-label="Ir al inicio"
+          aria-label={labels.goHome}
           className="flex items-center gap-3 cursor-pointer min-h-[3rem] bg-transparent border-0 p-0"
           onClick={() => scrollToSection('#hero')}
           onMouseEnter={() => setIsLogoHovered(true)}
           onMouseLeave={() => setIsLogoHovered(false)}
         >
           <AnimatePresence mode="wait">
-            {!logoError && !isLogoHovered ? (
-              <motion.img
+            {!isLogoHovered ? (
+              <motion.div
                 key="logo-img"
                 initial={{ opacity: 0, y: 5 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -5 }}
                 transition={{ duration: 0.3 }}
-                src="https://www.ccgrupo.com.co/wp-content/uploads/2025/03/logo-original-b-.webp"
-                alt="CCGrupo Logo"
-                className="h-12 w-auto object-contain logo-auto"
-                onError={() => setLogoError(true)}
-              />
+              >
+                <ThemedLogo
+                  alt="CCGrupo Logo"
+                  className="h-12 w-auto object-contain"
+                  fallback={logoFallback}
+                />
+              </motion.div>
             ) : (
               <motion.div
                 key="logo-text"
@@ -99,10 +116,11 @@ export default function Navbar({ onNavigate }: Props) {
           </ul>
 
           {/* Language toggle */}
-          <div className="flex items-center gap-1.5 font-mono text-[0.55rem] tracking-[0.1em] select-none" role="group" aria-label="Seleccionar idioma">
+          <div className="flex items-center gap-1.5 font-mono text-[0.55rem] tracking-[0.1em] select-none" role="group" aria-label={labels.languageGroup}>
             <button
               onClick={() => lang !== 'es' && toggleLang()}
-              aria-label="Español" aria-pressed={lang === 'es'}
+              aria-label="Espanol"
+              aria-pressed={lang === 'es'}
               className={`transition-colors ${lang === 'es' ? 'text-teal font-semibold' : 'text-gray-300 hover:text-gray-100'}`}
             >
               ES
@@ -110,7 +128,8 @@ export default function Navbar({ onNavigate }: Props) {
             <span aria-hidden="true" className="text-gray-400">|</span>
             <button
               onClick={() => lang !== 'en' && toggleLang()}
-              aria-label="English" aria-pressed={lang === 'en'}
+              aria-label="English"
+              aria-pressed={lang === 'en'}
               className={`transition-colors ${lang === 'en' ? 'text-teal font-semibold' : 'text-gray-300 hover:text-gray-100'}`}
             >
               EN
@@ -120,7 +139,7 @@ export default function Navbar({ onNavigate }: Props) {
           {/* Theme toggle */}
           <button
             onClick={toggle}
-            aria-label="Cambiar tema"
+            aria-label={labels.themeToggle}
             className="w-8 h-8 flex items-center justify-center text-gray-200 hover:text-teal transition-colors"
           >
             {isDark ? <Sun size={16} /> : <Moon size={16} />}
@@ -138,10 +157,11 @@ export default function Navbar({ onNavigate }: Props) {
         {/* Mobile right side */}
         <div className="flex md:hidden items-center gap-3">
           {/* Mobile lang toggle */}
-          <div className="flex items-center gap-1 font-mono text-[0.55rem] tracking-[0.1em]" role="group" aria-label="Seleccionar idioma">
+          <div className="flex items-center gap-1 font-mono text-[0.55rem] tracking-[0.1em]" role="group" aria-label={labels.languageGroup}>
             <button
               onClick={() => lang !== 'es' && toggleLang()}
-              aria-label="Español" aria-pressed={lang === 'es'}
+              aria-label="Espanol"
+              aria-pressed={lang === 'es'}
               className={`transition-colors ${lang === 'es' ? 'text-teal' : 'text-gray-300'}`}
             >
               ES
@@ -149,7 +169,8 @@ export default function Navbar({ onNavigate }: Props) {
             <span aria-hidden="true" className="text-gray-400">|</span>
             <button
               onClick={() => lang !== 'en' && toggleLang()}
-              aria-label="English" aria-pressed={lang === 'en'}
+              aria-label="English"
+              aria-pressed={lang === 'en'}
               className={`transition-colors ${lang === 'en' ? 'text-teal' : 'text-gray-300'}`}
             >
               EN
@@ -157,13 +178,13 @@ export default function Navbar({ onNavigate }: Props) {
           </div>
           <button
             onClick={toggle}
-            aria-label="Cambiar tema"
+            aria-label={labels.themeToggle}
             className="text-gray-200 hover:text-teal transition-colors p-1"
           >
             {isDark ? <Sun size={16} /> : <Moon size={16} />}
           </button>
           <button
-            aria-label="Abrir menú de navegación"
+            aria-label={labels.openMenu}
             aria-expanded={isMobileMenuOpen}
             className="text-white p-1"
             onClick={() => setMobileOpen(true)}
@@ -179,14 +200,14 @@ export default function Navbar({ onNavigate }: Props) {
           <motion.div
             role="dialog"
             aria-modal="true"
-            aria-label="Menú de navegación"
+            aria-label={labels.menuDialog}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[10001] bg-navy-deep/95 backdrop-blur-2xl flex flex-col items-center justify-center p-8"
           >
             <button
-              aria-label="Cerrar menú de navegación"
+              aria-label={labels.closeMenu}
               className="absolute top-6 right-6 text-white p-2"
               onClick={() => setMobileOpen(false)}
             >

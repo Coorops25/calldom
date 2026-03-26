@@ -39,7 +39,7 @@ function grantConsent(value: ConsentValue) {
 
 export default function CookieBanner({ onNavigate }: { onNavigate?: (view: string) => void }) {
   const [visible, setVisible] = useState(false);
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const ck = t.cookie;
 
   useEffect(() => {
@@ -112,7 +112,7 @@ export default function CookieBanner({ onNavigate }: { onNavigate?: (view: strin
             <button
               onClick={() => handle('rejected')}
               className="absolute top-3 right-3 text-gray-500 hover:text-gray-300 transition-colors sm:hidden"
-              aria-label="Cerrar"
+              aria-label={lang === 'en' ? 'Close' : 'Cerrar'}
             >
               <X size={14} />
             </button>

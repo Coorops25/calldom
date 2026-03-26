@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ArrowLeft, FileText, X } from 'lucide-react';
 import BackgroundEffects from '../ui/BackgroundEffects';
 import Footer from '../layout/Footer';
+import ThemedLogo from '../ui/ThemedLogo';
 import { useLang } from '../../i18n';
 
 const pdfUrls: Record<number, string> = {
@@ -19,7 +20,6 @@ interface Props { onBack: () => void; }
 
 export default function PrivacyModule({ onBack }: Props) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [logoError, setLogoError]     = useState(false);
   const { t } = useLang();
   const pt = t.privacy;
 
@@ -30,16 +30,15 @@ export default function PrivacyModule({ onBack }: Props) {
       {/* Navbar */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-6 md:px-14 py-6 flex justify-between items-center bg-navy-deep/85 backdrop-blur-xl border-b border-white/5">
         <div className="flex items-center gap-3 cursor-pointer" onClick={onBack}>
-          {!logoError ? (
-            <img
-              src="https://www.ccgrupo.com.co/wp-content/uploads/2025/03/logo-original-b-.webp"
-              alt="CCGrupo Logo"
-              className="h-10 w-auto object-contain logo-auto"
-              onError={() => setLogoError(true)}
-            />
-          ) : (
-            <div className="w-8 h-8 border-2 border-teal rounded-md flex items-center justify-center font-mono text-[0.55rem] font-bold text-teal">CCG</div>
-          )}
+          <ThemedLogo
+            alt="CCGrupo Logo"
+            className="h-10 w-auto object-contain"
+            fallback={(
+              <div className="w-8 h-8 border-2 border-teal rounded-md flex items-center justify-center font-mono text-[0.55rem] font-bold text-teal">
+                CCG
+              </div>
+            )}
+          />
         </div>
         <button onClick={onBack} className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-teal hover:text-white transition-colors">
           <ArrowLeft size={16} />

@@ -10,7 +10,10 @@ interface Props {
 
 export default function FloatingCTA({ onNavigate }: Props) {
   const [visible, setVisible] = useState(false);
-  const { t } = useLang();
+  const { t, lang } = useLang();
+  const waMessage = lang === 'en'
+    ? 'Hi CCGrupo, I would like more information'
+    : 'Hola CCGrupo, quisiera mas informacion';
 
   useEffect(() => {
     const handler = () => setVisible(window.scrollY > 600);
@@ -31,7 +34,7 @@ export default function FloatingCTA({ onNavigate }: Props) {
           {/* WhatsApp — only when VITE_WHATSAPP_NUMBER is set */}
           {WA_NUMBER && (
             <motion.a
-              href={`https://wa.me/${WA_NUMBER}?text=Hola%20CCGrupo%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n`}
+              href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage)}`}
               target="_blank"
               rel="noreferrer"
               aria-label="WhatsApp"

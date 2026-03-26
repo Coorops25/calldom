@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Linkedin, Instagram, Facebook, Youtube } from 'lucide-react';
 import { useLang } from '../../i18n';
+import ThemedLogo from '../ui/ThemedLogo';
 
 interface Props {
   onNavigate?: (view: string) => void;
@@ -9,8 +10,13 @@ interface Props {
 
 export default function Footer({ onNavigate }: Props) {
   const [isHovered, setIsHovered] = useState(false);
-  const [logoError, setLogoError]  = useState(false);
   const { t } = useLang();
+
+  const logoFallback = (
+    <div className="w-8 h-8 border-2 border-teal rounded-md flex items-center justify-center font-mono text-[0.55rem] font-bold text-teal">
+      CCG
+    </div>
+  );
 
   return (
     <footer className="bg-navy pt-20 pb-12 px-6 md:px-14 lg:px-28 border-t border-white/10">
@@ -22,18 +28,20 @@ export default function Footer({ onNavigate }: Props) {
             onMouseLeave={() => setIsHovered(false)}
           >
             <AnimatePresence mode="wait">
-              {!logoError && !isHovered ? (
-                <motion.img
+              {!isHovered ? (
+                <motion.div
                   key="logo-img"
                   initial={{ opacity: 0, y: 5 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -5 }}
                   transition={{ duration: 0.3 }}
-                  src="https://www.ccgrupo.com.co/wp-content/uploads/2025/03/logo-original-b-.webp"
-                  alt="CCGrupo Logo"
-                  className="h-10 w-auto object-contain logo-auto"
-                  onError={() => setLogoError(true)}
-                />
+                >
+                  <ThemedLogo
+                    alt="CCGrupo Logo"
+                    className="h-10 w-auto object-contain"
+                    fallback={logoFallback}
+                  />
+                </motion.div>
               ) : (
                 <motion.div
                   key="logo-text"
@@ -94,7 +102,7 @@ export default function Footer({ onNavigate }: Props) {
         <div>
           <h5 className="font-mono text-[0.55rem] tracking-[0.25em] uppercase text-gray-300 mb-6">{t.footer.contactTitle}</h5>
           <div className="space-y-4 text-sm font-light text-gray-200">
-            <p>Cra. 20 #133 – 74, La Calleja</p>
+            <p>Cra. 20 #133 - 74, La Calleja</p>
             <p>{t.footer.location}</p>
             <a href="mailto:info@ccgrupo.com.co" className="block hover:text-teal transition-colors">info@ccgrupo.com.co</a>
             <a href="tel:+60117443732" className="block hover:text-teal transition-colors">(601) 7443732</a>
@@ -133,7 +141,6 @@ export default function Footer({ onNavigate }: Props) {
               <Icon size={14} />
             </a>
           ))}
-          {/* TikTok — no lucide icon, inline SVG */}
           <a
             href="https://www.tiktok.com/@contactcentergbpo"
             target="_blank"

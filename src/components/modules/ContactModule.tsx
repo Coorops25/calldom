@@ -10,16 +10,13 @@ const EJ_KEY      = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 const EMAILJS_CONFIGURED = !!(EJ_SERVICE && EJ_TEMPLATE && EJ_KEY &&
   !EJ_SERVICE.includes('xxxxxxx'));
 
-const services = [
-  '01 — CX – Experiencia del Cliente',
-  '02 — Leads & Ventas',
-  '03 — Agentes Autónomos',
-  '04 — Digital Studio',
-];
-
 interface FormState {
-  nombre: string; empresa: string; email: string;
-  telefono: string; servicio: string; mensaje: string;
+  nombre: string;
+  empresa: string;
+  email: string;
+  telefono: string;
+  servicio: string;
+  mensaje: string;
 }
 
 const empty: FormState = { nombre: '', empresa: '', email: '', telefono: '', servicio: '', mensaje: '' };
@@ -27,14 +24,17 @@ const empty: FormState = { nombre: '', empresa: '', email: '', telefono: '', ser
 interface Props { onBack: () => void; }
 
 export default function ContactModule({ onBack }: Props) {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const ct = t.contact;
+
+  const serviceOrder: Array<keyof typeof t.services.items> = ['01', '02', '03', '04'];
+  const serviceOptions = serviceOrder.map((id) => `${id} - ${t.services.items[id].title}`);
 
   useEffect(() => {
     const prev = document.title;
-    document.title = `Contacto | CCGrupo`;
+    document.title = lang === 'en' ? 'Contact | CCGrupo' : 'Contacto | CCGrupo';
     return () => { document.title = prev; };
-  }, []);
+  }, [lang]);
 
   const [form, setForm]           = useState<FormState>(empty);
   const [errors, setErrors]       = useState<Partial<FormState>>({});
@@ -42,17 +42,18 @@ export default function ContactModule({ onBack }: Props) {
   const [sending, setSending]     = useState(false);
   const [sendError, setSendError] = useState(false);
 
+  const scheduleValue = lang === 'en' ? 'Mon - Fri · 8:00 - 18:00' : 'Lun - Vie · 8:00 - 18:00';
   const contactInfo = [
-    { icon: MapPin, label: ct.infoLabels.location, value: 'Cra. 20 #133 – 74, La Calleja', sub: ct.infoSubs.location },
+    { icon: MapPin, label: ct.infoLabels.location, value: 'Cra. 20 #133 - 74, La Calleja', sub: ct.infoSubs.location },
     { icon: Mail,   label: ct.infoLabels.email,    value: 'info@ccgrupo.com.co',            sub: ct.infoSubs.email   },
     { icon: Phone,  label: ct.infoLabels.phone,    value: '(601) 7443732',                  sub: ct.infoSubs.phone   },
-    { icon: Clock,  label: ct.infoLabels.schedule, value: 'Lun – Vie · 8:00 – 18:00',      sub: ct.infoSubs.schedule },
+    { icon: Clock,  label: ct.infoLabels.schedule, value: scheduleValue,                     sub: ct.infoSubs.schedule },
   ];
 
   const validate = (): boolean => {
     const next: Partial<FormState> = {};
-    if (!form.nombre.trim())   next.nombre   = ct.errors.nombre;
-    if (!form.empresa.trim())  next.empresa  = ct.errors.empresa;
+    if (!form.nombre.trim())   next.nombre = ct.errors.nombre;
+    if (!form.empresa.trim())  next.empresa = ct.errors.empresa;
     if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) next.email = ct.errors.email;
     if (!form.telefono.trim()) next.telefono = ct.errors.telefono;
     if (!form.servicio)        next.servicio = ct.errors.servicio;
@@ -96,10 +97,15 @@ export default function ContactModule({ onBack }: Props) {
         setSending(false);
       }
     } else {
-      // Fallback: mailto link when EmailJS not configured
-      const subject = encodeURIComponent(`Contacto CCGrupo — ${form.servicio}`);
+      const subjectPrefix = lang === 'en' ? 'CCGrupo Contact' : 'Contacto CCGrupo';
+      const nameLabel = lang === 'en' ? 'Name' : 'Nombre';
+      const companyLabel = lang === 'en' ? 'Company' : 'Empresa';
+      const phoneLabel = lang === 'en' ? 'Phone' : 'Telefono';
+      const serviceLabel = lang === 'en' ? 'Service' : 'Servicio';
+
+      const subject = encodeURIComponent(`${subjectPrefix} - ${form.servicio}`);
       const body    = encodeURIComponent(
-        `Nombre: ${form.nombre}\nEmpresa: ${form.empresa}\nEmail: ${form.email}\nTeléfono: ${form.telefono}\nServicio: ${form.servicio}\n\n${form.mensaje}`
+        `${nameLabel}: ${form.nombre}\n${companyLabel}: ${form.empresa}\nEmail: ${form.email}\n${phoneLabel}: ${form.telefono}\n${serviceLabel}: ${form.servicio}\n\n${form.mensaje}`
       );
       window.location.href = `mailto:info@ccgrupo.com.co?subject=${subject}&body=${body}`;
       setSending(false);
@@ -124,7 +130,6 @@ export default function ContactModule({ onBack }: Props) {
       </motion.button>
 
       <div className="max-w-7xl mx-auto px-6 md:px-14 pt-28 pb-24">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -145,7 +150,6 @@ export default function ContactModule({ onBack }: Props) {
         </motion.div>
 
         <div className="grid lg:grid-cols-[1fr_1.6fr] gap-16 items-start">
-          {/* Left — contact info */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -178,7 +182,6 @@ export default function ContactModule({ onBack }: Props) {
             </div>
           </motion.div>
 
-          {/* Right — form */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -225,16 +228,28 @@ export default function ContactModule({ onBack }: Props) {
                 >
                   <div className="grid sm:grid-cols-2 gap-5">
                     <Field label={ct.fields.nombre} error={errors.nombre}>
-                      <input name="nombre" value={form.nombre} onChange={handleChange} placeholder="Juan García" className={inputBase} />
+                      <input
+                        name="nombre"
+                        value={form.nombre}
+                        onChange={handleChange}
+                        placeholder={lang === 'en' ? 'John Doe' : 'Juan Garcia'}
+                        className={inputBase}
+                      />
                     </Field>
                     <Field label={ct.fields.empresa} error={errors.empresa}>
-                      <input name="empresa" value={form.empresa} onChange={handleChange} placeholder="Mi Empresa S.A.S." className={inputBase} />
+                      <input
+                        name="empresa"
+                        value={form.empresa}
+                        onChange={handleChange}
+                        placeholder={lang === 'en' ? 'My Company LLC' : 'Mi Empresa S.A.S.'}
+                        className={inputBase}
+                      />
                     </Field>
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-5">
                     <Field label={ct.fields.email} error={errors.email}>
-                      <input type="email" name="email" value={form.email} onChange={handleChange} placeholder="juan@empresa.com" className={inputBase} />
+                      <input type="email" name="email" value={form.email} onChange={handleChange} placeholder="name@company.com" className={inputBase} />
                     </Field>
                     <Field label={ct.fields.telefono} error={errors.telefono}>
                       <input type="tel" name="telefono" value={form.telefono} onChange={handleChange} placeholder="+57 300 000 0000" className={inputBase} />
@@ -244,7 +259,7 @@ export default function ContactModule({ onBack }: Props) {
                   <Field label={ct.fields.servicio} error={errors.servicio}>
                     <select name="servicio" value={form.servicio} onChange={handleChange} className={`${inputBase} appearance-none cursor-pointer`}>
                       <option value="" disabled className="bg-navy-deep">{ct.fields.selectPh}</option>
-                      {services.map(s => <option key={s} value={s} className="bg-navy-deep">{s}</option>)}
+                      {serviceOptions.map((s) => <option key={s} value={s} className="bg-navy-deep">{s}</option>)}
                     </select>
                   </Field>
 
@@ -273,7 +288,9 @@ export default function ContactModule({ onBack }: Props) {
                         className="flex items-center gap-2 font-mono text-[0.55rem] text-red-400 justify-center"
                       >
                         <XCircle size={12} />
-                        Error al enviar. Intenta de nuevo o escríbenos a info@ccgrupo.com.co
+                        {lang === 'en'
+                          ? 'Send failed. Try again or email us at info@ccgrupo.com.co'
+                          : 'Error al enviar. Intenta de nuevo o escribenos a info@ccgrupo.com.co'}
                       </motion.div>
                     )}
                   </AnimatePresence>
