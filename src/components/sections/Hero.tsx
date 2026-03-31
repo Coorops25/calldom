@@ -172,6 +172,7 @@ export default function Hero({ onNavigate }: Props) {
       </div>
 
       <motion.div
+        style={{ opacity }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 3.5, duration: 0.8 }}
@@ -182,6 +183,7 @@ export default function Hero({ onNavigate }: Props) {
       </motion.div>
 
       <motion.div
+        style={{ opacity }}
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 3.8, duration: 1 }}
