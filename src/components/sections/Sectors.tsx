@@ -22,7 +22,7 @@ export default function Sectors() {
   const inView = useInView(ref, { once: true, margin: '-100px' });
   const { t, lang } = useLang();
   const s = t.sectors;
-  const viewMoreLabel = lang === 'en' ? 'See more' : 'Ver mas';
+  const viewMoreLabel = lang === 'en' ? 'See more' : 'Ver más';
 
   const [active, setActive] = useState<(SectorItem & { index: number }) | null>(null);
 

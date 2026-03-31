@@ -13,7 +13,7 @@ export default function FloatingCTA({ onNavigate }: Props) {
   const { t, lang } = useLang();
   const waMessage = lang === 'en'
     ? 'Hi CCGrupo, I would like more information'
-    : 'Hola CCGrupo, quisiera mas informacion';
+    : 'Hola CCGrupo, quisiera más información';
 
   useEffect(() => {
     const handler = () => setVisible(window.scrollY > 600);
