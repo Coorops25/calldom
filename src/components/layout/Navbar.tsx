@@ -20,9 +20,9 @@ export default function Navbar({ onNavigate }: Props) {
     goHome: lang === 'en' ? 'Go home' : 'Ir al inicio',
     languageGroup: lang === 'en' ? 'Select language' : 'Seleccionar idioma',
     themeToggle: lang === 'en' ? 'Toggle theme' : 'Cambiar tema',
-    openMenu: lang === 'en' ? 'Open navigation menu' : 'Abrir menu de navegacion',
-    closeMenu: lang === 'en' ? 'Close navigation menu' : 'Cerrar menu de navegacion',
-    menuDialog: lang === 'en' ? 'Navigation menu' : 'Menu de navegacion',
+    openMenu: lang === 'en' ? 'Open navigation menu' : 'Abrir menú de navegación',
+    closeMenu: lang === 'en' ? 'Close navigation menu' : 'Cerrar menú de navegación',
+    menuDialog: lang === 'en' ? 'Navigation menu' : 'Menú de navegación',
   };
 
   useEffect(() => {
@@ -119,7 +119,7 @@ export default function Navbar({ onNavigate }: Props) {
           <div className="flex items-center gap-1.5 font-mono text-[0.55rem] tracking-[0.1em] select-none" role="group" aria-label={labels.languageGroup}>
             <button
               onClick={() => lang !== 'es' && toggleLang()}
-              aria-label="Espanol"
+              aria-label="Español"
               aria-pressed={lang === 'es'}
               className={`transition-colors ${lang === 'es' ? 'text-teal font-semibold' : 'text-gray-300 hover:text-gray-100'}`}
             >
@@ -160,7 +160,7 @@ export default function Navbar({ onNavigate }: Props) {
           <div className="flex items-center gap-1 font-mono text-[0.55rem] tracking-[0.1em]" role="group" aria-label={labels.languageGroup}>
             <button
               onClick={() => lang !== 'es' && toggleLang()}
-              aria-label="Espanol"
+              aria-label="Español"
               aria-pressed={lang === 'es'}
               className={`transition-colors ${lang === 'es' ? 'text-teal' : 'text-gray-300'}`}
             >

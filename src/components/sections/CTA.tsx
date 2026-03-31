@@ -20,7 +20,7 @@ export default function CTA({ onNavigate }: Props) {
         headingPre: 'Hablemos del',
         headingEm: 'futuro',
         headingPost: 'de tu empresa',
-        desc: 'Integramos tecnologia, procesos y conocimiento para construir soluciones que hacen tu negocio mas agil, eficiente y rentable.',
+        desc: 'Integramos tecnología, procesos y conocimiento para construir soluciones que hacen tu negocio más ágil, eficiente y rentable.',
       };
 
   return (

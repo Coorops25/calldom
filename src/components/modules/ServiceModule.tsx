@@ -204,13 +204,19 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
             <p className="text-xl font-light leading-relaxed text-gray-200 mb-10">
               {sd?.longDesc ?? service.details.longDesc}
             </p>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-3 mb-8">
               {(sd?.tags ?? service.tags).map(tag => (
                 <span key={tag} className="font-mono text-xs tracking-wider uppercase px-4 py-2 border border-white/10 rounded-full text-teal bg-teal/5">
                   {tag}
                 </span>
               ))}
             </div>
+            <button
+              onClick={() => onNavigate?.('contact')}
+              className="inline-flex items-center gap-2 font-mono text-sm tracking-[0.2em] uppercase px-8 py-3 border border-teal text-teal hover:bg-teal hover:text-navy-deep transition-all duration-300 cursor-pointer"
+            >
+              {sm.hablemos}
+            </button>
           </motion.div>
 
           <motion.div
@@ -261,6 +267,50 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
             </div>
           </motion.div>
         </div>
+
+        {/* ¿Qué hacemos? */}
+        {sd?.whatWeDoBoxes && sd.whatWeDoBoxes.length > 0 && (
+          <div className="mt-24 border-t border-white/10 pt-20">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mb-10"
+            >
+              <div className="flex items-center gap-4 font-mono text-xs tracking-[0.35em] uppercase text-teal mb-4">
+                <div className="w-8 h-px bg-teal" />
+                {sm.whatWeDo}
+              </div>
+              {sd.whatWeDoDesc && (
+                <p className="text-lg font-light text-gray-200 leading-relaxed max-w-3xl">{sd.whatWeDoDesc}</p>
+              )}
+            </motion.div>
+            <div className="grid sm:grid-cols-2 gap-6">
+              {sd.whatWeDoBoxes.map((box, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="p-8 border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] hover:-translate-y-1 transition-all duration-300 rounded-xl"
+                >
+                  <div className="font-mono text-[0.45rem] tracking-[0.3em] uppercase text-teal/60 mb-3">0{i + 1}</div>
+                  <h4 className="font-mono text-sm uppercase tracking-widest text-teal mb-3">{box.title}</h4>
+                  <p className="text-gray-300 font-light leading-relaxed">{box.desc}</p>
+                  {service.id === '01' && i === 3 && (
+                    <button
+                      onClick={() => onNavigate?.('03')}
+                      className="mt-4 font-mono text-xs tracking-wider uppercase text-teal hover:text-white transition-colors cursor-pointer underline underline-offset-4"
+                    >
+                      {lang === 'en' ? 'Learn about our Autonomous Agents →' : 'Conoce nuestro servicio de Agentes Autónomos →'}
+                    </button>
+                  )}
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Features & Benefits */}
         <div className="grid lg:grid-cols-3 gap-12 border-t border-white/10 pt-20">
@@ -414,6 +464,96 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
           </div>
         )}
 
+        {/* ¿Por qué nos necesitas? */}
+        {sd?.whyYouNeedUsItems && sd.whyYouNeedUsItems.length > 0 && (
+          <div className="mt-24 border-t border-white/10 pt-20">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mb-12"
+            >
+              <div className="flex items-center gap-4 font-mono text-xs tracking-[0.35em] uppercase text-teal mb-4">
+                <div className="w-8 h-px bg-teal" />
+                {sm.whyYouNeedUs}
+              </div>
+            </motion.div>
+            <div className="space-y-4 max-w-4xl">
+              {sd.whyYouNeedUsItems.map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                  className="flex gap-6 p-6 border border-white/10 bg-white/[0.02] hover:bg-white/[0.03] hover:border-teal/20 transition-all duration-300 rounded-xl"
+                >
+                  <div className="font-mono text-[0.6rem] tracking-[0.2em] uppercase text-teal/50 shrink-0 pt-1 w-8">0{i + 1}</div>
+                  <div>
+                    <h4 className="font-body font-semibold text-white mb-2">{item.title}</h4>
+                    <p className="text-gray-300 font-light leading-relaxed">{item.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ¿Qué puedes lograr con nosotros? */}
+        {sd?.whatYouCanAchieveItems && sd.whatYouCanAchieveItems.length > 0 && (
+          <div className="mt-24 border-t border-white/10 pt-20">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mb-10"
+            >
+              <div className="flex items-center gap-4 font-mono text-xs tracking-[0.35em] uppercase text-teal mb-4">
+                <div className="w-8 h-px bg-teal" />
+                {sm.whatYouCanAchieve}
+              </div>
+            </motion.div>
+            <div className="grid sm:grid-cols-2 gap-3 max-w-3xl">
+              {sd.whatYouCanAchieveItems.map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.06 }}
+                  className="flex items-start gap-3 group"
+                >
+                  <CheckCircle size={16} className="text-teal shrink-0 mt-1 group-hover:text-white transition-colors" />
+                  <span className="text-gray-300 font-light">{item}</span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Mid-page banner (services 02 and 04) */}
+        {sd?.midBanner?.title && (
+          <div className="mt-24 border-t border-white/10 pt-20">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="p-12 border border-teal/20 bg-teal/5 rounded-2xl text-center"
+            >
+              <p className="font-display text-3xl md:text-4xl text-white mb-3">{sd.midBanner.title}</p>
+              {sd.midBanner.desc && (
+                <p className="text-lg font-light text-gray-200 mb-8 max-w-2xl mx-auto">{sd.midBanner.desc}</p>
+              )}
+              <button
+                onClick={() => onNavigate?.('contact')}
+                className="font-mono text-sm tracking-[0.25em] uppercase px-8 py-3 bg-teal text-navy-deep hover:bg-white transition-all duration-300 cursor-pointer"
+              >
+                {sd.midBanner.buttonLabel}
+              </button>
+            </motion.div>
+          </div>
+        )}
+
         {/* Base Unificada */}
         {(() => {
           const PILLAR_ICONS = [Network, Zap, BarChart3];
@@ -473,13 +613,13 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
         {/* CTA */}
         <div className="mt-24 p-12 md:p-20 border border-white/10 rounded-3xl bg-gradient-to-br from-teal/10 to-transparent text-center relative overflow-hidden">
           <div className="relative z-10">
-            <h2 className="font-display text-4xl md:text-5xl mb-6">{sm.ctaTitle}</h2>
+            <h2 className="font-display text-4xl md:text-5xl mb-6">{sd?.ctaTitle ?? sm.ctaTitle}</h2>
             <p className="text-xl font-light text-gray-300 mb-10 max-w-2xl mx-auto">
-              {sm.ctaDescPre} {title} {sm.ctaDescPost}
+              {sd?.ctaDesc ?? `${sm.ctaDescPre} ${title} ${sm.ctaDescPost}`}
             </p>
             <button
               onClick={() => onNavigate?.('contact')}
-              className="font-mono text-sm tracking-[0.25em] uppercase px-10 py-4 bg-teal text-navy-deep hover:bg-white transition-all duration-300"
+              className="font-mono text-sm tracking-[0.25em] uppercase px-10 py-4 bg-teal text-navy-deep hover:bg-white transition-all duration-300 cursor-pointer"
             >
               {sm.ctaButton}
             </button>

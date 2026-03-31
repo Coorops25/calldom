@@ -42,8 +42,8 @@ export default class ErrorBoundary extends React.Component {
         }
       : {
           title: 'Error inesperado',
-          desc: 'Algo salio mal. Por favor recarga la pagina o escribenos a',
-          reload: 'Recargar pagina',
+          desc: 'Algo salió mal. Por favor recarga la página o escríbenos a',
+          reload: 'Recargar página',
         };
 
     return (

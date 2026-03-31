@@ -100,7 +100,7 @@ export default function ContactModule({ onBack }: Props) {
       const subjectPrefix = lang === 'en' ? 'CCGrupo Contact' : 'Contacto CCGrupo';
       const nameLabel = lang === 'en' ? 'Name' : 'Nombre';
       const companyLabel = lang === 'en' ? 'Company' : 'Empresa';
-      const phoneLabel = lang === 'en' ? 'Phone' : 'Telefono';
+      const phoneLabel = lang === 'en' ? 'Phone' : 'Teléfono';
       const serviceLabel = lang === 'en' ? 'Service' : 'Servicio';
 
       const subject = encodeURIComponent(`${subjectPrefix} - ${form.servicio}`);
@@ -290,7 +290,7 @@ export default function ContactModule({ onBack }: Props) {
                         <XCircle size={12} />
                         {lang === 'en'
                           ? 'Send failed. Try again or email us at info@ccgrupo.com.co'
-                          : 'Error al enviar. Intenta de nuevo o escribenos a info@ccgrupo.com.co'}
+                          : 'Error al enviar. Intenta de nuevo o escríbenos a info@ccgrupo.com.co'}
                       </motion.div>
                     )}
                   </AnimatePresence>

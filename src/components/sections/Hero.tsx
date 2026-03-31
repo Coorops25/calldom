@@ -24,11 +24,11 @@ export default function Hero({ onNavigate }: Props) {
         desc: 'We integrate technology, processes and knowledge to build solutions that make your business more agile, efficient and profitable.',
       }
     : {
-        line1: 'La tecnologia nos impulsa,',
+        line1: 'La tecnología nos impulsa,',
         line2: 'las personas',
         line3a: 'nos',
         line3b: 'inspiran.',
-        desc: 'Integramos tecnologia, procesos y conocimiento para construir soluciones que hacen tu negocio mas agil, eficiente y rentable.',
+        desc: 'Integramos tecnología, procesos y conocimiento para construir soluciones que hacen tu negocio más ágil, eficiente y rentable.',
       };
 
   useEffect(() => {
