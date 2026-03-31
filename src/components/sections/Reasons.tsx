@@ -15,30 +15,7 @@ export default function Reasons() {
   const headingPrefix = lang === 'es' ? '\u00BF' : '';
   const headingFocus = `${reasonsHeadingEm}?`;
 
-  const reasonsEs = [
-    {
-      title: 'Omnicanalidad como pilar del éxito',
-      desc: 'Unificamos todos tus canales (WhatsApp, voz, chat, redes y CRM) en una sola operación donde cada conversación tiene contexto y continuidad. Así logramos que la experiencia del cliente sea fluida y que cada interacción avance hacia un resultado.',
-    },
-    {
-      title: 'Automatización que sí resuelve',
-      desc: 'Deja que los humanos hagan lo importante y automatiza los procesos operativos. La automatización escala, optimiza tiempos y multiplica oportunidades reales para responder, calificar, agendar y ejecutar sin sacrificar tiempo.',
-    },
-    {
-      title: 'Decisiones basadas en datos',
-      desc: 'Convertimos la operación en información accionable con dashboards en tiempo real (Looker Studio y Power BI). Cada dato cuenta una historia clara: qué está pasando, dónde mejorar y cómo crecer con control.',
-    },
-    {
-      title: 'Soluciones diseñadas para ti',
-      desc: 'Entendemos cómo funciona tu operación y construimos soluciones a la medida de tus procesos, objetivos y clientes. No adaptamos tu negocio a la tecnología: adaptamos la tecnología para que tu negocio funcione mejor.',
-    },
-    {
-      title: 'La tecnología potencia el talento humano',
-      desc: 'Combinamos IA con equipos humanos para lograr soluciones ágiles, cercanas y escalables. La tecnología nos impulsa, pero las personas nos inspiran.',
-    },
-  ];
-
-  const reasonItems = lang === 'en' ? t.reasons.items : reasonsEs;
+  const reasonItems = t.reasons.items;
 
   return (
     <section id="reasons" className="py-20 px-6 md:px-14 lg:px-28">
