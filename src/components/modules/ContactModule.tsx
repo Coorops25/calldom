@@ -227,8 +227,9 @@ export default function ContactModule({ onBack }: Props) {
                   className="space-y-5"
                 >
                   <div className="grid sm:grid-cols-2 gap-5">
-                    <Field label={ct.fields.nombre} error={errors.nombre}>
+                    <Field label={ct.fields.nombre} error={errors.nombre} htmlFor="f-nombre">
                       <input
+                        id="f-nombre"
                         name="nombre"
                         value={form.nombre}
                         onChange={handleChange}
@@ -236,8 +237,9 @@ export default function ContactModule({ onBack }: Props) {
                         className={inputBase}
                       />
                     </Field>
-                    <Field label={ct.fields.empresa} error={errors.empresa}>
+                    <Field label={ct.fields.empresa} error={errors.empresa} htmlFor="f-empresa">
                       <input
+                        id="f-empresa"
                         name="empresa"
                         value={form.empresa}
                         onChange={handleChange}
@@ -248,23 +250,23 @@ export default function ContactModule({ onBack }: Props) {
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-5">
-                    <Field label={ct.fields.email} error={errors.email}>
-                      <input type="email" name="email" value={form.email} onChange={handleChange} placeholder="name@company.com" className={inputBase} />
+                    <Field label={ct.fields.email} error={errors.email} htmlFor="f-email">
+                      <input id="f-email" type="email" name="email" value={form.email} onChange={handleChange} placeholder="name@company.com" className={inputBase} />
                     </Field>
-                    <Field label={ct.fields.telefono} error={errors.telefono}>
-                      <input type="tel" name="telefono" value={form.telefono} onChange={handleChange} placeholder="+57 300 000 0000" className={inputBase} />
+                    <Field label={ct.fields.telefono} error={errors.telefono} htmlFor="f-telefono">
+                      <input id="f-telefono" type="tel" name="telefono" value={form.telefono} onChange={handleChange} placeholder="+57 300 000 0000" className={inputBase} />
                     </Field>
                   </div>
 
-                  <Field label={ct.fields.servicio} error={errors.servicio}>
-                    <select name="servicio" value={form.servicio} onChange={handleChange} className={`${inputBase} appearance-none cursor-pointer`}>
+                  <Field label={ct.fields.servicio} error={errors.servicio} htmlFor="f-servicio">
+                    <select id="f-servicio" name="servicio" value={form.servicio} onChange={handleChange} className={`${inputBase} appearance-none cursor-pointer`}>
                       <option value="" disabled className="bg-navy-deep">{ct.fields.selectPh}</option>
                       {serviceOptions.map((s) => <option key={s} value={s} className="bg-navy-deep">{s}</option>)}
                     </select>
                   </Field>
 
-                  <Field label={ct.fields.mensaje} error={errors.mensaje}>
-                    <textarea name="mensaje" value={form.mensaje} onChange={handleChange} rows={5} placeholder={ct.fields.messagePh} className={`${inputBase} resize-none`} />
+                  <Field label={ct.fields.mensaje} error={errors.mensaje} htmlFor="f-mensaje">
+                    <textarea id="f-mensaje" name="mensaje" value={form.mensaje} onChange={handleChange} rows={5} placeholder={ct.fields.messagePh} className={`${inputBase} resize-none`} />
                   </Field>
 
                   <motion.button
@@ -308,10 +310,10 @@ export default function ContactModule({ onBack }: Props) {
   );
 }
 
-function Field({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) {
+function Field({ label, error, children, htmlFor }: { label: string; error?: string; children: React.ReactNode; htmlFor?: string }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label className="font-mono text-[0.55rem] tracking-[0.2em] uppercase text-gray-200">{label}</label>
+      <label htmlFor={htmlFor} className="font-mono text-[0.55rem] tracking-[0.2em] uppercase text-gray-200">{label}</label>
       {children}
       <AnimatePresence>
         {error && (

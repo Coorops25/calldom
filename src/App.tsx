@@ -4,7 +4,7 @@
  */
 
 import { useState, useEffect, lazy, Suspense } from 'react';
-import { AnimatePresence } from 'motion/react';
+import { AnimatePresence, MotionConfig } from 'motion/react';
 import { LangProvider } from './i18n';
 import Preloader from './components/ui/Preloader';
 import PageLoader from './components/ui/PageLoader';
@@ -134,6 +134,7 @@ export default function App() {
   };
 
   return (
+    <MotionConfig reducedMotion="user">
     <LangProvider>
       <ErrorBoundary>
         <AnimatePresence mode="wait">
@@ -189,5 +190,6 @@ export default function App() {
         )}
       </ErrorBoundary>
     </LangProvider>
+    </MotionConfig>
   );
 }

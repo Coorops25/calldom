@@ -13,31 +13,6 @@ interface ServicesProps {
 export default function Services({ onNavigate }: ServicesProps) {
   const { t, lang } = useLang();
   const tapHint = lang === 'en' ? 'Tap card to view details' : 'Toca la tarjeta para ver detalles';
-  const customServicesEs: Record<string, { title: string; subtitle?: string; desc: string; tags: string[] }> = {
-    '01': {
-      title: 'Experiencia del Cliente',
-      subtitle: 'Experiencias que hacen que tus clientes se queden',
-      desc: 'Gestionamos y optimizamos cada punto de contacto para que la atención sea ágil, consistente y alineada a tu marca. Más que respuestas, construimos experiencias que generan confianza, continuidad y fidelización.',
-      tags: ['Servicio al cliente', 'PQR', 'Reservas', 'Pedidos', 'Mesa de ayuda', 'Soporte omnicanal'],
-    },
-    '02': {
-      title: 'Leads & Ventas',
-      subtitle: 'Procesos comerciales que convierten en serio',
-      desc: 'Diseñamos y ejecutamos sistemas de ventas donde cada lead tiene seguimiento, contexto y una alta probabilidad de cierre. Conectamos canales, CRM y equipo comercial para que ninguna oportunidad se pierda.',
-      tags: ['Captación', 'Seguimiento', 'WhatsApp ventas', 'CRM', 'Reactivación', 'Cierre'],
-    },
-    '03': {
-      title: 'Agentes Autónomos',
-      subtitle: 'Agentes que trabajan 24/7 por tu negocio',
-      desc: 'Automatizamos conversaciones y tareas clave para que tu empresa responda en todo momento sin depender de disponibilidad humana. Implementamos agentes que atienden, filtran, agendan y conectan con tus procesos reales.',
-      tags: ['IA 24/7', 'WhatsApp IA', 'Chat IA', 'Leads IA', 'Social IA', 'Autónomo'],
-    },
-    '04': {
-      title: 'Digital Studio',
-      desc: 'Creamos tecnología a la medida que conecta tus procesos, equipos y datos en un solo ecosistema. Puede ser un CRM, una app, un portal de clientes, plataformas de capacitación o lo que se te ocurra.',
-      tags: ['CRM', 'Apps', 'Portales', 'Capacitación', 'Integración', 'Eficiencia'],
-    },
-  };
 
   return (
     <section id="services" className="pt-24 relative">
@@ -94,11 +69,10 @@ export default function Services({ onNavigate }: ServicesProps) {
           const isReversed = i % 2 !== 0;
           const svcT = t.services.items[svc.id as keyof typeof t.services.items];
           const svcDetailT = t.serviceDetails[svc.id as keyof typeof t.serviceDetails];
-          const customEs = lang === 'es' ? customServicesEs[svc.id] : undefined;
-          const subtitle = customEs?.subtitle ?? svcT?.subtitle;
-          const title = customEs?.title ?? svcT?.title ?? svc.title;
-          const desc  = customEs?.desc  ?? svcT?.desc  ?? svc.desc;
-          const tags  = customEs?.tags  ?? svcDetailT?.tags ?? svc.tags;
+          const subtitle = svcT?.subtitle;
+          const title = svcT?.title ?? svc.title;
+          const desc  = svcT?.desc  ?? svc.desc;
+          const tags  = svcDetailT?.tags ?? svc.tags;
 
           const textCol = (
             <div

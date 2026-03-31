@@ -50,10 +50,10 @@ const translations = {
       label:   '03 / 05 — Servicios',
       explore: 'Explorar',
       items: {
-        '01': { title: 'CX – Experiencia del Cliente', subtitle: 'Experiencias que escalan negocios', desc: 'Operamos y optimizamos la atención al cliente en todos los puntos de contacto para mejorar satisfacción, continuidad y fidelización.' },
-        '02': { title: 'Leads & Ventas',               subtitle: 'Conversión con Método',             desc: 'Diseñamos y operamos procesos comerciales que convierten oportunidades en ventas reales, con más velocidad, seguimiento y trazabilidad.' },
-        '03': { title: 'Agentes Autónomos',            subtitle: 'Operación 24/7 sin Límites',        desc: 'Automatizamos interacciones con IA para escalar atención, captación y respuesta 24/7 sin incrementar tu estructura operativa.' },
-        '04': { title: 'Digital Studio',               subtitle: 'Tecnología que Impulsa Resultados', desc: 'Creamos soluciones digitales a medida para conectar tecnología, operación y resultados.' },
+        '01': { title: 'Experiencia del Cliente', subtitle: 'Experiencias que hacen que tus clientes se queden', desc: 'Gestionamos y optimizamos cada punto de contacto para que la atención sea ágil, consistente y alineada a tu marca. Más que respuestas, construimos experiencias que generan confianza, continuidad y fidelización.' },
+        '02': { title: 'Leads & Ventas',          subtitle: 'Procesos comerciales que convierten en serio',       desc: 'Diseñamos y ejecutamos sistemas de ventas donde cada lead tiene seguimiento, contexto y una alta probabilidad de cierre. Conectamos canales, CRM y equipo comercial para que ninguna oportunidad se pierda.' },
+        '03': { title: 'Agentes Autónomos',       subtitle: 'Agentes que trabajan 24/7 por tu negocio',           desc: 'Automatizamos conversaciones y tareas clave para que tu empresa responda en todo momento sin depender de disponibilidad humana. Implementamos agentes que atienden, filtran, agendan y conectan con tus procesos reales.' },
+        '04': { title: 'Digital Studio',          subtitle: 'Tecnología a la medida de tu negocio',                desc: 'Creamos tecnología a la medida que conecta tus procesos, equipos y datos en un solo ecosistema. Puede ser un CRM, una app, un portal de clientes, plataformas de capacitación o lo que se te ocurra.' },
       },
     },
     reasons: {

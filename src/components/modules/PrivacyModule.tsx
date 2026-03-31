@@ -32,7 +32,7 @@ export default function PrivacyModule({ onBack, onNavigate }: Props) {
 
       {/* Navbar */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-6 md:px-14 py-6 flex justify-between items-center bg-navy-deep/85 backdrop-blur-xl border-b border-white/5">
-        <div className="flex items-center gap-3 cursor-pointer" onClick={onBack}>
+        <button type="button" onClick={onBack} className="flex items-center gap-3 cursor-pointer bg-transparent border-0 p-0" aria-label={lang === 'en' ? 'Go home' : 'Ir al inicio'}>
           <ThemedLogo
             alt="CCGrupo Logo"
             className="h-12 w-auto object-contain"
@@ -42,7 +42,7 @@ export default function PrivacyModule({ onBack, onNavigate }: Props) {
               </div>
             )}
           />
-        </div>
+        </button>
         <button onClick={onBack} className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-teal hover:text-white transition-colors">
           <ArrowLeft size={16} />
           {t.back}

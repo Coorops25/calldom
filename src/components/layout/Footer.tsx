@@ -23,7 +23,7 @@ export default function Footer({ onNavigate }: Props) {
       <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
         <div className="lg:col-span-2">
           <div
-            className="flex items-center gap-3 mb-6 cursor-pointer min-h-[2.5rem]"
+            className="flex items-center gap-3 mb-6 min-h-[2.5rem]"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
