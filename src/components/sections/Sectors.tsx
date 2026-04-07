@@ -118,48 +118,54 @@ export default function Sectors() {
               className="fixed inset-0 z-[9900] flex items-center justify-center p-4 md:p-8 pointer-events-none"
             >
               <div
-                className="pointer-events-auto relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-navy border border-white/10 rounded-3xl shadow-2xl"
+                className="pointer-events-auto relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-navy border border-white/10 rounded-2xl md:rounded-3xl shadow-2xl"
                 onClick={e => e.stopPropagation()}
               >
-                <button
-                  onClick={close}
-                  className="absolute top-6 right-6 w-9 h-9 rounded-xl border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-white/30 transition-all duration-200 z-10"
-                >
-                  <X size={16} />
-                </button>
+                {/* Sticky close button */}
+                <div className="sticky top-0 z-10 flex justify-end px-4 pt-4 md:px-6 md:pt-5 pointer-events-none">
+                  <button
+                    onClick={close}
+                    className="pointer-events-auto w-9 h-9 rounded-xl border border-white/10 bg-navy flex items-center justify-center text-gray-400 hover:text-white hover:border-white/30 transition-all duration-200"
+                  >
+                    <X size={16} />
+                  </button>
+                </div>
 
-                <div className="p-8 md:p-12">
-                  <div className="flex items-start gap-5 mb-8">
-                    <div className="w-14 h-14 rounded-xl border border-teal/30 bg-teal/10 flex items-center justify-center shrink-0">
-                      {(() => { const Icon = ICONS[active.index]; return <Icon size={24} className="text-teal" />; })()}
+                <div className="px-5 pb-8 -mt-2 sm:px-8 md:px-12 md:pb-12">
+                  {/* Header */}
+                  <div className="flex items-start gap-4 mb-7">
+                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl border border-teal/30 bg-teal/10 flex items-center justify-center shrink-0">
+                      {(() => { const Icon = ICONS[active.index]; return <Icon size={22} className="text-teal" />; })()}
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <div className="font-mono text-[0.45rem] tracking-[0.3em] uppercase text-teal mb-2">
                         {String(active.index + 1).padStart(2, '0')} - {s.label}
                       </div>
-                      <h3 className="font-display text-2xl md:text-3xl text-white leading-tight">
+                      <h3 className="font-display text-xl sm:text-2xl md:text-3xl text-white leading-tight">
                         {active.name}
                       </h3>
                     </div>
                   </div>
 
-                  <p className="text-gray-300 font-light text-sm leading-relaxed mb-10 border-l-2 border-teal/40 pl-4">
+                  <p className="text-gray-300 font-light text-sm leading-relaxed mb-8 border-l-2 border-teal/40 pl-4">
                     {active.detail}
                   </p>
 
-                  <div className="grid grid-cols-3 gap-4 mb-10">
+                  {/* KPIs */}
+                  <div className="grid grid-cols-3 gap-2 md:gap-4 mb-8">
                     {active.kpis.map((kpi, i) => (
-                      <div key={i} className="p-4 border border-white/10 rounded-xl bg-white/[0.02] text-center">
-                        <div className="font-mono text-lg font-bold text-teal mb-1">{kpi.value}</div>
-                        <div className="font-mono text-[0.45rem] tracking-[0.15em] uppercase text-gray-400 leading-tight">{kpi.label}</div>
+                      <div key={i} className="p-3 md:p-4 border border-white/10 rounded-xl bg-white/[0.02] text-center">
+                        <div className="font-mono text-base md:text-lg font-bold text-teal mb-1 truncate">{kpi.value}</div>
+                        <div className="font-mono text-[0.42rem] tracking-[0.12em] uppercase text-gray-400 leading-tight">{kpi.label}</div>
                       </div>
                     ))}
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-8 mb-10">
+                  {/* Challenges / Solutions */}
+                  <div className="grid sm:grid-cols-2 gap-6 md:gap-8">
                     <div>
                       <div className="flex items-center gap-3 font-mono text-[0.5rem] tracking-[0.2em] uppercase text-gray-400 mb-4">
-                        <TrendingUp size={12} className="text-teal" />
+                        <TrendingUp size={12} className="text-teal shrink-0" />
                         {s.challenges}
                       </div>
                       <ul className="space-y-3">
@@ -173,7 +179,7 @@ export default function Sectors() {
                     </div>
                     <div>
                       <div className="flex items-center gap-3 font-mono text-[0.5rem] tracking-[0.2em] uppercase text-gray-400 mb-4">
-                        <CheckCircle2 size={12} className="text-teal" />
+                        <CheckCircle2 size={12} className="text-teal shrink-0" />
                         {s.solutions}
                       </div>
                       <ul className="space-y-3">
