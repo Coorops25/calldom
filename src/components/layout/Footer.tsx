@@ -61,9 +61,15 @@ export default function Footer({ onNavigate }: Props) {
               )}
             </AnimatePresence>
           </div>
-          <p className="text-sm font-light leading-relaxed text-gray-200 max-w-xs">
-            {t.footer.desc}
+          <p className="text-sm font-light leading-relaxed text-gray-200 max-w-xs mb-5">
+            {t.footer.description}
           </p>
+          <div className="flex items-center gap-3 max-w-xs">
+            <div className="w-5 h-px bg-teal/50 shrink-0" />
+            <span className="font-mono text-[0.55rem] tracking-[0.18em] uppercase text-teal/70 leading-relaxed">
+              {t.footer.tagline}
+            </span>
+          </div>
         </div>
 
         <div>

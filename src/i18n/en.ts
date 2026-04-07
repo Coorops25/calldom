@@ -121,6 +121,7 @@ const en = {
   },
   footer: {
     description: 'Next-gen BPO that transforms business processes with CX, Leads & Sales, Autonomous AI Agents and Digital Studio.',
+    tagline: 'Beyond service — we build experiences.',
     links: {
       company: 'Company',
       services: 'Services',

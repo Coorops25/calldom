@@ -121,6 +121,7 @@ const es = {
   },
   footer: {
     description: 'BPO de nueva generación que transforma los procesos de las empresas con CX, Leads & Ventas, Agentes Autónomos con IA y Digital Studio.',
+    tagline: 'Más allá del servicio — construimos experiencias.',
     links: {
       company: 'Empresa',
       services: 'Servicios',
