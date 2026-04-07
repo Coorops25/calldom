@@ -143,11 +143,11 @@ const es = {
     contactTitle: 'Contacto',
     copyright: '© 2025 CCGrupo. Todos los derechos reservados.',
     privacy: 'Política de Privacidad',
-    location: 'Medellín, Colombia',
+    location: 'Bogotá, Colombia',
     contact: {
       title: 'Contacto',
       address: 'Cra 43A #1-50, Of 818',
-      city: 'Medellín, Colombia',
+      city: 'Bogotá, Colombia',
       email: 'contacto@ccgrupo.com.co',
       phone: '+57 604 444 22 44',
     },
@@ -237,7 +237,7 @@ const es = {
     info: {
       title: 'Información de contacto',
       address: 'Cra 43A #1-50, Of 818',
-      city: 'Medellín, Colombia',
+      city: 'Bogotá, Colombia',
       email: 'contacto@ccgrupo.com.co',
       phone: '+57 604 444 22 44',
       whatsapp: 'Escríbenos por WhatsApp',
