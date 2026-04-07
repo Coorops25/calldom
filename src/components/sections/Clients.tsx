@@ -4,16 +4,16 @@ import SplitText from '../ui/SplitText';
 import { useLang } from '../../i18n';
 
 const CLIENTS = [
-  { name: 'Salud Total',  logo: '/clients/salud-total.svg'  },
-  { name: 'Compensar',   logo: '/clients/compensar.svg'    },
-  { name: 'Colsubsidio', logo: '/clients/colsubsidio.svg'  },
-  { name: 'Famisanar',   logo: '/clients/famisanar.svg'    },
-  { name: 'Sanitas',     logo: '/clients/sanitas.svg'      },
-  { name: 'Keralty',     logo: '/clients/keralty.svg'      },
-  { name: 'Cafam',       logo: '/clients/cafam.svg'        },
-  { name: 'Sura',        logo: '/clients/sura.svg'         },
-  { name: 'Comfenalco',  logo: '/clients/comfenalco.svg'   },
-  { name: 'Medimás',     logo: '/clients/medimas.svg'      },
+  { name: 'Cliente 01', logo: '/clients/webp/Cliente-01.webp' },
+  { name: 'Cliente 02', logo: '/clients/webp/Cliente-02.webp' },
+  { name: 'Cliente 03', logo: '/clients/webp/Cliente-03.webp' },
+  { name: 'Cliente 04', logo: '/clients/webp/Cliente-04.webp' },
+  { name: 'Cliente 05', logo: '/clients/webp/Cliente-05.webp' },
+  { name: 'Cliente 06', logo: '/clients/webp/Cliente-06.webp' },
+  { name: 'Cliente 07', logo: '/clients/webp/Cliente-07.webp' },
+  { name: 'Cliente 08', logo: '/clients/webp/Cliente-08.webp' },
+  { name: 'Cliente 09', logo: '/clients/webp/Cliente-09.webp' },
+  { name: 'Cliente 10', logo: '/clients/webp/Cliente-10.webp' },
 ];
 
 export default function Clients() {
@@ -85,7 +85,7 @@ export default function Clients() {
                   alt={name}
                   loading="lazy"
                   onError={() => handleErr(i)}
-                  className="relative z-10 h-10 w-auto max-w-[140px] object-contain opacity-60 group-hover:opacity-100 transition-opacity duration-300 brightness-0 invert"
+                  className="relative z-10 h-12 w-auto max-w-[140px] object-contain opacity-60 group-hover:opacity-100 transition-opacity duration-300"
                 />
               ) : (
                 <span className="relative z-10 font-body font-medium text-gray-200 group-hover:text-white transition-colors text-sm px-4 text-center leading-tight">
