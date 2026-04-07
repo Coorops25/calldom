@@ -55,9 +55,9 @@ export default function Sectors() {
             </p>
           </motion.div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {s.items.map((item, i) => {
-              const Icon = ICONS[i];
+              const Icon = ICONS[i % ICONS.length];
               return (
                 <motion.button
                   key={item.name}
