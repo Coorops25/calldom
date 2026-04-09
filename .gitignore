@@ -1,9 +1,81 @@
+# Dependencies
 node_modules/
-build/
+.pnp
+.pnp.js
+
+# Build
 dist/
+build/
+out/
+.next/
+.nuxt/
+.vercel/
+
+# Testing
 coverage/
-.DS_Store
-*.log
-.env*
+.nyc_output/
+
+# Environment
+.env
+.env.local
+.env.*.local
 !.env.example
-.vercel
+
+# IDE & OS
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Temporary
+tmp/
+temp/
+*.tmp
+
+# Secrets & certificates (no commits!)
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Database (dev only)
+*.sqlite
+*.sqlite3
+*.db
+
+# AI / LLM artifacts (pueden contener datos sensibles)
+.ai-logs/
+.llm-logs/
+.cursor/
+.aider*
+.claude/
+.gemini/
+.github/prompts/ui-ux-pro-max/
+.opencode/skills/ui-ux-pro-max/
+.continue/skills/ui-ux-pro-max/
+.codex/skills/ui-ux-pro-max/
+.roo/skills/ui-ux-pro-max/
+.agent/skills/ui-ux-pro-max/
+.codebuddy/skills/ui-ux-pro-max/
+.windsurf/skills/ui-ux-pro-max/
+.trae/skills/ui-ux-pro-max/
+.kiro/
+.qoder/
+
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+# Debug
+npm-debug.log*
