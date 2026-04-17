@@ -409,6 +409,13 @@ html.light :focus-visible {
   outline-color: #0077b6;
 }
 
+/* ─── Why-cards: all items in one row at xl ─────── */
+@media (min-width: 1280px) {
+  [style*="--why-cols"] {
+    grid-template-columns: repeat(var(--why-cols), minmax(0, 1fr));
+  }
+}
+
 /* ─── Reduced motion ─────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {

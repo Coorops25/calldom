@@ -9,28 +9,30 @@ import TiltCard from '../ui/TiltCard';
 import { getServiceById } from '../../data';
 import { useLang } from '../../i18n';
 
-// ── Mock UI illustrations — bilingual, theme-aware ─────────────────────────
+// ── Mock UI illustrations — bilingual, theme-aware, 5 unique variants ───────
 function createWhyMocks(lang: string): FC[] {
   const isEn = lang === 'en';
-  // All text strings — ES / EN
   const s = {
-    inbox:       isEn ? 'Active inbox'            : 'Bandeja activa',
-    unattended:  isEn ? '+127 unattended'          : '+127 sin atender',
-    waiting:     isEn ? 'Waiting for response…'   : 'Esperando respuesta…',
-    coverage:    isEn ? 'Time coverage'            : 'Cobertura horaria',
-    covered:     isEn ? 'Covered'                  : 'Cubierto',
-    noCoverage:  isEn ? 'No coverage'              : 'Sin cobertura',
-    dashboard:   isEn ? 'Control panel'            : 'Panel de control',
-    respTime:    isEn ? 'Resp. time'               : 'T. respuesta',
-    resolved:    isEn ? 'Resolved'                 : 'Resueltos',
-    open:        isEn ? 'Open'                     : 'Abiertos',
-    noVisib:     isEn ? 'No operation visibility'  : 'Sin visibilidad de la operación',
-    scaleCost:   isEn ? 'Cost to scale'            : 'Costo de escalar',
-    internal:    isEn ? 'Internal'                 : 'Interno',
-    outsource:   isEn ? 'Outsource = efficiency, less cost' : 'Externalizar = más eficiencia, menos costo',
+    inbox:      isEn ? 'Active inbox'              : 'Bandeja activa',
+    unattended: isEn ? '+127 unattended'            : '+127 sin atender',
+    waiting:    isEn ? 'Waiting for response…'     : 'Esperando respuesta…',
+    coverage:   isEn ? 'Time coverage'             : 'Cobertura horaria',
+    covered:    isEn ? 'Covered'                   : 'Cubierto',
+    noCoverage: isEn ? 'No coverage'               : 'Sin cobertura',
+    dashboard:  isEn ? 'Control panel'             : 'Panel de control',
+    respTime:   isEn ? 'Resp. time'                : 'T. respuesta',
+    resolved:   isEn ? 'Resolved'                  : 'Resueltos',
+    open:       isEn ? 'Open'                      : 'Abiertos',
+    noVisib:    isEn ? 'No operation visibility'   : 'Sin visibilidad',
+    scaleCost:  isEn ? 'Cost to scale'             : 'Costo de escalar',
+    internal:   isEn ? 'Internal'                  : 'Interno',
+    outsource:  isEn ? 'Outsource = less cost'     : 'Externalizar = menos costo',
+    dbTitle:    isEn ? 'Lead database'             : 'Base de leads',
+    dormant:    isEn ? 'Dormant leads'             : 'Leads dormidos',
+    noContact:  isEn ? 'Never contacted'           : 'Sin contactar',
+    lastSeen:   isEn ? 'Last activity'             : 'Últ. actividad',
   };
 
-  // Shared row/cell style — uses CSS vars so it adapts to light/dark
   const rowCls   = 'flex items-center gap-2 px-2 py-1.5 rounded-lg border';
   const cellCls  = 'p-2 rounded-lg border';
   const rowStyle = { background: 'color-mix(in srgb, var(--c-fg) 5%, transparent)', borderColor: 'color-mix(in srgb, var(--c-fg) 8%, transparent)' };
@@ -39,18 +41,14 @@ function createWhyMocks(lang: string): FC[] {
   return [
     // 0 — Chat inbox overflow
     () => (
-      <div className="p-4 flex flex-col gap-1.5">
+      <div className="p-3 flex flex-col gap-1.5">
         <div className="flex items-center justify-between mb-1">
           <span className="font-mono text-[0.42rem] tracking-widest text-teal/60 uppercase">{s.inbox}</span>
-          <span className="font-mono text-[0.42rem] bg-red-500/20 text-red-400 px-1.5 py-0.5 rounded-full border border-red-400/20">
-            {s.unattended}
-          </span>
+          <span className="font-mono text-[0.42rem] bg-red-500/20 text-red-400 px-1.5 py-0.5 rounded-full border border-red-400/20">{s.unattended}</span>
         </div>
         {(['Juan P.', 'María L.', 'Carlos H.', 'Ana R.']).map((name, i) => (
           <div key={i} className={rowCls} style={rowStyle}>
-            <div className="w-5 h-5 rounded-full bg-teal/20 border border-teal/30 flex items-center justify-center text-[0.4rem] font-bold text-teal shrink-0">
-              {name[0]}
-            </div>
+            <div className="w-5 h-5 rounded-full bg-teal/20 border border-teal/30 flex items-center justify-center text-[0.4rem] font-bold text-teal shrink-0">{name[0]}</div>
             <div className="flex-1 min-w-0">
               <div className="flex justify-between items-center">
                 <span className="text-[0.5rem] font-medium" style={fgStyle}>{name}</span>
@@ -58,9 +56,7 @@ function createWhyMocks(lang: string): FC[] {
               </div>
               <div className="text-gray-500 text-[0.4rem] truncate">{s.waiting}</div>
             </div>
-            <div className="w-3.5 h-3.5 rounded-full bg-teal/80 text-navy-deep flex items-center justify-center text-[0.38rem] font-bold shrink-0">
-              {i + 2}
-            </div>
+            <div className="w-3.5 h-3.5 rounded-full bg-teal/80 text-navy-deep flex items-center justify-center text-[0.38rem] font-bold shrink-0">{i + 2}</div>
           </div>
         ))}
       </div>
@@ -68,52 +64,34 @@ function createWhyMocks(lang: string): FC[] {
 
     // 1 — Coverage gaps (24/7)
     () => (
-      <div className="p-4">
-        <div className="font-mono text-[0.42rem] tracking-widest text-teal/60 uppercase mb-3">{s.coverage}</div>
-        <div className="grid grid-cols-7 gap-0.5 mb-3">
+      <div className="p-3">
+        <div className="font-mono text-[0.42rem] tracking-widest text-teal/60 uppercase mb-2">{s.coverage}</div>
+        <div className="grid grid-cols-7 gap-0.5 mb-2">
           {(isEn ? ['M','T','W','T','F','S','S'] : ['L','M','X','J','V','S','D']).map((d, col) => (
             <div key={col} className="flex flex-col items-center gap-0.5">
               <span className="font-mono text-[0.38rem] text-gray-400">{d}</span>
               {[0,1,2,3].map(row => (
-                <div
-                  key={row}
-                  className={`h-4 w-full rounded-sm ${
-                    col < 5 && row < 2
-                      ? 'bg-teal/30 border border-teal/20'
-                      : 'bg-red-500/20 border border-red-500/20'
-                  }`}
-                />
+                <div key={row} className={`h-4 w-full rounded-sm ${col < 5 && row < 2 ? 'bg-teal/30 border border-teal/20' : 'bg-red-500/20 border border-red-500/20'}`} />
               ))}
             </div>
           ))}
         </div>
-        <div className="flex gap-4">
-          <div className="flex items-center gap-1">
-            <div className="w-2 h-2 rounded-sm bg-teal/30 border border-teal/20" />
-            <span className="text-gray-400 text-[0.4rem]">{s.covered}</span>
-          </div>
-          <div className="flex items-center gap-1">
-            <div className="w-2 h-2 rounded-sm bg-red-500/20 border border-red-500/20" />
-            <span className="text-gray-400 text-[0.4rem]">{s.noCoverage}</span>
-          </div>
+        <div className="flex gap-3">
+          <div className="flex items-center gap-1"><div className="w-2 h-2 rounded-sm bg-teal/30 border border-teal/20" /><span className="text-gray-400 text-[0.4rem]">{s.covered}</span></div>
+          <div className="flex items-center gap-1"><div className="w-2 h-2 rounded-sm bg-red-500/20 border border-red-500/20" /><span className="text-gray-400 text-[0.4rem]">{s.noCoverage}</span></div>
         </div>
       </div>
     ),
 
     // 2 — Real-time metrics (unknown)
     () => (
-      <div className="p-4">
-        <div className="font-mono text-[0.42rem] tracking-widest text-teal/60 uppercase mb-3">{s.dashboard}</div>
-        <div className="grid grid-cols-2 gap-2 mb-3">
-          {[
-            { label: s.respTime, value: '?? min' },
-            { label: s.resolved, value: '?? %'   },
-            { label: s.open,     value: '???'    },
-            { label: 'CSAT',     value: '??/10'  },
-          ].map((m, i) => (
+      <div className="p-3">
+        <div className="font-mono text-[0.42rem] tracking-widest text-teal/60 uppercase mb-2">{s.dashboard}</div>
+        <div className="grid grid-cols-2 gap-1.5 mb-2">
+          {[{ label: s.respTime, value: '?? min' }, { label: s.resolved, value: '?? %' }, { label: s.open, value: '???' }, { label: 'CSAT', value: '??/10' }].map((m, i) => (
             <div key={i} className={cellCls} style={rowStyle}>
-              <div className="font-mono text-[0.38rem] text-gray-400 mb-1">{m.label}</div>
-              <div className="font-mono text-base font-bold text-red-400/70">{m.value}</div>
+              <div className="font-mono text-[0.38rem] text-gray-400 mb-0.5">{m.label}</div>
+              <div className="font-mono text-sm font-bold text-red-400/70">{m.value}</div>
             </div>
           ))}
         </div>
@@ -126,24 +104,18 @@ function createWhyMocks(lang: string): FC[] {
 
     // 3 — Internal cost vs CCGrupo
     () => (
-      <div className="p-4">
-        <div className="font-mono text-[0.42rem] tracking-widest text-teal/60 uppercase mb-3">{s.scaleCost}</div>
-        <div className="flex items-end justify-center gap-8 mb-3">
+      <div className="p-3">
+        <div className="font-mono text-[0.42rem] tracking-widest text-teal/60 uppercase mb-2">{s.scaleCost}</div>
+        <div className="flex items-end justify-center gap-6 mb-2">
           <div className="flex flex-col items-center gap-1">
-            <div
-              className="w-14 rounded-t-md bg-gradient-to-t from-red-500/40 to-red-500/10 border border-red-500/30 flex items-start justify-center pt-1"
-              style={{ height: '80px' }}
-            >
+            <div className="w-12 rounded-t-md bg-gradient-to-t from-red-500/40 to-red-500/10 border border-red-500/30 flex items-start justify-center pt-1" style={{ height: '72px' }}>
               <span className="font-mono text-[0.4rem] text-red-400">↑↑↑</span>
             </div>
             <span className="font-mono text-[0.4rem] text-gray-400">{s.internal}</span>
             <span className="font-mono text-[0.4rem] text-red-400 font-bold">$$$$$</span>
           </div>
           <div className="flex flex-col items-center gap-1">
-            <div
-              className="w-14 rounded-t-md bg-gradient-to-t from-teal/40 to-teal/10 border border-teal/30 flex items-start justify-center pt-1"
-              style={{ height: '45px' }}
-            >
+            <div className="w-12 rounded-t-md bg-gradient-to-t from-teal/40 to-teal/10 border border-teal/30 flex items-start justify-center pt-1" style={{ height: '40px' }}>
               <span className="font-mono text-[0.4rem] text-teal">↑</span>
             </div>
             <span className="font-mono text-[0.4rem] text-gray-400">CCGrupo</span>
@@ -153,6 +125,38 @@ function createWhyMocks(lang: string): FC[] {
         <div className="flex items-center gap-1.5 p-1.5 rounded-lg bg-teal/10 border border-teal/20">
           <div className="w-1.5 h-1.5 rounded-full bg-teal animate-pulse shrink-0" />
           <span className="text-[0.4rem] text-teal/80">{s.outsource}</span>
+        </div>
+      </div>
+    ),
+
+    // 4 — Dormant lead database (unused contacts)
+    () => (
+      <div className="p-3">
+        <div className="font-mono text-[0.42rem] tracking-widest text-teal/60 uppercase mb-2">{s.dbTitle}</div>
+        <div className="space-y-1 mb-2">
+          {[
+            { id: '#1042', tag: isEn ? 'Cold' : 'Frío',     days: isEn ? '47d ago' : 'hace 47d',  pct: 82 },
+            { id: '#0891', tag: isEn ? 'Old'  : 'Antiguo',  days: isEn ? '120d ago': 'hace 120d', pct: 64 },
+            { id: '#1198', tag: s.noContact,                 days: '—',                            pct: 0  },
+            { id: '#0734', tag: isEn ? 'Cold' : 'Frío',     days: isEn ? '60d ago' : 'hace 60d',  pct: 55 },
+          ].map((lead, i) => (
+            <div key={i} className={rowCls} style={rowStyle}>
+              <span className="font-mono text-[0.38rem] text-teal/60 shrink-0">{lead.id}</span>
+              <div className="flex-1 min-w-0">
+                <div className="flex justify-between items-center mb-0.5">
+                  <span className="font-mono text-[0.38rem] text-amber-400/80">{lead.tag}</span>
+                  <span className="text-gray-500 text-[0.38rem]">{lead.days}</span>
+                </div>
+                <div className="w-full h-1 rounded-full bg-white/10">
+                  <div className="h-1 rounded-full bg-amber-400/50" style={{ width: `${lead.pct}%` }} />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="flex items-center gap-1.5 p-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20">
+          <div className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse shrink-0" />
+          <span className="text-[0.4rem] text-amber-400/80">{s.dormant}: 847 {isEn ? 'contacts' : 'contactos'}</span>
         </div>
       </div>
     ),
@@ -528,9 +532,12 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
               </div>
             </motion.div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div
+              className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+              style={{ ['--why-cols' as string]: sd.whyYouNeedUsItems.length }}
+            >
               {sd.whyYouNeedUsItems.map((item, i) => {
-                const MockUI = whyMocks[i % whyMocks.length];
+                const MockUI = whyMocks[i];
                 return (
                   <motion.div
                     key={i}
