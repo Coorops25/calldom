@@ -118,7 +118,7 @@ export default function Sectors() {
               className="fixed inset-0 z-[9900] flex items-center justify-center p-3 sm:p-6 md:p-10 pointer-events-none"
             >
               <div
-                className="pointer-events-auto relative w-full max-w-2xl max-h-[92vh] overflow-y-auto
+                className="pointer-events-auto relative w-full max-w-2xl max-h-[85svh] sm:max-h-[92vh] overflow-y-auto
                            bg-navy-deep/80 backdrop-blur-2xl
                            border border-white/[0.12]
                            rounded-2xl md:rounded-3xl

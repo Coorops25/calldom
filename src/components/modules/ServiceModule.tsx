@@ -417,8 +417,8 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
               </div>
             )}
 
-            {/* Decorative icon badge */}
-            <div className="absolute -bottom-10 -left-10 w-40 h-40 border border-teal/20 rounded-full flex items-center justify-center bg-navy-deep/80 backdrop-blur-md">
+            {/* Decorative icon badge — hidden on small screens to avoid overflow */}
+            <div className="hidden sm:flex absolute -bottom-10 -left-10 w-40 h-40 border border-teal/20 rounded-full items-center justify-center bg-navy-deep/80 backdrop-blur-md">
               <service.icon size={48} className="text-teal" strokeWidth={1} />
             </div>
           </motion.div>
@@ -533,7 +533,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
             </motion.div>
 
             <div
-              className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+              className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
               style={{ ['--why-cols' as string]: sd.whyYouNeedUsItems.length }}
             >
               {sd.whyYouNeedUsItems.map((item, i) => {
@@ -550,7 +550,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
                     <TiltCard className="h-full">
                       <div className="h-full flex flex-col rounded-2xl overflow-hidden border border-white/10 bg-navy-deep/80 backdrop-blur-sm hover:border-teal/30 transition-colors duration-300">
                         {/* Mock UI illustration */}
-                        <div className="bg-gradient-to-br from-teal/5 to-navy-deep border-b border-white/[0.07] min-h-[160px]">
+                        <div className="bg-gradient-to-br from-teal/5 to-navy-deep border-b border-white/[0.07] min-h-[130px] sm:min-h-[160px]">
                           <MockUI />
                         </div>
                         {/* Text content */}

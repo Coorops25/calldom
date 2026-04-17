@@ -14,9 +14,9 @@ const BORDERS = [
   'border-teal/25',
 ];
 
-const CARD_W  = 300; // px — individual card width
-const CARD_H  = 210; // px
-const ANIM_S  = 28;  // seconds for one full pass (normal speed)
+const CARD_W  = 380; // px — individual card width
+const CARD_H  = 270; // px
+const ANIM_S  = 32;  // seconds for one full pass (normal speed)
 const ANIM_CSS = `
   @keyframes ccg-slide-fwd {
     from { left: 100%; }
@@ -130,31 +130,31 @@ export default function Reasons() {
                   }}
                 >
                   <div
-                    className={`w-full h-full rounded-2xl border ${BORDERS[i % BORDERS.length]} bg-navy-deep/90 backdrop-blur-sm p-5 flex flex-col gap-3 hover:border-teal/60 hover:bg-navy-deep transition-all duration-300 group`}
+                    className={`w-full h-full rounded-2xl border ${BORDERS[i % BORDERS.length]} bg-navy-deep/90 backdrop-blur-sm p-6 flex flex-col gap-4 hover:border-teal/60 hover:bg-navy-deep transition-all duration-300 group overflow-hidden`}
                     style={{ boxSizing: 'border-box' }}
                   >
                     {/* Top row */}
-                    <div className="flex items-center justify-between">
-                      <div className="w-9 h-9 rounded-xl bg-teal/10 border border-teal/20 flex items-center justify-center group-hover:bg-teal/20 group-hover:border-teal/40 transition-all duration-300">
-                        <Icon size={17} className="text-teal" strokeWidth={1.5} />
+                    <div className="flex items-center justify-between shrink-0">
+                      <div className="w-10 h-10 rounded-xl bg-teal/10 border border-teal/20 flex items-center justify-center group-hover:bg-teal/20 group-hover:border-teal/40 transition-all duration-300">
+                        <Icon size={20} className="text-teal" strokeWidth={1.5} />
                       </div>
-                      <span className="font-mono text-[0.45rem] tracking-[0.3em] text-teal/40">
+                      <span className="font-mono text-[0.6rem] tracking-[0.3em] text-teal/40">
                         {String(i + 1).padStart(2, '0')}
                       </span>
                     </div>
 
                     {/* Title */}
-                    <h4 className="font-mono text-xs uppercase tracking-wider text-white leading-snug group-hover:text-teal transition-colors duration-300">
+                    <h4 className="font-mono text-sm uppercase tracking-wider text-white leading-snug group-hover:text-teal transition-colors duration-300 shrink-0 line-clamp-2">
                       {reason.title}
                     </h4>
 
                     {/* Desc */}
-                    <p className="text-gray-400 font-light text-xs leading-relaxed flex-1">
+                    <p className="text-gray-400 font-light text-sm leading-relaxed flex-1 overflow-hidden line-clamp-4">
                       {reason.desc}
                     </p>
 
                     {/* Bottom accent */}
-                    <div className="h-px w-0 bg-gradient-to-r from-teal to-transparent group-hover:w-full transition-all duration-500" />
+                    <div className="h-px w-0 bg-gradient-to-r from-teal to-transparent group-hover:w-full transition-all duration-500 shrink-0" />
                   </div>
                 </div>
               );

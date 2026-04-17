@@ -27,7 +27,7 @@ export default function Services({ onNavigate }: ServicesProps) {
           {t.services.label}
         </motion.div>
 
-        <div className="font-display text-[clamp(4rem,10vw,9rem)] leading-[0.95]">
+        <div className="font-display text-[clamp(2.5rem,10vw,9rem)] leading-[0.95]">
           <SplitText
             key={`services-heading-${lang}`}
             className="inline-block"

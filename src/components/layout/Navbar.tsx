@@ -75,7 +75,7 @@ export default function Navbar({ onNavigate }: Props) {
               >
                 <ThemedLogo
                   alt="CCGrupo Logo"
-                  className="h-20 md:h-24 w-auto object-contain"
+                  className="h-14 sm:h-18 md:h-20 lg:h-24 w-auto object-contain max-w-[50vw]"
                   fallback={logoFallback}
                 />
               </motion.div>
