@@ -66,14 +66,14 @@ export default function Footer({ onNavigate }: Props) {
           </p>
           <div className="flex items-center gap-3 max-w-xs">
             <div className="w-5 h-px bg-teal/50 shrink-0" />
-            <span className="font-mono text-[0.55rem] tracking-[0.18em] uppercase text-teal/70 leading-relaxed">
+            <span className="font-mono text-xs tracking-[0.15em] uppercase text-teal/70 leading-relaxed">
               {t.footer.tagline}
             </span>
           </div>
         </div>
 
         <div>
-          <h5 className="font-mono text-[0.55rem] tracking-[0.25em] uppercase text-gray-300 mb-6">{t.footer.servicesTitle}</h5>
+          <h5 className="font-mono text-xs tracking-[0.2em] uppercase text-gray-300 mb-6">{t.footer.servicesTitle}</h5>
           <ul className="space-y-4">
             {t.footer.serviceLinks.map(item => (
               <li key={item.id}>
@@ -89,7 +89,7 @@ export default function Footer({ onNavigate }: Props) {
         </div>
 
         <div>
-          <h5 className="font-mono text-[0.55rem] tracking-[0.25em] uppercase text-gray-300 mb-6">{t.footer.companyTitle}</h5>
+          <h5 className="font-mono text-xs tracking-[0.2em] uppercase text-gray-300 mb-6">{t.footer.companyTitle}</h5>
           <ul className="space-y-4">
             {t.footer.companyLinks.map(item => (
               <li key={item.name}>
@@ -106,7 +106,7 @@ export default function Footer({ onNavigate }: Props) {
         </div>
 
         <div>
-          <h5 className="font-mono text-[0.55rem] tracking-[0.25em] uppercase text-gray-300 mb-6">{t.footer.contactTitle}</h5>
+          <h5 className="font-mono text-xs tracking-[0.2em] uppercase text-gray-300 mb-6">{t.footer.contactTitle}</h5>
           <div className="space-y-4 text-sm font-light text-gray-200">
             <p>Cra. 20 #133 - 74, La Calleja</p>
             <p>{t.footer.location}</p>
@@ -118,12 +118,12 @@ export default function Footer({ onNavigate }: Props) {
 
       <div className="pt-10 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
         <div className="flex flex-col sm:flex-row items-center gap-4">
-          <span className="font-mono text-[0.5rem] tracking-[0.15em] uppercase text-gray-300">
+          <span className="font-mono text-xs tracking-[0.12em] uppercase text-gray-300">
             {t.footer.copyright}
           </span>
           <button
             onClick={() => onNavigate?.('privacy')}
-            className="font-mono text-[0.5rem] tracking-[0.15em] uppercase text-gray-300 hover:text-teal transition-colors"
+            className="font-mono text-xs tracking-[0.12em] uppercase text-gray-300 hover:text-teal transition-colors"
           >
             {t.footer.privacy}
           </button>
@@ -160,7 +160,7 @@ export default function Footer({ onNavigate }: Props) {
           </a>
         </div>
 
-        <span className="font-mono text-[0.5rem] tracking-[0.15em] uppercase text-gray-300">
+        <span className="font-mono text-xs tracking-[0.12em] uppercase text-gray-300">
           {t.footer.location}
         </span>
       </div>

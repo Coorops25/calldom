@@ -24,13 +24,10 @@ const en = {
   about: {
     label: '02 / 05 — About Us',
     headingPre: 'Over 15 years transforming',
+    headingHighlight: 'companies',
     headingPost: 'in Colombia',
-    descPre: 'We are a',
-    descPost: 'of a new generation that transforms business processes with CX, Leads & Sales, Autonomous AI Agents and Digital Studio. We optimize productivity, improve service and generate more sales.',
-    evoPre: 'We evolved the traditional',
-    evoMid: 'towards models based on',
-    evoStrong: 'productivity, intelligent automation and measurable results',
-    quote: 'Technology to grow, experiences that connect.',
+    desc: 'We are a digital transformation company. We integrate an ecosystem of 4 solutions so companies can improve their customer experience, sales and internal flows. We design solutions based on artificial intelligence, process automation and above all, human talent.',
+    quote: 'We are not just another provider — get to know us.',
     stats: [
       'Years of experience in the BPO sector',
       'More productivity in agents',
@@ -56,12 +53,11 @@ const en = {
     headingPre: 'Why choose Contact Center',
     headingEm: 'Grupo?',
     items: [
-      { title: 'More than a Contact Center', desc: "We don't limit ourselves to handling contacts. We transform processes, integrate technology and deliver executive visibility for better decision-making." },
-      { title: 'AI + Human Talent', desc: 'We fuse autonomous virtual agents with trained human talent for maximum efficiency, speed and empathy operations.' },
-      { title: 'Integrated Ecosystem', desc: 'CX, Sales, Automation and Technology in one coherent operation. Each service enhances the next for compound results.' },
-      { title: 'Real Omnichannel', desc: 'WhatsApp, email, SMS, chatbots and voice unified in one platform for zero friction and consistent experience across all channels.' },
-      { title: 'Executive Visibility', desc: 'Real-time dashboards with Looker Studio and Power BI. Complete traceability of operations for data-driven decisions.' },
-      { title: 'Results-Oriented', desc: "We don't just implement technology. We connect operations with business objectives and measure real impact on productivity, sales and experience." },
+      { title: 'Omnichannel as a success pillar', desc: 'We unify all your channels (WhatsApp, voice, chat, social and CRM) in one operation where every conversation has context and continuity — making the customer experience fluid and moving every interaction toward a result.' },
+      { title: 'Automation that actually solves', desc: 'Let humans do what matters, automate the operational processes. Automation scales, optimizes time and multiplies real opportunities to respond, qualify, schedule and execute without sacrificing quality.' },
+      { title: 'Data-driven decisions', desc: 'We turn operations into actionable information with real-time dashboards (Looker Studio and Power BI). Every data point tells a clear story: what is happening, where to improve and how to grow with control.' },
+      { title: 'Solutions designed for you', desc: 'We understand how your operation works and build solutions tailored to your processes, objectives and customers. We don\'t adapt your business to technology — we adapt technology so your business works better.' },
+      { title: 'Technology empowers human talent', desc: 'We combine AI with human teams to achieve agile, close and scalable solutions. Technology drives us, but people inspire us.' },
     ],
   },
   sectors: {
@@ -109,8 +105,8 @@ const en = {
   },
   clients: {
     label: '05 / 05 — Clients',
-    headingPre: 'Companies that',
-    headingEm: 'trust',
+    headingPre: 'Our',
+    headingEm: 'Clients',
     sub: 'in our experience',
   },
   cta: {
@@ -120,7 +116,7 @@ const en = {
     cta: 'Schedule free consultation',
   },
   footer: {
-    description: 'Next-gen BPO that transforms business processes with CX, Leads & Sales, Autonomous AI Agents and Digital Studio.',
+    description: 'We are a digital transformation company that integrates people, artificial intelligence and proprietary technology to solve how companies serve, operate and sell.',
     tagline: 'Beyond service — we build experiences.',
     links: {
       company: 'Company',

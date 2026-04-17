@@ -86,7 +86,7 @@ export default function Services({ onNavigate }: ServicesProps) {
                 {title}
               </h3>
               {subtitle && (
-                <p className="font-mono text-[0.52rem] sm:text-[0.58rem] tracking-[0.18em] uppercase text-teal mb-4 sm:mb-5">
+                <p className="font-mono text-xs sm:text-sm tracking-[0.15em] uppercase text-teal mb-4 sm:mb-5">
                   {subtitle}
                 </p>
               )}
@@ -98,7 +98,7 @@ export default function Services({ onNavigate }: ServicesProps) {
                 {tags.map(tag => (
                   <span
                     key={`mobile-${tag}`}
-                    className="shrink-0 font-mono text-[0.48rem] tracking-[0.12em] uppercase px-3 py-1.5 border border-white/10 text-gray-200"
+                    className="shrink-0 font-mono text-xs tracking-[0.1em] uppercase px-3 py-1.5 border border-white/10 text-gray-200"
                   >
                     {tag}
                   </span>
@@ -106,7 +106,7 @@ export default function Services({ onNavigate }: ServicesProps) {
               </div>
               <div className="hidden sm:flex flex-wrap gap-2 mb-10">
                 {tags.map(tag => (
-                  <span key={tag} className="font-mono text-[0.5rem] tracking-[0.15em] uppercase px-4 py-2 border border-white/10 text-gray-200 transition-all duration-300 hover:border-teal hover:text-teal hover:bg-teal/10">
+                  <span key={tag} className="font-mono text-xs tracking-[0.12em] uppercase px-4 py-2 border border-white/10 text-gray-200 transition-all duration-300 hover:border-teal hover:text-teal hover:bg-teal/10">
                     {tag}
                   </span>
                 ))}

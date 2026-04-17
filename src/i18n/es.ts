@@ -23,14 +23,11 @@ const es = {
   },
   about: {
     label: '02 / 05 — Nosotros',
-    headingPre: 'Más de 15 años transformando el',
+    headingPre: 'Más de 15 años transformando a las',
+    headingHighlight: 'empresas',
     headingPost: 'en Colombia',
-    descPre: 'Somos un',
-    descPost: 'de nueva generación que transforma los procesos de las empresas con CX, Leads & Ventas, Agentes Autónomos con IA y Digital Studio. Optimizamos la productividad, mejoramos la atención y generamos más ventas.',
-    evoPre: 'Evolucionamos el',
-    evoMid: 'tradicional hacia modelos basados en',
-    evoStrong: 'productividad, automatización inteligente y resultados medibles',
-    quote: 'Tecnología para crecer, experiencias que conectan.',
+    desc: 'Somos una empresa de transformación digital. Integramos un ecosistema de 4 soluciones para que las empresas mejoren su experiencia del cliente, sus ventas y sus flujos internos. Diseñamos soluciones basadas en la inteligencia artificial, la automatización de procesos y sobre todo el talento humano.',
+    quote: 'No somos un proveedor más, conócenos.',
     stats: [
       'Años de experiencia en el sector BPO',
       'Más productividad en agentes',
@@ -56,12 +53,11 @@ const es = {
     headingPre: '¿Por qué elegir a Contact Center',
     headingEm: 'Grupo?',
     items: [
-      { title: 'Más que un Contact Center', desc: 'No nos limitamos a atender contactos. Transformamos procesos, integramos tecnología y entregamos visibilidad gerencial para una mejor toma de decisiones.' },
-      { title: 'IA + Talento Humano', desc: 'Fusionamos agentes virtuales autónomos con talento humano capacitado para operaciones de máxima eficiencia, velocidad y empatía.' },
-      { title: 'Ecosistema Integrado', desc: 'CX, Ventas, Automatización y Tecnología en una sola operación coherente. Cada servicio potencia al siguiente para resultados compuestos.' },
-      { title: 'Omnicanalidad Real', desc: 'WhatsApp, email, SMS, chatbots y voz unificados en una sola plataforma para cero fricción y experiencia consistente en todos los canales.' },
-      { title: 'Visibilidad Ejecutiva', desc: 'Dashboards en tiempo real con Looker Studio y Power BI. Trazabilidad completa de la operación para decisiones basadas en datos.' },
-      { title: 'Orientados a Resultados', desc: 'No solo implementamos tecnología. Conectamos la operación con objetivos de negocio y medimos el impacto real en productividad, ventas y experiencia.' },
+      { title: 'Omnicanalidad como pilar del éxito', desc: 'Unificamos todos tus canales (WhatsApp, voz, chat, redes y CRM) en una sola operación donde cada conversación tiene contexto y continuidad. Así logramos que la experiencia del cliente sea fluida y que cada interacción avance hacia un resultado.' },
+      { title: 'Automatización que sí resuelve', desc: 'Deja que los humanos hagan lo importante, automatiza los procesos operativos. La automatización escala, optimiza tiempos y multiplica oportunidades reales para responder, calificar, agendar y ejecutar sin sacrificar tiempo.' },
+      { title: 'Decisiones basadas en datos', desc: 'Convertimos la operación en información accionable con dashboards en tiempo real (Looker Studio y Power BI). Cada dato cuenta una historia clara: qué está pasando, dónde mejorar y cómo crecer con control.' },
+      { title: 'Soluciones diseñadas para ti', desc: 'Entendemos cómo funciona tu operación y construimos soluciones a la medida de tus procesos, objetivos y clientes. No adaptamos tu negocio a la tecnología: adaptamos la tecnología para que tu negocio funcione mejor.' },
+      { title: 'La tecnología potencia el talento humano', desc: 'Combinamos IA con equipos humanos para lograr soluciones ágiles, cercanas y escalables. La tecnología nos impulsa, pero las personas nos inspiran.' },
     ],
   },
   sectors: {
@@ -109,8 +105,8 @@ const es = {
   },
   clients: {
     label: '05 / 05 — Clientes',
-    headingPre: 'Empresas que',
-    headingEm: 'confían',
+    headingPre: 'Nuestros',
+    headingEm: 'Clientes',
     sub: 'en nuestra experiencia',
   },
   cta: {
@@ -120,7 +116,7 @@ const es = {
     cta: 'Agendar asesoría gratuita',
   },
   footer: {
-    description: 'BPO de nueva generación que transforma los procesos de las empresas con CX, Leads & Ventas, Agentes Autónomos con IA y Digital Studio.',
+    description: 'Somos una empresa de transformación digital que integra personas, inteligencia artificial y tecnología propia para resolver cómo las empresas atienden, operan y venden.',
     tagline: 'Más allá del servicio — construimos experiencias.',
     links: {
       company: 'Empresa',

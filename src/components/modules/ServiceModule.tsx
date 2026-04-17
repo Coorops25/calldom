@@ -312,47 +312,6 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
           </div>
         )}
 
-        {/* Features & Benefits */}
-        <div className="grid lg:grid-cols-3 gap-12 border-t border-white/10 pt-20">
-          <div className="lg:col-span-1">
-            <h3 className="font-display text-3xl mb-8">{sm.features}</h3>
-            <ul className="space-y-6">
-              {(sd?.features ?? service.details.features).map((feature, i) => (
-                <motion.li
-                  key={i}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.08 }}
-                  className="flex items-start gap-4 group"
-                >
-                  <CheckCircle size={20} className="text-teal shrink-0 mt-1 group-hover:text-white transition-colors" />
-                  <span className="text-gray-300 font-light">{feature}</span>
-                </motion.li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="lg:col-span-2">
-            <h3 className="font-display text-3xl mb-8">{sm.benefits}</h3>
-            <div className="grid sm:grid-cols-2 gap-6">
-              {(sd?.benefits ?? service.details.benefits).map((benefit, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 + i * 0.1 }}
-                  className="p-8 border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] hover:-translate-y-1 transition-all duration-300 rounded-xl"
-                >
-                  <h4 className="font-mono text-sm uppercase tracking-widest text-teal mb-4">{benefit.title}</h4>
-                  <p className="text-gray-300 font-light leading-relaxed">{benefit.desc}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-
         {/* Sub-products (AVA Suite, etc.) */}
         {localizedSubProducts && localizedSubProducts.length > 0 && (
           <div className="mt-24 border-t border-white/10 pt-20">

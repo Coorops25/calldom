@@ -1,6 +1,5 @@
 import { motion, useInView } from 'motion/react';
 import { useRef, useState, useEffect, lazy, Suspense } from 'react';
-import ScrambledText from '../ui/ScrambledText';
 import SplitText from '../ui/SplitText';
 import { useLang } from '../../i18n';
 
@@ -74,34 +73,18 @@ export default function About() {
             from={{ opacity: 0, y: 20 }}
             to={{ opacity: 1, y: 0 }}
           >
-            {t.about.headingPre} <span className="text-teal font-medium italic">BPO</span> {t.about.headingPost}
+            {t.about.headingPre} <span className="text-teal font-medium italic">{t.about.headingHighlight}</span> {t.about.headingPost}
           </SplitText>
         </div>
 
-        <motion.div
+        <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
           className="text-lg font-light leading-relaxed text-gray-200"
         >
-          <ScrambledText className="inline" scrambleChars="!@#$%^&*()_+-=[]{}|;:,.<>?/~" radius={150} duration={0.8}>
-            {`${t.about.descPre} `}
-          </ScrambledText>
-          <em className="italic text-gradient font-medium">BPO</em>
-          <ScrambledText className="inline" scrambleChars="!@#$%^&*()_+-=[]{}|;:,.<>?/~" radius={150} duration={0.8}>
-            {` ${t.about.descPost}`}
-          </ScrambledText>
-        </motion.div>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-          className="text-lg font-light leading-relaxed text-gray-200"
-        >
-          {t.about.evoPre} <em className="italic text-gradient">BPO</em> {t.about.evoMid} <strong className="text-white font-medium">{t.about.evoStrong}</strong>.
+          {t.about.desc}
         </motion.p>
 
         <motion.div
@@ -130,7 +113,7 @@ export default function About() {
               <div className="font-display text-6xl leading-none text-gradient mb-2">
                 <Counter target={stat.val} suffix={stat.suffix} />
               </div>
-              <div className="font-mono text-[0.55rem] tracking-[0.15em] uppercase text-gray-300 mt-4 leading-relaxed">
+              <div className="font-mono text-xs tracking-[0.15em] uppercase text-gray-300 mt-4 leading-relaxed">
                 {stat.label}
               </div>
             </div>
