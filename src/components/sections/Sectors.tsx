@@ -115,22 +115,26 @@ export default function Sectors() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 40, scale: 0.97 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="fixed inset-0 z-[9900] flex items-center justify-center p-3 sm:p-6 md:p-10 pointer-events-none"
+              className="fixed inset-x-0 bottom-0 sm:inset-0 z-[9900] flex sm:items-center sm:justify-center sm:p-6 md:p-10 pointer-events-none"
             >
               <div
-                className="pointer-events-auto relative w-full max-w-2xl max-h-[85svh] sm:max-h-[92vh] overflow-y-auto
-                           bg-navy-deep/80 backdrop-blur-2xl
-                           border border-white/[0.12]
-                           rounded-2xl md:rounded-3xl
-                           shadow-[0_32px_80px_rgba(0,0,0,0.6)]
-                           ring-1 ring-white/[0.06]"
+                className="pointer-events-auto relative w-full sm:max-w-2xl
+                           max-h-[92vh] sm:max-h-[90vh] overflow-y-auto overscroll-contain
+                           bg-navy-deep border border-white/[0.12]
+                           rounded-t-3xl sm:rounded-3xl
+                           shadow-[0_-16px_60px_rgba(0,0,0,0.5)] sm:shadow-[0_32px_80px_rgba(0,0,0,0.6)]"
                 onClick={e => e.stopPropagation()}
               >
+                {/* Drag handle (mobile) */}
+                <div className="flex justify-center pt-3 pb-1 sm:hidden">
+                  <div className="w-10 h-1 rounded-full bg-white/20" />
+                </div>
+
                 {/* Sticky close button */}
-                <div className="sticky top-0 z-10 flex justify-end px-4 pt-4 md:px-6 md:pt-5 pointer-events-none">
+                <div className="sticky top-0 z-10 flex justify-end px-4 pt-3 sm:pt-4 md:px-6 md:pt-5 pointer-events-none">
                   <button
                     onClick={close}
-                    className="pointer-events-auto w-9 h-9 rounded-xl border border-white/10 bg-navy-deep/60 backdrop-blur-md flex items-center justify-center text-gray-400 hover:text-white hover:border-white/30 transition-all duration-200"
+                    className="pointer-events-auto w-9 h-9 rounded-xl border border-white/10 bg-navy-deep/80 backdrop-blur-md flex items-center justify-center text-gray-400 hover:text-white hover:border-white/30 transition-all duration-200"
                   >
                     <X size={16} />
                   </button>
@@ -138,59 +142,59 @@ export default function Sectors() {
 
                 <div className="px-5 pb-8 -mt-2 sm:px-8 md:px-10 md:pb-10">
                   {/* Header */}
-                  <div className="flex items-start gap-4 mb-7">
-                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl border border-teal/30 bg-teal/10 flex items-center justify-center shrink-0">
-                      {(() => { const Icon = ICONS[active.index]; return <Icon size={24} className="text-teal" />; })()}
+                  <div className="flex items-start gap-3 mb-5 sm:mb-7">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-xl border border-teal/30 bg-teal/10 flex items-center justify-center shrink-0">
+                      {(() => { const Icon = ICONS[active.index]; return <Icon size={20} className="text-teal" />; })()}
                     </div>
-                    <div className="min-w-0">
-                      <div className="font-mono text-label tracking-[0.25em] uppercase text-teal mb-2">
+                    <div className="min-w-0 flex-1">
+                      <div className="font-mono text-[0.6rem] tracking-[0.2em] uppercase text-teal mb-1.5">
                         {String(active.index + 1).padStart(2, '0')} — {s.label}
                       </div>
-                      <h3 className="font-display text-2xl sm:text-3xl md:text-4xl text-white leading-tight">
+                      <h3 className="font-display text-xl sm:text-3xl md:text-4xl text-white leading-tight break-words">
                         {active.name}
                       </h3>
                     </div>
                   </div>
 
-                  <p className="text-gray-300 font-light text-base leading-relaxed mb-8 border-l-2 border-teal/40 pl-4">
+                  <p className="text-gray-300 font-light text-sm sm:text-base leading-relaxed mb-6 sm:mb-8 border-l-2 border-teal/40 pl-4">
                     {active.detail}
                   </p>
 
                   {/* KPIs */}
-                  <div className="grid grid-cols-3 gap-2 md:gap-3 mb-8">
+                  <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-6 sm:mb-8">
                     {active.kpis.map((kpi, i) => (
-                      <div key={i} className="p-3 md:p-5 border border-white/10 rounded-xl bg-white/[0.04] text-center">
-                        <div className="font-mono text-lg md:text-2xl font-bold text-teal mb-1 truncate">{kpi.value}</div>
-                        <div className="font-mono text-xs tracking-[0.1em] uppercase text-gray-400 leading-tight">{kpi.label}</div>
+                      <div key={i} className="p-2.5 sm:p-4 md:p-5 border border-white/10 rounded-xl bg-white/[0.04] text-center overflow-hidden">
+                        <div className="font-mono text-base sm:text-xl md:text-2xl font-bold text-teal mb-0.5 sm:mb-1 truncate">{kpi.value}</div>
+                        <div className="font-mono text-[0.55rem] sm:text-xs tracking-[0.08em] sm:tracking-[0.1em] uppercase text-gray-400 leading-tight line-clamp-2">{kpi.label}</div>
                       </div>
                     ))}
                   </div>
 
                   {/* Challenges / Solutions */}
-                  <div className="grid sm:grid-cols-2 gap-6 md:gap-8">
+                  <div className="grid sm:grid-cols-2 gap-5 sm:gap-8">
                     <div>
-                      <div className="flex items-center gap-3 font-mono text-label tracking-[0.2em] uppercase text-gray-400 mb-4">
-                        <TrendingUp size={13} className="text-teal shrink-0" />
+                      <div className="flex items-center gap-2 font-mono text-[0.6rem] tracking-[0.2em] uppercase text-gray-400 mb-3 sm:mb-4">
+                        <TrendingUp size={12} className="text-teal shrink-0" />
                         {s.challenges}
                       </div>
-                      <ul className="space-y-3">
+                      <ul className="space-y-2 sm:space-y-3">
                         {active.challenges.map((c, i) => (
-                          <li key={i} className="flex items-start gap-3 text-base text-gray-300 font-light">
-                            <span className="mt-2 w-1.5 h-1.5 rounded-full bg-gray-500 shrink-0" />
+                          <li key={i} className="flex items-start gap-2.5 text-sm sm:text-base text-gray-300 font-light">
+                            <span className="mt-[0.45rem] w-1.5 h-1.5 rounded-full bg-gray-500 shrink-0" />
                             {c}
                           </li>
                         ))}
                       </ul>
                     </div>
                     <div>
-                      <div className="flex items-center gap-3 font-mono text-label tracking-[0.2em] uppercase text-gray-400 mb-4">
-                        <CheckCircle2 size={13} className="text-teal shrink-0" />
+                      <div className="flex items-center gap-2 font-mono text-[0.6rem] tracking-[0.2em] uppercase text-gray-400 mb-3 sm:mb-4">
+                        <CheckCircle2 size={12} className="text-teal shrink-0" />
                         {s.solutions}
                       </div>
-                      <ul className="space-y-3">
+                      <ul className="space-y-2 sm:space-y-3">
                         {active.solutions.map((sol, i) => (
-                          <li key={i} className="flex items-start gap-3 text-base text-gray-300 font-light">
-                            <span className="mt-2 w-1.5 h-1.5 rounded-full bg-teal shrink-0" />
+                          <li key={i} className="flex items-start gap-2.5 text-sm sm:text-base text-gray-300 font-light">
+                            <span className="mt-[0.45rem] w-1.5 h-1.5 rounded-full bg-teal shrink-0" />
                             {sol}
                           </li>
                         ))}
