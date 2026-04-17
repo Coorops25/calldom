@@ -1,12 +1,136 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, type FC } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowLeft, CheckCircle, ChevronDown, Network, Zap, BarChart3 } from 'lucide-react';
 import Footer from '../layout/Footer';
 import BackgroundEffects from '../ui/BackgroundEffects';
 import { HexagonBackground } from '../ui/hexagon-background';
 import ThemedLogo from '../ui/ThemedLogo';
+import TiltCard from '../ui/TiltCard';
 import { getServiceById } from '../../data';
 import { useLang } from '../../i18n';
+
+// ── Mock UI illustrations for "¿Por qué nos necesitas?" cards ──────────────
+const WHY_MOCKS: FC[] = [
+  // 0 — Chat inbox overflow
+  () => (
+    <div className="p-4 flex flex-col gap-1.5">
+      <div className="flex items-center justify-between mb-1">
+        <span className="font-mono text-[0.42rem] tracking-widest text-teal/60 uppercase">Bandeja activa</span>
+        <span className="font-mono text-[0.42rem] bg-red-500/20 text-red-400 px-1.5 py-0.5 rounded-full border border-red-400/20">
+          +127 sin atender
+        </span>
+      </div>
+      {(['Juan P.', 'María L.', 'Carlos H.', 'Ana R.']).map((name, i) => (
+        <div key={i} className="flex items-center gap-2 px-2 py-1.5 rounded-lg bg-white/[0.04] border border-white/[0.06]">
+          <div className="w-5 h-5 rounded-full bg-teal/20 border border-teal/30 flex items-center justify-center text-[0.4rem] font-bold text-teal shrink-0">
+            {name[0]}
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="flex justify-between items-center">
+              <span className="text-white text-[0.5rem] font-medium">{name}</span>
+              <span className="text-gray-500 text-[0.4rem]">{(i + 1) * 3}min</span>
+            </div>
+            <div className="text-gray-500 text-[0.4rem] truncate">Esperando respuesta…</div>
+          </div>
+          <div className="w-3.5 h-3.5 rounded-full bg-teal/80 text-navy-deep flex items-center justify-center text-[0.38rem] font-bold shrink-0">
+            {i + 2}
+          </div>
+        </div>
+      ))}
+    </div>
+  ),
+
+  // 1 — Coverage gaps (24/7)
+  () => (
+    <div className="p-4">
+      <div className="font-mono text-[0.42rem] tracking-widest text-teal/60 uppercase mb-3">Cobertura horaria</div>
+      <div className="grid grid-cols-7 gap-0.5 mb-3">
+        {['L','M','X','J','V','S','D'].map((d, col) => (
+          <div key={col} className="flex flex-col items-center gap-0.5">
+            <span className="font-mono text-[0.38rem] text-gray-400">{d}</span>
+            {[0,1,2,3].map(row => (
+              <div
+                key={row}
+                className={`h-4 w-full rounded-sm ${
+                  col < 5 && row < 2
+                    ? 'bg-teal/30 border border-teal/20'
+                    : 'bg-red-500/20 border border-red-500/20'
+                }`}
+              />
+            ))}
+          </div>
+        ))}
+      </div>
+      <div className="flex gap-4">
+        <div className="flex items-center gap-1">
+          <div className="w-2 h-2 rounded-sm bg-teal/30 border border-teal/20" />
+          <span className="text-gray-400 text-[0.4rem]">Cubierto</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <div className="w-2 h-2 rounded-sm bg-red-500/20 border border-red-500/20" />
+          <span className="text-gray-400 text-[0.4rem]">Sin cobertura</span>
+        </div>
+      </div>
+    </div>
+  ),
+
+  // 2 — Real-time tracking / unknown metrics
+  () => (
+    <div className="p-4">
+      <div className="font-mono text-[0.42rem] tracking-widest text-teal/60 uppercase mb-3">Panel de control</div>
+      <div className="grid grid-cols-2 gap-2 mb-3">
+        {[
+          { label: 'T. respuesta', value: '?? min' },
+          { label: 'Resueltos',    value: '?? %'   },
+          { label: 'Abiertos',     value: '???'    },
+          { label: 'CSAT',         value: '??/10'  },
+        ].map((m, i) => (
+          <div key={i} className="p-2 rounded-lg bg-white/[0.04] border border-white/[0.06]">
+            <div className="font-mono text-[0.38rem] text-gray-400 mb-1">{m.label}</div>
+            <div className="font-mono text-base font-bold text-red-400/70">{m.value}</div>
+          </div>
+        ))}
+      </div>
+      <div className="flex items-center gap-1.5 p-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20">
+        <div className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse shrink-0" />
+        <span className="text-[0.4rem] text-amber-400/80">Sin visibilidad de la operación</span>
+      </div>
+    </div>
+  ),
+
+  // 3 — Internal cost vs CCG
+  () => (
+    <div className="p-4">
+      <div className="font-mono text-[0.42rem] tracking-widest text-teal/60 uppercase mb-3">Costo de escalar</div>
+      <div className="flex items-end justify-center gap-8 mb-3">
+        <div className="flex flex-col items-center gap-1">
+          <div
+            className="w-14 rounded-t-md bg-gradient-to-t from-red-500/40 to-red-500/10 border border-red-500/30 flex items-start justify-center pt-1"
+            style={{ height: '80px' }}
+          >
+            <span className="font-mono text-[0.4rem] text-red-400">↑↑↑</span>
+          </div>
+          <span className="font-mono text-[0.4rem] text-gray-400">Interno</span>
+          <span className="font-mono text-[0.4rem] text-red-400 font-bold">$$$$$</span>
+        </div>
+        <div className="flex flex-col items-center gap-1">
+          <div
+            className="w-14 rounded-t-md bg-gradient-to-t from-teal/40 to-teal/10 border border-teal/30 flex items-start justify-center pt-1"
+            style={{ height: '45px' }}
+          >
+            <span className="font-mono text-[0.4rem] text-teal">↑</span>
+          </div>
+          <span className="font-mono text-[0.4rem] text-gray-400">CCGrupo</span>
+          <span className="font-mono text-[0.4rem] text-teal font-bold">$</span>
+        </div>
+      </div>
+      <div className="flex items-center gap-1.5 p-1.5 rounded-lg bg-teal/10 border border-teal/20">
+        <div className="w-1.5 h-1.5 rounded-full bg-teal animate-pulse shrink-0" />
+        <span className="text-[0.4rem] text-teal/80">Externalizar = más eficiencia, menos costo</span>
+      </div>
+    </div>
+  ),
+];
 
 interface ServiceModuleProps {
   serviceId: string;
@@ -361,17 +485,72 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
           </div>
         )}
 
-        {/* FAQ · ¿Por qué nos necesitas? · ¿Qué puedes lograr? — compact 3-col layout */}
+        {/* ¿Por qué nos necesitas? — TiltCards */}
+        {sd?.whyYouNeedUsItems && sd.whyYouNeedUsItems.length > 0 && (
+          <div className="mt-16 border-t border-white/10 pt-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mb-10"
+            >
+              <div className="flex items-center gap-4 font-mono text-xs tracking-[0.35em] uppercase text-teal mb-3">
+                <div className="w-8 h-px bg-teal" />
+                {sm.whyYouNeedUs}
+              </div>
+            </motion.div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {sd.whyYouNeedUsItems.map((item, i) => {
+                const MockUI = WHY_MOCKS[i % WHY_MOCKS.length];
+                return (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 28 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1, duration: 0.6 }}
+                    className="h-full"
+                  >
+                    <TiltCard className="h-full">
+                      <div className="h-full flex flex-col rounded-2xl overflow-hidden border border-white/10 bg-navy-deep/80 backdrop-blur-sm hover:border-teal/30 transition-colors duration-300">
+                        {/* Mock UI illustration */}
+                        <div className="bg-gradient-to-br from-teal/5 to-navy-deep border-b border-white/[0.07] min-h-[160px]">
+                          <MockUI />
+                        </div>
+                        {/* Text content */}
+                        <div className="p-5 flex flex-col gap-2 flex-1">
+                          <div className="font-mono text-[0.5rem] tracking-[0.3em] uppercase text-teal/50">
+                            {String(i + 1).padStart(2, '0')}
+                          </div>
+                          <h4 className="font-mono text-sm uppercase tracking-wide text-white leading-snug">
+                            {item.title}
+                          </h4>
+                          <p className="text-gray-400 font-light text-sm leading-relaxed">
+                            {item.desc}
+                          </p>
+                        </div>
+                        {/* Bottom teal line on hover */}
+                        <div className="h-px w-full bg-gradient-to-r from-teal/50 via-teal/20 to-transparent" />
+                      </div>
+                    </TiltCard>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* FAQ · ¿Qué puedes lograr? — 2-col layout */}
         {(() => {
           const faqItems   = sd?.faq ?? service.details.faq;
           const hasFaq     = faqItems && faqItems.length > 0;
-          const hasWhy     = sd?.whyYouNeedUsItems && sd.whyYouNeedUsItems.length > 0;
           const hasAchieve = sd?.whatYouCanAchieveItems && sd.whatYouCanAchieveItems.length > 0;
-          if (!hasFaq && !hasWhy && !hasAchieve) return null;
+          if (!hasFaq && !hasAchieve) return null;
 
           return (
             <div className="mt-16 border-t border-white/10 pt-16">
-              <div className="grid lg:grid-cols-3 gap-10">
+              <div className={`grid gap-10 ${hasFaq && hasAchieve ? 'lg:grid-cols-2' : ''}`}>
 
                 {/* FAQ */}
                 {hasFaq && (
@@ -434,41 +613,6 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
                   </div>
                 )}
 
-                {/* ¿Por qué nos necesitas? */}
-                {hasWhy && (
-                  <div>
-                    <motion.div
-                      initial={{ opacity: 0, y: 16 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      className="mb-6"
-                    >
-                      <div className="flex items-center gap-3 font-mono text-xs tracking-[0.35em] uppercase text-teal mb-2">
-                        <div className="w-6 h-px bg-teal" />
-                        {sm.whyYouNeedUs}
-                      </div>
-                    </motion.div>
-                    <div className="space-y-3">
-                      {sd!.whyYouNeedUsItems!.map((item, i) => (
-                        <motion.div
-                          key={i}
-                          initial={{ opacity: 0, x: -16 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: i * 0.07 }}
-                          className="flex gap-4 p-4 border border-white/10 bg-white/[0.02] hover:bg-white/[0.03] hover:border-teal/20 transition-all duration-300 rounded-xl"
-                        >
-                          <div className="font-mono text-[0.55rem] tracking-[0.2em] uppercase text-teal/50 shrink-0 pt-0.5 w-6">0{i + 1}</div>
-                          <div>
-                            <h4 className="font-body font-semibold text-white text-sm mb-1">{item.title}</h4>
-                            <p className="text-gray-300 font-light text-sm leading-relaxed">{item.desc}</p>
-                          </div>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
                 {/* ¿Qué puedes lograr con nosotros? */}
                 {hasAchieve && (
                   <div>
@@ -483,7 +627,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
                         {sm.whatYouCanAchieve}
                       </div>
                     </motion.div>
-                    <div className="space-y-3">
+                    <div className="grid sm:grid-cols-2 gap-2">
                       {sd!.whatYouCanAchieveItems!.map((item, i) => (
                         <motion.div
                           key={i}
