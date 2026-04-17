@@ -1,7 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { lazy, Suspense } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import CircularText from '../ui/CircularText';
 import { useLang } from '../../i18n';
+
+const Prism = lazy(() => import('../ui/Prism'));
 
 interface Props {
   onNavigate?: (view: string) => void;
@@ -9,10 +11,9 @@ interface Props {
 
 export default function Hero({ onNavigate }: Props) {
   const { t, lang } = useLang();
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const { scrollY } = useScroll();
-  const y1      = useTransform(scrollY, [0, 500], [0, 200]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+
   const heroCopy = lang === 'en'
     ? {
         line1: 'Technology drives us,',
@@ -29,77 +30,29 @@ export default function Hero({ onNavigate }: Props) {
         desc: 'Integramos tecnología, procesos y conocimiento para construir soluciones que hacen tu negocio más ágil, eficiente y rentable.',
       };
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let w = (canvas.width = window.innerWidth);
-    let h = (canvas.height = window.innerHeight);
-
-    class Particle {
-      x: number; y: number; vx: number; vy: number; r: number; o: number;
-      constructor() {
-        this.x  = Math.random() * w;
-        this.y  = Math.random() * h;
-        this.vx = (Math.random() - 0.5) * 0.3;
-        this.vy = (Math.random() - 0.5) * 0.3;
-        this.r  = Math.random() * 1.5 + 0.5;
-        this.o  = Math.random() * 0.3 + 0.05;
-      }
-      update() {
-        this.x += this.vx; this.y += this.vy;
-        if (this.x < 0 || this.x > w) this.vx *= -1;
-        if (this.y < 0 || this.y > h) this.vy *= -1;
-      }
-      draw() {
-        if (!ctx) return;
-        const light = document.documentElement.classList.contains('light');
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-        ctx.fillStyle = light
-          ? `rgba(0,100,180,${this.o * 2.8})`
-          : `rgba(0,180,216,${this.o})`;
-        ctx.fill();
-      }
-    }
-
-    const particles: Particle[] = Array.from({ length: 60 }, () => new Particle());
-
-    const animate = () => {
-      ctx.clearRect(0, 0, w, h);
-      particles.forEach(p => { p.update(); p.draw(); });
-      const light = document.documentElement.classList.contains('light');
-      particles.forEach((p1, i) => {
-        particles.slice(i + 1).forEach(p2 => {
-          const dx = p1.x - p2.x, dy = p1.y - p2.y;
-          const d = Math.sqrt(dx * dx + dy * dy);
-          if (d < 150) {
-            ctx.beginPath();
-            ctx.moveTo(p1.x, p1.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = light
-              ? `rgba(0,100,180,${0.15 * (1 - d / 150)})`
-              : `rgba(0,180,216,${0.05 * (1 - d / 150)})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        });
-      });
-      requestAnimationFrame(animate);
-    };
-    animate();
-
-    const handleResize = () => { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   return (
     <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden px-6 pt-32 pb-24">
-      <canvas ref={canvasRef} className="absolute inset-0 z-0" />
 
+      {/* Prism WebGL background */}
+      <div className="absolute inset-0 z-0">
+        <Suspense fallback={null}>
+          <Prism
+            animationType="rotate"
+            timeScale={0.5}
+            height={3.5}
+            baseWidth={5.5}
+            scale={4.2}
+            hueShift={0}
+            colorFrequency={1}
+            noise={0}
+            glow={0.6}
+            transparent
+          />
+        </Suspense>
+      </div>
+
+      {/* Dark overlay so text stays legible */}
+      <div className="absolute inset-0 z-[1] bg-navy-deep/60 pointer-events-none" />
 
       <div className="relative z-10 flex flex-col items-center text-center">
         <h1 className="font-display text-[clamp(3.2rem,8.5vw,8.5rem)] leading-[1.05] tracking-tight font-normal">
