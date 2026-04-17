@@ -361,134 +361,150 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
           </div>
         )}
 
-        {/* FAQ */}
-        {(sd?.faq ?? service.details.faq) && (sd?.faq ?? service.details.faq)!.length > 0 && (
-          <div className="mt-24 border-t border-white/10 pt-20">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="mb-12"
-            >
-              <div className="flex items-center gap-4 font-mono text-xs tracking-[0.35em] uppercase text-teal mb-4">
-                <div className="w-8 h-px bg-teal" />
-                {sm.faqLabel}
-              </div>
-              <h3 className="font-display text-4xl">FAQ</h3>
-            </motion.div>
+        {/* FAQ · ¿Por qué nos necesitas? · ¿Qué puedes lograr? — compact 3-col layout */}
+        {(() => {
+          const faqItems   = sd?.faq ?? service.details.faq;
+          const hasFaq     = faqItems && faqItems.length > 0;
+          const hasWhy     = sd?.whyYouNeedUsItems && sd.whyYouNeedUsItems.length > 0;
+          const hasAchieve = sd?.whatYouCanAchieveItems && sd.whatYouCanAchieveItems.length > 0;
+          if (!hasFaq && !hasWhy && !hasAchieve) return null;
 
-            <div className="max-w-3xl space-y-3">
-              {(sd?.faq ?? service.details.faq)!.map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.08 }}
-                  className="border border-white/10 rounded-xl overflow-hidden"
-                >
-                  <button
-                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    aria-expanded={openFaq === i}
-                    aria-controls={`faq-answer-${i}`}
-                    className="w-full flex items-center justify-between p-6 text-left hover:bg-white/[0.03] transition-colors"
-                  >
-                    <span className="font-body font-medium text-white pr-4">{item.question}</span>
-                    <ChevronDown
-                      size={18}
-                      className={`text-teal shrink-0 transition-transform duration-300 ${openFaq === i ? 'rotate-180' : ''}`}
-                    />
-                  </button>
-                  <AnimatePresence>
-                    {openFaq === i && (
-                      <motion.div
-                        id={`faq-answer-${i}`}
-                        role="region"
-                        aria-label={item.question}
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                        className="overflow-hidden"
-                      >
-                        <p className="px-6 pb-6 text-gray-300 font-light leading-relaxed border-t border-white/5 pt-4">
-                          {item.answer}
-                        </p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        )}
+          return (
+            <div className="mt-16 border-t border-white/10 pt-16">
+              <div className="grid lg:grid-cols-3 gap-10">
 
-        {/* ¿Por qué nos necesitas? */}
-        {sd?.whyYouNeedUsItems && sd.whyYouNeedUsItems.length > 0 && (
-          <div className="mt-24 border-t border-white/10 pt-20">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="mb-12"
-            >
-              <div className="flex items-center gap-4 font-mono text-xs tracking-[0.35em] uppercase text-teal mb-4">
-                <div className="w-8 h-px bg-teal" />
-                {sm.whyYouNeedUs}
-              </div>
-            </motion.div>
-            <div className="space-y-4 max-w-4xl">
-              {sd.whyYouNeedUsItems.map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.08 }}
-                  className="flex gap-6 p-6 border border-white/10 bg-white/[0.02] hover:bg-white/[0.03] hover:border-teal/20 transition-all duration-300 rounded-xl"
-                >
-                  <div className="font-mono text-[0.6rem] tracking-[0.2em] uppercase text-teal/50 shrink-0 pt-1 w-8">0{i + 1}</div>
+                {/* FAQ */}
+                {hasFaq && (
                   <div>
-                    <h4 className="font-body font-semibold text-white mb-2">{item.title}</h4>
-                    <p className="text-gray-300 font-light leading-relaxed">{item.desc}</p>
+                    <motion.div
+                      initial={{ opacity: 0, y: 16 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      className="mb-6"
+                    >
+                      <div className="flex items-center gap-3 font-mono text-xs tracking-[0.35em] uppercase text-teal mb-2">
+                        <div className="w-6 h-px bg-teal" />
+                        {sm.faqLabel}
+                      </div>
+                      <h3 className="font-display text-2xl">FAQ</h3>
+                    </motion.div>
+                    <div className="space-y-2">
+                      {faqItems!.map((item, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, y: 8 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: i * 0.06 }}
+                          className="border border-white/10 rounded-xl overflow-hidden"
+                        >
+                          <button
+                            onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                            aria-expanded={openFaq === i}
+                            aria-controls={`faq-answer-${i}`}
+                            className="w-full flex items-center justify-between p-4 text-left hover:bg-white/[0.03] transition-colors gap-3"
+                          >
+                            <span className="font-body font-medium text-white text-sm">{item.question}</span>
+                            <ChevronDown
+                              size={15}
+                              className={`text-teal shrink-0 transition-transform duration-300 ${openFaq === i ? 'rotate-180' : ''}`}
+                            />
+                          </button>
+                          <AnimatePresence>
+                            {openFaq === i && (
+                              <motion.div
+                                id={`faq-answer-${i}`}
+                                role="region"
+                                aria-label={item.question}
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: 'auto', opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                                className="overflow-hidden"
+                              >
+                                <p className="px-4 pb-4 text-gray-300 font-light text-sm leading-relaxed border-t border-white/5 pt-3">
+                                  {item.answer}
+                                </p>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </motion.div>
+                      ))}
+                    </div>
                   </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        )}
+                )}
 
-        {/* ¿Qué puedes lograr con nosotros? */}
-        {sd?.whatYouCanAchieveItems && sd.whatYouCanAchieveItems.length > 0 && (
-          <div className="mt-24 border-t border-white/10 pt-20">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="mb-10"
-            >
-              <div className="flex items-center gap-4 font-mono text-xs tracking-[0.35em] uppercase text-teal mb-4">
-                <div className="w-8 h-px bg-teal" />
-                {sm.whatYouCanAchieve}
+                {/* ¿Por qué nos necesitas? */}
+                {hasWhy && (
+                  <div>
+                    <motion.div
+                      initial={{ opacity: 0, y: 16 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      className="mb-6"
+                    >
+                      <div className="flex items-center gap-3 font-mono text-xs tracking-[0.35em] uppercase text-teal mb-2">
+                        <div className="w-6 h-px bg-teal" />
+                        {sm.whyYouNeedUs}
+                      </div>
+                    </motion.div>
+                    <div className="space-y-3">
+                      {sd!.whyYouNeedUsItems!.map((item, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, x: -16 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: i * 0.07 }}
+                          className="flex gap-4 p-4 border border-white/10 bg-white/[0.02] hover:bg-white/[0.03] hover:border-teal/20 transition-all duration-300 rounded-xl"
+                        >
+                          <div className="font-mono text-[0.55rem] tracking-[0.2em] uppercase text-teal/50 shrink-0 pt-0.5 w-6">0{i + 1}</div>
+                          <div>
+                            <h4 className="font-body font-semibold text-white text-sm mb-1">{item.title}</h4>
+                            <p className="text-gray-300 font-light text-sm leading-relaxed">{item.desc}</p>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* ¿Qué puedes lograr con nosotros? */}
+                {hasAchieve && (
+                  <div>
+                    <motion.div
+                      initial={{ opacity: 0, y: 16 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      className="mb-6"
+                    >
+                      <div className="flex items-center gap-3 font-mono text-xs tracking-[0.35em] uppercase text-teal mb-2">
+                        <div className="w-6 h-px bg-teal" />
+                        {sm.whatYouCanAchieve}
+                      </div>
+                    </motion.div>
+                    <div className="space-y-3">
+                      {sd!.whatYouCanAchieveItems!.map((item, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, y: 8 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: i * 0.05 }}
+                          className="flex items-start gap-3 group p-3 rounded-lg hover:bg-white/[0.02] transition-colors"
+                        >
+                          <CheckCircle size={15} className="text-teal shrink-0 mt-0.5 group-hover:text-white transition-colors" />
+                          <span className="text-gray-300 font-light text-sm">{item}</span>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
               </div>
-            </motion.div>
-            <div className="grid sm:grid-cols-2 gap-3 max-w-3xl">
-              {sd.whatYouCanAchieveItems.map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.06 }}
-                  className="flex items-start gap-3 group"
-                >
-                  <CheckCircle size={16} className="text-teal shrink-0 mt-1 group-hover:text-white transition-colors" />
-                  <span className="text-gray-300 font-light">{item}</span>
-                </motion.div>
-              ))}
             </div>
-          </div>
-        )}
+          );
+        })()}
 
         {/* Mid-page banner (services 02 and 04) */}
         {sd?.midBanner?.title && (
