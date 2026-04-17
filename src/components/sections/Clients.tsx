@@ -3,22 +3,18 @@ import { motion } from 'motion/react';
 import SplitText from '../ui/SplitText';
 import { useLang } from '../../i18n';
 
-const CLIENTS = [
-  { name: 'Cliente 01', logo: '/clients/webp/Cliente-01.webp' },
-  { name: 'Cliente 02', logo: '/clients/webp/Cliente-02.webp' },
-  { name: 'Cliente 03', logo: '/clients/webp/Cliente-03.webp' },
-  { name: 'Cliente 04', logo: '/clients/webp/Cliente-04.webp' },
-  { name: 'Cliente 05', logo: '/clients/webp/Cliente-05.webp' },
-  { name: 'Cliente 06', logo: '/clients/webp/Cliente-06.webp' },
-  { name: 'Cliente 07', logo: '/clients/webp/Cliente-07.webp' },
-  { name: 'Cliente 08', logo: '/clients/webp/Cliente-08.webp' },
-  { name: 'Cliente 09', logo: '/clients/webp/Cliente-09.webp' },
-  { name: 'Cliente 10', logo: '/clients/webp/Cliente-10.webp' },
-];
+// Auto-loads every .webp file added to src/assets/clients/webp/
+const logoModules = import.meta.glob('../../assets/clients/webp/*.webp', { eager: true }) as Record<string, { default: string }>;
+
+const CLIENTS = Object.entries(logoModules)
+  .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
+  .map(([path, mod]) => ({
+    name: path.split('/').pop()?.replace(/\.\w+$/, '') ?? 'Cliente',
+    logo: mod.default,
+  }));
 
 export default function Clients() {
   const { t, lang } = useLang();
-  // Per-slot error state stored by index
   const errRef = useRef<Record<number, boolean>>({});
   const [, forceRender] = useState(0);
   const track = [...CLIENTS, ...CLIENTS, ...CLIENTS];
@@ -71,12 +67,12 @@ export default function Clients() {
         <motion.div
           className="flex w-max"
           animate={{ x: '-50%' }}
-          transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+          transition={{ duration: 35, repeat: Infinity, ease: 'linear' }}
         >
           {track.map(({ name, logo }, i) => (
             <div
               key={`${name}-${i}`}
-              className="w-[240px] h-[120px] border border-white/10 flex items-center justify-center -mr-px relative group hover:border-teal/30 hover:z-10 transition-all duration-300 bg-navy-deep shrink-0"
+              className="w-[300px] h-[150px] border border-white/10 flex items-center justify-center -mr-px relative group hover:border-teal/30 hover:z-10 transition-all duration-300 bg-navy-deep shrink-0"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-teal/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               {!errRef.current[i] ? (
@@ -85,7 +81,7 @@ export default function Clients() {
                   alt={name}
                   loading="lazy"
                   onError={() => handleErr(i)}
-                  className="relative z-10 h-16 w-auto max-w-[180px] object-contain opacity-60 group-hover:opacity-100 transition-opacity duration-300"
+                  className="relative z-10 h-20 w-auto max-w-[240px] object-contain opacity-60 group-hover:opacity-100 transition-opacity duration-300"
                 />
               ) : (
                 <span className="relative z-10 font-body font-medium text-gray-200 group-hover:text-white transition-colors text-base px-4 text-center leading-tight">
