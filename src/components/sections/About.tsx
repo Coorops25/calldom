@@ -1,6 +1,7 @@
 import { motion, useInView } from 'motion/react';
 import { useRef, useState, useEffect, lazy, Suspense } from 'react';
 import SplitText from '../ui/SplitText';
+import ScrambledText from '../ui/ScrambledText';
 import { useLang } from '../../i18n';
 
 const LiquidEther = lazy(() => import('../ui/LiquidEther'));
@@ -77,15 +78,17 @@ export default function About() {
           </SplitText>
         </div>
 
-        <motion.p
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
           className="text-lg font-light leading-relaxed text-gray-200"
         >
-          {t.about.desc}
-        </motion.p>
+          <ScrambledText className="inline" scrambleChars="!@#$%^&*()_+-=[]{}|;:,.<>?/~" radius={150} duration={0.8}>
+            {t.about.desc}
+          </ScrambledText>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, x: -20 }}
