@@ -14,21 +14,32 @@ const BORDERS = [
   'border-teal/25',
 ];
 
-const CARD_W  = 380; // px — individual card width
-const CARD_H  = 270; // px
-const ANIM_S  = 32;  // seconds for one full pass (normal speed)
+const ANIM_S  = 32;  // seconds for one full pass (desktop speed)
+
+// Card dimensions live in CSS vars so every breakpoint override is automatic.
+// The @keyframes "to" value also reads the var, so the exit point is always correct.
 const ANIM_CSS = `
+  :root {
+    --ccg-cw: 240px;
+    --ccg-ch: 220px;
+  }
+  @media (min-width: 480px) {
+    :root { --ccg-cw: 290px; --ccg-ch: 240px; }
+  }
+  @media (min-width: 768px) {
+    :root { --ccg-cw: 330px; --ccg-ch: 255px; }
+  }
+  @media (min-width: 1024px) {
+    :root { --ccg-cw: 380px; --ccg-ch: 270px; }
+  }
+
   @keyframes ccg-slide-fwd {
     from { left: 100%; }
-    to   { left: ${-CARD_W}px; }
-  }
-  @keyframes ccg-slide-rev {
-    from { left: ${-CARD_W}px; }
-    to   { left: 100%; }
+    to   { left: calc(-1 * var(--ccg-cw)); }
   }
   .ccg-track-item {
-    width:    ${CARD_W}px;
-    height:   ${CARD_H}px;
+    width:    var(--ccg-cw);
+    height:   var(--ccg-ch);
     position: absolute;
     top: 0;
   }
@@ -100,9 +111,9 @@ export default function Reasons() {
       <div
         className="relative overflow-hidden"
         style={{
-          height: `${CARD_H + 24}px`,
-          maskImage: 'linear-gradient(to right, transparent, #000 7% 93%, transparent)',
-          WebkitMaskImage: 'linear-gradient(to right, transparent, #000 7% 93%, transparent)',
+          height: 'calc(var(--ccg-ch) + 24px)',
+          maskImage: 'linear-gradient(to right, transparent, #000 5% 95%, transparent)',
+          WebkitMaskImage: 'linear-gradient(to right, transparent, #000 5% 95%, transparent)',
         }}
       >
         {/* Scroll-linked subtle parallax layer */}
@@ -130,26 +141,27 @@ export default function Reasons() {
                   }}
                 >
                   <div
-                    className={`w-full h-full rounded-2xl border ${BORDERS[i % BORDERS.length]} bg-navy-deep/90 backdrop-blur-sm p-6 flex flex-col gap-4 hover:border-teal/60 hover:bg-navy-deep transition-all duration-300 group overflow-hidden`}
+                    className={`w-full h-full rounded-2xl border ${BORDERS[i % BORDERS.length]} bg-navy-deep/90 backdrop-blur-sm p-4 md:p-6 flex flex-col gap-3 md:gap-4 hover:border-teal/60 hover:bg-navy-deep transition-all duration-300 group overflow-hidden`}
                     style={{ boxSizing: 'border-box' }}
                   >
                     {/* Top row */}
                     <div className="flex items-center justify-between shrink-0">
-                      <div className="w-10 h-10 rounded-xl bg-teal/10 border border-teal/20 flex items-center justify-center group-hover:bg-teal/20 group-hover:border-teal/40 transition-all duration-300">
-                        <Icon size={20} className="text-teal" strokeWidth={1.5} />
+                      <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-teal/10 border border-teal/20 flex items-center justify-center group-hover:bg-teal/20 group-hover:border-teal/40 transition-all duration-300">
+                        <Icon size={16} className="text-teal md:hidden" strokeWidth={1.5} />
+                        <Icon size={20} className="text-teal hidden md:block" strokeWidth={1.5} />
                       </div>
-                      <span className="font-mono text-[0.6rem] tracking-[0.3em] text-teal/40">
+                      <span className="font-mono text-[0.55rem] tracking-[0.25em] text-teal/40">
                         {String(i + 1).padStart(2, '0')}
                       </span>
                     </div>
 
                     {/* Title */}
-                    <h4 className="font-mono text-sm uppercase tracking-wider text-white leading-snug group-hover:text-teal transition-colors duration-300 shrink-0 line-clamp-2">
+                    <h4 className="font-mono text-xs md:text-sm uppercase tracking-wider text-white leading-snug group-hover:text-teal transition-colors duration-300 shrink-0 line-clamp-2">
                       {reason.title}
                     </h4>
 
                     {/* Desc */}
-                    <p className="text-gray-400 font-light text-sm leading-relaxed flex-1 overflow-hidden line-clamp-4">
+                    <p className="text-gray-400 font-light text-xs md:text-sm leading-relaxed flex-1 overflow-hidden line-clamp-3 md:line-clamp-4">
                       {reason.desc}
                     </p>
 
