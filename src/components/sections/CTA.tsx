@@ -1,7 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
-import SplitText from '../ui/SplitText';
 import { useLang } from '../../i18n';
 
 const LiquidEther = lazy(() => import('../ui/LiquidEther'));
@@ -11,20 +10,12 @@ interface Props {
 }
 
 export default function CTA({ onNavigate }: Props) {
-  const { t, lang } = useLang();
-  const ctaCopy = lang === 'en'
-    ? t.cta
-    : {
-        ...t.cta,
-        label: '¿Listo para tomar decisiones que impulsen tu crecimiento?',
-        headingPre: 'Hablemos del',
-        headingEm: 'futuro',
-        headingPost: 'de tu empresa',
-        desc: 'Integramos tecnología, procesos y conocimiento para construir soluciones que hacen tu negocio más ágil, eficiente y rentable.',
-      };
+  const { t } = useLang();
+  const ctaCopy = t.cta;
 
   return (
-    <section className="py-56 px-6 relative overflow-hidden text-center">
+    <section className="relative overflow-hidden bg-navy-deep py-40 sm:py-48 lg:py-56 px-6 text-center">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,229,255,0.12),transparent_42%),linear-gradient(180deg,rgba(13,25,64,0.92),rgba(13,25,64,1))] pointer-events-none" />
       <div className="absolute inset-0 opacity-20 pointer-events-none">
         <Suspense fallback={null}>
           <LiquidEther
@@ -47,20 +38,15 @@ export default function CTA({ onNavigate }: Props) {
           {ctaCopy.label}
         </motion.div>
 
-        <div className="font-display text-[clamp(3rem,7vw,6.5rem)] leading-[1.1] mb-8">
-          <SplitText
-            key={`cta-heading-${lang}`}
-            className="inline-block"
-            delay={40}
-            duration={1}
-            splitType="words"
-            from={{ opacity: 0, y: 30 }}
-            to={{ opacity: 1, y: 0 }}
-            textAlign="center"
-          >
-            {ctaCopy.headingPre} <em className="italic font-bold text-teal-bright animate-pulse inline-block drop-shadow-[0_0_25px_rgba(0,229,255,0.8)]">{ctaCopy.headingEm}</em> {ctaCopy.headingPost}
-          </SplitText>
-        </div>
+        <motion.h2
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="mx-auto max-w-4xl font-display text-[clamp(2.7rem,6.8vw,6.4rem)] leading-[0.95] tracking-[-0.04em] text-white text-balance mb-8"
+        >
+          {ctaCopy.heading}
+        </motion.h2>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -80,7 +66,7 @@ export default function CTA({ onNavigate }: Props) {
           onClick={() => onNavigate?.('contact')}
           className="group relative inline-flex items-center gap-4 font-mono text-[0.7rem] tracking-[0.25em] uppercase px-14 py-5 bg-gradient-to-br from-teal-dark to-teal text-white overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_50px_rgba(0,180,216,0.4)]"
         >
-          <span className="relative z-10">{t.cta.button}</span>
+          <span className="relative z-10">{t.cta.cta}</span>
           <ArrowRight size={16} className="relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
           <div className="absolute inset-0 bg-gradient-to-br from-teal to-teal-bright opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </motion.button>
