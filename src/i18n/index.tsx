@@ -16,14 +16,21 @@ interface LangContextValue {
 
 const LangContext = createContext<LangContextValue | null>(null);
 
-function getLangFromPath(pathname: string): Lang | null {
+export function getLangFromPath(pathname: string): Lang | null {
   const [first] = pathname.split('/').filter(Boolean);
   if (first === 'en' || first === 'pt' || first === 'es') return first;
   return null;
 }
 
-export function LangProvider({ children }: { children: ReactNode }) {
+export function LangProvider({
+  children,
+  initialLang,
+}: {
+  children: ReactNode;
+  initialLang?: Lang;
+}) {
   const [lang, setLang] = useState<Lang>(() => {
+    if (initialLang) return initialLang;
     if (typeof window === 'undefined') return 'es';
     const pathLang = getLangFromPath(window.location.pathname);
     if (pathLang) return pathLang;

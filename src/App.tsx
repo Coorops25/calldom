@@ -5,7 +5,7 @@
 
 import { useState, useEffect, lazy, Suspense } from 'react';
 import { AnimatePresence, MotionConfig } from 'motion/react';
-import { LangProvider } from './i18n';
+import { LangProvider, getLangFromPath } from './i18n';
 import Preloader from './components/ui/Preloader';
 import PageLoader from './components/ui/PageLoader';
 import CustomCursor from './components/ui/CustomCursor';
@@ -92,10 +92,16 @@ function getPathForView(view: string): string {
   }
 }
 
-export default function App() {
+interface AppProps {
+  initialPath?: string;
+}
+
+export default function App({ initialPath }: AppProps) {
+  const pathForInit = initialPath ?? (typeof window !== 'undefined' ? window.location.pathname : '/');
+  const initialLang = getLangFromPath(pathForInit) ?? 'es';
   const [loading, setLoading] = useState(true);
   const [currentView, setCurrentView] = useState<'home' | string>(() => {
-    if (typeof window === 'undefined') return 'home';
+    if (typeof window === 'undefined') return getViewFromPath(pathForInit);
     return getViewFromPath(window.location.pathname);
   });
 
@@ -152,7 +158,7 @@ export default function App() {
 
   return (
     <MotionConfig reducedMotion="user">
-    <LangProvider>
+    <LangProvider initialLang={initialLang}>
       <ErrorBoundary>
         <AnimatePresence mode="wait">
           {loading && <Preloader onComplete={() => setLoading(false)} />}

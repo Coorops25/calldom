@@ -5,9 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
-    "build": "vite build && tsx scripts/prerender.ts",
+    "dev:ssr": "set VITE_SSR_DEV=true&& node server.js",
+    "build": "vite build && vite build --ssr src/entry-server.tsx --outDir dist/server && tsx scripts/prerender.ts",
     "prerender": "tsx scripts/prerender.ts",
     "preview": "vite preview",
+    "start:ssr": "node server.js",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit && eslint src --max-warnings 50",
     "test": "vitest run",

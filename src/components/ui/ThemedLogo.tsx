@@ -5,20 +5,13 @@ type ThemedLogoProps = Omit<ImgHTMLAttributes<HTMLImageElement>, 'src' | 'onErro
   fallback?: ReactNode;
 };
 
-function getIsLightTheme() {
-  if (typeof document === 'undefined') return false;
-  return document.documentElement.classList.contains('light');
-}
-
 export default function ThemedLogo({
   fallback = null,
   alt = 'CCGrupo Logo',
   ...imgProps
 }: ThemedLogoProps) {
-  const [isLightTheme, setIsLightTheme] = useState<boolean>(() => getIsLightTheme());
-  const [src, setSrc] = useState<string>(() =>
-    getIsLightTheme() ? BRAND_ASSETS.logoLight : BRAND_ASSETS.logoDark
-  );
+  const [isLightTheme, setIsLightTheme] = useState<boolean>(false);
+  const [src, setSrc] = useState<string>(BRAND_ASSETS.logoDark);
   const [failed, setFailed] = useState(false);
 
   useEffect(() => {
