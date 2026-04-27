@@ -69,7 +69,6 @@ const SplitText: React.FC<SplitTextProps> = ({
     const split = new GSAPSplitText(ref.current, { 
       type: splitType === 'chars' ? 'words,chars' : splitType,
       reduceWhiteSpace: false,
-      specialChars: (char) => char === ' ' ? '&nbsp;' : char
     });
     const elements =
       splitType === 'chars'
@@ -122,7 +121,7 @@ const SplitText: React.FC<SplitTextProps> = ({
     <div
       ref={ref}
       className={`split-text ${className}`}
-      style={{ textAlign, whiteSpace: 'normal', display: 'inline-block' }}
+      style={{ textAlign, whiteSpace: 'pre', display: 'inline' }}
     >
       {children || text}
     </div>
