@@ -68,7 +68,8 @@ const SplitText: React.FC<SplitTextProps> = ({
 
     const split = new GSAPSplitText(ref.current, { 
       type: splitType === 'chars' ? 'words,chars' : splitType,
-      reduceWhiteSpace: false 
+      reduceWhiteSpace: false,
+      specialChars: (char) => char === ' ' ? '&nbsp;' : char
     });
     const elements =
       splitType === 'chars'
