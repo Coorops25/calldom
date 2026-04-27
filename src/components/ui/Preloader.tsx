@@ -132,7 +132,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
 
         {/* Center logo */}
         <div
-          className="relative z-10 w-16 h-16 rounded-2xl flex items-center justify-center"
+          className="relative z-10 w-28 h-28 sm:w-32 sm:h-32 rounded-3xl flex items-center justify-center"
           style={{
             background: 'linear-gradient(135deg, rgba(0,180,216,0.15), rgba(0,229,255,0.08))',
             border: '1px solid rgba(0,180,216,0.3)',
@@ -144,7 +144,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
             <img
               src={logoSrc}
               alt="CCGrupo"
-              className="ccg-loader-logo-img h-10 w-auto object-contain"
+              className="ccg-loader-logo-img h-16 w-auto object-contain sm:h-20"
               onError={() => {
                 if (logoSrc !== BRAND_ASSETS.legacyLogo) {
                   setLogoSrc(BRAND_ASSETS.legacyLogo);

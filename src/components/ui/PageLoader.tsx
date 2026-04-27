@@ -18,7 +18,7 @@ export default function PageLoader() {
           <img
             src={logoSrc}
             alt="CCGrupo"
-            className="h-24 md:h-28 w-auto object-contain"
+            className="h-36 sm:h-40 md:h-48 w-auto object-contain"
             onError={() => {
               if (logoSrc !== BRAND_ASSETS.legacyLogo) {
                 setLogoSrc(BRAND_ASSETS.legacyLogo);
@@ -28,8 +28,8 @@ export default function PageLoader() {
             }}
           />
         ) : (
-          <div className="w-24 h-24 md:w-28 md:h-28 border-2 border-teal rounded-xl flex items-center justify-center">
-            <span className="font-mono text-lg font-bold text-teal tracking-wider">CCG</span>
+          <div className="w-36 h-36 sm:w-40 sm:h-40 md:w-48 md:h-48 border-2 border-teal rounded-2xl flex items-center justify-center">
+            <span className="font-mono text-2xl md:text-3xl font-bold text-teal tracking-wider">CCG</span>
           </div>
         )}
 
