@@ -83,7 +83,7 @@ export default function About() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
-          className="text-lg font-light leading-relaxed text-gray-200"
+          className="text-lg font-light leading-relaxed text-white"
         >
           <ScrambledText className="inline" scrambleChars="!@#$%^&*()_+-=[]{}|;:,.<>?/~" radius={150} duration={0.8}>
             {t.about.desc}
@@ -116,7 +116,7 @@ export default function About() {
               <div className="font-display text-6xl leading-none text-gradient mb-2">
                 <Counter target={stat.val} suffix={stat.suffix} />
               </div>
-              <div className="font-mono text-xs tracking-[0.15em] uppercase text-gray-300 mt-4 leading-relaxed">
+              <div className="font-mono text-xs tracking-[0.15em] uppercase text-white mt-4 leading-relaxed">
                 {stat.label}
               </div>
             </div>

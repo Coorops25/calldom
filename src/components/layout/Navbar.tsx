@@ -188,7 +188,7 @@ export default function Navbar({ onNavigate }: Props) {
           <button
             onClick={toggle}
             aria-label={labels.themeToggle}
-            className="text-gray-200 hover:text-teal transition-colors p-1"
+            className="text-white hover:text-teal transition-colors p-1"
           >
             {isDark ? <Sun size={16} /> : <Moon size={16} />}
           </button>
@@ -252,6 +252,21 @@ export default function Navbar({ onNavigate }: Props) {
               <button
                 onClick={() => { setMobileOpen(false); onNavigate?.('contact'); }}
                 className="font-mono text-xs tracking-[0.25em] uppercase px-10 py-4 bg-gradient-to-br from-teal-dark to-teal text-white hover:shadow-[0_8px_40px_rgba(0,180,216,0.35)] transition-all duration-300"
+              >
+                {t.nav.contact}
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
+</AnimatePresence>
+    </>
+  );
+}
+               className="font-mono text-xs tracking-[0.25em] uppercase px-10 py-4 bg-gradient-to-br from-teal-dark to-teal text-white hover:shadow-[0_8px_40px_rgba(0,180,216,0.35)] transition-all duration-300"
               >
                 {t.nav.contact}
               </button>

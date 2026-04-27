@@ -77,7 +77,7 @@ export default function Hero({ onNavigate }: Props) {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2.8, duration: 0.9 }}
-          className="max-w-xl mt-10 text-base font-light leading-relaxed text-gray-200"
+          className="max-w-xl mt-10 text-base font-light leading-relaxed text-white"
         >
           {heroCopy.desc}
         </motion.p>
@@ -98,7 +98,7 @@ export default function Hero({ onNavigate }: Props) {
 
           <button
             onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
-            className="font-mono text-label tracking-[0.2em] uppercase px-10 py-4 bg-transparent border border-white/10 text-gray-100 hover:border-teal hover:text-teal hover:bg-teal/10 transition-all duration-300"
+            className="font-mono text-label tracking-[0.2em] uppercase px-10 py-4 bg-transparent border border-white/10 text-white hover:border-teal hover:text-teal hover:bg-teal/10 transition-all duration-300"
           >
             {t.hero.cta2}
           </button>
@@ -112,7 +112,7 @@ export default function Hero({ onNavigate }: Props) {
         transition={{ delay: 3.5, duration: 0.8 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20"
       >
-        <span className="font-mono text-label tracking-[0.35em] uppercase text-gray-300">{t.hero.scroll}</span>
+        <span className="font-mono text-label tracking-[0.35em] uppercase text-white">{t.hero.scroll}</span>
         <div className="w-px h-12 bg-gradient-to-b from-teal to-transparent animate-pulse" />
       </motion.div>
 
