@@ -123,33 +123,33 @@ export default function ContactModule({ onBack }: Props) {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
         onClick={onBack}
-        className="fixed top-6 left-6 z-50 flex items-center gap-2 font-mono text-[0.6rem] tracking-[0.2em] uppercase text-gray-200 hover:text-teal transition-colors group"
+        className="fixed top-4 left-4 sm:top-6 sm:left-6 z-50 flex items-center gap-2 font-mono text-[0.6rem] tracking-[0.2em] uppercase text-gray-200 hover:text-teal transition-colors group bg-navy-deep/70 backdrop-blur-md px-3 py-2 rounded-full border border-white/10"
       >
         <ArrowLeft size={14} className="transition-transform duration-300 group-hover:-translate-x-1" />
         {t.back}
       </motion.button>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-14 pt-28 pb-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-14 pt-28 pb-24">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-16"
+          className="mb-12 sm:mb-16"
         >
           <div className="font-mono text-[0.6rem] tracking-[0.35em] uppercase text-teal mb-4">
             {ct.label}
           </div>
-          <h1 className="font-display text-[clamp(2.8rem,6vw,5.5rem)] leading-[1.05] mb-6">
+          <h1 className="font-display text-[clamp(2.4rem,6vw,5.5rem)] leading-[1.03] mb-6 max-w-4xl">
             {ct.headingPre}
             <br />
             <em className="italic text-teal">{ct.headingEm}</em>
           </h1>
-          <p className="font-body text-base text-gray-200 max-w-lg leading-relaxed">
+          <p className="font-body text-base text-gray-200 max-w-xl leading-relaxed">
             {ct.desc}
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-[1fr_1.6fr] gap-16 items-start">
+        <div className="grid lg:grid-cols-[1fr_1.45fr] gap-10 xl:gap-16 items-start">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -162,15 +162,15 @@ export default function ContactModule({ onBack }: Props) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 + i * 0.07 }}
-                className="flex items-start gap-4 p-5 border border-white/8 bg-white/[0.02] hover:border-teal/30 hover:bg-white/[0.04] transition-all duration-300 group"
+                className="flex items-start gap-4 p-4 sm:p-5 border border-white/8 bg-white/[0.02] hover:border-teal/30 hover:bg-white/[0.04] transition-all duration-300 group rounded-2xl min-w-0"
               >
                 <div className="w-10 h-10 flex items-center justify-center border border-teal/30 text-teal group-hover:bg-teal/10 transition-colors shrink-0">
                   <Icon size={16} />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <div className="font-mono text-[0.55rem] tracking-[0.2em] uppercase text-gray-300 mb-0.5">{label}</div>
-                  <div className="font-body text-sm text-white font-medium">{value}</div>
-                  <div className="font-mono text-[0.55rem] text-gray-300 mt-0.5">{sub}</div>
+                  <div className="font-body text-sm text-white font-medium break-words">{value}</div>
+                  <div className="font-mono text-[0.55rem] text-gray-300 mt-0.5 break-words">{sub}</div>
                 </div>
               </motion.div>
             ))}
@@ -195,7 +195,7 @@ export default function ContactModule({ onBack }: Props) {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="flex flex-col items-center justify-center text-center py-20 px-8 border border-teal/20 bg-teal/5"
+                  className="flex flex-col items-center justify-center text-center py-16 sm:py-20 px-5 sm:px-8 border border-teal/20 bg-teal/5 rounded-3xl"
                 >
                   <motion.div
                     initial={{ scale: 0 }}
@@ -205,8 +205,8 @@ export default function ContactModule({ onBack }: Props) {
                   >
                     <CheckCircle size={32} />
                   </motion.div>
-                  <h2 className="font-display text-3xl mb-4">{ct.success.title}</h2>
-                  <p className="font-body text-gray-200 text-sm leading-relaxed max-w-sm mb-10">
+                  <h2 className="font-display text-2xl sm:text-3xl mb-4">{ct.success.title}</h2>
+                  <p className="font-body text-gray-200 text-sm leading-relaxed max-w-sm mb-10 px-2">
                     {ct.success.pre} <strong className="text-white">{form.nombre.split(' ')[0]}</strong>{ct.success.post}
                   </p>
                   <button
@@ -224,9 +224,9 @@ export default function ContactModule({ onBack }: Props) {
                   exit={{ opacity: 0 }}
                   onSubmit={handleSubmit}
                   noValidate
-                  className="space-y-5"
+                  className="space-y-5 min-w-0"
                 >
-                  <div className="grid sm:grid-cols-2 gap-5">
+                  <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
                     <Field label={ct.fields.nombre} error={errors.nombre} htmlFor="f-nombre">
                       <input
                         id="f-nombre"
@@ -249,7 +249,7 @@ export default function ContactModule({ onBack }: Props) {
                     </Field>
                   </div>
 
-                  <div className="grid sm:grid-cols-2 gap-5">
+                  <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
                     <Field label={ct.fields.email} error={errors.email} htmlFor="f-email">
                       <input id="f-email" type="email" name="email" value={form.email} onChange={handleChange} placeholder="name@company.com" className={inputBase} />
                     </Field>
@@ -297,7 +297,7 @@ export default function ContactModule({ onBack }: Props) {
                     )}
                   </AnimatePresence>
 
-                  <p className="font-mono text-[0.52rem] tracking-[0.15em] text-gray-300 text-center">
+                  <p className="font-mono text-[0.52rem] tracking-[0.15em] text-gray-300 text-center max-w-md mx-auto">
                     {ct.fields.privacyNote}
                   </p>
                 </motion.form>

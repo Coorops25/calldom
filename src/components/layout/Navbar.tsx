@@ -68,7 +68,7 @@ export default function Navbar({ onNavigate }: Props) {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 px-6 md:px-14 py-5 flex items-center justify-between ${
+          className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 px-6 md:px-14 py-5 flex items-center justify-between ${
           isScrolled ? 'bg-navy-deep/80 backdrop-blur-xl border-b border-white/5' : 'bg-transparent'
         }`}
       >
@@ -201,17 +201,17 @@ export default function Navbar({ onNavigate }: Props) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[10001] bg-navy-deep/95 backdrop-blur-2xl flex flex-col items-center justify-center p-8"
+            className="fixed inset-0 z-[10001] bg-navy-deep/95 backdrop-blur-2xl flex flex-col items-center justify-start gap-10 overflow-y-auto overscroll-contain px-6 py-8 sm:px-8 sm:py-10"
           >
             <button
               aria-label={labels.closeMenu}
-              className="absolute top-6 right-6 text-white p-2"
+              className="absolute top-5 right-5 sm:top-6 sm:right-6 text-white p-2"
               onClick={() => setMobileOpen(false)}
             >
               <X size={32} />
             </button>
 
-            <ul className="flex flex-col items-center w-full max-w-md">
+            <ul className="flex flex-col items-center w-full max-w-md pt-16 sm:pt-20">
               {t.nav.links.map((link, index) => (
                 <motion.li
                   key={link.name}
@@ -222,7 +222,7 @@ export default function Navbar({ onNavigate }: Props) {
                 >
                   <button
                     onClick={() => scrollToSection(link.href)}
-                    className="w-full flex justify-between items-center py-6 font-display text-3xl text-white hover:text-teal hover:pl-4 transition-all duration-300"
+                    className="w-full flex justify-between items-center py-5 sm:py-6 font-display text-2xl sm:text-3xl text-white hover:text-teal hover:pl-4 transition-all duration-300"
                   >
                     <span>{link.name}</span>
                     <span className="font-mono text-xs tracking-widest text-teal">0{index + 1}</span>
@@ -235,7 +235,7 @@ export default function Navbar({ onNavigate }: Props) {
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.4 }}
-              className="mt-12"
+              className="mt-4 sm:mt-8 pb-8"
             >
               <button
                 onClick={() => { setMobileOpen(false); onNavigate?.('contact'); }}

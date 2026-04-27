@@ -19,11 +19,11 @@ export default function Footer({ onNavigate }: Props) {
   );
 
   return (
-    <footer className="bg-navy pt-20 pb-12 px-6 md:px-14 lg:px-28 border-t border-white/10">
-      <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
-        <div className="lg:col-span-2">
+    <footer className="bg-navy-deep pt-20 pb-12 px-5 sm:px-6 md:px-14 lg:px-28 border-t border-white/10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 sm:gap-12 lg:gap-14 mb-16">
+        <div className="lg:col-span-2 min-w-0">
           <div
-            className="flex items-center gap-3 mb-6 min-h-[2.5rem]"
+            className="flex items-center gap-3 mb-6 min-h-[2.5rem] min-w-0"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
@@ -38,7 +38,7 @@ export default function Footer({ onNavigate }: Props) {
                 >
                   <ThemedLogo
                     alt="CCGrupo Logo"
-                    className="h-20 w-auto object-contain"
+                    className="h-16 sm:h-20 w-auto max-w-[11rem] sm:max-w-none object-contain"
                     fallback={logoFallback}
                   />
                 </motion.div>
@@ -61,10 +61,10 @@ export default function Footer({ onNavigate }: Props) {
               )}
             </AnimatePresence>
           </div>
-          <p className="text-sm font-light leading-relaxed text-gray-200 max-w-xs mb-5">
+          <p className="text-sm font-light leading-relaxed text-gray-200 max-w-xs mb-5 min-w-0">
             {t.footer.description}
           </p>
-          <div className="flex items-center gap-3 max-w-xs">
+          <div className="flex items-center gap-3 max-w-xs min-w-0">
             <div className="w-5 h-px bg-teal/50 shrink-0" />
             <span className="font-mono text-xs tracking-[0.15em] uppercase text-teal/70 leading-relaxed">
               {t.footer.tagline}
@@ -116,8 +116,8 @@ export default function Footer({ onNavigate }: Props) {
         </div>
       </div>
 
-      <div className="pt-10 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
-        <div className="flex flex-col sm:flex-row items-center gap-4">
+      <div className="pt-10 border-t border-white/10 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 min-w-0">
           <span className="font-mono text-xs tracking-[0.12em] uppercase text-gray-300">
             {t.footer.copyright}
           </span>
@@ -129,7 +129,7 @@ export default function Footer({ onNavigate }: Props) {
           </button>
         </div>
 
-        <div className="flex gap-4">
+        <div className="flex flex-wrap gap-3 sm:gap-4">
           {[
             { Icon: Linkedin,  href: 'https://www.linkedin.com/company/contact-center-grupo-sas', label: 'LinkedIn' },
             { Icon: Instagram, href: 'https://www.instagram.com/contact_center_grupo/',           label: 'Instagram' },
@@ -142,7 +142,7 @@ export default function Footer({ onNavigate }: Props) {
               target="_blank"
               rel="noreferrer"
               aria-label={label}
-              className="w-9 h-9 border border-white/10 rounded-lg flex items-center justify-center text-gray-200 hover:border-teal hover:text-teal hover:bg-teal/10 transition-all duration-300"
+              className="w-10 h-10 border border-white/10 rounded-lg flex items-center justify-center text-gray-200 hover:border-teal hover:text-teal hover:bg-teal/10 transition-all duration-300"
             >
               <Icon size={14} />
             </a>
@@ -152,15 +152,15 @@ export default function Footer({ onNavigate }: Props) {
             target="_blank"
             rel="noreferrer"
             aria-label="TikTok"
-            className="w-9 h-9 border border-white/10 rounded-lg flex items-center justify-center text-gray-200 hover:border-teal hover:text-teal hover:bg-teal/10 transition-all duration-300"
+            className="w-10 h-10 border border-white/10 rounded-lg flex items-center justify-center text-gray-200 hover:border-teal hover:text-teal hover:bg-teal/10 transition-all duration-300"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/>
-            </svg>
-          </a>
+          </svg>
+        </a>
         </div>
 
-        <span className="font-mono text-xs tracking-[0.12em] uppercase text-gray-300">
+        <span className="font-mono text-xs tracking-[0.12em] uppercase text-gray-300 max-w-full text-left lg:text-right">
           {t.footer.location}
         </span>
       </div>

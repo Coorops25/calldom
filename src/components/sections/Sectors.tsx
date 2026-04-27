@@ -49,7 +49,7 @@ export default function Sectors() {
 
   return (
     <>
-      <section id="sectors" ref={ref} className="relative py-32 px-6 md:px-14 lg:px-28 overflow-hidden bg-navy-deep">
+      <section id="sectors" ref={ref} className="relative py-32 px-6 md:px-14 lg:px-28 overflow-hidden bg-transparent">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-teal/5 rounded-full blur-[100px]" />
         </div>
@@ -134,26 +134,24 @@ export default function Sectors() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 40, scale: 0.97 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="fixed inset-x-3 bottom-3 sm:inset-0 z-[9900] flex sm:items-center sm:justify-center sm:p-6 md:p-10 pointer-events-none"
+              className="fixed inset-0 z-[9900] flex items-end sm:items-center justify-center p-3 sm:p-6 md:p-10 pointer-events-none"
             >
               <div
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby={`sector-modal-title-${active.index}`}
-                className="pointer-events-auto relative w-full sm:w-full sm:max-w-[min(92vw,56rem)]
-                           max-h-[calc(100dvh-1.5rem)] sm:max-h-[90vh] overflow-hidden overscroll-contain
+                className="pointer-events-auto relative w-[min(100%,56rem)] sm:w-[min(92vw,56rem)]
+                           max-h-[calc(100dvh-1rem)] sm:max-h-[min(90vh,52rem)] overflow-y-auto overscroll-contain
                            rounded-[1.75rem] sm:rounded-[2.25rem]
-                           border border-white/12 bg-[#0D1940]/90 backdrop-blur-2xl
+                           border border-white/12 bg-[#0D1940]/95 backdrop-blur-2xl
                            shadow-[0_24px_100px_rgba(0,0,0,0.65)] sm:shadow-[0_36px_120px_rgba(0,0,0,0.72)]"
                 onClick={e => e.stopPropagation()}
               >
-                <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.12),transparent_38%),linear-gradient(180deg,rgba(255,255,255,0.06),transparent_28%)]" />
-
                 <div className="relative z-10 flex justify-center pt-3 pb-1 sm:hidden">
                   <div className="w-10 h-1 rounded-full bg-white/20" />
                 </div>
 
-                <div className="relative z-10 px-5 py-7 sm:p-10 md:p-14">
+                <div className="relative z-10 px-4 sm:px-10 md:px-14 py-6 sm:py-10 pb-8 sm:pb-10">
                   <button
                     type="button"
                     onClick={close}
@@ -162,7 +160,7 @@ export default function Sectors() {
                     <X size={20} />
                   </button>
 
-                  <div className="flex items-start gap-4 mb-8 sm:mb-10 pr-12 sm:pr-10">
+                  <div className="flex items-start gap-4 mb-8 sm:mb-10 pr-12 sm:pr-10 min-w-0">
                     <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl border border-teal/30 bg-teal/10 backdrop-blur-sm flex items-center justify-center shrink-0">
                       {(() => {
                         const Icon = ICONS[active.index];
@@ -182,7 +180,7 @@ export default function Sectors() {
                     </div>
                   </div>
 
-                  <p className="max-w-3xl text-white/92 font-light text-base sm:text-lg leading-relaxed mb-10 sm:mb-12 border-l-2 border-teal/40 pl-5 sm:pl-6">
+                  <p className="max-w-3xl text-white/92 font-light text-base sm:text-lg leading-relaxed mb-10 sm:mb-12 border-l-2 border-teal/40 pl-5 sm:pl-6 break-words">
                     {active.detail}
                   </p>
 

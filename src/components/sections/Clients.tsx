@@ -63,16 +63,16 @@ export default function Clients() {
         </motion.div>
       </div>
 
-      <div className="flex w-full">
+      <div className="flex w-full overflow-hidden">
         <motion.div
-          className="flex w-max"
+          className="flex w-max min-w-full"
           animate={{ x: '-50%' }}
           transition={{ duration: 35, repeat: Infinity, ease: 'linear' }}
         >
           {track.map(({ name, logo }, i) => (
             <div
               key={`${name}-${i}`}
-              className="w-[220px] sm:w-[280px] md:w-[320px] h-[130px] sm:h-[180px] border border-white/10 flex items-center justify-center -mr-px relative group hover:border-teal/30 hover:z-10 transition-all duration-300 bg-navy-deep shrink-0"
+              className="w-[clamp(20rem,30vw,28rem)] h-[clamp(12rem,16vw,16rem)] border border-white/10 flex items-center justify-center -mr-px relative group hover:border-teal/30 hover:z-10 transition-all duration-300 bg-navy-deep shrink-0 px-9"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-teal/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               {!errRef.current[i] ? (
@@ -81,10 +81,10 @@ export default function Clients() {
                   alt={name}
                   loading="lazy"
                   onError={() => handleErr(i)}
-                  className="relative z-10 h-14 sm:h-24 w-auto max-w-[180px] sm:max-w-[260px] object-contain opacity-60 group-hover:opacity-100 transition-opacity duration-300"
+                  className="relative z-10 h-[clamp(7rem,9vw,10rem)] w-auto max-w-[clamp(17rem,24vw,26rem)] object-contain opacity-70 group-hover:opacity-100 transition-all duration-300 sm:scale-[1.12] md:scale-[1.18]"
                 />
               ) : (
-                <span className="relative z-10 font-body font-medium text-white group-hover:text-white transition-colors text-base px-4 text-center leading-tight">
+                <span className="relative z-10 font-body font-medium text-white group-hover:text-white transition-colors text-lg px-4 text-center leading-tight max-w-[80%]">
                   {name}
                 </span>
               )}

@@ -15,7 +15,7 @@ export default function Services({ onNavigate }: ServicesProps) {
   const tapHint = lang === 'en' ? 'Tap card to view details' : 'Toca la tarjeta para ver detalles';
 
   return (
-    <section id="services" className="pt-24 relative">
+    <section id="services" className="pt-24 relative bg-navy-deep overflow-hidden">
       <div className="px-6 md:px-14 lg:px-28 pb-20 relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -133,7 +133,7 @@ export default function Services({ onNavigate }: ServicesProps) {
               key="icon"
               className={`order-2 ${isReversed ? 'lg:order-1' : 'lg:order-2'} relative min-h-[30vh] sm:min-h-[40vh] lg:min-h-auto overflow-hidden flex items-center justify-center`}
             >
-              <div className={`service-panel-bg absolute inset-0 bg-gradient-to-br ${svc.gradient} transition-transform duration-1000 ease-out group-hover:scale-105`} />
+              <div className="service-panel-bg absolute inset-0 bg-[#0D1940] transition-transform duration-1000 ease-out group-hover:scale-105" />
               <HexagonBackground
                 className="absolute inset-0 bg-transparent"
                 hexagonSize={40}
@@ -165,7 +165,7 @@ export default function Services({ onNavigate }: ServicesProps) {
               onClick={() => {
                 if (window.matchMedia('(max-width: 1023px)').matches) onNavigate?.(svc.id);
               }}
-              className="group grid lg:grid-cols-2 min-h-[auto] sm:min-h-[60vh] lg:min-h-[75vh] border-b border-white/10 overflow-hidden relative transition-colors duration-500 hover:bg-white/[0.02] cursor-pointer lg:cursor-default"
+              className="group grid lg:grid-cols-2 min-h-[auto] sm:min-h-[60vh] lg:min-h-[75vh] border-b border-white/10 overflow-hidden relative transition-colors duration-500 bg-[#0D1940] hover:bg-[#0D1940] cursor-pointer lg:cursor-default"
             >
               {[textCol, iconCol]}
             </motion.div>

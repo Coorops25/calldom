@@ -4,8 +4,15 @@ import { motion } from 'motion/react';
 export default function CustomCursor() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [canRender, setCanRender] = useState(false);
 
   useEffect(() => {
+    const media = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const updateCapability = () => setCanRender(media.matches);
+
+    updateCapability();
+    media.addEventListener('change', updateCapability);
+
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
@@ -29,10 +36,13 @@ export default function CustomCursor() {
     window.addEventListener('mouseover', handleMouseOver);
 
     return () => {
+      media.removeEventListener('change', updateCapability);
       window.removeEventListener('mousemove', updateMousePosition);
       window.removeEventListener('mouseover', handleMouseOver);
     };
   }, []);
+
+  if (!canRender) return null;
 
   return (
     <>

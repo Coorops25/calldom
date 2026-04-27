@@ -27,12 +27,12 @@ export default function PrivacyModule({ onBack, onNavigate }: Props) {
   const pt = t.privacy;
 
   return (
-    <div className="min-h-screen bg-navy text-white relative">
+    <div className="min-h-screen bg-navy-deep text-white relative overflow-x-hidden">
       <BackgroundEffects />
 
       {/* Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 px-6 md:px-14 py-6 flex justify-between items-center bg-navy-deep/85 backdrop-blur-xl border-b border-white/5">
-        <button type="button" onClick={onBack} className="flex items-center gap-3 cursor-pointer bg-transparent border-0 p-0" aria-label={lang === 'en' ? 'Go home' : 'Ir al inicio'}>
+      <nav className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 md:px-14 py-4 sm:py-6 flex justify-between items-center gap-4 bg-navy-deep/85 backdrop-blur-xl border-b border-white/5">
+        <button type="button" onClick={onBack} className="flex items-center gap-3 min-w-0 cursor-pointer bg-transparent border-0 p-0" aria-label={lang === 'en' ? 'Go home' : 'Ir al inicio'}>
           <ThemedLogo
             alt="CCGrupo Logo"
             className="h-12 w-auto object-contain"
@@ -43,25 +43,25 @@ export default function PrivacyModule({ onBack, onNavigate }: Props) {
             )}
           />
         </button>
-        <button onClick={onBack} className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-teal hover:text-white transition-colors">
+        <button onClick={onBack} className="flex items-center gap-2 font-mono text-[0.65rem] sm:text-xs uppercase tracking-widest text-teal hover:text-white transition-colors shrink-0">
           <ArrowLeft size={16} />
           {t.back}
         </button>
       </nav>
 
-      <main className="pt-32 pb-20 px-6 md:px-14 lg:px-28 relative z-10">
+      <main className="pt-28 sm:pt-32 pb-20 px-4 sm:px-6 md:px-14 lg:px-28 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-16"
+          className="mb-12 sm:mb-16"
         >
           <span className="font-mono text-[0.6rem] tracking-[0.3em] uppercase text-teal mb-4 block">{pt.label}</span>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">{pt.heading}</h1>
-          <p className="text-gray-200 text-lg font-light max-w-2xl leading-relaxed">{pt.desc}</p>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 max-w-4xl">{pt.heading}</h1>
+          <p className="text-base sm:text-lg font-light max-w-2xl leading-relaxed text-gray-200">{pt.desc}</p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {pt.policies.map((policy, index) => (
             <motion.div
               key={index}
@@ -69,13 +69,13 @@ export default function PrivacyModule({ onBack, onNavigate }: Props) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
               onClick={() => setActiveIndex(index)}
-              className="group relative p-8 border border-white/10 bg-navy-mid/40 hover:border-teal/40 hover:bg-navy-mid/70 transition-all duration-300 cursor-pointer"
+              className="group relative p-6 sm:p-8 border border-white/10 bg-navy-mid/40 hover:border-teal/40 hover:bg-navy-mid/70 transition-all duration-300 cursor-pointer rounded-2xl min-w-0"
             >
-              <div className="w-12 h-12 border border-teal/30 flex items-center justify-center mb-6 group-hover:border-teal group-hover:bg-teal/10 transition-all duration-300">
+              <div className="w-12 h-12 border border-teal/30 flex items-center justify-center mb-6 group-hover:border-teal group-hover:bg-teal/10 transition-all duration-300 shrink-0">
                 <FileText size={20} className="text-teal" />
               </div>
-              <h2 className="text-lg font-medium text-white mb-3 leading-snug">{policy.title}</h2>
-              <p className="text-sm font-light text-gray-200 leading-relaxed mb-6">{policy.desc}</p>
+              <h2 className="text-base sm:text-lg font-medium text-white mb-3 leading-snug break-words">{policy.title}</h2>
+              <p className="text-sm font-light text-gray-200 leading-relaxed mb-6 break-words">{policy.desc}</p>
               <span className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-teal group-hover:text-teal-bright transition-colors">
                 {pt.viewDoc}
               </span>
@@ -94,14 +94,14 @@ export default function PrivacyModule({ onBack, onNavigate }: Props) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[10002] bg-navy-deep/95 backdrop-blur-2xl flex flex-col"
+            className="fixed inset-0 z-[10002] bg-navy-deep/95 backdrop-blur-2xl flex flex-col overflow-hidden"
           >
-            <div className="flex items-center justify-between px-6 md:px-14 py-5 border-b border-white/10 shrink-0">
-              <div className="min-w-0 mr-4">
+            <div className="flex items-start sm:items-center justify-between gap-4 px-4 sm:px-6 md:px-14 py-4 sm:py-5 border-b border-white/10 shrink-0 flex-wrap">
+              <div className="min-w-0 max-w-full">
                 <span className="font-mono text-[0.55rem] tracking-[0.25em] uppercase text-teal block mb-1">{pt.modalLabel}</span>
-                <h2 className="text-base md:text-xl font-medium text-white leading-snug">{pt.policies[activeIndex].title}</h2>
+                <h2 className="text-sm sm:text-base md:text-xl font-medium text-white leading-snug break-words">{pt.policies[activeIndex].title}</h2>
               </div>
-              <div className="flex items-center gap-3 shrink-0">
+              <div className="flex items-center gap-3 shrink-0 ml-auto">
                 <a
                   href={pdfUrls[activeIndex]}
                   target="_blank"
@@ -119,7 +119,7 @@ export default function PrivacyModule({ onBack, onNavigate }: Props) {
                 </button>
               </div>
             </div>
-            <div className="flex-1 relative bg-gray-900/30">
+            <div className="flex-1 relative bg-gray-900/30 min-h-0">
               <object
                 data={`${pdfUrls[activeIndex]}#toolbar=1&navpanes=0`}
                 type="application/pdf"

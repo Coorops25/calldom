@@ -14,7 +14,7 @@ export default function CTA({ onNavigate }: Props) {
   const ctaCopy = t.cta;
 
   return (
-    <section className="relative overflow-hidden bg-navy-deep py-40 sm:py-48 lg:py-56 px-6 text-center">
+    <section className="relative overflow-hidden bg-navy-deep py-24 sm:py-40 lg:py-56 px-6 text-center">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,229,255,0.12),transparent_42%),linear-gradient(180deg,rgba(13,25,64,0.92),rgba(13,25,64,1))] pointer-events-none" />
       <div className="absolute inset-0 opacity-20 pointer-events-none">
         <Suspense fallback={null}>
@@ -28,7 +28,7 @@ export default function CTA({ onNavigate }: Props) {
         </Suspense>
       </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto">
+      <div className="relative z-10 mx-auto max-w-4xl flex flex-col items-center text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -64,7 +64,7 @@ export default function CTA({ onNavigate }: Props) {
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
           onClick={() => onNavigate?.('contact')}
-          className="group relative inline-flex items-center gap-4 font-mono text-[0.7rem] tracking-[0.25em] uppercase px-14 py-5 bg-gradient-to-br from-teal-dark to-teal text-white overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_50px_rgba(0,180,216,0.4)]"
+          className="group relative inline-flex w-full max-w-[22rem] sm:w-auto sm:max-w-none mx-auto items-center justify-center gap-4 font-mono text-[0.7rem] tracking-[0.25em] uppercase px-8 sm:px-14 py-5 bg-gradient-to-br from-teal-dark to-teal text-white overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_50px_rgba(0,180,216,0.4)]"
         >
           <span className="relative z-10">{t.cta.cta}</span>
           <ArrowRight size={16} className="relative z-10 transition-transform duration-300 group-hover:translate-x-1" />

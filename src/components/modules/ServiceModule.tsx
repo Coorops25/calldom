@@ -307,11 +307,11 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
   }, [serviceId, title, homeCrumb, servicesCrumb]);
 
   return (
-    <div className="min-h-screen bg-navy text-white relative">
+    <div className="min-h-screen bg-navy-deep text-white relative overflow-x-hidden">
       <BackgroundEffects />
 
       {/* Custom Navbar for Module */}
-      <nav className="fixed top-0 left-0 right-0 z-50 px-6 md:px-14 py-6 flex justify-between items-center bg-navy-deep/85 backdrop-blur-xl border-b border-white/5">
+      <nav className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 md:px-14 py-4 sm:py-6 flex justify-between items-center bg-navy-deep/85 backdrop-blur-xl border-b border-white/5">
         <button
           type="button"
           aria-label={backHomeLabel}
@@ -337,9 +337,9 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
         </button>
       </nav>
 
-      <main className="pt-32 pb-20 px-6 md:px-14 lg:px-28 relative z-10">
+      <main className="pt-28 sm:pt-32 pb-20 px-4 sm:px-6 md:px-14 lg:px-28 relative z-10">
         {/* Hero Section */}
-        <div className="grid lg:grid-cols-2 gap-16 items-center mb-24">
+        <div className="grid lg:grid-cols-2 gap-10 xl:gap-16 items-start mb-20 lg:mb-24">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -357,10 +357,10 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
                 {subtitle}
               </p>
             )}
-            <p className="text-xl font-light leading-relaxed text-gray-200 mb-10">
+            <p className="text-lg sm:text-xl font-light leading-relaxed text-gray-200 mb-8 sm:mb-10 max-w-3xl">
               {sd?.longDesc ?? service.details.longDesc}
             </p>
-            <div className="flex flex-wrap gap-3 mb-8">
+            <div className="flex flex-wrap gap-3 mb-8 max-w-3xl">
               {(sd?.tags ?? service.tags).map(tag => (
                 <span key={tag} className="font-mono text-xs tracking-wider uppercase px-4 py-2 border border-white/10 rounded-full text-teal bg-teal/5">
                   {tag}
@@ -369,7 +369,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
             </div>
             <button
               onClick={() => onNavigate?.('contact')}
-              className="inline-flex items-center gap-2 font-mono text-sm tracking-[0.2em] uppercase px-8 py-3 border border-teal text-teal hover:bg-teal hover:text-navy-deep transition-all duration-300 cursor-pointer"
+              className="inline-flex items-center gap-2 font-mono text-sm tracking-[0.2em] uppercase px-7 sm:px-8 py-3 border border-teal text-teal hover:bg-teal hover:text-navy-deep transition-all duration-300 cursor-pointer"
             >
               {sm.hablemos}
             </button>
@@ -382,7 +382,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
             className="relative"
           >
             {showIconPlaceholder ? (
-              <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-teal/20 relative">
+              <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-teal/20 relative w-full">
                 <div className={`service-panel-bg absolute inset-0 bg-gradient-to-br ${service.gradient}`} />
                 <HexagonBackground
                   className="absolute inset-0 bg-transparent"
@@ -394,7 +394,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
                 >
                   <div className="flex items-center justify-center h-full w-full relative z-10">
                     <div className="text-center">
-                      <div className="w-24 h-24 border border-teal/30 rounded-3xl flex items-center justify-center bg-navy-deep/60 backdrop-blur-md mx-auto mb-4">
+                      <div className="w-20 h-20 sm:w-24 sm:h-24 border border-teal/30 rounded-3xl flex items-center justify-center bg-navy-deep/60 backdrop-blur-md mx-auto mb-4">
                         <service.icon size={48} className="text-teal" strokeWidth={0.75} />
                       </div>
                       <div className="font-mono text-[0.55rem] tracking-[0.3em] uppercase text-gray-300">
@@ -418,7 +418,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
             )}
 
             {/* Decorative icon badge — hidden on small screens to avoid overflow */}
-            <div className="hidden sm:flex absolute -bottom-10 -left-10 w-40 h-40 border border-teal/20 rounded-full items-center justify-center bg-navy-deep/80 backdrop-blur-md">
+            <div className="hidden sm:flex absolute -bottom-8 -left-8 lg:-bottom-10 lg:-left-10 w-32 h-32 sm:w-40 sm:h-40 border border-teal/20 rounded-full items-center justify-center bg-navy-deep/80 backdrop-blur-md">
               <service.icon size={48} className="text-teal" strokeWidth={1} />
             </div>
           </motion.div>
@@ -449,7 +449,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="p-8 border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] hover:-translate-y-1 transition-all duration-300 rounded-xl"
+                  className="p-6 sm:p-8 border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] hover:-translate-y-1 transition-all duration-300 rounded-xl"
                 >
                   <div className="font-mono text-[0.45rem] tracking-[0.3em] uppercase text-teal/60 mb-3">0{i + 1}</div>
                   <h4 className="font-mono text-sm uppercase tracking-widest text-teal mb-3">{box.title}</h4>
@@ -492,7 +492,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="p-8 border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] hover:border-teal/30 hover:-translate-y-1 transition-all duration-300 rounded-2xl group"
+                  className="p-6 sm:p-8 border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] hover:border-teal/30 hover:-translate-y-1 transition-all duration-300 rounded-2xl group"
                 >
                   <div className="flex items-center gap-4 mb-4">
                     <div className="w-12 h-12 rounded-xl border border-teal/20 bg-teal/5 flex items-center justify-center shrink-0 group-hover:border-teal/50 transition-colors">
@@ -692,15 +692,15 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="p-12 border border-teal/20 bg-teal/5 rounded-2xl text-center"
+              className="p-8 sm:p-10 lg:p-12 border border-teal/20 bg-teal/5 rounded-2xl text-center"
             >
-              <p className="font-display text-3xl md:text-4xl text-white mb-3">{sd.midBanner.title}</p>
+              <p className="font-display text-2xl sm:text-3xl md:text-4xl text-white mb-3">{sd.midBanner.title}</p>
               {sd.midBanner.desc && (
-                <p className="text-lg font-light text-gray-200 mb-8 max-w-2xl mx-auto">{sd.midBanner.desc}</p>
+                <p className="text-base sm:text-lg font-light text-gray-200 mb-8 max-w-2xl mx-auto">{sd.midBanner.desc}</p>
               )}
               <button
                 onClick={() => onNavigate?.('contact')}
-                className="font-mono text-sm tracking-[0.25em] uppercase px-8 py-3 bg-teal text-navy-deep hover:bg-white transition-all duration-300 cursor-pointer"
+                className="font-mono text-sm tracking-[0.25em] uppercase px-7 sm:px-8 py-3 bg-teal text-navy-deep hover:bg-white transition-all duration-300 cursor-pointer"
               >
                 {sd.midBanner.buttonLabel}
               </button>
@@ -724,7 +724,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
                   {sm.baseBlock.label}
                   <div className="w-6 h-px bg-teal" />
                 </div>
-                <p className="font-display text-2xl md:text-4xl leading-snug text-white max-w-3xl mx-auto">
+                <p className="font-display text-xl sm:text-2xl md:text-4xl leading-snug text-white max-w-3xl mx-auto">
                   {sm.baseBlock.title}
                 </p>
               </motion.div>
@@ -739,7 +739,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: i * 0.1 }}
-                      className="flex flex-col items-center text-center p-8 border border-teal/20 bg-teal/5 rounded-2xl hover:-translate-y-1 hover:border-teal/40 transition-all duration-300"
+                      className="flex flex-col items-center text-center p-6 sm:p-8 border border-teal/20 bg-teal/5 rounded-2xl hover:-translate-y-1 hover:border-teal/40 transition-all duration-300"
                     >
                       <div className="w-14 h-14 rounded-xl border border-teal/30 bg-teal/10 flex items-center justify-center mb-5">
                         <PillarIcon size={24} className="text-teal" strokeWidth={1.5} />
@@ -765,10 +765,10 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
         })()}
 
         {/* CTA */}
-        <div className="mt-24 p-12 md:p-20 border border-white/10 rounded-3xl bg-gradient-to-br from-teal/10 to-transparent text-center relative overflow-hidden">
+        <div className="mt-20 lg:mt-24 p-8 sm:p-12 md:p-20 border border-white/10 rounded-3xl bg-gradient-to-br from-teal/10 to-transparent text-center relative overflow-hidden">
           <div className="relative z-10">
-            <h2 className="font-display text-4xl md:text-5xl mb-6">{sd?.ctaTitle ?? sm.ctaTitle}</h2>
-            <p className="text-xl font-light text-gray-300 mb-10 max-w-2xl mx-auto">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl mb-6">{sd?.ctaTitle ?? sm.ctaTitle}</h2>
+            <p className="text-base sm:text-xl font-light text-gray-300 mb-10 max-w-2xl mx-auto">
               {sd?.ctaDesc ?? `${sm.ctaDescPre} ${title} ${sm.ctaDescPost}`}
             </p>
             <button

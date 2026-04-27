@@ -73,7 +73,7 @@ export default function CookieBanner({ onNavigate }: { onNavigate?: (view: strin
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[9700] w-[calc(100%-3rem)] max-w-2xl"
         >
-          <div className="bg-navy border border-white/15 rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.5)] px-6 py-5 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+          <div className="relative overflow-hidden bg-navy-deep/96 backdrop-blur-2xl border border-white/12 rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.5)] px-5 py-5 sm:px-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
             {/* Icon */}
             <div className="w-9 h-9 rounded-xl border border-teal/30 bg-teal/10 flex items-center justify-center shrink-0">
               <Cookie size={16} className="text-teal" />
@@ -93,16 +93,16 @@ export default function CookieBanner({ onNavigate }: { onNavigate?: (view: strin
             </p>
 
             {/* Actions */}
-            <div className="flex gap-2 shrink-0">
+            <div className="flex flex-col sm:flex-row gap-2 shrink-0 w-full sm:w-auto">
               <button
                 onClick={() => handle('rejected')}
-                className="font-mono text-[0.5rem] tracking-[0.2em] uppercase px-4 py-2 border border-white/15 text-gray-300 hover:border-white/40 hover:text-white transition-all duration-200 rounded-lg"
+                className="w-full sm:w-auto font-mono text-[0.5rem] tracking-[0.2em] uppercase px-4 py-2 border border-white/15 text-gray-300 hover:border-white/40 hover:text-white transition-all duration-200 rounded-lg"
               >
                 {ck.reject}
               </button>
               <button
                 onClick={() => handle('accepted')}
-                className="font-mono text-[0.5rem] tracking-[0.2em] uppercase px-4 py-2 bg-teal text-navy-deep hover:bg-teal-bright transition-all duration-200 rounded-lg"
+                className="w-full sm:w-auto font-mono text-[0.5rem] tracking-[0.2em] uppercase px-4 py-2 bg-teal text-navy-deep hover:bg-teal-bright transition-all duration-200 rounded-lg"
               >
                 {ck.accept}
               </button>
