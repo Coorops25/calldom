@@ -25,6 +25,7 @@ import ScrollTracker from './components/ui/ScrollTracker';
 import CornerLabels from './components/ui/CornerLabels';
 import CookieBanner from './components/ui/CookieBanner';
 import ErrorBoundary from './components/ui/ErrorBoundary';
+import type { Lang } from './i18n';
 
 const ServiceModule  = lazy(() => import('./components/modules/ServiceModule'));
 const ContactModule  = lazy(() => import('./components/modules/ContactModule'));
@@ -49,6 +50,16 @@ function stripLocalePrefix(pathname: string): string {
   return normalized;
 }
 
+function getPreferredLang(): Lang {
+  if (typeof window === 'undefined') return 'es';
+  const parts = normalizePath(window.location.pathname).split('/').filter(Boolean);
+  const pathLang = parts[0];
+  if (pathLang === 'en' || pathLang === 'pt' || pathLang === 'es') return pathLang;
+  const stored = localStorage.getItem('lang');
+  if (stored === 'en' || stored === 'pt' || stored === 'es') return stored;
+  return 'es';
+}
+
 function getViewFromPath(pathname: string): string {
   const path = stripLocalePrefix(pathname);
 
@@ -63,17 +74,21 @@ function getViewFromPath(pathname: string): string {
 }
 
 function getPathForView(view: string): string {
-  if (SERVICE_VIEW_SET.has(view)) return `/servicio/${view}`;
+  const lang = getPreferredLang();
+  const servicePrefix = lang === 'en' ? '/en' : '';
+  const publicPrefix = lang === 'es' ? '' : `/${lang}`;
+
+  if (SERVICE_VIEW_SET.has(view)) return `${servicePrefix}/servicio/${view}`;
 
   switch (view) {
     case 'home':
-      return '/';
+      return publicPrefix || '/';
     case 'contact':
-      return '/contacto';
+      return `${publicPrefix}/contacto`;
     case 'privacy':
-      return '/politicas-privacidad';
+      return `${publicPrefix}/politicas-privacidad`;
     default:
-      return '/404';
+      return `${publicPrefix}/404`;
   }
 }
 
@@ -121,11 +136,13 @@ export default function App() {
   const handleBackToHome = () => {
     setCurrentView('home');
     syncUrlWithView('home');
-    const lang = (typeof window !== 'undefined' ? localStorage.getItem('lang') : 'es') === 'en' ? 'en' : 'es';
+    const preferred = getPreferredLang();
     document.title =
-      lang === 'en'
+      preferred === 'en'
         ? 'CCGrupo | CX, Sales, AI and Digital Studio'
-        : 'CCGrupo | CX, Ventas, IA y Digital Studio';
+        : preferred === 'pt'
+          ? 'CCGrupo | CX, Vendas, IA e Digital Studio'
+          : 'CCGrupo | CX, Ventas, IA y Digital Studio';
 
     setTimeout(() => {
       const element = document.getElementById('services');

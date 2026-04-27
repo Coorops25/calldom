@@ -1,6 +1,6 @@
 {
   "rewrites": [
-    { "source": "/((?!_next|favicon|og-image|site.webmanifest|robots.txt|sitemap.xml|llms.txt|clients|policies|images|fonts).*)", "destination": "/" }
+    { "source": "/((?!_next|favicon|og-image|site.webmanifest|robots.txt|sitemap.xml|llms.txt|clients|policies|images|fonts|en|pt|servicio|contacto|politicas-privacidad|privacy-policies|contact|privacy).*)", "destination": "/" }
   ],
   "headers": [
     {

@@ -8,7 +8,7 @@ export const servicesData: ServiceData[] = [
     subtitle: 'Experiencias que escalan negocios',
     desc: 'Operamos y optimizamos la atención al cliente en todos los puntos de contacto para mejorar satisfacción, continuidad y fidelización.',
     tags: ['Servicio al Cliente', 'PQR', 'Reservas', 'Gestión de Pedidos', 'Mesa de Ayuda', 'Soporte Omnicanal'],
-    link: 'https://ccgrupo.com.co/cx-experiencia-del-cliente/',
+    link: 'https://ccgrupo.com.co/servicio/01',
     icon: Users,
     gradient: 'from-[#071a2c] via-navy-deep to-[#0a1e30]',
     details: {
@@ -42,7 +42,7 @@ export const servicesData: ServiceData[] = [
     subtitle: 'Conversión con Método',
     desc: 'Diseñamos y operamos procesos comerciales que convierten oportunidades en ventas reales, con más velocidad, seguimiento y trazabilidad.',
     tags: ['Captación de Leads', 'Seguimiento Multicanal', 'WhatsApp Ventas', 'Gestión CRM', 'Reactivación', 'Cierre de Oportunidades'],
-    link: 'https://ccgrupo.com.co/leads-ventas/',
+    link: 'https://ccgrupo.com.co/servicio/02',
     icon: TrendingUp,
     gradient: 'from-[#1a0d07] via-navy-deep to-[#2a1408]',
     details: {
@@ -76,7 +76,7 @@ export const servicesData: ServiceData[] = [
     subtitle: 'Operación 24/7 sin Límites',
     desc: 'Automatizamos interacciones con IA para escalar atención, captación y respuesta 24/7 sin incrementar tu estructura operativa.',
     tags: ['IA 24/7', 'WhatsApp IA', 'Chat IA', 'Leads IA', 'Social IA', 'Autónomo'],
-    link: 'https://ccgrupo.com.co/agentes-autonomos/',
+    link: 'https://ccgrupo.com.co/servicio/03',
     icon: Bot,
     gradient: 'from-[#0c0f24] via-navy-deep to-[#10162e]',
     subProducts: [
@@ -149,7 +149,7 @@ export const servicesData: ServiceData[] = [
     subtitle: 'Tecnología que Impulsa Resultados',
     desc: 'Creamos soluciones digitales a medida para conectar tecnología, operación y resultados.',
     tags: ['CRM', 'Apps', 'E-commerce', 'Agendamiento', 'Portales', 'Dashboards', 'Avatares IA'],
-    link: 'https://ccgrupo.com.co/digital-studio/',
+    link: 'https://ccgrupo.com.co/servicio/04',
     icon: Code2,
     gradient: 'from-[#091a0e] via-navy-deep to-[#0e2416]',
     details: {
