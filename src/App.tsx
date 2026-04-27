@@ -42,7 +42,7 @@ function normalizePath(pathname: string): string {
 function stripLocalePrefix(pathname: string): string {
   const normalized = normalizePath(pathname);
   const parts = normalized.split('/').filter(Boolean);
-  if (parts[0] === 'en' || parts[0] === 'es') {
+  if (parts[0] === 'en' || parts[0] === 'es' || parts[0] === 'pt') {
     const rest = parts.slice(1).join('/');
     return rest ? `/${rest}` : '/';
   }

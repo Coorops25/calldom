@@ -31,7 +31,7 @@ const en = {
     stats: [
       'Years of experience in the BPO sector',
       'More productivity in agents',
-      'Languages: Spanish, English, Italian, French',
+      'Languages: Spanish, English, Italian, French, Portuguese',
       'Queries resolved on first call',
     ],
   },

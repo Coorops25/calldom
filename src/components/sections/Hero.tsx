@@ -77,7 +77,7 @@ export default function Hero({ onNavigate }: Props) {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2.8, duration: 0.9 }}
-          className="max-w-xl mt-10 text-lg font-light leading-relaxed text-gray-200"
+          className="max-w-xl mt-10 text-base font-light leading-relaxed text-gray-200"
         >
           {heroCopy.desc}
         </motion.p>

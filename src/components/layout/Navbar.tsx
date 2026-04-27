@@ -14,15 +14,15 @@ export default function Navbar({ onNavigate }: Props) {
   const [isMobileMenuOpen, setMobileOpen] = useState(false);
   const [isLogoHovered, setIsLogoHovered] = useState(false);
   const { isDark, toggle }                = useTheme();
-  const { lang, t, toggleLang }           = useLang();
+  const { lang, t, setLanguage } = useLang();
 
   const labels = {
-    goHome: lang === 'en' ? 'Go home' : 'Ir al inicio',
-    languageGroup: lang === 'en' ? 'Select language' : 'Seleccionar idioma',
-    themeToggle: lang === 'en' ? 'Toggle theme' : 'Cambiar tema',
-    openMenu: lang === 'en' ? 'Open navigation menu' : 'Abrir menú de navegación',
-    closeMenu: lang === 'en' ? 'Close navigation menu' : 'Cerrar menú de navegación',
-    menuDialog: lang === 'en' ? 'Navigation menu' : 'Menú de navegación',
+    goHome: lang === 'en' ? 'Go home' : lang === 'es' ? 'Ir al inicio' : 'Ir para o início',
+    languageGroup: lang === 'en' ? 'Select language' : lang === 'es' ? 'Seleccionar idioma' : 'Selecionar idioma',
+    themeToggle: lang === 'en' ? 'Toggle theme' : lang === 'es' ? 'Cambiar tema' : 'Mudar tema',
+    openMenu: lang === 'en' ? 'Open navigation menu' : lang === 'es' ? 'Abrir menú de navegación' : 'Abrir menu de navegação',
+    closeMenu: lang === 'en' ? 'Close navigation menu' : lang === 'es' ? 'Cerrar menú de navegación' : 'Fechar menu de navegação',
+    menuDialog: lang === 'en' ? 'Navigation menu' : lang === 'es' ? 'Menú de navegación' : 'Menu de navegação',
   };
 
   useEffect(() => {
@@ -159,7 +159,7 @@ export default function Navbar({ onNavigate }: Props) {
           {/* Mobile lang toggle */}
           <div className="flex items-center gap-1 font-mono text-label tracking-[0.1em]" role="group" aria-label={labels.languageGroup}>
             <button
-              onClick={() => lang !== 'es' && toggleLang()}
+              onClick={() => lang !== 'es' && setLanguage('es')}
               aria-label="Español"
               aria-pressed={lang === 'es'}
               className={`transition-colors ${lang === 'es' ? 'text-teal' : 'text-gray-300'}`}
@@ -168,12 +168,21 @@ export default function Navbar({ onNavigate }: Props) {
             </button>
             <span aria-hidden="true" className="text-gray-400">|</span>
             <button
-              onClick={() => lang !== 'en' && toggleLang()}
+              onClick={() => lang !== 'en' && setLanguage('en')}
               aria-label="English"
               aria-pressed={lang === 'en'}
               className={`transition-colors ${lang === 'en' ? 'text-teal' : 'text-gray-300'}`}
             >
               EN
+            </button>
+            <span aria-hidden="true" className="text-gray-400">|</span>
+            <button
+              onClick={() => lang !== 'pt' && setLanguage('pt')}
+              aria-label="Português"
+              aria-pressed={lang === 'pt'}
+              className={`transition-colors ${lang === 'pt' ? 'text-teal' : 'text-gray-300'}`}
+            >
+              PT
             </button>
           </div>
           <button
@@ -250,6 +259,10 @@ export default function Navbar({ onNavigate }: Props) {
           </motion.div>
         )}
       </AnimatePresence>
+    </>
+  );
+}
+</AnimatePresence>
     </>
   );
 }

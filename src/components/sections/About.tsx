@@ -35,7 +35,7 @@ export default function About() {
   const stats = [
     { val: 15, suffix: '+', label: t.about.stats[0] },
     { val: 40, suffix: '%', label: t.about.stats[1] },
-    { val: 4,  suffix: '',  label: t.about.stats[2] },
+    { val: 5,  suffix: '',  label: t.about.stats[2] },
     { val: 92, suffix: '%', label: t.about.stats[3] },
   ];
 
@@ -70,7 +70,7 @@ export default function About() {
             className="inline-block"
             delay={30}
             duration={1}
-            splitType="words"
+            splitType="chars"
             from={{ opacity: 0, y: 20 }}
             to={{ opacity: 1, y: 0 }}
           >
