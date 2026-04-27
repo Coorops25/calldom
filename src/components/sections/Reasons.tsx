@@ -151,7 +151,7 @@ export default function Reasons() {
 
                     {/* Desc — full text, no clamp, card grows to fit */}
                     <p className="text-white font-light text-xs md:text-sm leading-relaxed">
-                      {item.desc}
+                      {reason.desc}
                     </p>
 
                     {/* Bottom accent */}
