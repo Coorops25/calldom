@@ -55,7 +55,7 @@ export default function Hero({ onNavigate }: Props) {
       <div className="absolute inset-0 z-[1] bg-navy-deep/60 pointer-events-none" />
 
       <div className="relative z-10 flex flex-col items-center text-center">
-        <h1 className="font-display text-[clamp(3.2rem,8.5vw,8.5rem)] leading-[1.05] tracking-tight font-normal">
+        <h1 className="font-display text-[clamp(2.5rem,7vw,7rem)] leading-[1.05] tracking-tight font-normal">
           <div className="overflow-hidden">
             <motion.div initial={{ y: '115%' }} animate={{ y: 0 }} transition={{ delay: 2.1, duration: 1.3, ease: [0.16, 1, 0.3, 1] }}>
               {heroCopy.line1}
