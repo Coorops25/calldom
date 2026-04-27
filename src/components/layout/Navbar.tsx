@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { Fragment, useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, Sun, Moon } from 'lucide-react';
+import { Menu, X, Sun, Moon, ChevronDown, Globe } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
-import { useLang } from '../../i18n';
+import { useLang, type Lang } from '../../i18n';
+import ThemedLogo from '../ui/ThemedLogo';
 
 interface Props {
   onNavigate?: (view: string) => void;
@@ -11,8 +12,10 @@ interface Props {
 export default function Navbar({ onNavigate }: Props) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setMobileOpen] = useState(false);
+  const [isLangOpen, setLangOpen] = useState(false);
   const { isDark, toggle } = useTheme();
   const { lang, t, setLanguage } = useLang();
+  const langRef = useRef<HTMLDivElement>(null);
 
   const labels = {
     goHome: lang === 'en' ? 'Go home' : lang === 'es' ? 'Ir al inicio' : 'Ir para o início',
@@ -23,10 +26,24 @@ export default function Navbar({ onNavigate }: Props) {
     menuDialog: lang === 'en' ? 'Navigation menu' : lang === 'es' ? 'Menú de navegación' : 'Menu de navegação',
   };
 
+  const languages: { code: Lang; label: string }[] = [
+    { code: 'es', label: 'ES' },
+    { code: 'en', label: 'EN' },
+    { code: 'pt', label: 'PT' },
+  ];
+
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    const handleClickOutside = (e: MouseEvent) => {
+      if (langRef.current && !langRef.current.contains(e.target as Node)) setLangOpen(false);
+    };
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
 
   const scrollToSection = (href: string) => {
@@ -58,21 +75,14 @@ export default function Navbar({ onNavigate }: Props) {
         {/* Logo container */}
         <button
           onClick={() => scrollToSection('#hero')}
-          className="flex items-center gap-3 group relative z-50"
+          className="relative z-50 transition-transform duration-300 hover:scale-[1.02]"
           aria-label={labels.goHome}
         >
-          <div className="relative w-10 h-10 flex items-center justify-center">
-            <div className="absolute inset-0 bg-teal/20 rounded-xl rotate-45 group-hover:rotate-90 transition-transform duration-500" />
-            <span className="font-display text-2xl font-bold text-white relative">C</span>
-          </div>
-          <div className="flex flex-col leading-none">
-            <span className="font-display text-lg tracking-wider text-white">CCGrupo</span>
-            <span className="font-mono text-[0.55rem] tracking-[0.3em] uppercase text-teal">Smart BPO</span>
-          </div>
+          <ThemedLogo width={160} className="h-auto" />
         </button>
 
         {/* Desktop navigation */}
-        <div className="hidden md:flex items-center gap-10">
+        <div className="hidden md:flex items-center gap-8">
           <ul className="flex gap-8">
             {t.nav.links.map((link) => (
               <li key={link.name}>
@@ -87,34 +97,46 @@ export default function Navbar({ onNavigate }: Props) {
             ))}
           </ul>
 
-          {/* Language toggle */}
-          <div className="flex items-center gap-1.5 font-mono text-label tracking-[0.1em] select-none" role="group" aria-label={labels.languageGroup}>
+          {/* Language Dropdown */}
+          <div className="relative" ref={langRef}>
             <button
-              onClick={() => lang !== 'es' && setLanguage('es')}
-              aria-label="Español"
-              aria-pressed={lang === 'es'}
-              className={`transition-colors ${lang === 'es' ? 'text-teal font-semibold' : 'text-white hover:text-gray-100'}`}
+              onClick={() => setLangOpen(!isLangOpen)}
+              className="flex items-center gap-2 font-mono text-label tracking-[0.15em] text-white hover:text-teal transition-colors px-3 py-1.5 border border-white/10 rounded-lg hover:border-teal/30"
+              aria-label={labels.languageGroup}
+              aria-expanded={isLangOpen}
             >
-              ES
+              <Globe size={14} className="text-teal" />
+              <span>{lang.toUpperCase()}</span>
+              <ChevronDown size={12} className={`transition-transform duration-300 ${isLangOpen ? 'rotate-180' : ''}`} />
             </button>
-            <span aria-hidden="true" className="text-gray-400">|</span>
-            <button
-              onClick={() => lang !== 'en' && setLanguage('en')}
-              aria-label="English"
-              aria-pressed={lang === 'en'}
-              className={`transition-colors ${lang === 'en' ? 'text-teal font-semibold' : 'text-white hover:text-gray-100'}`}
-            >
-              EN
-            </button>
-            <span aria-hidden="true" className="text-gray-400">|</span>
-            <button
-              onClick={() => lang !== 'pt' && setLanguage('pt')}
-              aria-label="Português"
-              aria-pressed={lang === 'pt'}
-              className={`transition-colors ${lang === 'pt' ? 'text-teal font-semibold' : 'text-white hover:text-gray-100'}`}
-            >
-              PT
-            </button>
+
+            <AnimatePresence>
+              {isLangOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute top-full mt-2 right-0 w-32 bg-navy-deep/95 backdrop-blur-xl border border-white/10 rounded-xl overflow-hidden shadow-2xl"
+                >
+                  {languages.map((l) => (
+                    <button
+                      key={l.code}
+                      onClick={() => {
+                        setLanguage(l.code);
+                        setLangOpen(false);
+                      }}
+                      className={`w-full text-left px-4 py-3 font-mono text-xs tracking-wider transition-colors hover:bg-white/5 flex items-center justify-between ${
+                        lang === l.code ? 'text-teal bg-teal/5' : 'text-white'
+                      }`}
+                    >
+                      {l.label}
+                      {lang === l.code && <div className="w-1.5 h-1.5 rounded-full bg-teal shadow-[0_0_8px_#00b4d8]" />}
+                    </button>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* Theme toggle */}
@@ -137,34 +159,19 @@ export default function Navbar({ onNavigate }: Props) {
 
         {/* Mobile right side */}
         <div className="flex md:hidden items-center gap-3">
-          {/* Mobile lang toggle */}
+          {/* Mobile lang toggle (keep simple for space) */}
           <div className="flex items-center gap-1 font-mono text-label tracking-[0.1em]" role="group" aria-label={labels.languageGroup}>
-            <button
-              onClick={() => lang !== 'es' && setLanguage('es')}
-              aria-label="Español"
-              aria-pressed={lang === 'es'}
-              className={`transition-colors ${lang === 'es' ? 'text-teal' : 'text-gray-300'}`}
-            >
-              ES
-            </button>
-            <span aria-hidden="true" className="text-gray-400">|</span>
-            <button
-              onClick={() => lang !== 'en' && setLanguage('en')}
-              aria-label="English"
-              aria-pressed={lang === 'en'}
-              className={`transition-colors ${lang === 'en' ? 'text-teal' : 'text-gray-300'}`}
-            >
-              EN
-            </button>
-            <span aria-hidden="true" className="text-gray-400">|</span>
-            <button
-              onClick={() => lang !== 'pt' && setLanguage('pt')}
-              aria-label="Português"
-              aria-pressed={lang === 'pt'}
-              className={`transition-colors ${lang === 'pt' ? 'text-teal' : 'text-gray-300'}`}
-            >
-              PT
-            </button>
+            {languages.map((l, i) => (
+              <Fragment key={l.code}>
+                <button
+                  onClick={() => setLanguage(l.code)}
+                  className={`transition-colors ${lang === l.code ? 'text-teal font-bold' : 'text-gray-300'}`}
+                >
+                  {l.label}
+                </button>
+                {i < languages.length - 1 && <span className="text-gray-500">|</span>}
+              </Fragment>
+            ))}
           </div>
           <button
             onClick={toggle}
