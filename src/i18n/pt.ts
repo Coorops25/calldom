@@ -120,6 +120,12 @@ const pt = {
     desc: 'Vamos nos conectar. Ajudamos você a desenhar a solução perfeita para seus desafios operacionais.',
     cta: 'Agendar consultoria gratuita',
   },
+  cookie: {
+    message: 'Usamos cookies para melhorar sua experiência e medir o desempenho do site.',
+    policy: 'Política de privacidade',
+    accept: 'Aceitar',
+    reject: 'Recusar',
+  },
   footer: {
     description: 'Somos uma empresa de transformação digital que integra pessoas, inteligência artificial e tecnologia própria para resolver como as empresas atendem, operam e vendem.',
     tagline: 'Além do serviço — construímos experiências.',

@@ -40,7 +40,16 @@ function grantConsent(value: ConsentValue) {
 export default function CookieBanner({ onNavigate }: { onNavigate?: (view: string) => void }) {
   const [visible, setVisible] = useState(false);
   const { t, lang } = useLang();
-  const ck = t.cookie;
+  const ck = t.cookie ?? {
+    message: lang === 'en'
+      ? 'We use cookies to improve your experience and measure site performance.'
+      : lang === 'pt'
+        ? 'Usamos cookies para melhorar sua experiência e medir o desempenho do site.'
+        : 'Usamos cookies para mejorar tu experiencia y medir el rendimiento del sitio.',
+    policy: lang === 'en' ? 'Privacy policy' : lang === 'pt' ? 'Política de privacidade' : 'Política de privacidad',
+    accept: lang === 'en' ? 'Accept' : lang === 'pt' ? 'Aceitar' : 'Aceptar',
+    reject: lang === 'en' ? 'Reject' : lang === 'pt' ? 'Recusar' : 'Rechazar',
+  };
 
   useEffect(() => {
     const stored = readConsent();
@@ -80,8 +89,8 @@ export default function CookieBanner({ onNavigate }: { onNavigate?: (view: strin
             </div>
 
             {/* Text */}
-            <p className="flex-1 text-gray-300 font-light text-xs leading-relaxed">
-              {ck.message}{' '}
+            <div className="flex-1 text-gray-300 font-light text-xs leading-relaxed">
+              <span>{ck.message}{' '}</span>
               {onNavigate && (
                 <button
                   onClick={() => { handle('accepted'); onNavigate('privacy'); }}
@@ -90,7 +99,7 @@ export default function CookieBanner({ onNavigate }: { onNavigate?: (view: strin
                   {ck.policy}
                 </button>
               )}
-            </p>
+            </div>
 
             {/* Actions */}
             <div className="flex flex-col sm:flex-row gap-2 shrink-0 w-full sm:w-auto">

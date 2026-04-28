@@ -120,6 +120,12 @@ const en = {
     desc: "Let's connect. We'll help you design the perfect solution for your operational challenges.",
     cta: 'Schedule free consultation',
   },
+  cookie: {
+    message: 'We use cookies to improve your experience and measure site performance.',
+    policy: 'Privacy policy',
+    accept: 'Accept',
+    reject: 'Reject',
+  },
   footer: {
     description: 'We are a digital transformation company that integrates people, artificial intelligence and proprietary technology to solve how companies serve, operate and sell.',
     tagline: 'Beyond service — we build experiences.',
