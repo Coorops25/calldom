@@ -69,7 +69,7 @@ export default function Navbar({ onNavigate, hidden = false }: Props) {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-          className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 px-6 md:px-14 py-5 flex items-center justify-between ${
+          className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 px-4 sm:px-6 md:px-14 py-4 sm:py-5 flex items-center justify-between ${
           hidden ? 'pointer-events-none -translate-y-4 opacity-0' : 'opacity-100'
         } ${
           isScrolled ? 'bg-navy-deep/80 backdrop-blur-xl border-b border-white/5' : 'bg-transparent'
@@ -161,35 +161,35 @@ export default function Navbar({ onNavigate, hidden = false }: Props) {
         </div>
 
         {/* Mobile right side */}
-        <div className="flex md:hidden items-center gap-3">
+        <div className="flex md:hidden items-center gap-2 sm:gap-3">
           {/* Mobile lang toggle (keep simple for space) */}
-          <div className="flex items-center gap-1 font-mono text-label tracking-[0.1em]" role="group" aria-label={labels.languageGroup}>
+          <div className="flex items-center gap-1 rounded-full border border-white/10 bg-navy-deep/60 backdrop-blur-md px-2 py-1 font-mono text-[0.62rem] tracking-[0.1em]" role="group" aria-label={labels.languageGroup}>
             {languages.map((l, i) => (
               <Fragment key={l.code}>
                 <button
                   onClick={() => setLanguage(l.code)}
-                  className={`transition-colors ${lang === l.code ? 'text-teal font-bold' : 'text-gray-300'}`}
+                  className={`rounded-full px-2.5 py-1 transition-colors ${lang === l.code ? 'bg-teal/10 text-teal font-bold' : 'text-gray-300 hover:text-white hover:bg-white/5'}`}
                 >
                   {l.label}
                 </button>
-                {i < languages.length - 1 && <span className="text-gray-500">|</span>}
+                {i < languages.length - 1 && <span className="text-gray-500/80">|</span>}
               </Fragment>
             ))}
           </div>
           <button
             onClick={toggle}
             aria-label={labels.themeToggle}
-            className="text-white hover:text-teal transition-colors p-1"
+            className="w-9 h-9 rounded-full border border-white/10 bg-navy-deep/60 backdrop-blur-md flex items-center justify-center text-white hover:text-teal hover:border-teal/30 transition-all"
           >
             {isDark ? <Sun size={16} /> : <Moon size={16} />}
           </button>
           <button
             aria-label={labels.openMenu}
             aria-expanded={isMobileMenuOpen}
-            className="text-white p-1"
+            className="w-9 h-9 rounded-full border border-white/10 bg-navy-deep/60 backdrop-blur-md flex items-center justify-center text-white hover:text-teal hover:border-teal/30 transition-all"
             onClick={() => setMobileOpen(true)}
           >
-            <Menu size={22} />
+            <Menu size={20} />
           </button>
         </div>
       </motion.nav>
@@ -204,17 +204,17 @@ export default function Navbar({ onNavigate, hidden = false }: Props) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[10001] bg-navy-deep/95 backdrop-blur-2xl flex flex-col items-center justify-start gap-10 overflow-y-auto overscroll-contain px-6 py-8 sm:px-8 sm:py-10"
+            className="fixed inset-0 z-[10001] bg-navy-deep/95 backdrop-blur-2xl flex flex-col items-center justify-start gap-8 sm:gap-10 overflow-y-auto overscroll-contain px-5 py-6 sm:px-8 sm:py-10"
           >
             <button
               aria-label={labels.closeMenu}
-              className="absolute top-5 right-5 sm:top-6 sm:right-6 text-white p-2"
+              className="absolute top-4 right-4 sm:top-6 sm:right-6 w-11 h-11 rounded-full border border-white/10 bg-navy-deep/70 backdrop-blur-md text-white flex items-center justify-center hover:text-teal hover:border-teal/30 transition-all"
               onClick={() => setMobileOpen(false)}
             >
-              <X size={32} />
+              <X size={24} />
             </button>
 
-            <ul className="flex flex-col items-center w-full max-w-md pt-16 sm:pt-20">
+            <ul className="flex flex-col items-center w-full max-w-md pt-14 sm:pt-20">
               {t.nav.links.map((link, index) => (
                 <motion.li
                   key={link.name}
@@ -225,7 +225,7 @@ export default function Navbar({ onNavigate, hidden = false }: Props) {
                 >
                   <button
                     onClick={() => scrollToSection(link.href)}
-                    className="w-full flex justify-between items-center py-5 sm:py-6 font-display text-2xl sm:text-3xl text-white hover:text-teal hover:pl-4 transition-all duration-300"
+                    className="w-full flex justify-between items-center py-4 sm:py-6 font-display text-xl sm:text-3xl leading-tight text-white hover:text-teal hover:pl-4 transition-all duration-300"
                   >
                     <span>{link.name}</span>
                     <span className="font-mono text-xs tracking-widest text-teal">0{index + 1}</span>
@@ -238,11 +238,11 @@ export default function Navbar({ onNavigate, hidden = false }: Props) {
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.4 }}
-              className="mt-4 sm:mt-8 pb-8"
+              className="mt-1 sm:mt-8 pb-4 sm:pb-8"
             >
               <button
                 onClick={() => { setMobileOpen(false); onNavigate?.('contact'); }}
-                className="font-mono text-xs tracking-[0.25em] uppercase px-10 py-4 bg-gradient-to-br from-teal-dark to-teal text-white hover:shadow-[0_8px_40px_rgba(0,180,216,0.35)] transition-all duration-300"
+                className="font-mono text-xs tracking-[0.25em] uppercase px-9 sm:px-10 py-3.5 sm:py-4 bg-gradient-to-br from-teal-dark to-teal text-white rounded-full hover:shadow-[0_8px_40px_rgba(0,180,216,0.35)] transition-all duration-300"
               >
                 {t.nav.contact}
               </button>

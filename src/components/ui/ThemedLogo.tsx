@@ -10,8 +10,18 @@ export default function ThemedLogo({
   alt = 'CCGrupo Logo',
   ...imgProps
 }: ThemedLogoProps) {
-  const [isLightTheme, setIsLightTheme] = useState<boolean>(false);
-  const [src, setSrc] = useState<string>(BRAND_ASSETS.logoDark);
+  const readInitialIsLight = () => {
+    if (typeof document !== 'undefined') {
+      return document.documentElement.classList.contains('light');
+    }
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') === 'light';
+    }
+    return false;
+  };
+
+  const [isLightTheme, setIsLightTheme] = useState<boolean>(readInitialIsLight);
+  const [src, setSrc] = useState<string>(() => (readInitialIsLight() ? BRAND_ASSETS.logoLight : BRAND_ASSETS.logoDark));
   const [failed, setFailed] = useState(false);
 
   useEffect(() => {

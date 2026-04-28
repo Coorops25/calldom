@@ -148,6 +148,10 @@ html.light {
   --c-g400:     #5a7a9a;
   --c-fg:       #0b1628;
   --c-border:   rgba(11, 22, 40, 0.1);
+  --color-teal:        #0a759a;
+  --color-teal-bright: #109ac5;
+  --color-teal-dark:   #065d84;
+  --color-blue:        #0b6f9e;
 }
 
 @theme {
@@ -259,11 +263,29 @@ html.light {
 /* ─── Light mode overrides ───────────────────────── */
 
 html.light {
+  /* Paper-like page background so light mode keeps depth */
+  & body {
+    background:
+      radial-gradient(circle at 18% 0%, rgba(0, 180, 216, 0.08), transparent 36%),
+      radial-gradient(circle at 82% 10%, rgba(0, 118, 182, 0.05), transparent 28%),
+      linear-gradient(180deg, #fbfdff 0%, #f4f8fc 44%, #eaf1f7 100%);
+    background-color: var(--c-bg-deep);
+  }
+
   /* ── Base text ── */
   & .text-white   { color: var(--c-fg); }
   & .text-gray-100 { color: var(--c-g100); }
   & .text-gray-200 { color: var(--c-g200); }
   & .text-gray-300 { color: var(--c-g300); }
+  & .text-gray-400 { color: #5b7898; }
+  & .text-gray-500 { color: #45607f; }
+  & .text-gray-600 { color: #30465f; }
+  & [class*="text-white/9"] { color: var(--c-g200) !important; }
+  & [class*="text-white/8"] { color: var(--c-g200) !important; }
+  & [class*="text-white/7"] { color: var(--c-g300) !important; }
+  & [class*="text-white/6"] { color: var(--c-g300) !important; }
+  & [class*="text-white/5"] { color: var(--c-g300) !important; }
+  & [class*="text-white/4"] { color: var(--c-g300) !important; }
 
   /* ── Text gradient: deeper teal so it reads on white (was #00e5ff = 1.7:1) ── */
   & .text-gradient {
@@ -341,6 +363,92 @@ html.light {
     background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 55%, #f0f9ff 100%) !important;
   }
 
+  /* Hero overlay: keep a focal veil instead of a flat white wash */
+  & .hero-overlay {
+    background:
+      radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.22), transparent 46%),
+      linear-gradient(180deg, rgba(245, 249, 253, 0.28), rgba(11, 22, 40, 0.08)) !important;
+  }
+
+  /* CTA overlay: light paper surface with a soft editorial tint */
+  & .cta-overlay {
+    background:
+      radial-gradient(circle at top, rgba(0, 180, 216, 0.08), transparent 40%),
+      linear-gradient(180deg, rgba(252, 254, 255, 0.92), rgba(235, 242, 248, 0.98)) !important;
+  }
+
+  /* Service module: surface hierarchy tuned for light mode */
+  & .service-module-root {
+    background:
+      radial-gradient(circle at top, rgba(0, 180, 216, 0.05), transparent 30%),
+      linear-gradient(180deg, rgba(251, 253, 255, 0.92), rgba(238, 244, 250, 0.98));
+  }
+  & .service-module-nav,
+  & .contact-module-back {
+    background-color: rgba(255, 255, 255, 0.88) !important;
+    border-color: rgba(11, 22, 40, 0.09) !important;
+    box-shadow: 0 2px 16px rgba(11, 22, 40, 0.08), 0 0 0 1px rgba(11, 22, 40, 0.04) !important;
+  }
+  & .service-module-panel,
+  & .service-module-card,
+  & .service-module-feature,
+  & .service-module-tile,
+  & .service-module-accordion,
+  & .service-module-achievement,
+  & .service-module-cta,
+  & .contact-module-card,
+  & .contact-module-success,
+  & .contact-module-field {
+    background-color: rgba(255, 255, 255, 0.96) !important;
+    border-color: rgba(11, 22, 40, 0.08) !important;
+    box-shadow: 0 12px 36px rgba(11, 22, 40, 0.06), 0 0 0 1px rgba(11, 22, 40, 0.04) !important;
+  }
+  & .service-module-tile {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(244, 248, 252, 0.96)) !important;
+  }
+  & .service-module-card:hover,
+  & .service-module-feature:hover,
+  & .service-module-accordion:hover,
+  & .service-module-achievement:hover {
+    background-color: rgba(248, 251, 255, 0.99) !important;
+    border-color: rgba(0, 118, 182, 0.24) !important;
+    box-shadow: 0 16px 40px rgba(11, 22, 40, 0.08), 0 0 0 1px rgba(0, 118, 182, 0.08) !important;
+  }
+  & .contact-module-card:hover,
+  & .contact-module-success:hover {
+    background-color: rgba(248, 251, 255, 0.99) !important;
+    border-color: rgba(0, 118, 182, 0.2) !important;
+    box-shadow: 0 14px 34px rgba(11, 22, 40, 0.08), 0 0 0 1px rgba(0, 118, 182, 0.06) !important;
+  }
+  & .service-module-cta {
+    background:
+      radial-gradient(circle at top, rgba(0, 180, 216, 0.08), transparent 30%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(241, 246, 250, 0.98)) !important;
+  }
+  & .contact-module-root {
+    background:
+      radial-gradient(circle at top right, rgba(0, 180, 216, 0.06), transparent 28%),
+      radial-gradient(circle at left center, rgba(0, 118, 182, 0.04), transparent 22%),
+      linear-gradient(180deg, rgba(251, 253, 255, 0.92), rgba(238, 244, 250, 0.98));
+  }
+  & .contact-module-label,
+  & .contact-module-privacy,
+  & .contact-module-note,
+  & .contact-module-field::placeholder {
+    color: var(--c-g400) !important;
+  }
+  & .contact-module-field {
+    background-color: rgba(255, 255, 255, 0.98) !important;
+    color: var(--c-fg) !important;
+    border-color: rgba(11, 22, 40, 0.12) !important;
+    box-shadow: 0 1px 6px rgba(11, 22, 40, 0.04) !important;
+  }
+  & .contact-module-field:focus {
+    background-color: #ffffff !important;
+    border-color: rgba(0, 118, 182, 0.28) !important;
+    box-shadow: 0 0 0 4px rgba(0, 118, 182, 0.12) !important;
+  }
+
   /* ── Client name carousel cards: white surface with separation ── */
   & .bg-navy-deep {
     background-color: #ffffff;
@@ -370,18 +478,27 @@ html.light {
   }
 
   /* ── Modal/overlay backgrounds ── */
-  & .bg-navy-deep\/85  { background-color: rgba(255, 255, 255, 0.9) !important; }
-  & .bg-navy-deep\/95  { background-color: rgba(248, 252, 255, 0.97) !important; }
+  & .bg-navy-deep\/85  { background-color: rgba(245, 249, 253, 0.98) !important; }
+  & .bg-navy-deep\/95  { background-color: rgba(251, 253, 255, 0.98) !important; }
   /* Carousel cards (Reasons) and TiltCard backdrop */
   & .bg-navy-deep\/90 {
-    background-color: #ffffff !important;
+    background-color: rgba(255, 255, 255, 0.98) !important;
     box-shadow: 0 4px 20px rgba(11, 22, 40, 0.07), 0 0 0 1px rgba(11, 22, 40, 0.06) !important;
   }
   & .bg-navy-deep\/80 {
-    background-color: rgba(255, 255, 255, 0.95) !important;
+    background-color: rgba(245, 249, 253, 0.98) !important;
     box-shadow: 0 2px 12px rgba(11, 22, 40, 0.06) !important;
   }
   & .bg-navy-mid\/40   { background-color: rgba(0, 100, 180, 0.06) !important; }
+
+  & .bg-navy-deep\/70,
+  & .bg-navy-deep\/60,
+  & .bg-navy-deep\/40,
+  & .bg-navy-deep\/30 {
+    background-color: rgba(240, 246, 251, 0.96) !important;
+    border-color: rgba(11, 22, 40, 0.08) !important;
+    box-shadow: 0 2px 14px rgba(11, 22, 40, 0.06), 0 0 0 1px rgba(11, 22, 40, 0.05) !important;
+  }
 
   /* ── Tag pills in service cards ── */
   & .rounded-full.border.text-teal {

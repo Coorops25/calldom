@@ -19,11 +19,11 @@ export default function Footer({ onNavigate }: Props) {
   );
 
   return (
-    <footer className="bg-navy-deep pt-20 pb-12 px-5 sm:px-6 md:px-14 lg:px-28 border-t border-white/10">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 sm:gap-12 lg:gap-14 mb-16">
-        <div className="lg:col-span-2 min-w-0">
+    <footer className="bg-navy-deep pt-16 sm:pt-20 pb-10 sm:pb-12 px-4 sm:px-6 md:px-14 lg:px-28 border-t border-white/10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-12 lg:gap-14 mb-12 sm:mb-16">
+        <div className="lg:col-span-2 min-w-0 text-center sm:text-left">
           <div
-            className="flex items-center gap-3 mb-6 min-h-[2.5rem] min-w-0"
+            className="flex items-center justify-center sm:justify-start gap-3 mb-5 sm:mb-6 min-h-[2.5rem] min-w-0"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
@@ -61,10 +61,10 @@ export default function Footer({ onNavigate }: Props) {
               )}
             </AnimatePresence>
           </div>
-          <p className="text-sm font-light leading-relaxed text-gray-200 max-w-xs mb-5 min-w-0">
+          <p className="text-sm font-light leading-relaxed text-gray-200 max-w-xs mx-auto sm:mx-0 mb-4 sm:mb-5 min-w-0">
             {t.footer.description}
           </p>
-          <div className="flex items-center gap-3 max-w-xs min-w-0">
+          <div className="flex items-center justify-center sm:justify-start gap-3 max-w-xs mx-auto sm:mx-0 min-w-0">
             <div className="w-5 h-px bg-teal/50 shrink-0" />
             <span className="font-mono text-xs tracking-[0.15em] uppercase text-teal/70 leading-relaxed">
               {t.footer.tagline}
@@ -72,14 +72,14 @@ export default function Footer({ onNavigate }: Props) {
           </div>
         </div>
 
-        <div>
-          <h5 className="font-mono text-xs tracking-[0.2em] uppercase text-gray-300 mb-6">{t.footer.servicesTitle}</h5>
-          <ul className="space-y-4">
+        <div className="text-center sm:text-left">
+          <h5 className="font-mono text-xs tracking-[0.2em] uppercase text-gray-300 mb-4 sm:mb-6">{t.footer.servicesTitle}</h5>
+          <ul className="space-y-3 sm:space-y-4">
             {t.footer.serviceLinks.map(item => (
               <li key={item.id}>
                 <button
                   onClick={() => { onNavigate?.(item.id); window.scrollTo(0, 0); }}
-                  className="text-sm font-light text-gray-200 hover:text-teal transition-colors text-left"
+                  className="text-sm font-light text-gray-200 hover:text-teal transition-colors text-center sm:text-left"
                 >
                   {item.name}
                 </button>
@@ -88,9 +88,9 @@ export default function Footer({ onNavigate }: Props) {
           </ul>
         </div>
 
-        <div>
-          <h5 className="font-mono text-xs tracking-[0.2em] uppercase text-gray-300 mb-6">{t.footer.companyTitle}</h5>
-          <ul className="space-y-4">
+        <div className="text-center sm:text-left">
+          <h5 className="font-mono text-xs tracking-[0.2em] uppercase text-gray-300 mb-4 sm:mb-6">{t.footer.companyTitle}</h5>
+          <ul className="space-y-3 sm:space-y-4">
             {t.footer.companyLinks.map(item => (
               <li key={item.name}>
                 {item.href.startsWith('http') ? (
@@ -105,9 +105,9 @@ export default function Footer({ onNavigate }: Props) {
           </ul>
         </div>
 
-        <div>
-          <h5 className="font-mono text-xs tracking-[0.2em] uppercase text-gray-300 mb-6">{t.footer.contactTitle}</h5>
-          <div className="space-y-4 text-sm font-light text-gray-200">
+        <div className="text-center sm:text-left">
+          <h5 className="font-mono text-xs tracking-[0.2em] uppercase text-gray-300 mb-4 sm:mb-6">{t.footer.contactTitle}</h5>
+          <div className="space-y-3 sm:space-y-4 text-sm font-light text-gray-200">
             <p>Cra. 20 #133 - 74, La Calleja</p>
             <p>{t.footer.location}</p>
             <a href="mailto:info@ccgrupo.com.co" className="block hover:text-teal transition-colors">info@ccgrupo.com.co</a>
@@ -116,8 +116,8 @@ export default function Footer({ onNavigate }: Props) {
         </div>
       </div>
 
-      <div className="pt-10 border-t border-white/10 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 min-w-0">
+      <div className="pt-8 sm:pt-10 border-t border-white/10 flex flex-col lg:flex-row justify-between items-center lg:items-center gap-5 sm:gap-6 text-center lg:text-left">
+        <div className="flex flex-col sm:flex-row items-center sm:items-center gap-3 sm:gap-4 min-w-0">
           <span className="font-mono text-xs tracking-[0.12em] uppercase text-gray-300">
             {t.footer.copyright}
           </span>
@@ -129,7 +129,7 @@ export default function Footer({ onNavigate }: Props) {
           </button>
         </div>
 
-        <div className="flex flex-wrap gap-3 sm:gap-4">
+        <div className="flex flex-wrap justify-center lg:justify-start gap-2.5 sm:gap-4">
           {[
             { Icon: Linkedin,  href: 'https://www.linkedin.com/company/contact-center-grupo-sas', label: 'LinkedIn' },
             { Icon: Instagram, href: 'https://www.instagram.com/contact_center_grupo/',           label: 'Instagram' },
@@ -160,7 +160,7 @@ export default function Footer({ onNavigate }: Props) {
         </a>
         </div>
 
-        <span className="font-mono text-xs tracking-[0.12em] uppercase text-gray-300 max-w-full text-left lg:text-right">
+        <span className="font-mono text-xs tracking-[0.12em] uppercase text-gray-300 max-w-full text-center lg:text-right">
           {t.footer.location}
         </span>
       </div>

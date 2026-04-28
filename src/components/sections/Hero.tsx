@@ -31,7 +31,7 @@ export default function Hero({ onNavigate }: Props) {
       };
 
   return (
-    <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden px-6 pt-32 pb-24">
+    <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden px-5 sm:px-6 pt-24 sm:pt-32 pb-20 sm:pb-24">
 
       {/* Prism WebGL background */}
       <div className="absolute inset-0 z-0">
@@ -52,32 +52,32 @@ export default function Hero({ onNavigate }: Props) {
       </div>
 
       {/* Dark overlay so text stays legible */}
-      <div className="absolute inset-0 z-[1] bg-navy-deep/60 pointer-events-none" />
+      <div className="hero-overlay absolute inset-0 z-[1] pointer-events-none" />
 
       <div className="relative z-10 flex flex-col items-center text-center">
-        <h1 className="font-display text-[clamp(2.5rem,7vw,7rem)] leading-[1.05] tracking-tight font-normal">
-          <div className="overflow-hidden">
-            <motion.div initial={{ y: '115%' }} animate={{ y: 0 }} transition={{ delay: 2.1, duration: 1.3, ease: [0.16, 1, 0.3, 1] }}>
+        <h1 className="font-display text-[clamp(2.5rem,7vw,7rem)] leading-[1.03] tracking-tight font-normal">
+          <span className="block overflow-hidden">
+            <motion.span initial={{ y: '115%' }} animate={{ y: 0 }} transition={{ delay: 2.1, duration: 1.3, ease: [0.16, 1, 0.3, 1] }} className="block">
               {heroCopy.line1}
-            </motion.div>
-          </div>
-          <div className="overflow-hidden">
-            <motion.div initial={{ y: '115%' }} animate={{ y: 0 }} transition={{ delay: 2.3, duration: 1.3, ease: [0.16, 1, 0.3, 1] }} className="italic text-gradient">
+            </motion.span>
+          </span>
+          <span className="block overflow-hidden">
+            <motion.span initial={{ y: '115%' }} animate={{ y: 0 }} transition={{ delay: 2.3, duration: 1.3, ease: [0.16, 1, 0.3, 1] }} className="block italic text-gradient">
               {heroCopy.line2}
-            </motion.div>
-          </div>
-          <div className="overflow-hidden">
-            <motion.div initial={{ y: '115%' }} animate={{ y: 0 }} transition={{ delay: 2.5, duration: 1.3, ease: [0.16, 1, 0.3, 1] }}>
+            </motion.span>
+          </span>
+          <span className="block overflow-hidden">
+            <motion.span initial={{ y: '115%' }} animate={{ y: 0 }} transition={{ delay: 2.5, duration: 1.3, ease: [0.16, 1, 0.3, 1] }} className="block">
               {heroCopy.line3a} <span className="italic text-gradient">{heroCopy.line3b}</span>
-            </motion.div>
-          </div>
+            </motion.span>
+          </span>
         </h1>
 
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2.8, duration: 0.9 }}
-          className="max-w-xl mt-10 text-base font-light leading-relaxed text-white"
+          className="max-w-xl mt-8 sm:mt-10 text-base font-light leading-relaxed text-white"
         >
           {heroCopy.desc}
         </motion.p>
@@ -86,19 +86,19 @@ export default function Hero({ onNavigate }: Props) {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 3, duration: 0.9 }}
-          className="flex flex-wrap justify-center gap-5 mt-12"
+          className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-5 mt-10 sm:mt-12 w-full max-w-[26rem] sm:max-w-none"
         >
           <button
             onClick={() => onNavigate?.('contact')}
-            className="group relative font-mono text-label tracking-[0.2em] uppercase px-10 py-4 bg-gradient-to-br from-teal-dark to-teal text-white overflow-hidden transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_40px_rgba(0,180,216,0.35)]"
+            className="group relative w-full sm:w-auto font-mono text-[0.65rem] sm:text-label tracking-[0.2em] uppercase px-8 sm:px-10 py-3.5 sm:py-4 bg-gradient-to-br from-teal-dark to-teal text-white overflow-hidden transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_40px_rgba(0,180,216,0.35)]"
           >
             <span className="relative z-10">{t.hero.cta1}</span>
-            <div className="absolute inset-0 bg-gradient-to-br from-teal to-teal-bright opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-br from-teal to-teal-bright opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </button>
 
           <button
             onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
-            className="font-mono text-label tracking-[0.2em] uppercase px-10 py-4 bg-transparent border border-white/10 text-white hover:border-teal hover:text-teal hover:bg-teal/10 transition-all duration-300"
+            className="w-full sm:w-auto font-mono text-[0.65rem] sm:text-label tracking-[0.2em] uppercase px-8 sm:px-10 py-3.5 sm:py-4 bg-transparent border border-white/10 text-white hover:border-teal hover:text-teal hover:bg-teal/10 transition-all duration-300"
           >
             {t.hero.cta2}
           </button>
@@ -110,7 +110,7 @@ export default function Hero({ onNavigate }: Props) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 3.5, duration: 0.8 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20"
+        className="absolute bottom-8 sm:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20"
       >
         <span className="font-mono text-label tracking-[0.35em] uppercase text-white">{t.hero.scroll}</span>
         <div className="w-px h-12 bg-gradient-to-b from-teal to-transparent animate-pulse" />

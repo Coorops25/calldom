@@ -57,7 +57,7 @@ export default function Sectors({ onModalOpenChange }: Props) {
 
   return (
     <>
-      <section id="sectors" ref={ref} className="relative py-32 px-6 md:px-14 lg:px-28 overflow-hidden bg-transparent">
+      <section id="sectors" ref={ref} className="relative py-24 sm:py-32 px-5 sm:px-6 md:px-14 lg:px-28 overflow-hidden bg-transparent">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-teal/5 rounded-full blur-[100px]" />
         </div>
@@ -67,13 +67,13 @@ export default function Sectors({ onModalOpenChange }: Props) {
             initial={{ opacity: 0, y: 24 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7 }}
-            className="mb-16"
+            className="mb-12 sm:mb-16"
           >
             <div className="flex items-center gap-4 font-mono text-xs tracking-[0.35em] uppercase text-teal mb-6">
               <div className="w-8 h-px bg-teal" />
               {s.label}
             </div>
-            <h2 className="font-display text-3xl md:text-5xl leading-tight text-white mb-4">
+            <h2 className="font-display text-3xl md:text-5xl leading-tight text-white mb-3 sm:mb-4">
               {s.heading}
             </h2>
             <p className="text-gray-300 font-light text-base max-w-2xl leading-relaxed">
@@ -81,7 +81,7 @@ export default function Sectors({ onModalOpenChange }: Props) {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
             {s.items.map((item, i) => {
               const Icon = ICONS[i % ICONS.length];
               return (
@@ -92,9 +92,9 @@ export default function Sectors({ onModalOpenChange }: Props) {
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: i * 0.08 }}
                   onClick={() => open(item, i)}
-                  className="group relative p-8 md:p-10 border border-white/10 hover:border-teal/40 bg-white/[0.02] hover:bg-teal/[0.05] rounded-2xl transition-all duration-300 text-left cursor-pointer"
+                  className="group relative p-6 sm:p-8 md:p-10 border border-white/10 hover:border-teal/40 bg-white/[0.02] hover:bg-teal/[0.05] rounded-2xl transition-all duration-300 text-left cursor-pointer"
                 >
-                  <div className="w-14 h-14 rounded-xl border border-white/10 group-hover:border-teal/40 bg-white/[0.03] group-hover:bg-teal/10 flex items-center justify-center mb-7 transition-all duration-300">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl border border-white/10 group-hover:border-teal/40 bg-white/[0.03] group-hover:bg-teal/10 flex items-center justify-center mb-6 sm:mb-7 transition-all duration-300">
                     <Icon size={24} className="text-gray-400 group-hover:text-teal transition-colors duration-300" />
                   </div>
 
@@ -106,7 +106,7 @@ export default function Sectors({ onModalOpenChange }: Props) {
                     {item.name}
                   </h3>
 
-                  <p className="text-gray-400 font-light text-base leading-relaxed mb-7">
+                  <p className="text-gray-400 font-light text-base leading-relaxed mb-6 sm:mb-7">
                     {item.desc}
                   </p>
 

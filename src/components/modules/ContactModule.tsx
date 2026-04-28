@@ -45,7 +45,7 @@ export default function ContactModule({ onBack }: Props) {
   const scheduleValue = lang === 'en' ? 'Mon - Fri · 8:00 - 18:00' : 'Lun - Vie · 8:00 - 18:00';
   const contactInfo = [
     { icon: MapPin, label: ct.infoLabels.location, value: 'Cra. 20 #133 - 74, La Calleja', sub: ct.infoSubs.location },
-    { icon: Mail,   label: ct.infoLabels.email,    value: 'info@ccgrupo.com.co',            sub: ct.infoSubs.email   },
+    { icon: Mail,   label: ct.infoLabels.email,    value: 'commercial@ccgrupo.com.co',      sub: ct.infoSubs.email   },
     { icon: Phone,  label: ct.infoLabels.phone,    value: '(601) 7443732',                  sub: ct.infoSubs.phone   },
     { icon: Clock,  label: ct.infoLabels.schedule, value: scheduleValue,                     sub: ct.infoSubs.schedule },
   ];
@@ -107,29 +107,29 @@ export default function ContactModule({ onBack }: Props) {
       const body    = encodeURIComponent(
         `${nameLabel}: ${form.nombre}\n${companyLabel}: ${form.empresa}\nEmail: ${form.email}\n${phoneLabel}: ${form.telefono}\n${serviceLabel}: ${form.servicio}\n\n${form.mensaje}`
       );
-      window.location.href = `mailto:info@ccgrupo.com.co?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:commercial@ccgrupo.com.co?subject=${subject}&body=${body}`;
       setSending(false);
       setSubmitted(true);
     }
   };
 
   const inputBase =
-    'w-full bg-white/5 border border-white/10 text-white placeholder-gray-300/40 font-body text-sm px-5 py-3.5 focus:outline-none focus:border-teal/60 focus:bg-white/8 transition-all duration-200';
+    'contact-module-field w-full bg-white/5 border border-white/10 text-white placeholder-gray-300/40 font-body text-sm px-5 py-3.5 focus:outline-none focus:border-teal/60 focus:bg-white/8 transition-all duration-200';
 
   return (
-    <div className="min-h-screen bg-navy-deep text-white relative overflow-x-hidden">
+    <div className="contact-module-root min-h-screen bg-navy-deep text-white relative overflow-x-hidden">
       <motion.button
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
         onClick={onBack}
-        className="fixed top-4 left-4 sm:top-6 sm:left-6 z-50 flex items-center gap-2 font-mono text-[0.6rem] tracking-[0.2em] uppercase text-gray-200 hover:text-teal transition-colors group bg-navy-deep/70 backdrop-blur-md px-3 py-2 rounded-full border border-white/10"
+        className="contact-module-back fixed top-4 left-4 sm:top-6 sm:left-6 z-50 flex items-center gap-2 font-mono text-[0.6rem] tracking-[0.2em] uppercase text-gray-200 hover:text-teal transition-colors group bg-navy-deep/70 backdrop-blur-md px-3 py-2 rounded-full border border-white/10"
       >
         <ArrowLeft size={14} className="transition-transform duration-300 group-hover:-translate-x-1" />
         {t.back}
       </motion.button>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-14 pt-28 pb-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-14 pt-24 sm:pt-28 pb-20 sm:pb-24">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -149,12 +149,12 @@ export default function ContactModule({ onBack }: Props) {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-[1fr_1.45fr] gap-10 xl:gap-16 items-start">
+        <div className="grid lg:grid-cols-[1fr_1.45fr] gap-8 sm:gap-10 xl:gap-16 items-start">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            className="space-y-4"
+            className="space-y-3 sm:space-y-4"
           >
             {contactInfo.map(({ icon: Icon, label, value, sub }, i) => (
               <motion.div
@@ -162,7 +162,7 @@ export default function ContactModule({ onBack }: Props) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 + i * 0.07 }}
-                className="flex items-start gap-4 p-4 sm:p-5 border border-white/8 bg-white/[0.02] hover:border-teal/30 hover:bg-white/[0.04] transition-all duration-300 group rounded-2xl min-w-0"
+                className="contact-module-card flex items-start gap-4 p-3 sm:p-5 border border-white/8 bg-white/[0.02] hover:border-teal/30 hover:bg-white/[0.04] transition-all duration-300 group rounded-2xl min-w-0"
               >
                 <div className="w-10 h-10 flex items-center justify-center border border-teal/30 text-teal group-hover:bg-teal/10 transition-colors shrink-0">
                   <Icon size={16} />
@@ -175,7 +175,7 @@ export default function ContactModule({ onBack }: Props) {
               </motion.div>
             ))}
 
-            <div className="pt-6 border-t border-white/8">
+            <div className="contact-module-note pt-5 sm:pt-6 border-t border-white/8">
               <p className="font-body text-sm font-light text-gray-200 leading-relaxed">
                 {ct.commercial}
               </p>
@@ -195,7 +195,7 @@ export default function ContactModule({ onBack }: Props) {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="flex flex-col items-center justify-center text-center py-16 sm:py-20 px-5 sm:px-8 border border-teal/20 bg-teal/5 rounded-3xl"
+                  className="contact-module-success flex flex-col items-center justify-center text-center py-14 sm:py-20 px-5 sm:px-8 border border-teal/20 bg-teal/5 rounded-3xl"
                 >
                   <motion.div
                     initial={{ scale: 0 }}
@@ -224,7 +224,7 @@ export default function ContactModule({ onBack }: Props) {
                   exit={{ opacity: 0 }}
                   onSubmit={handleSubmit}
                   noValidate
-                  className="space-y-5 min-w-0"
+                  className="contact-module-form space-y-4 sm:space-y-5 min-w-0"
                 >
                   <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
                     <Field label={ct.fields.nombre} error={errors.nombre} htmlFor="f-nombre">
@@ -278,7 +278,7 @@ export default function ContactModule({ onBack }: Props) {
                   >
                     <span className="relative z-10">{sending ? ct.fields.sending : ct.fields.submit}</span>
                     {!sending && <Send size={14} className="relative z-10 transition-transform duration-300 group-hover:translate-x-1" />}
-                    <div className="absolute inset-0 bg-gradient-to-br from-teal to-teal-bright opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-br from-teal to-teal-bright opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </motion.button>
 
                   <AnimatePresence>
@@ -291,13 +291,13 @@ export default function ContactModule({ onBack }: Props) {
                       >
                         <XCircle size={12} />
                         {lang === 'en'
-                          ? 'Send failed. Try again or email us at info@ccgrupo.com.co'
-                          : 'Error al enviar. Intenta de nuevo o escríbenos a info@ccgrupo.com.co'}
+                          ? 'Send failed. Try again or email us at commercial@ccgrupo.com.co'
+                          : 'Error al enviar. Intenta de nuevo o escríbenos a commercial@ccgrupo.com.co'}
                       </motion.div>
                     )}
                   </AnimatePresence>
 
-                  <p className="font-mono text-[0.52rem] tracking-[0.15em] text-gray-300 text-center max-w-md mx-auto">
+                  <p className="contact-module-privacy font-mono text-[0.52rem] tracking-[0.15em] text-gray-300 text-center max-w-md mx-auto">
                     {ct.fields.privacyNote}
                   </p>
                 </motion.form>
@@ -313,7 +313,7 @@ export default function ContactModule({ onBack }: Props) {
 function Field({ label, error, children, htmlFor }: { label: string; error?: string; children: React.ReactNode; htmlFor?: string }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label htmlFor={htmlFor} className="font-mono text-[0.55rem] tracking-[0.2em] uppercase text-gray-200">{label}</label>
+      <label htmlFor={htmlFor} className="contact-module-label font-mono text-[0.55rem] tracking-[0.2em] uppercase text-gray-200">{label}</label>
       {children}
       <AnimatePresence>
         {error && (

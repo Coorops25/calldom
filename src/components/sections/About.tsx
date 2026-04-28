@@ -37,7 +37,7 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="relative overflow-hidden py-28 md:py-32 px-6 md:px-14 lg:px-28 bg-navy-deep">
+    <section id="about" className="relative overflow-hidden py-24 sm:py-32 px-5 sm:px-6 md:px-14 lg:px-28 bg-navy-deep">
       <div className="absolute inset-0 opacity-20 pointer-events-none -z-10">
         <Suspense fallback={null}>
           <LiquidEther
@@ -50,8 +50,8 @@ export default function About() {
         </Suspense>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-[1.05fr_0.95fr] gap-14 lg:gap-20 items-start lg:items-center">
-        <div className="space-y-8 max-w-2xl lg:pr-4">
+      <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-20 items-start lg:items-center">
+        <div className="space-y-6 sm:space-y-8 max-w-2xl lg:pr-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -79,7 +79,7 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.15 }}
-            className="p-6 md:p-7 border border-white/10 bg-white/[0.03] rounded-2xl"
+            className="p-5 sm:p-6 md:p-7 border border-white/10 bg-white/[0.03] rounded-2xl"
           >
             <p className="text-lg md:text-xl font-light leading-relaxed text-white/90">
               {t.about.desc}
@@ -118,7 +118,7 @@ export default function About() {
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 self-center justify-self-center lg:justify-self-end w-full max-w-[34rem]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 self-center justify-self-center lg:justify-self-end w-full max-w-[34rem]">
           {stats.map((stat, i) => (
             <motion.div
               key={i}
@@ -126,7 +126,7 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="p-8 md:p-10 border border-white/10 rounded-2xl relative overflow-hidden group hover:border-teal/30 hover:-translate-y-1 transition-all duration-300 bg-navy-deep/30 flex flex-col items-center text-center"
+              className="p-6 sm:p-8 md:p-10 border border-white/10 rounded-2xl relative overflow-hidden group hover:border-teal/30 hover:-translate-y-1 transition-all duration-300 bg-navy-deep/30 flex flex-col items-center text-center"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-teal/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="relative z-10">

@@ -307,11 +307,11 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
   }, [serviceId, title, homeCrumb, servicesCrumb]);
 
   return (
-    <div className="min-h-screen bg-navy-deep text-white relative overflow-x-hidden">
+    <div className="service-module-root min-h-screen bg-navy-deep text-white relative overflow-x-hidden">
       <BackgroundEffects />
 
       {/* Custom Navbar for Module */}
-      <nav className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 md:px-14 py-4 sm:py-6 flex justify-between items-center bg-navy-deep/85 backdrop-blur-xl border-b border-white/5">
+      <nav className="service-module-nav fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 md:px-14 py-4 sm:py-6 flex justify-between items-center bg-navy-deep/85 backdrop-blur-xl border-b border-white/5">
         <button
           type="button"
           aria-label={backHomeLabel}
@@ -337,9 +337,9 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
         </button>
       </nav>
 
-      <main className="pt-28 sm:pt-32 pb-20 px-4 sm:px-6 md:px-14 lg:px-28 relative z-10">
+      <main className="pt-24 sm:pt-32 pb-16 sm:pb-20 px-4 sm:px-6 md:px-14 lg:px-28 relative z-10">
         {/* Hero Section */}
-        <div className="grid lg:grid-cols-2 gap-10 xl:gap-16 items-start mb-20 lg:mb-24">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 xl:gap-16 items-start mb-16 sm:mb-20 lg:mb-24">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -382,7 +382,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
             className="relative"
           >
             {showIconPlaceholder ? (
-              <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-teal/20 relative w-full">
+              <div className="service-module-panel aspect-[4/3] rounded-2xl overflow-hidden border border-teal/20 relative w-full">
                 <div className={`service-panel-bg absolute inset-0 bg-gradient-to-br ${service.gradient}`} />
                 <HexagonBackground
                   className="absolute inset-0 bg-transparent"
@@ -405,7 +405,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
                 </HexagonBackground>
               </div>
             ) : (
-              <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 relative group">
+              <div className="service-module-panel aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 relative group">
                 <div className="absolute inset-0 bg-teal/20 mix-blend-overlay z-10" />
                 <img
                   src={service.details.heroImage}
@@ -426,7 +426,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
 
         {/* ¿Qué hacemos? */}
         {sd?.whatWeDoBoxes && sd.whatWeDoBoxes.length > 0 && (
-          <div className="mt-24 border-t border-white/10 pt-20">
+          <div className="mt-20 sm:mt-24 border-t border-white/10 pt-16 sm:pt-20">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -441,7 +441,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
                 <p className="text-lg font-light text-gray-200 leading-relaxed max-w-3xl">{sd.whatWeDoDesc}</p>
               )}
             </motion.div>
-            <div className="grid sm:grid-cols-2 gap-6">
+            <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
               {sd.whatWeDoBoxes.map((box, i) => (
                 <motion.div
                   key={i}
@@ -449,7 +449,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="p-6 sm:p-8 border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] hover:-translate-y-1 transition-all duration-300 rounded-xl"
+                  className="service-module-card p-6 sm:p-8 border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] hover:-translate-y-1 transition-all duration-300 rounded-xl"
                 >
                   <div className="font-mono text-[0.45rem] tracking-[0.3em] uppercase text-teal/60 mb-3">0{i + 1}</div>
                   <h4 className="font-mono text-sm uppercase tracking-widest text-teal mb-3">{box.title}</h4>
@@ -470,7 +470,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
 
         {/* Sub-products (AVA Suite, etc.) */}
         {localizedSubProducts && localizedSubProducts.length > 0 && (
-          <div className="mt-24 border-t border-white/10 pt-20">
+          <div className="mt-20 sm:mt-24 border-t border-white/10 pt-16 sm:pt-20">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -484,7 +484,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
               <h3 className="font-display text-4xl">{sm.ourAgents}</h3>
             </motion.div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {localizedSubProducts.map((product, i) => (
                 <motion.div
                   key={i}
@@ -492,7 +492,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="p-6 sm:p-8 border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] hover:border-teal/30 hover:-translate-y-1 transition-all duration-300 rounded-2xl group"
+                  className="service-module-card service-module-feature p-6 sm:p-8 border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] hover:border-teal/30 hover:-translate-y-1 transition-all duration-300 rounded-2xl group"
                 >
                   <div className="flex items-center gap-4 mb-4">
                     <div className="w-12 h-12 rounded-xl border border-teal/20 bg-teal/5 flex items-center justify-center shrink-0 group-hover:border-teal/50 transition-colors">
@@ -519,7 +519,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
 
         {/* ¿Por qué nos necesitas? — TiltCards */}
         {sd?.whyYouNeedUsItems && sd.whyYouNeedUsItems.length > 0 && (
-          <div className="mt-16 border-t border-white/10 pt-16">
+          <div className="mt-14 sm:mt-16 border-t border-white/10 pt-12 sm:pt-16">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -533,7 +533,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
             </motion.div>
 
             <div
-              className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
+              className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
               style={{ ['--why-cols' as string]: sd.whyYouNeedUsItems.length }}
             >
               {sd.whyYouNeedUsItems.map((item, i) => {
@@ -548,7 +548,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
                     className="h-full"
                   >
                     <TiltCard className="h-full">
-                      <div className="h-full flex flex-col rounded-2xl overflow-hidden border border-white/10 bg-navy-deep/80 backdrop-blur-sm hover:border-teal/30 transition-colors duration-300">
+                      <div className="service-module-tile h-full flex flex-col rounded-2xl overflow-hidden border border-white/10 bg-navy-deep/80 backdrop-blur-sm hover:border-teal/30 transition-colors duration-300">
                         {/* Mock UI illustration */}
                         <div className="bg-gradient-to-br from-teal/5 to-navy-deep border-b border-white/[0.07] min-h-[130px] sm:min-h-[160px]">
                           <MockUI />
@@ -584,8 +584,8 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
           if (!hasFaq && !hasAchieve) return null;
 
           return (
-            <div className="mt-16 border-t border-white/10 pt-16">
-              <div className={`grid gap-10 ${hasFaq && hasAchieve ? 'lg:grid-cols-2' : ''}`}>
+            <div className="mt-14 sm:mt-16 border-t border-white/10 pt-12 sm:pt-16">
+              <div className={`grid gap-8 sm:gap-10 ${hasFaq && hasAchieve ? 'lg:grid-cols-2' : ''}`}>
 
                 {/* FAQ */}
                 {hasFaq && (
@@ -610,7 +610,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
                           transition={{ delay: i * 0.06 }}
-                          className="border border-white/10 rounded-xl overflow-hidden"
+                          className="service-module-accordion border border-white/10 rounded-xl overflow-hidden"
                         >
                           <button
                             onClick={() => setOpenFaq(openFaq === i ? null : i)}
@@ -670,7 +670,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
                           transition={{ delay: i * 0.05 }}
-                          className="flex items-start gap-3 group p-3 rounded-lg hover:bg-white/[0.02] transition-colors"
+                          className="service-module-achievement flex items-start gap-3 group p-3 rounded-lg hover:bg-white/[0.02] transition-colors"
                         >
                           <CheckCircle size={15} className="text-teal shrink-0 mt-0.5 group-hover:text-white transition-colors" />
                           <span className="text-gray-300 font-light text-sm">{item}</span>
@@ -687,7 +687,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
 
         {/* Mid-page banner (services 02 and 04) */}
         {sd?.midBanner?.title && (
-          <div className="mt-24 border-t border-white/10 pt-20">
+          <div className="mt-20 sm:mt-24 border-t border-white/10 pt-16 sm:pt-20">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -712,7 +712,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
         {(() => {
           const PILLAR_ICONS = [Network, Zap, BarChart3];
           return (
-            <div className="mt-24 border-t border-white/10 pt-20">
+            <div className="mt-20 sm:mt-24 border-t border-white/10 pt-16 sm:pt-20">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -729,7 +729,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
                 </p>
               </motion.div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-10">
                 {sm.baseBlock.pillars.map((pillar, i) => {
                   const PillarIcon = PILLAR_ICONS[i];
                   return (
@@ -765,7 +765,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
         })()}
 
         {/* CTA */}
-        <div className="mt-20 lg:mt-24 p-8 sm:p-12 md:p-20 border border-white/10 rounded-3xl bg-gradient-to-br from-teal/10 to-transparent text-center relative overflow-hidden">
+        <div className="service-module-cta mt-16 sm:mt-20 lg:mt-24 p-6 sm:p-12 md:p-20 border border-white/10 rounded-3xl bg-gradient-to-br from-teal/10 to-transparent text-center relative overflow-hidden">
           <div className="relative z-10">
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl mb-6">{sd?.ctaTitle ?? sm.ctaTitle}</h2>
             <p className="text-base sm:text-xl font-light text-gray-300 mb-10 max-w-2xl mx-auto">

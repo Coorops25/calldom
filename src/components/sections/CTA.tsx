@@ -14,8 +14,8 @@ export default function CTA({ onNavigate }: Props) {
   const ctaCopy = t.cta;
 
   return (
-    <section className="relative overflow-hidden bg-navy-deep py-24 sm:py-40 lg:py-56 px-6 text-center">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,229,255,0.12),transparent_42%),linear-gradient(180deg,rgba(13,25,64,0.92),rgba(13,25,64,1))] pointer-events-none" />
+    <section className="relative overflow-hidden bg-navy-deep py-20 sm:py-40 lg:py-56 px-5 sm:px-6 text-center">
+      <div className="cta-overlay absolute inset-0 pointer-events-none" />
       <div className="absolute inset-0 opacity-20 pointer-events-none">
         <Suspense fallback={null}>
           <LiquidEther
@@ -33,7 +33,7 @@ export default function CTA({ onNavigate }: Props) {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="font-body text-sm text-teal mb-8"
+          className="font-body text-sm text-teal mb-6 sm:mb-8"
         >
           {ctaCopy.label}
         </motion.div>
@@ -43,7 +43,7 @@ export default function CTA({ onNavigate }: Props) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="mx-auto max-w-4xl font-display text-[clamp(2.7rem,6.8vw,6.4rem)] leading-[0.95] tracking-[-0.04em] text-white text-balance mb-8"
+          className="mx-auto max-w-4xl font-display text-[clamp(2.7rem,6.8vw,6.4rem)] leading-[0.95] tracking-[-0.04em] text-white text-balance mb-6 sm:mb-8"
         >
           {ctaCopy.heading}
         </motion.h2>
@@ -53,7 +53,7 @@ export default function CTA({ onNavigate }: Props) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
-          className="text-lg font-light leading-relaxed text-gray-200 max-w-lg mx-auto mb-12"
+          className="text-lg font-light leading-relaxed text-gray-200 max-w-lg mx-auto mb-10 sm:mb-12"
         >
           {ctaCopy.desc}
         </motion.p>
@@ -68,7 +68,7 @@ export default function CTA({ onNavigate }: Props) {
         >
           <span className="relative z-10">{t.cta.cta}</span>
           <ArrowRight size={16} className="relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
-          <div className="absolute inset-0 bg-gradient-to-br from-teal to-teal-bright opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-br from-teal to-teal-bright opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </motion.button>
       </div>
     </section>
