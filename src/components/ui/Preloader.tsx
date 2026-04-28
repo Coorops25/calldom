@@ -72,16 +72,16 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
       <style>{LOADER_CSS}</style>
 
       {/* ── Box ring + logo ─────────────────────────── */}
-      <div className="relative flex items-center justify-center" style={{ width: 160, height: 160 }}>
+      <div className="relative flex items-center justify-center" style={{ width: 220, height: 220 }}>
 
         {/* Orbit ring (subtle) */}
         <div
           className="absolute rounded-full border border-teal/10"
-          style={{ width: 140, height: 140 }}
+          style={{ width: 180, height: 180 }}
         />
         <div
           className="absolute rounded-full border border-teal/5"
-          style={{ width: 110, height: 110 }}
+          style={{ width: 142, height: 142 }}
         />
 
         {/* 4 orbiting boxes */}
@@ -90,8 +90,8 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
             key={i}
             className="absolute"
             style={{
-              width: 22,
-              height: 22,
+              width: 24,
+              height: 24,
               ...pos,
             }}
           >
@@ -116,7 +116,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
           <div
             key={`corner-${i}`}
             className="absolute"
-            style={{ width: 10, height: 10, ...pos }}
+            style={{ width: 12, height: 12, ...pos }}
           >
             <div
               className="w-full h-full rounded-sm"
@@ -132,7 +132,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
 
         {/* Center logo */}
         <div
-          className="relative z-10 w-28 h-28 sm:w-32 sm:h-32 rounded-3xl flex items-center justify-center"
+          className="relative z-10 w-[160px] h-[160px] rounded-3xl flex items-center justify-center"
           style={{
             background: 'linear-gradient(135deg, rgba(0,180,216,0.15), rgba(0,229,255,0.08))',
             border: '1px solid rgba(0,180,216,0.3)',
@@ -144,7 +144,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
             <img
               src={logoSrc}
               alt="CCGrupo"
-              className="ccg-loader-logo-img h-16 w-auto object-contain sm:h-20"
+              className="ccg-loader-logo-img w-[160px] max-w-none h-auto object-contain"
               onError={() => {
                 if (logoSrc !== BRAND_ASSETS.legacyLogo) {
                   setLogoSrc(BRAND_ASSETS.legacyLogo);
@@ -154,7 +154,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
               }}
             />
           ) : (
-            <span className="font-mono text-xs font-bold text-teal">CCG</span>
+            <span className="font-mono text-2xl font-bold text-teal">CCG</span>
           )}
         </div>
       </div>
