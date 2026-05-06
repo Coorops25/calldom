@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'motion/react';
 import {
-  HeartPulse, Landmark, ShoppingBag, Building2, GraduationCap, Truck,
+  HeartPulse, Landmark, ShoppingBag, Truck, Building2, GraduationCap,
+  Plane, PawPrint, Utensils, Car, Users, Sparkles,
   X, CheckCircle2, TrendingUp, ArrowRight,
 } from 'lucide-react';
 import { useLang } from '../../i18n';
 
-const ICONS = [HeartPulse, Landmark, ShoppingBag, Building2, GraduationCap, Truck];
+const ICONS = [HeartPulse, Landmark, ShoppingBag, Truck, Building2, GraduationCap, Plane, PawPrint, Utensils, Car, Users, Sparkles];
 
 type SectorItem = {
   name: string;
@@ -57,7 +58,7 @@ export default function Sectors({ onModalOpenChange }: Props) {
 
   return (
     <>
-      <section id="sectors" ref={ref} className="relative py-24 sm:py-32 px-5 sm:px-6 md:px-14 lg:px-28 overflow-hidden bg-transparent">
+      <section id="sectores" ref={ref} className="relative py-24 sm:py-32 px-5 sm:px-6 md:px-14 lg:px-28 overflow-hidden bg-transparent">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-teal/5 rounded-full blur-[100px]" />
         </div>
@@ -81,7 +82,7 @@ export default function Sectors({ onModalOpenChange }: Props) {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
             {s.items.map((item, i) => {
               const Icon = ICONS[i % ICONS.length];
               return (
@@ -148,7 +149,7 @@ export default function Sectors({ onModalOpenChange }: Props) {
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby={`sector-modal-title-${active.index}`}
-                className="pointer-events-auto relative w-[min(100%,56rem)] sm:w-[min(92vw,56rem)]
+                className="sector-modal-panel pointer-events-auto relative w-[min(100%,56rem)] sm:w-[min(92vw,56rem)]
                            max-h-[calc(100dvh-1rem)] sm:max-h-[min(90vh,52rem)] overflow-y-auto overscroll-contain
                            rounded-[1.75rem] sm:rounded-[2.25rem]
                            border border-white/12 bg-[#0D1940]/95 backdrop-blur-2xl

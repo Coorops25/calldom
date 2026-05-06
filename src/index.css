@@ -390,6 +390,27 @@ html.light {
     & [class*="border-white"]   { border-color: rgba(255, 255, 255, 0.15) !important; }
   }
 
+  /* ── Sectors modal: full light surface ── */
+  & .sector-modal-panel {
+    background-color: #ffffff !important;
+    border-color: rgba(11, 22, 40, 0.08) !important;
+    box-shadow: 0 24px 80px rgba(11, 22, 40, 0.14), 0 0 0 1px rgba(11, 22, 40, 0.06) !important;
+
+    & h3                         { color: #0b1628 !important; }
+    & .text-white                { color: #0b1628 !important; }
+    & [class*="text-white/9"]    { color: rgba(11, 22, 40, 0.90) !important; }
+    & [class*="text-white/8"]    { color: rgba(11, 22, 40, 0.80) !important; }
+    & [class*="text-white/7"]    { color: rgba(11, 22, 40, 0.70) !important; }
+    & [class*="text-white/6"]    { color: rgba(11, 22, 40, 0.60) !important; }
+    & [class*="text-white/5"]    { color: rgba(11, 22, 40, 0.50) !important; }
+    & [class*="text-white/4"]    { color: rgba(11, 22, 40, 0.40) !important; }
+    & [class*="text-white/2"]    { color: rgba(11, 22, 40, 0.20) !important; }
+    & [class*="bg-white/"]       { background-color: rgba(11, 22, 40, 0.04) !important; }
+    & [class*="border-white"]    { border-color: rgba(11, 22, 40, 0.10) !important; }
+    & .bg-teal\/10               { background-color: rgba(0, 180, 216, 0.10) !important; }
+    & .rounded-full.bg-white\/20 { background-color: rgba(11, 22, 40, 0.15) !important; }
+  }
+
   /* Hero overlay: keep a focal veil instead of a flat white wash */
   & .hero-overlay {
     background:
