@@ -10,7 +10,7 @@ export default function Marquee() {
       <motion.div
         className="flex w-max"
         animate={{ x: '-50%' }}
-        transition={{ duration: 35, repeat: Infinity, ease: 'linear' }}
+        transition={{ duration: 65, repeat: Infinity, ease: 'linear' }}
       >
         {[...items, ...items, ...items, ...items].map((item, i) => (
           <div key={i} className="flex items-center gap-8 px-8 whitespace-nowrap">

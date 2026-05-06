@@ -31,7 +31,7 @@ export default function Hero({ onNavigate }: Props) {
       };
 
   return (
-    <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden px-5 sm:px-6 pt-24 sm:pt-32 pb-20 sm:pb-24">
+    <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden px-5 sm:px-6 pt-20 sm:pt-28 pb-16 sm:pb-20">
 
       {/* Prism WebGL background */}
       <div className="absolute inset-0 z-0">
@@ -77,7 +77,7 @@ export default function Hero({ onNavigate }: Props) {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2.8, duration: 0.9 }}
-          className="max-w-xl mt-8 sm:mt-10 text-base font-light leading-relaxed text-white"
+          className="max-w-lg sm:max-w-xl mt-6 sm:mt-8 text-base font-light leading-relaxed text-white"
         >
           {heroCopy.desc}
         </motion.p>
@@ -86,7 +86,7 @@ export default function Hero({ onNavigate }: Props) {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 3, duration: 0.9 }}
-          className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-5 mt-10 sm:mt-12 w-full max-w-[26rem] sm:max-w-none"
+          className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-5 mt-8 sm:mt-10 w-full max-w-[26rem] sm:max-w-none"
         >
           <button
             onClick={() => onNavigate?.('contact')}

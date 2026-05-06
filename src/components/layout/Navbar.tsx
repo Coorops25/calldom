@@ -69,7 +69,7 @@ export default function Navbar({ onNavigate, hidden = false }: Props) {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-          className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 px-4 sm:px-6 md:px-14 py-4 sm:py-5 flex items-center justify-between ${
+          className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 px-4 sm:px-6 md:px-14 py-2 sm:py-3 flex items-center justify-between ${
           hidden ? 'pointer-events-none -translate-y-4 opacity-0' : 'opacity-100'
         } ${
           isScrolled ? 'bg-navy-deep/80 backdrop-blur-xl border-b border-white/5' : 'bg-transparent'
@@ -81,7 +81,7 @@ export default function Navbar({ onNavigate, hidden = false }: Props) {
           className="relative z-50 transition-transform duration-300 hover:scale-[1.02]"
           aria-label={labels.goHome}
         >
-          <ThemedLogo width={160} className="h-auto" />
+          <ThemedLogo width={140} className="h-auto" />
         </button>
 
         {/* Desktop navigation */}
@@ -89,13 +89,25 @@ export default function Navbar({ onNavigate, hidden = false }: Props) {
           <ul className="flex gap-8">
             {t.nav.links.map((link) => (
               <li key={link.name}>
-                <button
-                  onClick={() => scrollToSection(link.href)}
-                  className="font-mono text-label uppercase tracking-[0.2em] text-white hover:text-teal transition-colors relative group pb-1"
-                >
-                  {link.name}
-                  <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-teal transition-all duration-300 group-hover:w-full" />
-                </button>
+                {link.external ? (
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-mono text-label uppercase tracking-[0.2em] text-white hover:text-teal transition-colors relative group pb-1"
+                  >
+                    {link.name}
+                    <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-teal transition-all duration-300 group-hover:w-full" />
+                  </a>
+                ) : (
+                  <button
+                    onClick={() => scrollToSection(link.href)}
+                    className="font-mono text-label uppercase tracking-[0.2em] text-white hover:text-teal transition-colors relative group pb-1"
+                  >
+                    {link.name}
+                    <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-teal transition-all duration-300 group-hover:w-full" />
+                  </button>
+                )}
               </li>
             ))}
           </ul>
@@ -152,12 +164,14 @@ export default function Navbar({ onNavigate, hidden = false }: Props) {
           </button>
 
           {/* CTA */}
-          <button
-            onClick={() => onNavigate?.('contact')}
+          <a
+            href={t.nav.contactHref}
+            target="_blank"
+            rel="noopener noreferrer"
             className="font-mono text-label uppercase tracking-[0.2em] px-7 py-2.5 border border-teal/40 text-teal hover:bg-teal hover:text-navy-deep hover:border-teal hover:shadow-[0_0_30px_rgba(0,180,216,0.25)] transition-all duration-300"
           >
             {t.nav.contact}
-          </button>
+          </a>
         </div>
 
         {/* Mobile right side */}
@@ -223,13 +237,26 @@ export default function Navbar({ onNavigate, hidden = false }: Props) {
                   transition={{ delay: 0.1 + index * 0.05 }}
                   className="w-full border-b border-white/10 first:border-t"
                 >
-                  <button
-                    onClick={() => scrollToSection(link.href)}
-                    className="w-full flex justify-between items-center py-4 sm:py-6 font-display text-xl sm:text-3xl leading-tight text-white hover:text-teal hover:pl-4 transition-all duration-300"
-                  >
-                    <span>{link.name}</span>
-                    <span className="font-mono text-xs tracking-widest text-teal">0{index + 1}</span>
-                  </button>
+                  {link.external ? (
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setMobileOpen(false)}
+                      className="w-full flex justify-between items-center py-4 sm:py-6 font-display text-xl sm:text-3xl leading-tight text-white hover:text-teal hover:pl-4 transition-all duration-300"
+                    >
+                      <span>{link.name}</span>
+                      <span className="font-mono text-xs tracking-widest text-teal">0{index + 1}</span>
+                    </a>
+                  ) : (
+                    <button
+                      onClick={() => scrollToSection(link.href)}
+                      className="w-full flex justify-between items-center py-4 sm:py-6 font-display text-xl sm:text-3xl leading-tight text-white hover:text-teal hover:pl-4 transition-all duration-300"
+                    >
+                      <span>{link.name}</span>
+                      <span className="font-mono text-xs tracking-widest text-teal">0{index + 1}</span>
+                    </button>
+                  )}
                 </motion.li>
               ))}
             </ul>
@@ -240,12 +267,15 @@ export default function Navbar({ onNavigate, hidden = false }: Props) {
               transition={{ delay: 0.4 }}
               className="mt-1 sm:mt-8 pb-4 sm:pb-8"
             >
-              <button
-                onClick={() => { setMobileOpen(false); onNavigate?.('contact'); }}
+              <a
+                href={t.nav.contactHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMobileOpen(false)}
                 className="font-mono text-xs tracking-[0.25em] uppercase px-9 sm:px-10 py-3.5 sm:py-4 bg-gradient-to-br from-teal-dark to-teal text-white rounded-full hover:shadow-[0_8px_40px_rgba(0,180,216,0.35)] transition-all duration-300"
               >
                 {t.nav.contact}
-              </button>
+              </a>
             </motion.div>
           </motion.div>
         )}
