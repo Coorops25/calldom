@@ -12,7 +12,7 @@ interface ServicesProps {
 
 export default function Services({ onNavigate }: ServicesProps) {
   const { t, lang } = useLang();
-  const tapHint = lang === 'en' ? 'Tap card to view details' : 'Toca la tarjeta para ver detalles';
+  const tapHint = lang === 'en' ? 'Tap card to view details' : lang === 'pt' ? 'Toque o cartão para ver detalhes' : 'Toca la tarjeta para ver detalles';
 
   return (
     <section id="services" className="pt-24 relative bg-navy-deep overflow-hidden">
@@ -77,12 +77,12 @@ export default function Services({ onNavigate }: ServicesProps) {
           const textCol = (
             <div
               key="text"
-              className={`order-1 ${isReversed ? 'lg:order-2' : 'lg:order-1'} p-6 sm:p-10 lg:p-20 flex flex-col justify-center`}
+              className={`service-text-col order-1 ${isReversed ? 'lg:order-2' : 'lg:order-1'} p-6 sm:p-10 lg:p-20 flex flex-col justify-center`}
             >
               <div className="font-mono text-4xl sm:text-6xl font-light text-navy-light mb-6 sm:mb-8 text-stroke-teal">
                 {svc.id}
               </div>
-              <h3 className="font-display text-[clamp(2rem,8vw,3.8rem)] leading-tight mb-5 sm:mb-6">
+              <h3 className="font-display text-[clamp(2rem,8vw,3.8rem)] leading-tight mb-5 sm:mb-6 text-white">
                 {title}
               </h3>
               {subtitle && (
@@ -118,7 +118,11 @@ export default function Services({ onNavigate }: ServicesProps) {
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  onNavigate?.(svc.id);
+                  if (svc.externalLink) {
+                    window.open(svc.externalLink, '_blank', 'noopener,noreferrer');
+                  } else {
+                    onNavigate?.(svc.id);
+                  }
                 }}
                 className="inline-flex items-center gap-4 font-mono text-[0.65rem] sm:text-xs tracking-[0.2em] uppercase text-teal group/link hover:text-white transition-colors"
               >
@@ -163,9 +167,15 @@ export default function Services({ onNavigate }: ServicesProps) {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true, margin: '-10%' }}
               onClick={() => {
-                if (window.matchMedia('(max-width: 1023px)').matches) onNavigate?.(svc.id);
+                if (window.matchMedia('(max-width: 1023px)').matches) {
+                  if (svc.externalLink) {
+                    window.open(svc.externalLink, '_blank', 'noopener,noreferrer');
+                  } else {
+                    onNavigate?.(svc.id);
+                  }
+                }
               }}
-              className="group grid lg:grid-cols-2 min-h-[auto] sm:min-h-[60vh] lg:min-h-[75vh] border-b border-white/10 overflow-hidden relative transition-colors duration-500 bg-[#0D1940] hover:bg-[#0D1940] cursor-pointer lg:cursor-default"
+              className="group grid lg:grid-cols-2 min-h-[auto] sm:min-h-[50vh] lg:min-h-[55vh] border-b border-white/10 overflow-hidden relative transition-colors duration-500 bg-[#0D1940] hover:bg-[#0D1940] cursor-pointer lg:cursor-default"
             >
               {[textCol, iconCol]}
             </motion.div>

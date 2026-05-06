@@ -287,6 +287,16 @@ html.light {
   & [class*="text-white/5"] { color: var(--c-g300) !important; }
   & [class*="text-white/4"] { color: var(--c-g300) !important; }
 
+  /* ── navy-deep as TEXT: var flips to #f0f4f8 in light → force dark ── */
+  & .text-navy-deep              { color: #0b1628 !important; }
+  & [class*="text-navy-deep/9"]  { color: rgba(11, 22, 40, 0.9) !important; }
+  & [class*="text-navy-deep/8"]  { color: rgba(11, 22, 40, 0.8) !important; }
+  & [class*="text-navy-deep/7"]  { color: rgba(11, 22, 40, 0.7) !important; }
+  & [class*="text-navy-deep/6"]  { color: rgba(11, 22, 40, 0.6) !important; }
+  & [class*="text-navy-deep/5"]  { color: rgba(11, 22, 40, 0.5) !important; }
+  & [class*="text-navy-deep/4"]  { color: rgba(11, 22, 40, 0.4) !important; }
+  & [class*="text-navy-deep/3"]  { color: rgba(11, 22, 40, 0.3) !important; }
+
   /* ── Text gradient: deeper teal so it reads on white (was #00e5ff = 1.7:1) ── */
   & .text-gradient {
     background: linear-gradient(135deg, #005b94 0%, #0090c0 100%);
@@ -361,6 +371,23 @@ html.light {
   /* ── Service icon panels: premium light gradient (dark navy-deep var breaks in light) ── */
   & .service-panel-bg {
     background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 55%, #f0f9ff 100%) !important;
+  }
+
+  /* ── Dark-bg sections: restore white text (Services text col + PostingSection keep dark bg) ── */
+  & .service-text-col,
+  & #posting-section {
+    & h3                        { color: #ffffff; }
+    & .text-white               { color: #ffffff !important; }
+    & .text-gray-200            { color: rgba(255, 255, 255, 0.75) !important; }
+    & .text-gray-300            { color: rgba(255, 255, 255, 0.65) !important; }
+    & .text-gray-400            { color: rgba(255, 255, 255, 0.50) !important; }
+    & [class*="text-white/9"]   { color: rgba(255, 255, 255, 0.90) !important; }
+    & [class*="text-white/8"]   { color: rgba(255, 255, 255, 0.80) !important; }
+    & [class*="text-white/7"]   { color: rgba(255, 255, 255, 0.70) !important; }
+    & [class*="text-white/6"]   { color: rgba(255, 255, 255, 0.60) !important; }
+    & [class*="text-white/5"]   { color: rgba(255, 255, 255, 0.50) !important; }
+    & [class*="text-white/4"]   { color: rgba(255, 255, 255, 0.40) !important; }
+    & [class*="border-white"]   { border-color: rgba(255, 255, 255, 0.15) !important; }
   }
 
   /* Hero overlay: keep a focal veil instead of a flat white wash */
