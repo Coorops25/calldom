@@ -13,11 +13,17 @@ import BackgroundEffects from './components/ui/BackgroundEffects';
 import Navbar from './components/layout/Navbar';
 import Hero from './components/sections/Hero';
 import Marquee from './components/sections/Marquee';
+import Diferencial from './components/sections/Diferencial';
+import AIStats from './components/sections/AIStats';
+import Journey from './components/sections/Journey';
 import About from './components/sections/About';
 import Services from './components/sections/Services';
 import Reasons from './components/sections/Reasons';
 import Sectors from './components/sections/Sectors';
+import Talento from './components/sections/Talento';
 import Clients from './components/sections/Clients';
+import PostingSection from './components/sections/PostingSection';
+import FAQ from './components/sections/FAQ';
 import CTA from './components/sections/CTA';
 import Footer from './components/layout/Footer';
 import FloatingCTA from './components/ui/FloatingCTA';
@@ -32,7 +38,7 @@ const ContactModule  = lazy(() => import('./components/modules/ContactModule'));
 const PrivacyModule  = lazy(() => import('./components/modules/PrivacyModule'));
 const NotFoundModule = lazy(() => import('./components/modules/NotFoundModule'));
 
-const SERVICE_VIEWS = ['01', '02', '03', '04'] as const;
+const SERVICE_VIEWS = ['01', '02', '03', '04', '05'] as const;
 const SERVICE_VIEW_SET = new Set<string>(SERVICE_VIEWS);
 
 function normalizePath(pathname: string): string {
@@ -180,11 +186,17 @@ export default function App({ initialPath }: AppProps) {
                 <main className="relative z-10">
                   <Hero onNavigate={handleNavigate} />
                   <Marquee />
+                  <Diferencial />
+                  <AIStats />
+                  <Journey />
                   <About />
                   <Services onNavigate={handleNavigate} />
                   <Reasons />
                   <Sectors onModalOpenChange={setIsSectorModalOpen} />
+                  <Talento />
                   <Clients />
+                  <PostingSection />
+                  <FAQ />
                   <CTA onNavigate={handleNavigate} />
                 </main>
                 <Footer onNavigate={handleNavigate} />

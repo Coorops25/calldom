@@ -111,7 +111,7 @@ export default function Footer({ onNavigate }: Props) {
             <p>Cra. 20 #133 - 74, La Calleja</p>
             <p>{t.footer.location}</p>
             <a href="mailto:info@ccgrupo.com.co" className="block hover:text-teal transition-colors">info@ccgrupo.com.co</a>
-            <a href="tel:+60117443732" className="block hover:text-teal transition-colors">(601) 7443732</a>
+            <a href="tel:+573016125291" className="block hover:text-teal transition-colors">301 612 5291</a>
           </div>
         </div>
       </div>
@@ -132,7 +132,7 @@ export default function Footer({ onNavigate }: Props) {
         <div className="flex flex-wrap justify-center lg:justify-start gap-2.5 sm:gap-4">
           {[
             { Icon: Linkedin,  href: 'https://www.linkedin.com/company/contact-center-grupo-sas', label: 'LinkedIn' },
-            { Icon: Instagram, href: 'https://www.instagram.com/contact_center_grupo/',           label: 'Instagram' },
+            { Icon: Instagram, href: 'https://www.instagram.com/postingbyccg',                    label: 'Instagram' },
             { Icon: Facebook,  href: 'https://www.facebook.com/CONTACTCENTERGROUP',               label: 'Facebook' },
             { Icon: Youtube,   href: 'https://www.youtube.com/channel/UCK1VihHdl_RjnuLkG5rhopQ', label: 'YouTube' },
           ].map(({ Icon, href, label }, i) => (

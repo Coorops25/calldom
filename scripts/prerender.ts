@@ -153,13 +153,13 @@ function renderHome(lang: Lang): string {
 function renderService(lang: Lang, id: string): string {
   const t = translations[lang];
   const service = servicesData.find((item) => item.id === id);
-  const detail = t.serviceDetails[id as keyof typeof t.serviceDetails];
+  const detail = t.serviceDetails[id as keyof typeof t.serviceDetails] as Record<string, any>;
   if (!service || !detail) return shell(paragraph('Not found'));
 
-  const title = service.title.replaceAll('â€“', '–');
-  const benefits = detail.benefits.map((item) => `<li style="margin-bottom:10px"><strong>${escapeHtml(item.title)}:</strong> ${escapeHtml(item.desc)}</li>`).join('');
-  const features = detail.features.map((item) => `<li style="margin-bottom:8px">${escapeHtml(item)}</li>`).join('');
-  const faqs = detail.faq.map((item) => `
+  const title = service.title.replaceAll('â€”', '–');
+  const benefits = (detail.benefits ?? []).map((item) => `<li style=”margin-bottom:10px”><strong>${escapeHtml(item.title)}:</strong> ${escapeHtml(item.desc)}</li>`).join('');
+  const features = (detail.features ?? []).map((item) => `<li style=”margin-bottom:8px”>${escapeHtml(item)}</li>`).join('');
+  const faqs = (detail.faq ?? []).map((item) => `
     <details style="margin:0 0 12px;padding:14px 16px;border:1px solid #cbd5e1;border-radius:12px">
       <summary style="cursor:pointer;font-weight:700">${escapeHtml(item.question)}</summary>
       <p style="margin:10px 0 0;color:#334155">${escapeHtml(item.answer)}</p>
@@ -172,9 +172,9 @@ function renderService(lang: Lang, id: string): string {
         <p style="margin:0 0 8px;letter-spacing:.18em;text-transform:uppercase;color:#0f766e;font-size:12px">${escapeHtml(t.serviceModule.servicePrefix)} ${escapeHtml(service.id)}</p>
         <h1 style="font-size:clamp(38px,6vw,72px);line-height:1.05;margin:0 0 10px">${escapeHtml(title)}</h1>
         <p style="margin:0 0 12px;font-size:20px;color:#0f766e;font-weight:700">${escapeHtml(service.subtitle ?? '')}</p>
-        <p style="max-width:840px;font-size:18px;color:#334155;margin:0">${escapeHtml(detail.longDesc)}</p>
+        <p style="max-width:840px;font-size:18px;color:#334155;margin:0">${escapeHtml(detail.longDesc ?? '')}</p>
       </header>
-      ${section(lang === 'en' ? 'Features' : lang === 'pt' ? 'Características' : 'Características', list(detail.features))}
+      ${section(lang === 'en' ? 'Features' : lang === 'pt' ? 'Características' : 'Características', list(detail.features ?? []))}
       ${section(lang === 'en' ? 'Benefits' : lang === 'pt' ? 'Benefícios' : 'Beneficios Clave', `<ul style="margin:0;padding-left:20px">${benefits}</ul>`)}
       ${section(lang === 'en' ? 'What we do' : lang === 'pt' ? 'O que fazemos' : '¿Qué hacemos?', paragraph(detail.whatWeDoDesc ?? '') + list(detail.whatWeDoBoxes?.map((box) => box.title) ?? []))}
       ${section(lang === 'en' ? 'Frequently Asked Questions' : 'Preguntas Frecuentes', faqs)}
@@ -284,13 +284,13 @@ async function main() {
     for (const id of ['01', '02', '03', '04']) {
       if (lang === 'pt') continue;
       const service = servicesData.find((item) => item.id === id);
-      const detail = t.serviceDetails[id as keyof typeof t.serviceDetails];
+      const detail = t.serviceDetails[id as keyof typeof t.serviceDetails] as Record<string, any>;
       if (!service || !detail) continue;
       pages.push({
         route: servicePath(lang, id),
         lang,
         title: `${service.title} | CCGrupo`,
-        description: detail.longDesc,
+        description: detail.longDesc ?? '',
         body: renderService(lang, id),
       });
     }

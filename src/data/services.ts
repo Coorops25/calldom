@@ -1,4 +1,4 @@
-import { Users, TrendingUp, Bot, Code2, Sparkles, MessageSquare, Mic, Target, Share2, Zap } from 'lucide-react';
+import { Users, TrendingUp, Bot, Code2, Sparkles, MessageSquare, Mic, Target, Share2, Zap, UserCheck, Palette } from 'lucide-react';
 import type { ServiceData } from '../types';
 
 export const servicesData: ServiceData[] = [
@@ -177,6 +177,75 @@ export const servicesData: ServiceData[] = [
         { question: '¿Cuánto tarda un proyecto típico?', answer: 'Un MVP toma entre 4 y 8 semanas; un sistema completo entre 3 y 6 meses con entregas iterativas.' },
         { question: '¿Ofrecen mantenimiento y soporte?', answer: 'Sí. Contamos con planes de soporte mensual, actualizaciones de seguridad y evolución del software incluida.' },
         { question: '¿Pueden integrar con sistemas legados?', answer: 'Sí. Desarrollamos conectores y middleware para integrar con SAP, Oracle, sistemas propietarios y cualquier servicio con API.' },
+      ],
+    },
+  },
+  {
+    id: '05',
+    title: 'Talento Humano',
+    subtitle: 'People-First Operations',
+    desc: 'Conectamos empresas con especialistas de alto valor formados para operar con IA, CRM y omnicanalidad. Talento bilingüe y multilingüe disponible en modalidades presencial, híbrida y teletrabajo desde +9 países.',
+    tags: ['Reclutamiento BPO', 'Selección Especializada', 'Onboarding', 'Nearshore', 'Teletrabajo', 'Multilingüe'],
+    link: 'https://ccgrupo.com.co/servicio/05',
+    icon: UserCheck,
+    gradient: 'from-[#071a1a] via-navy-deep to-[#0a2626]',
+    details: {
+      heroImage: '/images/services/05-talento-humano.svg',
+      longDesc: 'Conectamos empresas con talento humano de alto valor especializado en BPO, CX y operaciones digitales. Profesionales formados para trabajar con IA, CRM y omnicanalidad en cualquier modalidad: presencial, híbrida o teletrabajo desde más de 9 países con 5 idiomas.',
+      features: [
+        'Reclutamiento y selección especializada en BPO',
+        'Talento bilingüe y multilingüe (5 idiomas)',
+        'Modalidades presencial, híbrida y teletrabajo',
+        'Onboarding estructurado y acompañado',
+        'Nearshore desde +9 países',
+        'Evaluación de competencias y perfiles técnicos',
+      ],
+      benefits: [
+        { title: 'Talento de Alto Valor', desc: 'Especialistas formados en CX, ventas, IA y operaciones digitales con experiencia probada.' },
+        { title: 'Escalabilidad Inmediata', desc: 'Equipos listos para operar en semanas, no meses, con procesos de onboarding probados.' },
+        { title: 'Cobertura Global', desc: 'Talento nearshore desde +9 países para operaciones en 5 idiomas y múltiples zonas horarias.' },
+        { title: 'Retención Garantizada', desc: 'Programas de gestión del clima y seguimiento en primeros 90 días para reducir rotación.' },
+      ],
+      faq: [
+        { question: '¿Qué perfiles pueden proveer?', answer: 'Agentes de CX, ejecutivos de ventas, operadores de IA, analistas de datos, gestores de redes sociales y coordinadores de BPO.' },
+        { question: '¿En qué idiomas operan?', answer: 'Español, inglés, portugués, francés e italiano con agentes nativos o bilingües certificados.' },
+        { question: '¿Cuánto tiempo toma tener un equipo operativo?', answer: 'Entre 2 y 4 semanas para perfiles estándar, 4-6 semanas para perfiles técnicos especializados.' },
+        { question: '¿Incluye gestión del equipo?', answer: 'Sí. Ofrecemos modelos de operación supervisada donde CCGrupo gestiona el equipo, la calidad y los KPIs acordados.' },
+      ],
+    },
+  },
+  {
+    id: '06',
+    title: 'Agencia Creativa',
+    subtitle: 'Posting — Donde Todo Empieza',
+    desc: 'Posting es nuestra agencia creativa hermana especializada en construir la marca y presencia digital que CCG convierte y retiene. Identidad, pauta digital y contenido integrados con la operación.',
+    tags: ['Identidad de Marca', 'Desarrollo Web', 'Meta Ads', 'Google Ads', 'LinkedIn Ads', 'Contenido'],
+    link: 'https://www.posting.com.co',
+    externalLink: 'https://www.posting.com.co',
+    icon: Palette,
+    gradient: 'from-[#1a0a1a] via-navy-deep to-[#2a1030]',
+    details: {
+      heroImage: '/images/services/06-agencia-creativa.svg',
+      longDesc: 'Posting es la agencia creativa del ecosistema CCGrupo. Nos especializamos en construir la presencia digital y la marca que después CCG convierte y retiene. Desde identidad visual hasta producción audiovisual y pauta digital, integramos todo en un solo ecosistema.',
+      features: [
+        'Identidad de marca y branding corporativo',
+        'Desarrollo web y landing pages de conversión',
+        'Meta Ads, Google Ads y LinkedIn Ads',
+        'Gestión de redes sociales y community management',
+        'Producción audiovisual y contenido de alto impacto',
+        'Estrategia de contenidos y SEO',
+      ],
+      benefits: [
+        { title: 'Ecosistema Integrado', desc: 'Marca, pauta y operación conectados — lo que Posting atrae, CCG lo convierte.' },
+        { title: 'Creatividad con Datos', desc: 'Cada pieza creativa y campaña está respaldada por métricas reales y aprendizaje continuo.' },
+        { title: 'Un Solo Aliado', desc: 'Desde la primera impresión hasta la fidelización — todo gestionado en un ecosistema coherente.' },
+        { title: 'ROI Medible', desc: 'Cada campaña tiene trazabilidad completa desde la inversión publicitaria hasta el cliente convertido.' },
+      ],
+      faq: [
+        { question: '¿Posting opera de forma independiente?', answer: 'Sí. Posting es una agencia independiente que trabaja tanto con clientes del ecosistema CCGrupo como con clientes propios.' },
+        { question: '¿Qué incluye la gestión de redes sociales?', answer: 'Estrategia de contenidos, producción, publicación, gestión de comunidad, monitoreo de reputación y reportes mensuales.' },
+        { question: '¿Cómo se integra con la operación de CCG?', answer: 'Los leads generados por Posting pueden integrarse directamente con el CRM y el equipo de ventas de CCG para un seguimiento inmediato.' },
+        { question: '¿Tienen casos de éxito en pauta digital?', answer: 'Sí. Visita posting.com.co para ver casos y resultados de campañas en Meta, Google y LinkedIn para diferentes industrias.' },
       ],
     },
   },

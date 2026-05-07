@@ -33,6 +33,7 @@ export interface ServiceData {
   desc: string;
   tags: string[];
   link: string;
+  externalLink?: string;
   icon: ElementType;
   gradient: string;
   details: ServiceDetails;
@@ -42,4 +43,5 @@ export interface ServiceData {
 export interface NavLink {
   name: string;
   href: string;
+  external?: boolean;
 }
