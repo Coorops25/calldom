@@ -43,10 +43,10 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
   useEffect(() => {
     const interval = setInterval(() => {
       setCount((prev) => {
-        const next = prev + Math.floor(Math.random() * 6) + 3;
+        const next = prev + Math.floor(Math.random() * 10) + 6;
         if (next >= 100) {
           clearInterval(interval);
-          setTimeout(onComplete, 900);
+          setTimeout(onComplete, 500);
           return 100;
         }
         return next;

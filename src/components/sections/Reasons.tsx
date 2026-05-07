@@ -1,7 +1,7 @@
-import { useRef } from 'react';
+import { useRef, lazy, Suspense } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { Brain, BarChart3, Globe2, Settings, Link2, Zap } from 'lucide-react';
-import SplitText from '../ui/SplitText';
+const SplitText = lazy(() => import('../ui/SplitText'));
 import { useLang } from '../../i18n';
 
 const ICONS   = [Globe2, Settings, BarChart3, Link2, Brain, Zap];
@@ -97,20 +97,26 @@ export default function Reasons() {
         </motion.div>
 
         <div className="font-display text-[clamp(2.2rem,4vw,3.8rem)] leading-tight">
-          <SplitText
-            key={`reasons-heading-${lang}`}
-            className="inline-block"
-            delay={30}
-            duration={1}
-            splitType="words"
-            from={{ opacity: 0, y: 20 }}
-            to={{ opacity: 1, y: 0 }}
-          >
-            {prefix}{normalizeQ(t.reasons.headingPre)}{' '}
-            <em className="italic text-gradient inline-block align-baseline whitespace-nowrap">
-              {normalizeQ(t.reasons.headingEm)}?
-            </em>
-          </SplitText>
+          <Suspense fallback={
+            <span className="inline-block opacity-0">
+              {prefix}{normalizeQ(t.reasons.headingPre)} {normalizeQ(t.reasons.headingEm)}?
+            </span>
+          }>
+            <SplitText
+              key={`reasons-heading-${lang}`}
+              className="inline-block"
+              delay={30}
+              duration={1}
+              splitType="words"
+              from={{ opacity: 0, y: 20 }}
+              to={{ opacity: 1, y: 0 }}
+            >
+              {prefix}{normalizeQ(t.reasons.headingPre)}{' '}
+              <em className="italic text-gradient inline-block align-baseline whitespace-nowrap">
+                {normalizeQ(t.reasons.headingEm)}?
+              </em>
+            </SplitText>
+          </Suspense>
         </div>
       </div>
 

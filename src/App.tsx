@@ -11,20 +11,22 @@ import PageLoader from './components/ui/PageLoader';
 import CustomCursor from './components/ui/CustomCursor';
 import BackgroundEffects from './components/ui/BackgroundEffects';
 import Navbar from './components/layout/Navbar';
+// Above-fold: eager — must render instantly
 import Hero from './components/sections/Hero';
 import Marquee from './components/sections/Marquee';
-import Diferencial from './components/sections/Diferencial';
-import AIStats from './components/sections/AIStats';
-import Journey from './components/sections/Journey';
-import About from './components/sections/About';
-import Services from './components/sections/Services';
-import Reasons from './components/sections/Reasons';
-import Sectors from './components/sections/Sectors';
-import Talento from './components/sections/Talento';
-import Clients from './components/sections/Clients';
-import PostingSection from './components/sections/PostingSection';
-import FAQ from './components/sections/FAQ';
-import CTA from './components/sections/CTA';
+// Below-fold: lazy — deferred until scroll approaches
+const Diferencial    = lazy(() => import('./components/sections/Diferencial'));
+const AIStats        = lazy(() => import('./components/sections/AIStats'));
+const Journey        = lazy(() => import('./components/sections/Journey'));
+const About          = lazy(() => import('./components/sections/About'));
+const Services       = lazy(() => import('./components/sections/Services'));
+const Reasons        = lazy(() => import('./components/sections/Reasons'));
+const Sectors        = lazy(() => import('./components/sections/Sectors'));
+const Talento        = lazy(() => import('./components/sections/Talento'));
+const Clients        = lazy(() => import('./components/sections/Clients'));
+const PostingSection = lazy(() => import('./components/sections/PostingSection'));
+const FAQ            = lazy(() => import('./components/sections/FAQ'));
+const CTA            = lazy(() => import('./components/sections/CTA'));
 import Footer from './components/layout/Footer';
 import FloatingCTA from './components/ui/FloatingCTA';
 import ScrollTracker from './components/ui/ScrollTracker';
@@ -167,6 +169,10 @@ export default function App({ initialPath }: AppProps) {
     <MotionConfig reducedMotion="user">
     <LangProvider initialLang={initialLang}>
       <ErrorBoundary>
+        {/* Cookie banner mounts immediately so its 2 s timer fires from page-load,
+            not from after the preloader. z-[60000] keeps it above the preloader overlay. */}
+        <CookieBanner onNavigate={handleNavigate} />
+
         <AnimatePresence mode="wait">
           {loading && <Preloader onComplete={() => setLoading(false)} />}
         </AnimatePresence>
@@ -174,7 +180,6 @@ export default function App({ initialPath }: AppProps) {
         {!loading && (
           <>
             <CustomCursor />
-            <CookieBanner onNavigate={handleNavigate} />
 
             {currentView === 'home' ? (
               <>
@@ -186,18 +191,20 @@ export default function App({ initialPath }: AppProps) {
                 <main className="relative z-10">
                   <Hero onNavigate={handleNavigate} />
                   <Marquee />
-                  <Diferencial />
-                  <AIStats />
-                  <Journey />
-                  <About />
-                  <Services onNavigate={handleNavigate} />
-                  <Reasons />
-                  <Sectors onModalOpenChange={setIsSectorModalOpen} />
-                  <Talento />
-                  <Clients />
-                  <PostingSection />
-                  <FAQ />
-                  <CTA onNavigate={handleNavigate} />
+                  <Suspense fallback={null}>
+                    <Diferencial />
+                    <AIStats />
+                    <Journey />
+                    <About />
+                    <Services onNavigate={handleNavigate} />
+                    <Reasons />
+                    <Sectors onModalOpenChange={setIsSectorModalOpen} />
+                    <Talento />
+                    <Clients />
+                    <PostingSection />
+                    <FAQ />
+                    <CTA onNavigate={handleNavigate} />
+                  </Suspense>
                 </main>
                 <Footer onNavigate={handleNavigate} />
               </>

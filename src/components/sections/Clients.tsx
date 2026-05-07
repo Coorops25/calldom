@@ -1,6 +1,6 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, lazy, Suspense } from 'react';
 import { motion } from 'motion/react';
-import SplitText from '../ui/SplitText';
+const SplitText = lazy(() => import('../ui/SplitText'));
 import { useLang } from '../../i18n';
 
 // Auto-loads every .webp file added to src/assets/clients/webp/
@@ -39,17 +39,23 @@ export default function Clients() {
           </motion.div>
 
           <div className="font-display text-[clamp(2rem,3.5vw,3rem)]">
-            <SplitText
-              key={`clients-heading-${lang}`}
-              className="inline-block"
-              delay={40}
-              duration={1}
-              splitType="chars"
-              from={{ opacity: 0, y: 20 }}
-              to={{ opacity: 1, y: 0 }}
-            >
-              {t.clients.headingPre} <em className="italic text-teal">{t.clients.headingEm}</em>
-            </SplitText>
+            <Suspense fallback={
+              <span className="inline-block opacity-0">
+                {t.clients.headingPre} {t.clients.headingEm}
+              </span>
+            }>
+              <SplitText
+                key={`clients-heading-${lang}`}
+                className="inline-block"
+                delay={40}
+                duration={1}
+                splitType="chars"
+                from={{ opacity: 0, y: 20 }}
+                to={{ opacity: 1, y: 0 }}
+              >
+                {t.clients.headingPre} <em className="italic text-teal">{t.clients.headingEm}</em>
+              </SplitText>
+            </Suspense>
           </div>
         </div>
 

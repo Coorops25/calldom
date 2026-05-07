@@ -80,7 +80,7 @@ export default function CookieBanner({ onNavigate }: { onNavigate?: (view: strin
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 24 }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[9700] w-[calc(100%-3rem)] max-w-2xl"
+          className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60000] w-[calc(100%-3rem)] max-w-2xl"
         >
           <div className="relative overflow-hidden bg-navy-deep/96 backdrop-blur-2xl border border-white/12 rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.5)] px-5 py-5 sm:px-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
             {/* Icon */}

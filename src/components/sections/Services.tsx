@@ -1,7 +1,8 @@
+import { lazy, Suspense } from 'react';
 import { motion } from 'motion/react';
 import { Zap } from 'lucide-react';
 import CircularText from '../ui/CircularText';
-import SplitText from '../ui/SplitText';
+const SplitText = lazy(() => import('../ui/SplitText'));
 import { HexagonBackground } from '../ui/hexagon-background';
 import { servicesData as services } from '../../data';
 import { useLang } from '../../i18n';
@@ -28,19 +29,25 @@ export default function Services({ onNavigate }: ServicesProps) {
         </motion.div>
 
         <div className="font-display text-[clamp(2.5rem,10vw,9rem)] leading-[0.95]">
-          <SplitText
-            key={`services-heading-${lang}`}
-            className="inline-block"
-            delay={50}
-            duration={1.2}
-            splitType="chars"
-            from={{ opacity: 0, y: 40 }}
-            to={{ opacity: 1, y: 0 }}
-          >
-            {lang === 'en'
-              ? <>Our<br /><span className="text-stroke text-transparent">ecosystem</span></>
-              : <>Nuestro<br /><span className="text-stroke text-transparent">ecosistema</span></>}
-          </SplitText>
+          <Suspense fallback={
+            <span className="inline-block opacity-0">
+              {lang === 'en' ? 'Our ecosystem' : 'Nuestro ecosistema'}
+            </span>
+          }>
+            <SplitText
+              key={`services-heading-${lang}`}
+              className="inline-block"
+              delay={50}
+              duration={1.2}
+              splitType="chars"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+            >
+              {lang === 'en'
+                ? <>Our<br /><span className="text-stroke text-transparent">ecosystem</span></>
+                : <>Nuestro<br /><span className="text-stroke text-transparent">ecosistema</span></>}
+            </SplitText>
+          </Suspense>
         </div>
 
         <motion.div

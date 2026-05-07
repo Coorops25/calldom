@@ -297,12 +297,10 @@
       })();
     </script>
     <!-- --- Fonts (100% local — Share, Share Tech, Fira Sans) ------------- -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link rel="dns-prefetch" href="https://www.ccgrupo.com.co">
-    <link rel="preconnect" href="https://www.ccgrupo.com.co">
+    <!-- Preload critical fonts: display (Share-Bold) and mono (ShareTech) for above-fold text -->
+    <link rel="preload" href="/fonts/Share/Share-Regular.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/fonts/Share/Share-Bold.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/fonts/Share_Tech/ShareTech-Regular.ttf" as="font" type="font/ttf" crossorigin>
   </head>
   <body>
     <div id="root"></div>
