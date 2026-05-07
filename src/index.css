@@ -590,6 +590,74 @@ html.light :focus-visible {
   }
 }
 
+/* ─── Sectors 3D carousel (decorative) ───────────── */
+
+.sectors-carousel-wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* overflow must stay visible — hidden breaks preserve-3d */
+  overflow: visible;
+}
+
+.sectors-carousel-inner {
+  --w: 62px;
+  --h: 88px;
+  --translateZ: calc(var(--w) + var(--h));
+  --rotateX: -14deg;
+  --perspective: 1000px;
+  position: absolute;
+  width: var(--w);
+  height: var(--h);
+  top: 32%;
+  left: calc(50% - (var(--w) / 2) - 2px);
+  transform-style: preserve-3d;
+  animation: sectors-spin 28s linear infinite;
+}
+
+.sectors-carousel-wrap:hover .sectors-carousel-inner {
+  animation-play-state: paused;
+}
+
+@keyframes sectors-spin {
+  from { transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(0); }
+  to   { transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(1turn); }
+}
+
+.sectors-carousel-card {
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid rgba(var(--color-card), 0.55);
+  border-radius: 14px;
+  overflow: hidden;
+  transform: rotateY(calc((360deg / var(--quantity)) * var(--index)))
+             translateZ(var(--translateZ));
+}
+
+.sectors-carousel-face {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: radial-gradient(
+    circle,
+    rgba(var(--color-card), 0.12) 0%,
+    rgba(var(--color-card), 0.32) 70%,
+    rgba(var(--color-card), 0.52) 100%
+  );
+}
+
+/* pause for reduced-motion users */
+@media (prefers-reduced-motion: reduce) {
+  .sectors-carousel-inner { animation: none !important; }
+}
+
 /* ─── Reduced motion ─────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {

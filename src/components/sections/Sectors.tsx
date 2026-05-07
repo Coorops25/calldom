@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'motion/react';
 import {
   HeartPulse, Landmark, ShoppingBag, Truck, Building2, GraduationCap,
@@ -81,6 +81,37 @@ export default function Sectors({ onModalOpenChange }: Props) {
               {s.sub}
             </p>
           </motion.div>
+
+          {/* ── Decorative 3D carousel (desktop only) ── */}
+          <div className="hidden lg:block h-[340px] w-full mb-6 pointer-events-none select-none overflow-visible">
+            <div className="sectors-carousel-wrap">
+              <div
+                className="sectors-carousel-inner"
+                style={{ '--quantity': ICONS.length } as React.CSSProperties}
+              >
+                {ICONS.map((Icon, i) => {
+                  const hue = Math.round((i / ICONS.length) * 60); // 0-60° sweep within teal range
+                  const r = Math.round(0   + hue * 0.4);
+                  const g = Math.round(180 - hue * 0.8);
+                  const b = Math.round(216 + hue * 0.5);
+                  return (
+                    <div
+                      key={i}
+                      className="sectors-carousel-card"
+                      style={{ '--index': i, '--color-card': `${r}, ${g}, ${b}` } as React.CSSProperties}
+                    >
+                      <div className="sectors-carousel-face">
+                        <Icon size={18} className="text-white/70" strokeWidth={1.5} />
+                        <span className="font-mono text-[0.5rem] tracking-widest text-white/40">
+                          {String(i + 1).padStart(2, '0')}
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
             {s.items.map((item, i) => {
