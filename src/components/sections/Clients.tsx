@@ -69,34 +69,33 @@ export default function Clients() {
         </motion.div>
       </div>
 
-      <div className="flex w-full overflow-hidden">
-        <motion.div
-          className="flex w-max min-w-full"
-          animate={{ x: '-50%' }}
-          transition={{ duration: 35, repeat: Infinity, ease: 'linear' }}
-        >
+      {/* Marquee track */}
+      <div className="clients-marquee-wrap relative overflow-hidden">
+        {/* Fade edges */}
+        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 z-10 bg-gradient-to-r from-[#060d1f] to-transparent" />
+        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 z-10 bg-gradient-to-l from-[#060d1f] to-transparent" />
+
+        {/* clients-marquee-item width set via CSS so each breakpoint shows N logos in 100vw */}
+        <div className="clients-marquee flex">
           {track.map(({ name, logo }, i) => (
             <div
               key={`${name}-${i}`}
-              className="w-[clamp(20rem,30vw,28rem)] h-[clamp(12rem,16vw,16rem)] border border-white/10 flex items-center justify-center -mr-px relative group hover:border-teal/30 hover:z-10 transition-all duration-300 bg-navy-deep shrink-0 px-9"
+              className="clients-marquee-item shrink-0 flex items-center justify-center px-6 py-8 group"
+              style={errRef.current[i] ? { display: 'none' } : undefined}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-teal/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              {!errRef.current[i] ? (
-                <img
-                  src={logo}
-                  alt={name}
-                  loading="lazy"
-                  onError={() => handleErr(i)}
-                  className="relative z-10 h-[clamp(7rem,9vw,10rem)] w-auto max-w-[clamp(17rem,24vw,26rem)] object-contain opacity-70 group-hover:opacity-100 transition-all duration-300 sm:scale-[1.12] md:scale-[1.18]"
-                />
-              ) : (
-                <span className="relative z-10 font-body font-medium text-white group-hover:text-white transition-colors text-lg px-4 text-center leading-tight max-w-[80%]">
-                  {name}
-                </span>
-              )}
+              <img
+                src={logo}
+                alt={name}
+                loading="lazy"
+                onError={() => handleErr(i)}
+                className="object-contain h-10 sm:h-12 w-full max-w-[100px] sm:max-w-[120px]
+                           grayscale opacity-50
+                           group-hover:grayscale-0 group-hover:opacity-100
+                           transition-all duration-300"
+              />
             </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

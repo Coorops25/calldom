@@ -75,7 +75,7 @@ function getViewFromPath(pathname: string): string {
   if (path === '/contacto' || path === '/contact') return 'contact';
   if (path === '/politicas-privacidad' || path === '/privacy-policies' || path === '/privacy') return 'privacy';
 
-  const serviceMatch = path.match(/^\/servicio\/(01|02|03|04)$/);
+  const serviceMatch = path.match(/^\/servicio\/(01|02|03|04|05)$/);
   if (serviceMatch) return serviceMatch[1];
 
   return 'not-found';

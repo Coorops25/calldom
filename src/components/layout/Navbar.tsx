@@ -1,6 +1,6 @@
 import { Fragment, useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, Sun, Moon, ChevronDown, Globe } from 'lucide-react';
+import { Menu, X, ChevronDown, Globe } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
 import { useLang, type Lang } from '../../i18n';
 import ThemedLogo from '../ui/ThemedLogo';
@@ -154,14 +154,67 @@ export default function Navbar({ onNavigate, hidden = false }: Props) {
             </AnimatePresence>
           </div>
 
-          {/* Theme toggle */}
-          <button
+          {/* Animated theme toggle — desktop */}
+          <motion.button
             onClick={toggle}
             aria-label={labels.themeToggle}
-            className="w-8 h-8 flex items-center justify-center text-white hover:text-teal transition-colors"
+            className="w-9 h-9 flex items-center justify-center text-white hover:text-teal transition-colors relative"
+            whileTap={{ scale: 0.9 }}
           >
-            {isDark ? <Sun size={16} /> : <Moon size={16} />}
-          </button>
+            <svg
+              strokeWidth="3"
+              strokeLinecap="round"
+              width={100} height={100}
+              viewBox="0 0 100 100"
+              fill="none"
+              className="h-[18px] w-[18px]"
+            >
+              {/* Moon shine ring — visible in dark mode */}
+              <motion.path
+                d="M70 49.5C70 60.8218 60.8218 70 49.5 70C38.1782 70 29 60.8218 29 49.5C29 38.1782 38.1782 29 49.5 29C39 45 49.5 59.5 70 49.5Z"
+                className="stroke-teal"
+                initial={{ opacity: 0, scale: 2, strokeDasharray: '20, 1000' }}
+                animate={isDark ? {
+                  opacity: [0, 1, 0],
+                  strokeDashoffset: [0, -50, -100],
+                  transition: { duration: 0.75 }
+                } : { opacity: 0 }}
+              />
+              {/* Sun rays — visible in light mode */}
+              {[
+                'M50 2V11', 'M85 15L78 22', 'M98 50H89', 'M85 85L78 78',
+                'M50 98V89', 'M23 78L16 84', 'M11 50H2', 'M23 23L16 16'
+              ].map((d, i) => (
+                <motion.path
+                  key={d}
+                  d={d}
+                  className="stroke-teal"
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  animate={!isDark ? {
+                    pathLength: 1, opacity: 1,
+                    transition: { delay: i * 0.05, duration: 0.3 }
+                  } : { pathLength: 0, opacity: 0 }}
+                />
+              ))}
+              {/* Main circle — morphs sun↔moon */}
+              <motion.path
+                fill="transparent"
+                initial={{ d: 'M70 49.5C70 60.8218 60.8218 70 49.5 70C38.1782 70 29 60.8218 29 49.5C29 38.1782 38.1782 29 49.5 29C60 29 69.5 38 70 49.5Z' }}
+                animate={{
+                  d: isDark
+                    ? 'M70 49.5C70 60.8218 60.8218 70 49.5 70C38.1782 70 29 60.8218 29 49.5C29 38.1782 38.1782 29 49.5 29C39 45 49.5 59.5 70 49.5Z'
+                    : 'M70 49.5C70 60.8218 60.8218 70 49.5 70C38.1782 70 29 60.8218 29 49.5C29 38.1782 38.1782 29 49.5 29C60 29 69.5 38 70 49.5Z',
+                  rotate: isDark ? -360 : 0,
+                  scale: isDark ? 2 : 1,
+                  stroke: 'var(--color-teal, #00b4d8)',
+                  fill: 'var(--color-teal, #00b4d8)',
+                  fillOpacity: 0.35,
+                  strokeOpacity: 1,
+                }}
+                transition={{ duration: 0.6, type: 'spring', stiffness: 200 }}
+              />
+            </svg>
+          </motion.button>
 
           {/* CTA */}
           <a
@@ -190,13 +243,64 @@ export default function Navbar({ onNavigate, hidden = false }: Props) {
               </Fragment>
             ))}
           </div>
-          <button
+          {/* Animated theme toggle — mobile */}
+          <motion.button
             onClick={toggle}
             aria-label={labels.themeToggle}
             className="w-9 h-9 rounded-full border border-white/10 bg-navy-deep/60 backdrop-blur-md flex items-center justify-center text-white hover:text-teal hover:border-teal/30 transition-all"
+            whileTap={{ scale: 0.9 }}
           >
-            {isDark ? <Sun size={16} /> : <Moon size={16} />}
-          </button>
+            <svg
+              strokeWidth="3"
+              strokeLinecap="round"
+              width={100} height={100}
+              viewBox="0 0 100 100"
+              fill="none"
+              className="h-[18px] w-[18px]"
+            >
+              <motion.path
+                d="M70 49.5C70 60.8218 60.8218 70 49.5 70C38.1782 70 29 60.8218 29 49.5C29 38.1782 38.1782 29 49.5 29C39 45 49.5 59.5 70 49.5Z"
+                className="stroke-teal"
+                initial={{ opacity: 0, scale: 2, strokeDasharray: '20, 1000' }}
+                animate={isDark ? {
+                  opacity: [0, 1, 0],
+                  strokeDashoffset: [0, -50, -100],
+                  transition: { duration: 0.75 }
+                } : { opacity: 0 }}
+              />
+              {[
+                'M50 2V11', 'M85 15L78 22', 'M98 50H89', 'M85 85L78 78',
+                'M50 98V89', 'M23 78L16 84', 'M11 50H2', 'M23 23L16 16'
+              ].map((d, i) => (
+                <motion.path
+                  key={d}
+                  d={d}
+                  className="stroke-teal"
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  animate={!isDark ? {
+                    pathLength: 1, opacity: 1,
+                    transition: { delay: i * 0.05, duration: 0.3 }
+                  } : { pathLength: 0, opacity: 0 }}
+                />
+              ))}
+              <motion.path
+                fill="transparent"
+                initial={{ d: 'M70 49.5C70 60.8218 60.8218 70 49.5 70C38.1782 70 29 60.8218 29 49.5C29 38.1782 38.1782 29 49.5 29C60 29 69.5 38 70 49.5Z' }}
+                animate={{
+                  d: isDark
+                    ? 'M70 49.5C70 60.8218 60.8218 70 49.5 70C38.1782 70 29 60.8218 29 49.5C29 38.1782 38.1782 29 49.5 29C39 45 49.5 59.5 70 49.5Z'
+                    : 'M70 49.5C70 60.8218 60.8218 70 49.5 70C38.1782 70 29 60.8218 29 49.5C29 38.1782 38.1782 29 49.5 29C60 29 69.5 38 70 49.5Z',
+                  rotate: isDark ? -360 : 0,
+                  scale: isDark ? 2 : 1,
+                  stroke: 'var(--color-teal, #00b4d8)',
+                  fill: 'var(--color-teal, #00b4d8)',
+                  fillOpacity: 0.35,
+                  strokeOpacity: 1,
+                }}
+                transition={{ duration: 0.6, type: 'spring', stiffness: 200 }}
+              />
+            </svg>
+          </motion.button>
           <button
             aria-label={labels.openMenu}
             aria-expanded={isMobileMenuOpen}

@@ -658,6 +658,65 @@ html.light :focus-visible {
   .sectors-carousel-inner { animation: none !important; }
 }
 
+/* ── Premium Fade Theme Transition ─────────────────── */
+@keyframes theme-border-sweep {
+  0%   { clip-path: inset(0 100% 0 0); opacity: 0.9; }
+  40%  { clip-path: inset(0 20% 0 0);  opacity: 0.6; }
+  100% { clip-path: inset(0 0 0 100%); opacity: 0;   }
+}
+@keyframes theme-fade-out {
+  0%   { opacity: 1; transform: scale(1);    }
+  100% { opacity: 0; transform: scale(0.98); }
+}
+@keyframes theme-fade-in {
+  0%   { opacity: 0; transform: scale(1.02); }
+  100% { opacity: 1; transform: scale(1);    }
+}
+@keyframes theme-grid-pattern {
+  0%   { opacity: 0;    transform: scale(0.98); }
+  30%  { opacity: 0.03; transform: scale(1);    }
+  70%  { opacity: 0.03; transform: scale(1);    }
+  100% { opacity: 0;    transform: scale(1.02); }
+}
+
+html.theme-premium-fade::view-transition-old(root),
+html.theme-premium-fade::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+html.theme-premium-fade::view-transition-old(root) {
+  z-index: 1;
+  animation: theme-fade-out 0.2s ease-out forwards;
+}
+html.theme-premium-fade::view-transition-new(root) {
+  z-index: 2;
+  animation: theme-fade-in 0.3s ease-out 0.1s forwards;
+  opacity: 0;
+}
+html.theme-premium-fade::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 180, 216, 0.15); /* teal tint */
+  z-index: 100;
+  pointer-events: none;
+  will-change: clip-path, opacity;
+  animation: theme-border-sweep 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+html.theme-premium-fade::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,180,216,0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,180,216,0.3) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0;
+  z-index: 99;
+  pointer-events: none;
+  animation: theme-grid-pattern 0.4s ease-out forwards;
+}
+
 /* ─── Reduced motion ─────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
@@ -666,6 +725,51 @@ html.light :focus-visible {
   .animate-bounce {
     animation: none !important;
   }
+}
+
+/* ─── Clients marquee ────────────────────────────── */
+
+/*
+ * Each item width = 100vw / visible-count.
+ * The track holds 3 identical sets, so translateX(-33.333%) = one full loop.
+ * Mobile: 2 visible → 50vw each
+ * sm (640px+): 3 visible → 33.333vw each
+ * lg (1024px+): 5 visible → 20vw each
+ */
+.clients-marquee-item {
+  width: 50vw;
+}
+@media (min-width: 640px) {
+  .clients-marquee-item { width: calc(100vw / 3); }
+}
+@media (min-width: 1024px) {
+  .clients-marquee-item { width: 20vw; }
+}
+
+@keyframes clients-marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+
+.clients-marquee {
+  /* track is 3× the logo set; moving -33.333% of track = exactly 1 set */
+  animation: clients-marquee 20s linear infinite;
+}
+
+.clients-marquee-wrap:hover .clients-marquee {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .clients-marquee { animation: none; }
+}
+
+/* light-mode: swap the hard-coded dark edge-fade color */
+html.light .clients-marquee-wrap > div:first-child {
+  background: linear-gradient(to right, #f5f9fd, transparent) !important;
+}
+html.light .clients-marquee-wrap > div:nth-child(2) {
+  background: linear-gradient(to left, #f5f9fd, transparent) !important;
 }
 
 /* ─── Custom Scrollbar ───────────────────────────── */

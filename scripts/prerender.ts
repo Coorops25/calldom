@@ -281,7 +281,7 @@ async function main() {
       body: renderHome(lang),
     });
 
-    for (const id of ['01', '02', '03', '04']) {
+    for (const id of ['01', '02', '03', '04', '05']) {
       if (lang === 'pt') continue;
       const service = servicesData.find((item) => item.id === id);
       const detail = t.serviceDetails[id as keyof typeof t.serviceDetails] as Record<string, any>;
