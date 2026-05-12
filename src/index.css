@@ -768,16 +768,17 @@ html.theme-premium-fade::before {
 
 /* ─── Clients marquee ────────────────────────────── */
 
-/*
- * Each item width = 100vw / visible-count.
- * The track holds 3 identical sets, so translateX(-33.333%) = one full loop.
- * Mobile: 2 visible → 50vw each
- * sm (640px+): 4 visible → calc(100vw / 4) each
- * lg (1024px+): 6 visible → calc(100vw / 6) each
- * xl (1536px+): 8 visible → calc(100vw / 8) each
- */
+/* CSS variables for theme-aware fade edges */
+:root {
+  --clients-fade-color: #060d1f;
+}
+html.light {
+  --clients-fade-color: #f5f9fd;
+}
+
 .clients-marquee-item {
   width: 50vw;
+  transition: transform 0.3s ease-out, filter 0.3s ease-out;
 }
 @media (min-width: 640px) {
   .clients-marquee-item { width: calc(100vw / 4); }
@@ -789,37 +790,31 @@ html.theme-premium-fade::before {
   .clients-marquee-item { width: calc(100vw / 8); }
 }
 
-@keyframes clients-marquee {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-33.333%); }
-}
-
 .clients-marquee {
-  /* track is 3× the logo set; moving -33.333% of track = exactly 1 set */
-  animation: clients-marquee 20s linear infinite;
+  will-change: transform;
 }
 
-.clients-marquee-wrap:hover .clients-marquee {
-  animation-play-state: paused;
+.clients-marquee-fade-l {
+  background: linear-gradient(to right, var(--clients-fade-color), transparent) !important;
+}
+.clients-marquee-fade-r {
+  background: linear-gradient(to left, var(--clients-fade-color), transparent) !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .clients-marquee { animation: none; }
+  .clients-marquee { 
+    transform: none !important; 
+    overflow-x: auto;
+  }
 }
 
-/* light-mode: swap the hard-coded dark edge-fade color (semantic classes) */
-html.light .clients-marquee-fade-l {
-  background: linear-gradient(to right, #f5f9fd, transparent) !important;
+/* Logo images with transparent backgrounds */
+.clients-marquee-item img {
+  transition: all 0.3s ease-out;
+  filter: drop-shadow(0 0 4px rgba(255,255,255,0.15));
 }
-html.light .clients-marquee-fade-r {
-  background: linear-gradient(to left, #f5f9fd, transparent) !important;
-}
-/* Legacy positional selectors kept as fallback */
-html.light .clients-marquee-wrap > div:first-child {
-  background: linear-gradient(to right, #f5f9fd, transparent) !important;
-}
-html.light .clients-marquee-wrap > div:nth-child(2) {
-  background: linear-gradient(to left, #f5f9fd, transparent) !important;
+html.light .clients-marquee-item img {
+  filter: drop-shadow(0 0 4px rgba(0,0,0,0.08));
 }
 
 /* ─── Custom Scrollbar ───────────────────────────── */
