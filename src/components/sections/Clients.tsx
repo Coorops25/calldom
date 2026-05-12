@@ -88,7 +88,7 @@ export default function Clients() {
                 alt={name}
                 loading="lazy"
                 onError={() => handleErr(i)}
-                className="object-contain h-10 sm:h-12 w-full max-w-[100px] sm:max-w-[120px]
+                className="object-contain h-14 sm:h-16 w-full max-w-[8.125rem] sm:max-w-[10rem]
                            grayscale opacity-50
                            group-hover:grayscale-0 group-hover:opacity-100
                            transition-all duration-300"

@@ -592,6 +592,18 @@ html.light {
     color: #ffffff !important;
   }
 
+  /* ── Floating CTA buttons: keep white text on colored backgrounds ── */
+  & a.bg-\[\#25D366\],
+  & button.bg-gradient-to-br {
+    color: #ffffff !important;
+  }
+
+  /* ── Services row wrapper: light surface on light mode ── */
+  & .bg-\[\#0D1940\] {
+    background-color: #f2f7ff !important;
+    box-shadow: inset 0 0 0 1px rgba(11, 22, 40, 0.08) !important;
+  }
+
   /* ── White/30 used as separator line: give it visible contrast ── */
   & .h-px[class*="bg-white/3"] {
     background-color: rgba(11, 22, 40, 0.15) !important;
@@ -760,17 +772,21 @@ html.theme-premium-fade::before {
  * Each item width = 100vw / visible-count.
  * The track holds 3 identical sets, so translateX(-33.333%) = one full loop.
  * Mobile: 2 visible → 50vw each
- * sm (640px+): 3 visible → 33.333vw each
- * lg (1024px+): 5 visible → 20vw each
+ * sm (640px+): 4 visible → calc(100vw / 4) each
+ * lg (1024px+): 6 visible → calc(100vw / 6) each
+ * xl (1536px+): 8 visible → calc(100vw / 8) each
  */
 .clients-marquee-item {
   width: 50vw;
 }
 @media (min-width: 640px) {
-  .clients-marquee-item { width: calc(100vw / 3); }
+  .clients-marquee-item { width: calc(100vw / 4); }
 }
 @media (min-width: 1024px) {
-  .clients-marquee-item { width: 20vw; }
+  .clients-marquee-item { width: calc(100vw / 6); }
+}
+@media (min-width: 1536px) {
+  .clients-marquee-item { width: calc(100vw / 8); }
 }
 
 @keyframes clients-marquee {
