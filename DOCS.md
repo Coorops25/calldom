@@ -838,6 +838,30 @@ npm run build   # Build limpio sin errores
 
 ---
 
+## 17. Galería de capturas
+
+### Vista completa
+
+![Fullpage](docs/assets/fullpage.png)
+
+### Hero
+
+![Hero](docs/assets/hero.png)
+
+### Servicios
+
+![Services](docs/assets/services.png)
+
+### Clientes (carrusel de logos)
+
+![Clients](docs/assets/clients.png)
+
+### Footer
+
+![Footer](docs/assets/footer.png)
+
+---
+
 ## Contacto del proyecto
 
 | | |
