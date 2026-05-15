@@ -856,6 +856,20 @@ html.light .posting-section [class*="bg-white/"] {
 .sectors-carousel-draggable        { cursor: grab; }
 .sectors-carousel-draggable:active { cursor: grabbing; }
 
+/* ── Sectors mobile carousel ── */
+.sectors-mobile-scroller {
+  /* Native horizontal scroll for touch swipe; mouse drag handled by JS. */
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  /* `pan-y` lets the page still scroll vertically while the user drags the
+     row horizontally — important so the carousel doesn't trap touch on mobile. */
+  touch-action: pan-y;
+}
+.sectors-mobile-scroller::-webkit-scrollbar { display: none; }
+/* Drag-snapshot during pointerdown — keep cursor visible while moving */
+.sectors-mobile-scroller:active { scroll-behavior: auto; }
+
 @keyframes sectors-spin {
   from { transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(0); }
   to   { transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(1turn); }
