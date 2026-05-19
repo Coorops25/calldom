@@ -3,6 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Inline theme script: apply before first paint to prevent FOUC.
+         Runs synchronously so the class is on <html> before React hydrates. -->
+    <script>try{if(localStorage.getItem('theme')==='light')document.documentElement.classList.add('light')}catch(e){}</script>
 
     <!-- --- Primary SEO ---------------------------------------------------- -->
     <title>CCGrupo | BPO Colombia — CX, Ventas, IA y Digital Studio</title>

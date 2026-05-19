@@ -10,25 +10,9 @@ interface Props {
 }
 
 export default function Hero({ onNavigate }: Props) {
-  const { t, lang } = useLang();
+  const { t } = useLang();
   const { scrollY } = useScroll();
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
-
-  const heroCopy = lang === 'en'
-    ? {
-        line1: 'Technology drives us,',
-        line2: 'people',
-        line3a: 'inspire',
-        line3b: 'us.',
-        desc: 'We integrate technology, processes and knowledge to build solutions that make your business more agile, efficient and profitable.',
-      }
-    : {
-        line1: 'La tecnología nos impulsa,',
-        line2: 'las personas',
-        line3a: 'nos',
-        line3b: 'inspiran.',
-        desc: 'Integramos tecnología, procesos y conocimiento para construir soluciones que hacen tu negocio más ágil, eficiente y rentable.',
-      };
 
   return (
     <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden px-5 sm:px-6 pt-20 sm:pt-28 pb-16 sm:pb-20">
@@ -59,17 +43,17 @@ export default function Hero({ onNavigate }: Props) {
         <h1 className="font-display text-[clamp(2.5rem,7vw,7rem)] leading-[1.03] tracking-tight font-normal">
           <span className="block overflow-hidden">
             <motion.span initial={{ y: '115%' }} animate={{ y: 0 }} transition={{ delay: 2.1, duration: 1.3, ease: [0.16, 1, 0.3, 1] }} className="block">
-              {heroCopy.line1}
+              {t.hero.line1}
             </motion.span>
           </span>
           <span className="block overflow-hidden">
             <motion.span initial={{ y: '115%' }} animate={{ y: 0 }} transition={{ delay: 2.3, duration: 1.3, ease: [0.16, 1, 0.3, 1] }} className="block italic text-gradient">
-              {heroCopy.line2}
+              {t.hero.line2}
             </motion.span>
           </span>
           <span className="block overflow-hidden">
             <motion.span initial={{ y: '115%' }} animate={{ y: 0 }} transition={{ delay: 2.5, duration: 1.3, ease: [0.16, 1, 0.3, 1] }} className="block">
-              {heroCopy.line3a} <span className="italic text-gradient">{heroCopy.line3b}</span>
+              {t.hero.line3a} <span className="italic text-gradient">{t.hero.line3b}</span>
             </motion.span>
           </span>
         </h1>
@@ -80,7 +64,7 @@ export default function Hero({ onNavigate }: Props) {
           transition={{ delay: 2.8, duration: 0.9 }}
           className="max-w-lg sm:max-w-xl mt-6 sm:mt-8 text-base font-light leading-relaxed text-white"
         >
-          {heroCopy.desc}
+          {t.hero.desc}
         </motion.p>
 
         <motion.div
