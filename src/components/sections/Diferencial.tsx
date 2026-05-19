@@ -33,7 +33,7 @@ export default function Diferencial() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.08 }}
-            className={`font-display text-[clamp(2rem,4vw,3.5rem)] leading-[1.1] tracking-[-0.03em] ${isDark ? 'text-white' : 'text-gray-900'}`}
+            className={`font-display text-[clamp(2rem,4vw,3.5rem)] leading-[1.1] tracking-[-0.03em] ${isDark ? 'text-white' : 'text-[#0b1f38]'}`}
           >
             <span className="block">{d.heading}</span>
             <span className="block text-teal">{d.headingHighlight}</span>
@@ -72,7 +72,7 @@ export default function Diferencial() {
                   <Icon size={20} className="text-teal" strokeWidth={1.75} />
                 </div>
                 <div className="space-y-2">
-                  <h3 className={`font-display text-base font-semibold leading-snug ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                  <h3 className={`font-display text-base font-semibold leading-snug ${isDark ? 'text-white' : 'text-[#0b1f38]'}`}>
                     {pillar.title}
                   </h3>
                   <p className={`text-sm leading-relaxed ${isDark ? 'text-white/55' : 'text-gray-600'}`}>

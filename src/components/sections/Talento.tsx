@@ -169,7 +169,7 @@ export default function Talento() {
                   </p>
                 </div>
                 {country.active && (
-                  <span className="flex-shrink-0 bg-teal text-navy-deep text-[9px] font-bold px-2 py-0.5 rounded-full ml-auto whitespace-nowrap">
+                  <span className="flex-shrink-0 bg-teal !text-white text-[9px] font-bold px-2 py-0.5 rounded-full ml-auto whitespace-nowrap">
                     Activa
                   </span>
                 )}

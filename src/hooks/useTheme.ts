@@ -33,28 +33,30 @@ export function useTheme() {
 
   const toggle = () => {
     const newIsDark = !isDark;
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const applyTheme = () => {
       const html = document.documentElement;
       html.classList.toggle('light', !newIsDark);
       html.style.colorScheme = newIsDark ? 'dark' : 'light';
       try { localStorage.setItem('theme', newIsDark ? 'dark' : 'light'); } catch { /* storage unavailable */ }
-      // update theme-color meta
       const meta = document.querySelector('meta[name="theme-color"]');
       if (meta) meta.setAttribute('content', newIsDark ? '#00b4d8' : '#f0f4f8');
       setIsDark(newIsDark);
     };
 
-    if (!document.startViewTransition || prefersReducedMotion) {
-      applyTheme();
-      return;
+    // Tell App.tsx to render the CCG Preloader on top. App listens for
+    // this event and shows the preloader for ~1.4s, then bumps a key on
+    // the homepage tree so all entry animations replay — the user sees
+    // a proper "loading" ceremony instead of a half-painted re-render.
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('ccg:theme-switch'));
     }
-
-    document.documentElement.classList.add('theme-premium-fade');
-    const transition = document.startViewTransition(applyTheme);
-    transition.finished.finally(() => {
-      document.documentElement.classList.remove('theme-premium-fade');
+    // Two rAFs to give React a tick to mount the preloader before we
+    // kick off the re-render storm that flips the theme.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        applyTheme();
+      });
     });
   };
 

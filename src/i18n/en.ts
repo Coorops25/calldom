@@ -355,6 +355,10 @@ const en = {
         desc: 'Framework for preventing, detecting and managing workplace harassment situations.',
       },
       {
+        title: 'Emergency Response Policy',
+        desc: 'Plan for emergency preparedness, response and incident management across the organization.',
+      },
+      {
         title: 'Occupational Health & Safety Management System',
         desc: 'Guidelines and standards for the health and safety management system.',
       },
@@ -373,6 +377,10 @@ const en = {
       {
         title: 'Gender Equality & Labor Equity Policy',
         desc: 'Commitment to equal opportunities and labor equity with a gender perspective.',
+      },
+      {
+        title: 'Mental Health Policy',
+        desc: 'Promotion of psychological well-being and prevention of mental health risks at work.',
       },
       {
         title: 'Right to Disconnect Policy',
@@ -422,6 +430,7 @@ const en = {
       subjectPrefix: 'CCGrupo Contact',
       name: 'Name',
       company: 'Company',
+      role: 'Role',
       phone: 'Phone',
       service: 'Service',
       sector: 'Sector',
@@ -429,6 +438,7 @@ const en = {
     placeholders: {
       nombre: 'John Doe',
       empresa: 'My Company LLC',
+      cargo: 'Commercial Director',
     },
     infoLabels: {
       location: 'Location',
@@ -446,6 +456,7 @@ const en = {
     fields: {
       nombre: 'Full name',
       empresa: 'Company',
+      cargo: 'Role',
       email: 'Email',
       telefono: 'Phone',
       servicio: 'Service of interest',
@@ -462,8 +473,9 @@ const en = {
     errors: {
       nombre: 'Please enter your full name.',
       empresa: 'Tell us your company name.',
+      cargo: 'Tell us your role.',
       email: 'Enter a valid email address.',
-      telefono: 'Provide a contact phone number.',
+      telefono: 'Enter a valid phone number with country code.',
       servicio: 'Choose a service of interest.',
       sector: 'Choose your sector.',
       mensaje: 'Write at least 20 characters so we understand your request.',

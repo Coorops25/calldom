@@ -112,6 +112,8 @@ export default function App({ initialPath }: AppProps) {
   const pathForInit = initialPath ?? (typeof window !== 'undefined' ? window.location.pathname : '/');
   const initialLang = getLangFromPath(pathForInit) ?? 'es';
   const [loading, setLoading] = useState(true);
+  const [themeSwitching, setThemeSwitching] = useState(false);
+  const [pageKey, setPageKey] = useState(0);
   const [isSectorModalOpen, setIsSectorModalOpen] = useState(false);
   const [currentView, setCurrentView] = useState<'home' | string>(() => {
     if (typeof window === 'undefined') return getViewFromPath(pathForInit);
@@ -130,6 +132,24 @@ export default function App({ initialPath }: AppProps) {
     const syncViewWithUrl = () => setCurrentView(getViewFromPath(window.location.pathname));
     window.addEventListener('popstate', syncViewWithUrl);
     return () => window.removeEventListener('popstate', syncViewWithUrl);
+  }, []);
+
+  // Theme-switch loader: useTheme.toggle dispatches this event before
+  // flipping the html.light class. We render the CCG Preloader on top
+  // and, halfway through, bump a key on the homepage tree so all entry
+  // animations replay when the loader fades out. The remount happens
+  // while the preloader still covers the page, so the user never sees
+  // the Suspense fallback flash.
+  useEffect(() => {
+    const onSwitch = () => {
+      setThemeSwitching(true);
+      // Remount the homepage under the loader so entry animations replay.
+      window.setTimeout(() => setPageKey((k) => k + 1), 500);
+      // Hide loader once main has had time to mount.
+      window.setTimeout(() => setThemeSwitching(false), 1500);
+    };
+    window.addEventListener('ccg:theme-switch', onSwitch);
+    return () => window.removeEventListener('ccg:theme-switch', onSwitch);
   }, []);
 
   const syncUrlWithView = (view: string, mode: 'push' | 'replace' = 'push') => {
@@ -178,7 +198,8 @@ export default function App({ initialPath }: AppProps) {
         <CookieBanner onNavigate={handleNavigate} />
 
         <AnimatePresence mode="wait">
-          {loading && <Preloader onComplete={() => setLoading(false)} />}
+          {loading && <Preloader key="initial-loader" onComplete={() => setLoading(false)} />}
+          {!loading && themeSwitching && <Preloader key="theme-switch-loader" onComplete={() => { /* unmount handled by themeSwitching timer */ }} />}
         </AnimatePresence>
 
         {!loading && (
@@ -192,7 +213,7 @@ export default function App({ initialPath }: AppProps) {
                 <ScrollTracker />
                 <CornerLabels />
                 <FloatingCTA onNavigate={handleNavigate} />
-                <main id="main-content" className="relative z-10">
+                <main id="main-content" key={pageKey} className="relative z-10">
                   <Hero onNavigate={handleNavigate} />
                   <Marquee />
                   <Suspense fallback={null}>

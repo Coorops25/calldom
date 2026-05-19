@@ -6,14 +6,19 @@ import Footer from '../layout/Footer';
 import ThemedLogo from '../ui/ThemedLogo';
 import { useLang } from '../../i18n';
 
+// Order matches the client's master list. New policies (Emergencia, Salud
+// Mental) are inserted at positions 1 and 7; Desconexión Laboral stays as
+// the closing card.
 const pdfUrls: Record<number, string> = {
   0: '/policies/acoso_laboral.pdf',
-  1: '/policies/POLITICA-SG-SST.pdf',
-  2: '/policies/Politica-de-alcohol-y-otros.pdf',
-  3: '/policies/pag.web-REV-JURIDICA-POLITICA-DE-PREVENCION-CONTRA-EL-ACOSO-SEXUAL-EN-EL-ENTORNO-LABORAL-CONTACT-CENTER-GRUPO-S.A.S.pdf',
-  4: '/policies/PAGINA-WEB-POLITICA-TELETRABAJO.pdf',
-  5: '/policies/PAGINA-WEB-POLITICA-IGUALDAD-Y-EQUIDAD-LABORAL-CON-ENFOQUE-DE-GENERO.pdf',
-  6: '/policies/PAGINA-WEB-POLITICA-DESCONEXION-LABORAL.pdf',
+  1: '/policies/PAGINA-WEB-POLITICA-EMERGENCIA.pdf',
+  2: '/policies/POLITICA-SG-SST.pdf',
+  3: '/policies/Politica-de-alcohol-y-otros.pdf',
+  4: '/policies/pag.web-REV-JURIDICA-POLITICA-DE-PREVENCION-CONTRA-EL-ACOSO-SEXUAL-EN-EL-ENTORNO-LABORAL-CONTACT-CENTER-GRUPO-S.A.S.pdf',
+  5: '/policies/PAGINA-WEB-POLITICA-TELETRABAJO.pdf',
+  6: '/policies/PAGINA-WEB-POLITICA-IGUALDAD-Y-EQUIDAD-LABORAL-CON-ENFOQUE-DE-GENERO.pdf',
+  7: '/policies/PAGINA-WEB-POLITICA-SALUD-MENTAL.pdf',
+  8: '/policies/PAGINA-WEB-POLITICA-DESCONEXION-LABORAL.pdf',
 };
 
 interface Props {

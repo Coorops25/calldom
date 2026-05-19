@@ -355,6 +355,10 @@ const es = {
         desc: 'Marco de prevención, detección y gestión de situaciones de acoso en el entorno laboral.',
       },
       {
+        title: 'Política de Emergencias',
+        desc: 'Plan de preparación, respuesta y atención ante situaciones de emergencia en la organización.',
+      },
+      {
         title: 'Sistema de Gestión de Seguridad y Salud en el Trabajo',
         desc: 'Lineamientos y estándares del sistema de gestión de seguridad y salud ocupacional.',
       },
@@ -373,6 +377,10 @@ const es = {
       {
         title: 'Política de Igualdad y Equidad Laboral con Enfoque de Género',
         desc: 'Compromiso con la igualdad de oportunidades y la equidad laboral con perspectiva de género.',
+      },
+      {
+        title: 'Política de Salud Mental',
+        desc: 'Promoción del bienestar psicológico y prevención de riesgos a la salud mental en el trabajo.',
       },
       {
         title: 'Política de Desconexión Laboral',
@@ -422,6 +430,7 @@ const es = {
       subjectPrefix: 'Contacto CCGrupo',
       name: 'Nombre',
       company: 'Empresa',
+      role: 'Cargo',
       phone: 'Teléfono',
       service: 'Servicio',
       sector: 'Sector',
@@ -429,6 +438,7 @@ const es = {
     placeholders: {
       nombre: 'Juan Garcia',
       empresa: 'Mi Empresa S.A.S.',
+      cargo: 'Director Comercial',
     },
     infoLabels: {
       location: 'Ubicación',
@@ -446,6 +456,7 @@ const es = {
     fields: {
       nombre: 'Nombre completo',
       empresa: 'Empresa',
+      cargo: 'Cargo',
       email: 'Correo electrónico',
       telefono: 'Teléfono',
       servicio: 'Servicio de interés',
@@ -462,8 +473,9 @@ const es = {
     errors: {
       nombre: 'Escribe tu nombre completo.',
       empresa: 'Indícanos el nombre de tu empresa.',
+      cargo: 'Cuéntanos tu cargo.',
       email: 'Ingresa un correo válido.',
-      telefono: 'Incluye un teléfono de contacto.',
+      telefono: 'Ingresa un teléfono válido con código de país.',
       servicio: 'Elige un servicio de interés.',
       sector: 'Elige tu sector.',
       mensaje: 'Escribe al menos 20 caracteres para entender tu solicitud.',

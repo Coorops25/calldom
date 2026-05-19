@@ -26,7 +26,7 @@ export default function PostingSection() {
   return (
     <section
       id="posting-section"
-      className="posting-section relative bg-[#FAFAF7] py-20 sm:py-28 px-5 sm:px-6 md:px-14 lg:px-28 overflow-hidden"
+      className="posting-section relative bg-[#FAFAF7] py-14 sm:py-20 px-5 sm:px-6 md:px-14 lg:px-28 overflow-hidden"
     >
       {/* Rainbow brand accent — full-width hairline at the top */}
       <div className="absolute top-0 inset-x-0 h-[3px] posting-rainbow-bar" />
@@ -51,7 +51,7 @@ export default function PostingSection() {
           </div>
 
           {/* Heading — sans display, with gradient on the tail */}
-          <h2 className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[1.02] tracking-[-0.025em] text-slate-900">
+          <h2 className="font-display text-[clamp(2.2rem,4.4vw,4rem)] leading-[1.02] tracking-[-0.025em] text-[#0b1f38]">
             {headingMain}
             {headingTail && (
               <>
@@ -84,10 +84,10 @@ export default function PostingSection() {
               href="https://www.posting.com.co"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-slate-900 hover:bg-slate-700 text-white font-mono text-[0.65rem] tracking-[0.22em] uppercase pl-7 pr-5 py-4 rounded-full transition-all duration-200 group shadow-[0_8px_24px_rgba(15,23,42,0.18)] hover:shadow-[0_12px_28px_rgba(15,23,42,0.25)]"
+              className="inline-flex items-center gap-3 bg-[#0b1f38] hover:bg-[#13294a] text-white font-mono text-[0.65rem] tracking-[0.22em] uppercase pl-7 pr-5 py-4 rounded-full transition-all duration-200 group shadow-[0_8px_24px_rgba(15,23,42,0.18)] hover:shadow-[0_12px_28px_rgba(15,23,42,0.25)]"
             >
               {ps.cta.replace(/\s*↗\s*$/, '')}
-              <span className="w-7 h-7 rounded-full bg-white flex items-center justify-center text-slate-900 transition-transform duration-200 group-hover:rotate-45">
+              <span className="w-7 h-7 rounded-full bg-white flex items-center justify-center text-[#0b1f38] transition-transform duration-200 group-hover:rotate-45">
                 <ArrowUpRight size={14} strokeWidth={2.2} />
               </span>
             </a>
@@ -133,14 +133,14 @@ export default function PostingSection() {
                       <div
                         className={`mt-0.5 flex-shrink-0 w-9 h-9 rounded-xl flex items-center justify-center ${
                           isLast
-                            ? 'bg-slate-900 text-white'
+                            ? 'bg-[#0b1f38] text-white'
                             : 'bg-white border border-slate-200 text-slate-700'
                         }`}
                       >
                         <Icon size={16} strokeWidth={1.8} />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <div className={`font-semibold text-[0.95rem] mb-0.5 ${isLast ? 'text-slate-900' : 'text-slate-900'}`}>
+                        <div className={`font-semibold text-[0.95rem] mb-0.5 ${isLast ? 'text-[#0b1f38]' : 'text-[#0b1f38]'}`}>
                           {step.title}
                         </div>
                         <div className="text-[0.8rem] text-slate-500 leading-relaxed">

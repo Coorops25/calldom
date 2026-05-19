@@ -16,8 +16,8 @@ export default function Services({ onNavigate }: ServicesProps) {
   const tapHint = t.common.tapHint;
 
   return (
-    <section id="services" className="pt-24 relative bg-navy-deep overflow-hidden">
-      <div className="px-6 md:px-14 lg:px-28 pb-20 relative">
+    <section id="services" className="pt-16 sm:pt-20 relative bg-navy-deep overflow-hidden">
+      <div className="px-6 md:px-14 lg:px-28 pb-14 sm:pb-16 relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -80,7 +80,12 @@ export default function Services({ onNavigate }: ServicesProps) {
           const textCol = (
             <div
               key="text"
-              className={`service-text-col order-1 ${isReversed ? 'lg:order-2' : 'lg:order-1'} p-6 sm:p-10 lg:p-20 flex flex-col justify-center`}
+              // `min-w-0` is required on grid children whose content includes
+              // a horizontally scrolling row (the tags row uses `flex
+              // shrink-0`). Without it, the grid track default `min-content`
+              // resolution forces this column to the sum of all tag widths
+              // (~525px), overflowing narrow viewports.
+              className={`service-text-col order-1 ${isReversed ? 'lg:order-2' : 'lg:order-1'} p-6 sm:p-10 lg:p-20 flex flex-col justify-center min-w-0`}
             >
               <div className="font-mono text-4xl sm:text-6xl font-light text-navy-light mb-6 sm:mb-8 text-stroke-teal">
                 {svc.id}
@@ -97,7 +102,7 @@ export default function Services({ onNavigate }: ServicesProps) {
                 {desc}
               </p>
 
-              <div className="sm:hidden flex gap-2 mb-5 overflow-x-auto pb-1 pr-2">
+              <div className="scrollbar-thin sm:hidden flex gap-2 mb-5 overflow-x-auto pb-2 pr-2">
                 {tags.map(tag => (
                   <span
                     key={`mobile-${tag}`}

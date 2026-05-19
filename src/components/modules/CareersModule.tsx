@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ArrowLeft, Send, CheckCircle, AlertCircle, XCircle, Briefcase } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import { useLang } from '../../i18n';
+import { sendLeadToSheets } from '../../lib/sheetsWebhook';
 
 const EJ_SERVICE  = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const EJ_TEMPLATE = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
@@ -59,6 +60,15 @@ export default function CareersModule({ onBack }: Props) {
     }
   };
 
+  const sendToSheets = () => sendLeadToSheets({
+    tipoLead: 'NOSOTROS',
+    nombre:   form.nombre,
+    telefono: form.telefono,
+    correo:   form.email,
+    servicio: 'Postulación de empleo',
+    mensaje:  form.mensaje,
+  });
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
@@ -67,20 +77,23 @@ export default function CareersModule({ onBack }: Props) {
 
     if (EMAILJS_CONFIGURED) {
       try {
-        await emailjs.send(
-          EJ_SERVICE!,
-          EJ_TEMPLATE!,
-          {
-            from_name:  form.nombre,
-            company:    'Postulación - Trabajo con CCG',
-            from_email: form.email,
-            phone:      form.telefono,
-            service:    'Postulación de empleo',
-            message:    form.mensaje,
-            reply_to:   form.email,
-          },
-          EJ_KEY!
-        );
+        await Promise.all([
+          emailjs.send(
+            EJ_SERVICE!,
+            EJ_TEMPLATE!,
+            {
+              from_name:  form.nombre,
+              company:    'Postulación - Trabajo con CCG',
+              from_email: form.email,
+              phone:      form.telefono,
+              service:    'Postulación de empleo',
+              message:    form.mensaje,
+              reply_to:   form.email,
+            },
+            EJ_KEY!
+          ),
+          sendToSheets(),
+        ]);
         setSubmitted(true);
       } catch {
         setSendError(true);
@@ -88,6 +101,7 @@ export default function CareersModule({ onBack }: Props) {
         setSending(false);
       }
     } else {
+      await sendToSheets();
       const subject = encodeURIComponent(`${ca.mailto.subject} - ${form.nombre}`);
       const body    = encodeURIComponent(
         `${ca.mailto.name}: ${form.nombre}\n${ca.mailto.phone}: ${form.telefono}\nEmail: ${form.email}\n\n${form.mensaje}`

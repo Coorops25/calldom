@@ -36,7 +36,7 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="relative overflow-hidden py-24 sm:py-32 px-5 sm:px-6 md:px-14 lg:px-28 bg-navy-deep">
+    <section id="about" className="relative overflow-hidden py-14 sm:py-20 px-5 sm:px-6 md:px-14 lg:px-28 bg-navy-deep">
       <div className="absolute inset-0 opacity-20 pointer-events-none -z-10">
         <FluidBackground colors={['#0f1d35', '#0077b6', '#060d1f']} />
       </div>

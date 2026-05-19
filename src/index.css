@@ -250,6 +250,39 @@ html.light {
   .text-gradient {
     @apply bg-gradient-to-br from-teal to-teal-bright bg-clip-text text-transparent;
   }
+
+  /* Thin horizontal scrollbar for in-card carousels (e.g. service tags
+     on mobile). Default browser scrollbars look chunky inside narrow
+     cards. WebKit + Firefox covered. */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 180, 216, 0.4) transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    height: 4px;
+    width: 4px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: rgba(0, 180, 216, 0.4);
+    border-radius: 999px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 180, 216, 0.65);
+  }
+  /* GSAP SplitText wraps each inner word in its own <div>. Those wrappers
+     don't inherit the parent's background-clip:text, so the gradient text
+     becomes invisible (transparent fill with no background). Propagate the
+     gradient styling down so split words still render. */
+  .text-gradient > div {
+    background: inherit;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
   .text-stroke {
     -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.32);
     color: transparent;
@@ -310,6 +343,13 @@ html.light {
     background: linear-gradient(135deg, #005b94 0%, #0090c0 100%);
     -webkit-background-clip: text;
     background-clip: text;
+    color: transparent;
+  }
+  & .text-gradient > div {
+    background: inherit;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
     color: transparent;
   }
 
@@ -719,10 +759,10 @@ html.light :focus-visible {
   /* Always-light surface regardless of html.light state. Keeps the
      Posting section feeling like an embedded piece of posting.com.co
      against the rest of the (dark-leaning) CCG ecosystem. */
-  color: #0f172a;
+  color: #0b1f38;
   color-scheme: light;
 }
-.posting-section h2 { color: #0f172a; }
+.posting-section h2 { color: #0b1f38; }
 
 /* `html.light` rewrites `.text-white` to dark navy globally — but inside
    .posting-section that breaks the CTA pill and the final formula icon
@@ -1080,4 +1120,73 @@ html.light .clients-marquee-item img {
 
 @media (prefers-reduced-motion: reduce) {
   .fluid-bg { animation: none; }
+}
+
+/* ─── react-phone-number-input theming (contact form) ───
+   The wrapper inherits .contact-module-field styles (set inline on the
+   element) so it matches the other inputs — surface, border, focus ring,
+   and light-mode overrides are all reused. Only the inner layout and the
+   country picker need extra rules here. */
+.ccg-phone-input {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+.ccg-phone-input .PhoneInputCountry {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  position: relative;
+  padding-right: 0.7rem;
+  border-right: 1px solid currentColor;
+  border-right-color: rgba(255, 255, 255, 0.12);
+  margin-right: 0.2rem;
+}
+.ccg-phone-input .PhoneInputCountryIcon {
+  width: 1.6rem;
+  height: 1.15rem;
+  box-shadow: none;
+  background: transparent;
+}
+.ccg-phone-input .PhoneInputCountryIcon--border {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.18);
+}
+.ccg-phone-input .PhoneInputCountryIconImg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.ccg-phone-input .PhoneInputCountrySelectArrow {
+  color: currentColor;
+  opacity: 0.55;
+  margin-left: 0.15rem;
+  border-bottom-width: 1px;
+  border-right-width: 1px;
+}
+.ccg-phone-input .PhoneInputCountrySelect {
+  color: #0b1220; /* readable in the native OS dropdown */
+}
+.ccg-phone-input .PhoneInputInput {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
+}
+.ccg-phone-input .PhoneInputInput::placeholder {
+  color: inherit;
+  opacity: 0.45;
+}
+
+/* Light-mode adjustments: lighten the country picker divider and flag border
+   so they match the rest of the form's paper-like inputs. */
+html.light .ccg-phone-input .PhoneInputCountry {
+  border-right-color: rgba(11, 22, 40, 0.1);
+}
+html.light .ccg-phone-input .PhoneInputCountryIcon--border {
+  box-shadow: 0 0 0 1px rgba(11, 22, 40, 0.12);
 }

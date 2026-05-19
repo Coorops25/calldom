@@ -12,7 +12,7 @@ export default function CTA({ onNavigate }: Props) {
   const ctaCopy = t.cta;
 
   return (
-    <section className="relative overflow-hidden bg-navy-deep py-20 sm:py-40 lg:py-56 px-5 sm:px-6 text-center">
+    <section className="relative overflow-hidden bg-navy-deep py-16 sm:py-24 lg:py-28 px-5 sm:px-6 text-center">
       <div className="cta-overlay absolute inset-0 pointer-events-none" />
       <div className="absolute inset-0 opacity-20 pointer-events-none">
         <FluidBackground colors={['#023e8a', '#0077b6', '#0096c7']} />

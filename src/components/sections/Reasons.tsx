@@ -148,7 +148,7 @@ export default function Reasons() {
   const track = [...items, ...items];
 
   return (
-    <section id="reasons" ref={sectionRef} className="py-20">
+    <section id="reasons" ref={sectionRef} className="relative py-14 sm:py-16">
       <style>{ANIM_CSS}</style>
 
       {/* ── Heading ─────────────────────────────────── */}
@@ -163,7 +163,7 @@ export default function Reasons() {
           {t.reasons.label}
         </motion.div>
 
-        <h2 className="font-display text-[clamp(2.2rem,4vw,3.8rem)] leading-tight font-normal">
+        <h2 className="font-display text-[clamp(1.6rem,4vw,3.8rem)] leading-tight font-normal">
           <Suspense fallback={
             <span className="inline-block opacity-0">
               {prefix}{normalizeQ(t.reasons.headingPre)} {normalizeQ(t.reasons.headingEm)}?

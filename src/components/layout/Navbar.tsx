@@ -199,7 +199,11 @@ export default function Navbar({ onNavigate, hidden = false }: Props) {
               {/* Main circle — morphs sun↔moon */}
               <motion.path
                 fill="transparent"
-                initial={{ d: 'M70 49.5C70 60.8218 60.8218 70 49.5 70C38.1782 70 29 60.8218 29 49.5C29 38.1782 38.1782 29 49.5 29C60 29 69.5 38 70 49.5Z' }}
+                initial={{
+                  d: 'M70 49.5C70 60.8218 60.8218 70 49.5 70C38.1782 70 29 60.8218 29 49.5C29 38.1782 38.1782 29 49.5 29C60 29 69.5 38 70 49.5Z',
+                  fillOpacity: 0,
+                  strokeOpacity: 0,
+                }}
                 animate={{
                   d: isDark
                     ? 'M70 49.5C70 60.8218 60.8218 70 49.5 70C38.1782 70 29 60.8218 29 49.5C29 38.1782 38.1782 29 49.5 29C39 45 49.5 59.5 70 49.5Z'
@@ -283,7 +287,11 @@ export default function Navbar({ onNavigate, hidden = false }: Props) {
               ))}
               <motion.path
                 fill="transparent"
-                initial={{ d: 'M70 49.5C70 60.8218 60.8218 70 49.5 70C38.1782 70 29 60.8218 29 49.5C29 38.1782 38.1782 29 49.5 29C60 29 69.5 38 70 49.5Z' }}
+                initial={{
+                  d: 'M70 49.5C70 60.8218 60.8218 70 49.5 70C38.1782 70 29 60.8218 29 49.5C29 38.1782 38.1782 29 49.5 29C60 29 69.5 38 70 49.5Z',
+                  fillOpacity: 0,
+                  strokeOpacity: 0,
+                }}
                 animate={{
                   d: isDark
                     ? 'M70 49.5C70 60.8218 60.8218 70 49.5 70C38.1782 70 29 60.8218 29 49.5C29 38.1782 38.1782 29 49.5 29C39 45 49.5 59.5 70 49.5Z'

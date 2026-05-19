@@ -1,5 +1,5 @@
 import { StrictMode } from 'react';
-import { hydrateRoot } from 'react-dom/client';
+import { createRoot, hydrateRoot } from 'react-dom/client';
 import App from './App';
 import './index.css';
 
@@ -44,9 +44,18 @@ function initGoogleAnalytics() {
 
 initGoogleAnalytics();
 
-hydrateRoot(
-  document.getElementById('root')!,
+const rootEl = document.getElementById('root')!;
+const tree = (
   <StrictMode>
     <App initialPath={window.location.pathname} />
-  </StrictMode>,
+  </StrictMode>
 );
+
+// In dev (`vite dev`) the HTML root is empty — there's no SSR markup to
+// hydrate, so hydrateRoot would fail with a mismatch warning. Production
+// uses the prerender script which fills <div id="root"> with markup.
+if (rootEl.hasChildNodes()) {
+  hydrateRoot(rootEl, tree);
+} else {
+  createRoot(rootEl).render(tree);
+}

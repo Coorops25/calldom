@@ -126,10 +126,10 @@ export default function Footer({ onNavigate }: Props) {
         <div className="text-center sm:text-left">
           <h3 className="font-mono text-xs tracking-[0.2em] uppercase text-gray-300 mb-4 sm:mb-6">{t.footer.contactTitle}</h3>
           <div className="space-y-3 sm:space-y-4 font-body text-sm font-light text-gray-200">
-            <p className="font-body font-light">{t.footer.contact.address}</p>
-            <p className="font-body font-light">{t.footer.location}</p>
-            <a href={`mailto:${t.footer.contact.email}`} className="font-body font-light block hover:text-teal transition-colors">{t.footer.contact.email}</a>
-            <a href="tel:+573016125291" className="font-body font-light block hover:text-teal transition-colors">{t.footer.contact.phone}</a>
+            <p className="font-body text-sm font-light leading-relaxed">{t.footer.contact.address}</p>
+            <p className="font-body text-sm font-light leading-relaxed">{t.footer.location}</p>
+            <a href={`mailto:${t.footer.contact.email}`} className="font-body text-sm font-light block hover:text-teal transition-colors">{t.footer.contact.email}</a>
+            <a href="tel:+573016125291" className="font-body text-sm font-light block hover:text-teal transition-colors">{t.footer.contact.phone}</a>
           </div>
         </div>
       </div>

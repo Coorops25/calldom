@@ -333,11 +333,13 @@ const pt = {
     modalLabel: 'Política corporativa',
     policies: [
       { title: 'Política de Prevenção do Assédio no Trabalho', desc: 'Marco de prevenção, detecção e gestão de situações de assédio no ambiente de trabalho.' },
+      { title: 'Política de Emergências', desc: 'Plano de preparação, resposta e atendimento a situações de emergência na organização.' },
       { title: 'Sistema de Gestão de Segurança e Saúde no Trabalho', desc: 'Diretrizes e padrões do sistema de gestão de saúde e segurança ocupacional.' },
       { title: 'Política de Álcool e Outras Substâncias', desc: 'Normas para prevenção e gestão do consumo de álcool e drogas no trabalho.' },
       { title: 'Política de Prevenção contra Assédio Sexual', desc: 'Medidas para prevenir e atender casos de assédio sexual no ambiente laboral.' },
       { title: 'Política de Teletrabalho', desc: 'Regulamentação e diretrizes para modalidades de teletrabalho e trabalho híbrido.' },
       { title: 'Política de Igualdade e Equidade com Enfoque de Gênero', desc: 'Compromisso com a igualdade de oportunidades e a equidade laboral com perspectiva de gênero.' },
+      { title: 'Política de Saúde Mental', desc: 'Promoção do bem-estar psicológico e prevenção de riscos à saúde mental no trabalho.' },
       { title: 'Política de Desconexão do Trabalho', desc: 'Garantia do direito dos colaboradores de se desconectarem fora do horário de trabalho.' },
     ],
   },
@@ -383,6 +385,7 @@ const pt = {
       subjectPrefix: 'Contato CCGrupo',
       name: 'Nome',
       company: 'Empresa',
+      role: 'Cargo',
       phone: 'Telefone',
       service: 'Serviço',
       sector: 'Setor',
@@ -390,6 +393,7 @@ const pt = {
     placeholders: {
       nombre: 'João Silva',
       empresa: 'Minha Empresa Ltda',
+      cargo: 'Diretor Comercial',
     },
     infoLabels: {
       location: 'Localização',
@@ -407,6 +411,7 @@ const pt = {
     fields: {
       nombre: 'Nome completo',
       empresa: 'Empresa',
+      cargo: 'Cargo',
       email: 'E-mail',
       telefono: 'Telefone',
       servicio: 'Serviço de interesse',
@@ -423,8 +428,9 @@ const pt = {
     errors: {
       nombre: 'Escreva seu nome completo.',
       empresa: 'Informe o nome da sua empresa.',
+      cargo: 'Informe seu cargo.',
       email: 'Insira um e-mail válido.',
-      telefono: 'Inclua um telefone de contato.',
+      telefono: 'Insira um telefone válido com código do país.',
       servicio: 'Escolha um serviço de interesse.',
       sector: 'Escolha seu setor.',
       mensaje: 'Escreva pelo menos 20 caracteres para entendermos sua solicitação.',

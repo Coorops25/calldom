@@ -148,7 +148,7 @@ export default function Clients() {
   }, []);
 
   return (
-    <section id="clients" className="py-24 border-t border-white/10 overflow-hidden">
+    <section id="clients" className="py-14 sm:py-20 border-t border-white/10 overflow-hidden">
       <div className="px-6 md:px-14 lg:px-28 flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
         <div>
           <motion.div

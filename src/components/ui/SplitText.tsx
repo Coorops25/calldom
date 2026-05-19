@@ -121,7 +121,11 @@ const SplitText: React.FC<SplitTextProps> = ({
     <div
       ref={ref}
       className={`split-text ${className}`}
-      style={{ textAlign, whiteSpace: 'pre', display: 'inline' }}
+      // `pre-wrap` preserves consecutive whitespace (which GSAP's SplitText
+      // relies on with `reduceWhiteSpace: false`) WHILE still wrapping at
+      // line boundaries. Previously `pre` forced single-line layouts and
+      // overflowed narrow mobile viewports (~352px).
+      style={{ textAlign, whiteSpace: 'pre-wrap', display: 'inline' }}
     >
       {children || text}
     </div>

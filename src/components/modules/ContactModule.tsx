@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowLeft, MapPin, Mail, Phone, Clock, Send, CheckCircle, AlertCircle, XCircle } from 'lucide-react';
 import emailjs from '@emailjs/browser';
+import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
 import { useLang } from '../../i18n';
+import { sendLeadToSheets } from '../../lib/sheetsWebhook';
 
 const EJ_SERVICE  = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const EJ_TEMPLATE = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
@@ -13,6 +16,7 @@ const EMAILJS_CONFIGURED = !!(EJ_SERVICE && EJ_TEMPLATE && EJ_KEY &&
 interface FormState {
   nombre: string;
   empresa: string;
+  cargo: string;
   email: string;
   telefono: string;
   servicio: string;
@@ -20,7 +24,7 @@ interface FormState {
   mensaje: string;
 }
 
-const empty: FormState = { nombre: '', empresa: '', email: '', telefono: '', servicio: '', sector: '', mensaje: '' };
+const empty: FormState = { nombre: '', empresa: '', cargo: '', email: '', telefono: '', servicio: '', sector: '', mensaje: '' };
 
 interface Props { onBack: () => void; }
 
@@ -71,8 +75,9 @@ export default function ContactModule({ onBack }: Props) {
     const next: Partial<FormState> = {};
     if (!form.nombre.trim())   next.nombre = ct.errors.nombre;
     if (!form.empresa.trim())  next.empresa = ct.errors.empresa;
+    if (!form.cargo.trim())    next.cargo = ct.errors.cargo;
     if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) next.email = ct.errors.email;
-    if (!form.telefono.trim()) next.telefono = ct.errors.telefono;
+    if (!form.telefono.trim() || !isValidPhoneNumber(form.telefono)) next.telefono = ct.errors.telefono;
     if (!form.servicio)        next.servicio = ct.errors.servicio;
     if (!form.sector)          next.sector = ct.errors.sector;
     if (!form.mensaje.trim() || form.mensaje.trim().length < 20) next.mensaje = ct.errors.mensaje;
@@ -86,6 +91,18 @@ export default function ContactModule({ onBack }: Props) {
     if (errors[name as keyof FormState]) setErrors(prev => ({ ...prev, [name]: undefined }));
   };
 
+  const sendToSheets = () => sendLeadToSheets({
+    tipoLead: 'CONTACTO',
+    nombre:   form.nombre,
+    telefono: form.telefono,
+    correo:   form.email,
+    empresa:  form.empresa,
+    cargo:    form.cargo,
+    sector:   form.sector,
+    servicio: form.servicio,
+    mensaje:  form.mensaje,
+  });
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
@@ -94,21 +111,25 @@ export default function ContactModule({ onBack }: Props) {
 
     if (EMAILJS_CONFIGURED) {
       try {
-        await emailjs.send(
-          EJ_SERVICE!,
-          EJ_TEMPLATE!,
-          {
-            from_name:  form.nombre,
-            company:    form.empresa,
-            from_email: form.email,
-            phone:      form.telefono,
-            service:    form.servicio,
-            sector:     form.sector,
-            message:    `[${ct.mailto.sector}: ${form.sector}]\n\n${form.mensaje}`,
-            reply_to:   form.email,
-          },
-          EJ_KEY!
-        );
+        await Promise.all([
+          emailjs.send(
+            EJ_SERVICE!,
+            EJ_TEMPLATE!,
+            {
+              from_name:  form.nombre,
+              company:    form.empresa,
+              role:       form.cargo,
+              from_email: form.email,
+              phone:      form.telefono,
+              service:    form.servicio,
+              sector:     form.sector,
+              message:    `[${ct.mailto.sector}: ${form.sector}]\n[${ct.mailto.role}: ${form.cargo}]\n\n${form.mensaje}`,
+              reply_to:   form.email,
+            },
+            EJ_KEY!
+          ),
+          sendToSheets(),
+        ]);
         setSubmitted(true);
       } catch {
         setSendError(true);
@@ -116,9 +137,10 @@ export default function ContactModule({ onBack }: Props) {
         setSending(false);
       }
     } else {
+      await sendToSheets();
       const subject = encodeURIComponent(`${ct.mailto.subjectPrefix} - ${form.servicio} (${form.sector})`);
       const body    = encodeURIComponent(
-        `${ct.mailto.name}: ${form.nombre}\n${ct.mailto.company}: ${form.empresa}\nEmail: ${form.email}\n${ct.mailto.phone}: ${form.telefono}\n${ct.mailto.service}: ${form.servicio}\n${ct.mailto.sector}: ${form.sector}\n\n${form.mensaje}`
+        `${ct.mailto.name}: ${form.nombre}\n${ct.mailto.company}: ${form.empresa}\n${ct.mailto.role}: ${form.cargo}\nEmail: ${form.email}\n${ct.mailto.phone}: ${form.telefono}\n${ct.mailto.service}: ${form.servicio}\n${ct.mailto.sector}: ${form.sector}\n\n${form.mensaje}`
       );
       window.location.href = `mailto:commercial@ccgrupo.com.co?subject=${subject}&body=${body}`;
       setSending(false);
@@ -263,13 +285,35 @@ export default function ContactModule({ onBack }: Props) {
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
+                    <Field label={ct.fields.cargo} error={errors.cargo} htmlFor="f-cargo">
+                      <input
+                        id="f-cargo"
+                        name="cargo"
+                        value={form.cargo}
+                        onChange={handleChange}
+                        placeholder={ct.placeholders.cargo}
+                        className={inputBase}
+                      />
+                    </Field>
                     <Field label={ct.fields.email} error={errors.email} htmlFor="f-email">
                       <input id="f-email" type="email" name="email" value={form.email} onChange={handleChange} placeholder="name@company.com" className={inputBase} />
                     </Field>
-                    <Field label={ct.fields.telefono} error={errors.telefono} htmlFor="f-telefono">
-                      <input id="f-telefono" type="tel" name="telefono" value={form.telefono} onChange={handleChange} placeholder="+57 300 000 0000" className={inputBase} />
-                    </Field>
                   </div>
+
+                  <Field label={ct.fields.telefono} error={errors.telefono} htmlFor="f-telefono">
+                    <PhoneInput
+                      id="f-telefono"
+                      international
+                      defaultCountry="CO"
+                      value={form.telefono}
+                      onChange={(value) => {
+                        setForm(prev => ({ ...prev, telefono: value || '' }));
+                        if (errors.telefono) setErrors(prev => ({ ...prev, telefono: undefined }));
+                      }}
+                      placeholder="300 000 0000"
+                      className={`ccg-phone-input ${inputBase}`}
+                    />
+                  </Field>
 
                   <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
                     <Field label={ct.fields.servicio} error={errors.servicio} htmlFor="f-servicio">
