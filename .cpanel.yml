@@ -1,9 +1,7 @@
 ---
 deployment:
   tasks:
-    # ↓ Reemplaza USUARIO_CPANEL por tu usuario real de cPanel antes de subir.
-    #   Cómo verlo: cPanel → barra lateral → "General Information" → "Current User".
-    - export DEPLOYPATH=/home/USUARIO_CPANEL/public_html/ccgrupo.com.co
+    - export DEPLOYPATH=/home/ccgltdac/public_html/ccgrupo.com.co
     # Copia el build de Vite (HTML prerendered + assets) al docroot.
     - /bin/cp -R dist/* $DEPLOYPATH
     # El subdirectorio dist/server es del build SSR de Node — no se usa
