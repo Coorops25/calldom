@@ -12,9 +12,11 @@ deployment:
     - /bin/rm -rf $DEPLOYPATH/wp-content
     - /bin/rm -rf $DEPLOYPATH/wp-includes
     - /bin/rm -f  $DEPLOYPATH/wp-*.php
+    - /bin/rm -f  $DEPLOYPATH/index.php
     - /bin/rm -f  $DEPLOYPATH/xmlrpc.php
     - /bin/rm -f  $DEPLOYPATH/license.txt
     - /bin/rm -f  $DEPLOYPATH/readme.html
+    - /bin/rm -f  $DEPLOYPATH/error_log
 
     # ─── Copiar el build de Vite ───
     # dist/ contiene: index.html (prerender), assets/, images/, fonts/, .htaccess
