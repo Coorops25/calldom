@@ -97,7 +97,15 @@ curl_close($ch);
 if ($response === false || $httpCode >= 400) {
     error_log('CCG lead proxy upstream error: ' . $curlError . ' (HTTP ' . $httpCode . ')');
     http_response_code(502);
-    echo json_encode(['ok' => false, 'error' => 'upstream_error', 'status' => $httpCode]);
+    echo json_encode([
+        'ok'          => false,
+        'error'       => 'upstream_error',
+        'status'      => $httpCode,
+        'curl_error'  => $curlError ?: null,
+        // Devolvemos un fragmento del body para depurar (truncado por privacidad).
+        // Quitar este campo cuando ya esté funcionando.
+        'upstream_body' => is_string($response) ? substr($response, 0, 600) : null,
+    ]);
     exit;
 }
 
