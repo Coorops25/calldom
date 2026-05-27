@@ -11,6 +11,7 @@
     "preview": "vite preview",
     "start:ssr": "node server.js",
     "clean": "rm -rf dist",
+    "deploy": "npm run build && git add -f dist && git commit -m \"build: deploy snapshot\" && git push",
     "lint": "tsc --noEmit && eslint src --max-warnings 50",
     "test": "vitest run",
     "test:watch": "vitest",

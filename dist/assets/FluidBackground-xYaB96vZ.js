@@ -1,0 +1,1 @@
+import{j as o}from"./vendor-react-lSmCTsfu.js";function a({colors:e=["#0f1d35","#0077b6","#060d1f"],className:t="",style:n}){const[s,c,i]=e;return o.jsx("div",{"aria-hidden":"true",className:`fluid-bg pointer-events-none absolute inset-0 ${t}`,style:{"--fb-c0":s,"--fb-c1":c,"--fb-c2":i,...n}})}export{a as F};

@@ -4,7 +4,10 @@ node_modules/
 .pnp.js
 
 # Build
-dist/
+# NOTE: dist/ is intentionally NOT ignored — cPanel pulls from this
+# repo and copies dist/* to public_html. Run `npm run deploy` to
+# build + commit + push in one shot. See .cpanel.yml.
+# dist/
 build/
 out/
 .next/
