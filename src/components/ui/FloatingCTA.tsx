@@ -1,25 +1,48 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { MessageCircle } from 'lucide-react';
 import { useLang } from '../../i18n';
 
-const WA_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER;
+// Número de WhatsApp con código de país, sin "+" ni espacios.
+// Si quieres cambiarlo, edítalo aquí — no necesita env var.
+const WA_NUMBER = '573016125291';
 
 interface Props {
   onNavigate?: (view: string) => void;
 }
 
-export default function FloatingCTA({ onNavigate }: Props) {
+export default function FloatingCTA({ onNavigate: _onNavigate }: Props) {
   const [visible, setVisible] = useState(false);
-  const { t, lang } = useLang();
-  const waMessage = lang === 'en'
-    ? 'Hi CCGrupo, I would like more information'
+  const { lang } = useLang();
+
+  const waMessage =
+    lang === 'en' ? 'Hi CCGrupo, I would like more information'
+    : lang === 'pt' ? 'Olá CCGrupo, gostaria de mais informações'
     : 'Hola CCGrupo, quisiera más información';
+  const waLabel =
+    lang === 'en' ? 'Chat with us on WhatsApp'
+    : lang === 'pt' ? 'Fale conosco no WhatsApp'
+    : 'Escríbenos por WhatsApp';
 
   useEffect(() => {
-    const handler = () => setVisible(window.scrollY > 600);
+    // Show the button once the user has scrolled a bit, then hide it
+    // when the page is near the bottom so it doesn't overlap the
+    // footer (the "Bogotá, Colombia" line and social icons).
+    const handler = () => {
+      const y = window.scrollY;
+      const viewport = window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight;
+      const distanceToBottom = docHeight - (y + viewport);
+      const past600 = y > 600;
+      const overFooter = distanceToBottom < 420; // hide cuando se acerca al footer
+      setVisible(past600 && !overFooter);
+    };
+    handler();
     window.addEventListener('scroll', handler, { passive: true });
-    return () => window.removeEventListener('scroll', handler);
+    window.addEventListener('resize', handler);
+    return () => {
+      window.removeEventListener('scroll', handler);
+      window.removeEventListener('resize', handler);
+    };
   }, []);
 
   return (
@@ -29,41 +52,30 @@ export default function FloatingCTA({ onNavigate }: Props) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed right-4 bottom-4 sm:right-8 sm:bottom-8 z-[9500] flex flex-col items-end gap-3"
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="fixed right-4 bottom-8 sm:right-8 sm:bottom-12 z-[9500]"
         >
-          {/* WhatsApp — only when VITE_WHATSAPP_NUMBER is set */}
-          {WA_NUMBER && (
-            <motion.a
-              href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage)}`}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="WhatsApp"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.1 }}
-              className="w-14 h-14 rounded-full border border-white/10 bg-navy-deep/60 backdrop-blur-md flex items-center justify-center text-[#25D366] hover:text-white hover:bg-[#25D366]/90 hover:border-[#25D366]/40 hover:-translate-y-0.5 shadow-[0_8px_32px_rgba(0,0,0,0.25)] hover:shadow-[0_12px_44px_rgba(37,211,102,0.35)] transition-all duration-300"
-            >
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-              </svg>
-            </motion.a>
-          )}
-
-          {/* Contact CTA — round button matching navbar style. Uses teal as
-              the accent so it reads as the primary action while still
-              echoing the header's circular-icon language. */}
-          <button
-            type="button"
-            onClick={() => onNavigate?.('contact')}
-            aria-label={t.nav.contact}
-            title={t.nav.contact}
-            className="relative w-14 h-14 rounded-full border border-teal/40 bg-navy-deep/60 backdrop-blur-md flex items-center justify-center text-teal hover:text-white hover:bg-gradient-to-br hover:from-teal-dark hover:to-teal hover:border-teal hover:-translate-y-0.5 shadow-[0_8px_32px_rgba(0,180,216,0.25)] hover:shadow-[0_12px_44px_rgba(0,180,216,0.45)] transition-all duration-300 group"
+          <a
+            href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMessage)}`}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={waLabel}
+            title={waLabel}
+            className="relative group w-14 h-14 rounded-full border border-teal/40 bg-navy-deep/60 backdrop-blur-md flex items-center justify-center text-teal hover:text-white hover:bg-gradient-to-br hover:from-teal-dark hover:to-teal hover:border-teal hover:-translate-y-0.5 shadow-[0_8px_32px_rgba(0,180,216,0.25)] hover:shadow-[0_12px_44px_rgba(0,180,216,0.45)] transition-all duration-300"
           >
-            {/* Subtle pulse ring — same energy as the dot in the old pill */}
+            {/* Subtle pulse ring — teal to match the rest of the site */}
             <span aria-hidden="true" className="absolute inset-0 rounded-full border border-teal/40 animate-ping opacity-50 group-hover:opacity-0 transition-opacity duration-300" />
-            <MessageCircle size={22} strokeWidth={1.75} className="relative z-10" />
-          </button>
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+              className="relative z-10"
+            >
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+          </a>
         </motion.div>
       )}
     </AnimatePresence>
