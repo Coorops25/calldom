@@ -1,9 +1,26 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/ccgltdac/public_html/ccgrupo.com.co
-    # Copia el build de Vite (HTML prerendered + assets) al docroot.
-    - /bin/cp -R dist/* $DEPLOYPATH
-    # El subdirectorio dist/server es del build SSR de Node — no se usa
-    # en hosting estático. Se borra para no dejar archivos sobrantes.
+    # Hosting: HappyWebServer (srv2.happywebserver.com) — usuario fbhvoiow.
+    # El document root del dominio ccgrupo.com.co es /public_html directamente.
+    - export DEPLOYPATH=/home/fbhvoiow/public_html
+
+    # ─── Limpiar restos de WordPress antes de desplegar ───
+    # En el primer deploy esto borra el WordPress viejo. En deploys
+    # siguientes es no-op (los archivos wp-* ya no existen).
+    - /bin/rm -rf $DEPLOYPATH/wp-admin
+    - /bin/rm -rf $DEPLOYPATH/wp-content
+    - /bin/rm -rf $DEPLOYPATH/wp-includes
+    - /bin/rm -f  $DEPLOYPATH/wp-*.php
+    - /bin/rm -f  $DEPLOYPATH/xmlrpc.php
+    - /bin/rm -f  $DEPLOYPATH/license.txt
+    - /bin/rm -f  $DEPLOYPATH/readme.html
+
+    # ─── Copiar el build de Vite ───
+    # dist/ contiene: index.html (prerender), assets/, images/, fonts/, .htaccess
+    - /bin/cp -R dist/* $DEPLOYPATH/
+    - /bin/cp -f dist/.htaccess $DEPLOYPATH/.htaccess
+
+    # ─── Limpieza final ───
+    # dist/server es del build SSR de Node — no se usa en hosting estático.
     - /bin/rm -rf $DEPLOYPATH/server
