@@ -1,0 +1,1 @@
+import{jsx as r}from"react/jsx-runtime";function d({colors:e=["#0f1d35","#0077b6","#060d1f"],className:n="",style:t}){const[c,i,o]=e;return r("div",{"aria-hidden":"true",className:`fluid-bg pointer-events-none absolute inset-0 ${n}`,style:{"--fb-c0":c,"--fb-c1":i,"--fb-c2":o,...t}})}export{d as F};

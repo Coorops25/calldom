@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" fill="none">
+  <rect width="1200" height="800" fill="#0b1628"/>
+  <rect width="1200" height="800" fill="url(#g5)"/>
+  <defs>
+    <linearGradient id="g5" x1="0" y1="0" x2="1200" y2="800" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0f1d35"/>
+      <stop offset="100%" stop-color="#00b4d8" stop-opacity="0.12"/>
+    </linearGradient>
+    <radialGradient id="hub-glow" cx="600" cy="400" r="180" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00b4d8" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#00b4d8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Soft hub glow -->
+  <circle cx="600" cy="400" r="180" fill="url(#hub-glow)"/>
+
+  <!-- Orbit rings -->
+  <circle cx="600" cy="400" r="260" stroke="#00b4d8" stroke-opacity="0.08" stroke-width="1"/>
+  <circle cx="600" cy="400" r="160" stroke="#00b4d8" stroke-opacity="0.12" stroke-width="1" stroke-dasharray="4 6"/>
+
+  <!-- Connection lines from hub to nodes -->
+  <g stroke="#00b4d8" stroke-opacity="0.25" stroke-width="1">
+    <line x1="600" y1="400" x2="380" y2="280"/>
+    <line x1="600" y1="400" x2="380" y2="520"/>
+    <line x1="600" y1="400" x2="820" y2="280"/>
+    <line x1="600" y1="400" x2="820" y2="520"/>
+    <line x1="600" y1="400" x2="600" y2="200"/>
+    <line x1="600" y1="400" x2="600" y2="600"/>
+  </g>
+
+  <!-- Central hub: large person with check -->
+  <circle cx="600" cy="400" r="68" stroke="#00b4d8" stroke-width="2.5" fill="#00b4d8" fill-opacity="0.08"/>
+  <!-- Head -->
+  <circle cx="600" cy="378" r="18" stroke="#00b4d8" stroke-width="3" fill="none" opacity="0.85"/>
+  <!-- Shoulders -->
+  <path d="M572 432 C572 414 585 402 600 402 C615 402 628 414 628 432 L628 442 L572 442 Z" fill="#00b4d8" opacity="0.6"/>
+  <!-- Check badge -->
+  <circle cx="638" cy="362" r="14" fill="#00b4d8" opacity="0.9"/>
+  <path d="M632 362 L636 367 L644 358" stroke="#0b1628" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- Satellite nodes (6 people around) -->
+  <g>
+    <!-- Top -->
+    <circle cx="600" cy="200" r="36" stroke="#00b4d8" stroke-width="1.5" fill="#00b4d8" fill-opacity="0.05" stroke-opacity="0.55"/>
+    <circle cx="600" cy="190" r="9" stroke="#00b4d8" stroke-width="2" fill="none" opacity="0.7"/>
+    <path d="M586 218 C586 209 592 203 600 203 C608 203 614 209 614 218 L614 222 L586 222 Z" fill="#00b4d8" opacity="0.45"/>
+    <!-- Top-left -->
+    <circle cx="380" cy="280" r="36" stroke="#00b4d8" stroke-width="1.5" fill="#00b4d8" fill-opacity="0.05" stroke-opacity="0.5"/>
+    <circle cx="380" cy="270" r="9" stroke="#00b4d8" stroke-width="2" fill="none" opacity="0.65"/>
+    <path d="M366 298 C366 289 372 283 380 283 C388 283 394 289 394 298 L394 302 L366 302 Z" fill="#00b4d8" opacity="0.4"/>
+    <!-- Top-right -->
+    <circle cx="820" cy="280" r="36" stroke="#00b4d8" stroke-width="1.5" fill="#00b4d8" fill-opacity="0.05" stroke-opacity="0.5"/>
+    <circle cx="820" cy="270" r="9" stroke="#00b4d8" stroke-width="2" fill="none" opacity="0.65"/>
+    <path d="M806 298 C806 289 812 283 820 283 C828 283 834 289 834 298 L834 302 L806 302 Z" fill="#00b4d8" opacity="0.4"/>
+    <!-- Bottom-left -->
+    <circle cx="380" cy="520" r="36" stroke="#00b4d8" stroke-width="1.5" fill="#00b4d8" fill-opacity="0.05" stroke-opacity="0.45"/>
+    <circle cx="380" cy="510" r="9" stroke="#00b4d8" stroke-width="2" fill="none" opacity="0.6"/>
+    <path d="M366 538 C366 529 372 523 380 523 C388 523 394 529 394 538 L394 542 L366 542 Z" fill="#00b4d8" opacity="0.35"/>
+    <!-- Bottom-right -->
+    <circle cx="820" cy="520" r="36" stroke="#00b4d8" stroke-width="1.5" fill="#00b4d8" fill-opacity="0.05" stroke-opacity="0.45"/>
+    <circle cx="820" cy="510" r="9" stroke="#00b4d8" stroke-width="2" fill="none" opacity="0.6"/>
+    <path d="M806 538 C806 529 812 523 820 523 C828 523 834 529 834 538 L834 542 L806 542 Z" fill="#00b4d8" opacity="0.35"/>
+    <!-- Bottom -->
+    <circle cx="600" cy="600" r="36" stroke="#00b4d8" stroke-width="1.5" fill="#00b4d8" fill-opacity="0.05" stroke-opacity="0.55"/>
+    <circle cx="600" cy="590" r="9" stroke="#00b4d8" stroke-width="2" fill="none" opacity="0.7"/>
+    <path d="M586 618 C586 609 592 603 600 603 C608 603 614 609 614 618 L614 622 L586 622 Z" fill="#00b4d8" opacity="0.45"/>
+  </g>
+
+  <!-- Floating language/skill chips -->
+  <g font-family="monospace" font-size="10" fill="#00b4d8" opacity="0.45">
+    <rect x="180" y="120" width="80" height="22" rx="11" fill="#00b4d8" fill-opacity="0.06" stroke="#00b4d8" stroke-opacity="0.25" stroke-width="1"/>
+    <text x="220" y="135" text-anchor="middle" letter-spacing="2">BPO</text>
+    <rect x="940" y="120" width="80" height="22" rx="11" fill="#00b4d8" fill-opacity="0.06" stroke="#00b4d8" stroke-opacity="0.25" stroke-width="1"/>
+    <text x="980" y="135" text-anchor="middle" letter-spacing="2">+9 PAÍSES</text>
+    <rect x="180" y="660" width="80" height="22" rx="11" fill="#00b4d8" fill-opacity="0.06" stroke="#00b4d8" stroke-opacity="0.25" stroke-width="1"/>
+    <text x="220" y="675" text-anchor="middle" letter-spacing="2">5 IDIOMAS</text>
+    <rect x="940" y="660" width="80" height="22" rx="11" fill="#00b4d8" fill-opacity="0.06" stroke="#00b4d8" stroke-opacity="0.25" stroke-width="1"/>
+    <text x="980" y="675" text-anchor="middle" letter-spacing="2">REMOTO</text>
+  </g>
+
+  <!-- Label -->
+  <text x="600" y="720" text-anchor="middle" font-family="monospace" font-size="13" fill="#00b4d8" opacity="0.5" letter-spacing="6">TALENTO HUMANO — RED DE ESPECIALISTAS</text>
+</svg>
