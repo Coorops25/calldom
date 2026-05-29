@@ -39,7 +39,7 @@ function ClientAvatars({
   clients,
   size,
   maxVisible,
-  overlap = 50,
+  overlap =65,
   focusScale = 1.25,
   moreSuffix,
 }: ClientAvatarsProps) {
