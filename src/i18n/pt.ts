@@ -29,7 +29,7 @@ const pt = {
   },
   nav: {
     links: [
-      { name: 'Soluções', href: '#sectores' },
+      { name: 'Soluções', href: '#services' },
       { name: 'Setores', href: '#sectores' },
       { name: 'Ecossistema', href: '#diferencial' },
       { name: 'Talento', href: '#talento' },

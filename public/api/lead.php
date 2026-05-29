@@ -89,17 +89,26 @@ curl_setopt_array($ch, [
     CURLOPT_CONNECTTIMEOUT => 5,
 ]);
 
-$response   = curl_exec($ch);
-$httpCode   = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
-$curlError  = curl_error($ch);
+$response  = curl_exec($ch);
+$httpCode  = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+$curlError = curl_error($ch);
 curl_close($ch);
 
-if ($response === false || $httpCode >= 400) {
-    error_log('CCG lead proxy upstream error: ' . $curlError . ' (HTTP ' . $httpCode . ')');
+// Apps Script Web Apps responden con redirects a googleusercontent.com
+// y códigos HTTP inconsistentes (200, 302, a veces 4xx) incluso cuando
+// doPost() ejecutó perfectamente y la fila ya se escribió en el sheet.
+// El efecto colateral (write to sheet) es lo que importa — el response
+// status no es confiable. Esto replica el `mode: 'no-cors'` original
+// del frontend: fire-and-forget.
+//
+// Solo reportamos error si cURL falló a nivel de red (timeout, DNS,
+// connection refused). Si el request salió, asumimos éxito.
+if ($response === false || $curlError !== '') {
+    error_log('CCG lead proxy network error: ' . $curlError);
     http_response_code(502);
-    echo json_encode(['ok' => false, 'error' => 'upstream_error', 'status' => $httpCode]);
+    echo json_encode(['ok' => false, 'error' => 'network_error']);
     exit;
 }
 
 http_response_code(200);
-echo json_encode(['ok' => true]);
+echo json_encode(['ok' => true, 'upstream_status' => $httpCode]);
