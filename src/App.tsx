@@ -135,7 +135,7 @@ export default function App({ initialPath }: AppProps) {
   }, []);
 
   // Theme-switch loader: useTheme.toggle dispatches this event before
-  // flipping the html.light class. We render the CCG Preloader on top
+  // flipping the html.light class. We render the CallDom Preloader on top
   // and, halfway through, bump a key on the homepage tree so all entry
   // animations replay when the loader fades out. The remount happens
   // while the preloader still covers the page, so the user never sees
@@ -148,8 +148,8 @@ export default function App({ initialPath }: AppProps) {
       // Hide loader once main has had time to mount.
       window.setTimeout(() => setThemeSwitching(false), 1500);
     };
-    window.addEventListener('ccg:theme-switch', onSwitch);
-    return () => window.removeEventListener('ccg:theme-switch', onSwitch);
+    window.addEventListener('calldom:theme-switch', onSwitch);
+    return () => window.removeEventListener('calldom:theme-switch', onSwitch);
   }, []);
 
   const syncUrlWithView = (view: string, mode: 'push' | 'replace' = 'push') => {
@@ -178,10 +178,10 @@ export default function App({ initialPath }: AppProps) {
     const preferred = getPreferredLang();
     document.title =
       preferred === 'en'
-        ? 'CCGrupo | CX, Sales, AI and Digital Studio'
+        ? 'CallDom del Caribe | BPO — CX, Sales, AI & Digital Studio'
         : preferred === 'pt'
-          ? 'CCGrupo | CX, Vendas, IA e Digital Studio'
-          : 'CCGrupo | CX, Ventas, IA y Digital Studio';
+          ? 'CallDom del Caribe | BPO — CX, Vendas, IA & Digital Studio'
+          : 'CallDom del Caribe | BPO — CX, Ventas, IA y Digital Studio';
 
     setTimeout(() => {
       const element = document.getElementById('services');

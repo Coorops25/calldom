@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import CircularText from '../ui/CircularText';
 import { useLang } from '../../i18n';
 
-const Prism = lazy(() => import('../ui/Prism'));
+const Ferrofluid = lazy(() => import('../ui/Ferrofluid'));
 
 interface Props {
   onNavigate?: (view: string) => void;
@@ -17,21 +17,24 @@ export default function Hero({ onNavigate }: Props) {
   return (
     <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden px-5 sm:px-6 pt-20 sm:pt-28 pb-16 sm:pb-20">
 
-      {/* Prism WebGL background */}
+      {/* Ferrofluid WebGL background */}
       <div className="absolute inset-0 z-0">
         <Suspense fallback={null}>
-          <Prism
-            animationType="rotate"
-            timeScale={0.5}
-            height={3.5}
-            baseWidth={5.5}
-            scale={4.2}
-            hueShift={0}
-            colorFrequency={1}
-            noise={0}
-            glow={0.6}
-            transparent
-            suspendWhenOffscreen
+          <Ferrofluid
+            colors={['#00b4d8', '#0077b6', '#00e5ff', '#0096c7']}
+            speed={0.5}
+            scale={1.6}
+            turbulence={1}
+            fluidity={0.1}
+            rimWidth={0.2}
+            sharpness={2.5}
+            shimmer={1.5}
+            glow={2}
+            flowDirection="down"
+            opacity={1}
+            mouseInteraction
+            mouseStrength={1}
+            mouseRadius={0.35}
           />
         </Suspense>
       </div>
@@ -108,7 +111,7 @@ export default function Hero({ onNavigate }: Props) {
         transition={{ delay: 3.8, duration: 1 }}
         className="absolute bottom-10 right-10 hidden lg:block z-20"
       >
-        <CircularText text="CONTACT*CENTER*GRUPO*BPO*" onHover="speedUp" spinDuration={20} className="text-teal font-mono text-xs" />
+        <CircularText text="CALLDOM*DEL*CARIBE*BPO*" onHover="speedUp" spinDuration={20} className="text-teal font-mono text-xs" />
       </motion.div>
     </section>
   );

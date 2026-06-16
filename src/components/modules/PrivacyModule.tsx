@@ -39,11 +39,11 @@ export default function PrivacyModule({ onBack, onNavigate }: Props) {
       <nav className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 md:px-14 py-4 sm:py-6 flex justify-between items-center gap-4 bg-navy-deep/85 backdrop-blur-xl border-b border-white/5">
         <button type="button" onClick={onBack} className="flex items-center gap-3 min-w-0 cursor-pointer bg-transparent border-0 p-0" aria-label={t.common.goHome}>
           <ThemedLogo
-            alt="CCGrupo Logo"
+            alt="CallDom del Caribe Logo"
             className="h-12 w-auto object-contain"
             fallback={(
               <div className="w-8 h-8 border-2 border-teal rounded-md flex items-center justify-center font-mono text-[0.55rem] font-bold text-teal">
-                CCG
+                CDM
               </div>
             )}
           />

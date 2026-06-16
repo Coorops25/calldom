@@ -17,7 +17,7 @@ export default function PageLoader() {
         {!showFallbackMark ? (
           <img
             src={logoSrc}
-            alt="CCGrupo"
+            alt="CallDom del Caribe"
             width={192}
             height={192}
             decoding="async"
@@ -32,7 +32,7 @@ export default function PageLoader() {
           />
         ) : (
           <div className="w-[160px] h-[160px] sm:w-[176px] sm:h-[176px] md:w-[192px] md:h-[192px] border-2 border-teal rounded-2xl flex items-center justify-center">
-            <span className="font-mono text-3xl md:text-4xl font-bold text-teal tracking-wider">CCG</span>
+            <span className="font-mono text-3xl md:text-4xl font-bold text-teal tracking-wider">CDM</span>
           </div>
         )}
 

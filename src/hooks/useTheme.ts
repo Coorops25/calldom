@@ -28,7 +28,7 @@ export function useTheme() {
 
   const toggle = () => {
     const newIsDark = !isDark;
-    window.dispatchEvent(new CustomEvent('ccg:theme-switch'));
+    window.dispatchEvent(new CustomEvent('calldom:theme-switch'));
     // Two rAFs give React a tick to mount the preloader before the re-render.
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {

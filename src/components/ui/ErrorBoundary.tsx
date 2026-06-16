@@ -23,7 +23,7 @@ export default class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error: Error, info: React.ErrorInfo) {
-    console.error('[CCGrupo] Uncaught error:', error, info.componentStack);
+    console.error('[CallDom] Uncaught error:', error, info.componentStack);
   }
 
   render(): React.ReactNode {
@@ -57,8 +57,8 @@ export default class ErrorBoundary extends React.Component {
           </div>
           <p className="text-gray-300 font-light text-sm leading-relaxed mb-8">
             {copy.desc}{' '}
-            <a href="mailto:info@ccgrupo.com.co" className="text-teal hover:underline">
-              info@ccgrupo.com.co
+            <a href="mailto:info@calldomdelcaribe.com" className="text-teal hover:underline">
+              info@calldomdelcaribe.com
             </a>
           </p>
           <button

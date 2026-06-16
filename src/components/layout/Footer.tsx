@@ -31,7 +31,7 @@ export default function Footer({ onNavigate }: Props) {
 
   const logoFallback = (
     <div className="w-8 h-8 border-2 border-teal rounded-md flex items-center justify-center font-mono text-[0.55rem] font-bold text-teal">
-      CCG
+      CDM
     </div>
   );
 
@@ -54,7 +54,7 @@ export default function Footer({ onNavigate }: Props) {
                   transition={{ duration: 0.3 }}
                 >
                   <ThemedLogo
-                    alt="CCGrupo Logo"
+                    alt="CallDom del Caribe Logo"
                     className="h-16 sm:h-20 w-auto max-w-[11rem] sm:max-w-none object-contain"
                     fallback={logoFallback}
                   />
@@ -69,10 +69,10 @@ export default function Footer({ onNavigate }: Props) {
                   className="flex items-center gap-3"
                 >
                   <div className="w-8 h-8 border-2 border-teal rounded-md flex items-center justify-center font-mono text-[0.55rem] font-bold text-teal">
-                    CCG
+                    CDM
                   </div>
                   <div className="font-mono text-[0.65rem] tracking-[0.25em] uppercase text-white font-normal">
-                    Contact Center <span className="text-teal font-semibold">Grupo</span>
+                    CallDom <span className="text-teal font-semibold">del Caribe</span>
                   </div>
                 </motion.div>
               )}
@@ -129,7 +129,7 @@ export default function Footer({ onNavigate }: Props) {
             <p className="font-body text-sm font-light leading-relaxed">{t.footer.contact.address}</p>
             <p className="font-body text-sm font-light leading-relaxed">{t.footer.location}</p>
             <a href={`mailto:${t.footer.contact.email}`} className="font-body text-sm font-light block hover:text-teal transition-colors">{t.footer.contact.email}</a>
-            <a href="tel:+573016125291" className="font-body text-sm font-light block hover:text-teal transition-colors">{t.footer.contact.phone}</a>
+            <a href="tel:+18299871507" className="font-body text-sm font-light block hover:text-teal transition-colors">{t.footer.contact.phone}</a>
           </div>
         </div>
       </div>
@@ -149,10 +149,10 @@ export default function Footer({ onNavigate }: Props) {
 
         <div className="flex flex-wrap justify-center lg:justify-start gap-2.5 sm:gap-4">
           {[
-            { Icon: Linkedin,  href: 'https://www.linkedin.com/company/contact-center-grupo-sas', label: 'LinkedIn' },
-            { Icon: Instagram, href: 'https://www.instagram.com/contact_center_grupo/',                    label: 'Instagram' },
-            { Icon: Facebook,  href: 'https://www.facebook.com/CONTACTCENTERGROUP',               label: 'Facebook' },
-            { Icon: Youtube,   href: 'https://www.youtube.com/channel/UCK1VihHdl_RjnuLkG5rhopQ', label: 'YouTube' },
+            { Icon: Linkedin,  href: 'https://www.linkedin.com/company/calldom-del-caribe', label: 'LinkedIn' },
+            { Icon: Instagram, href: 'https://www.instagram.com/calldomdelcaribe',           label: 'Instagram' },
+            { Icon: Facebook,  href: 'https://www.facebook.com/calldomdelcaribe',            label: 'Facebook' },
+            { Icon: Youtube,   href: 'https://www.youtube.com/@calldomdelcaribe',             label: 'YouTube' },
           ].map(({ Icon, href, label }, i) => (
             <a
               key={i}
@@ -178,9 +178,6 @@ export default function Footer({ onNavigate }: Props) {
           </a>
         </div>
 
-        <span className="font-mono text-xs tracking-[0.12em] uppercase text-gray-300 max-w-full text-center lg:text-right">
-          {t.footer.location}
-        </span>
       </div>
     </footer>
   );

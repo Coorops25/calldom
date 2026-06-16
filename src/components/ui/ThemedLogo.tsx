@@ -7,7 +7,7 @@ type ThemedLogoProps = Omit<ImgHTMLAttributes<HTMLImageElement>, 'src' | 'onErro
 
 export default function ThemedLogo({
   fallback = null,
-  alt = 'CCGrupo Logo',
+  alt = 'CallDom del Caribe Logo',
   ...imgProps
 }: ThemedLogoProps) {
   const readInitialIsLight = () => {

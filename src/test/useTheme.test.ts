@@ -61,15 +61,15 @@ describe('useTheme', () => {
     expect(localStorage.getItem('theme')).toBe('dark');
   });
 
-  it('toggle dispatches ccg:theme-switch event', () => {
+  it('toggle dispatches calldom:theme-switch event', () => {
     const { result } = renderHook(() => useTheme());
     const spy = vi.fn();
-    window.addEventListener('ccg:theme-switch', spy);
+    window.addEventListener('calldom:theme-switch', spy);
 
     act(() => { result.current.toggle(); });
 
     expect(spy).toHaveBeenCalledTimes(1);
-    window.removeEventListener('ccg:theme-switch', spy);
+    window.removeEventListener('calldom:theme-switch', spy);
   });
 
   it('toggle DOM update completes within 100ms (synchronous rAF stub)', () => {

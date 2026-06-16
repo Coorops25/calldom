@@ -56,10 +56,10 @@ export default function ContactModule({ onBack }: Props) {
   // select with the sector they were reading about.
   useEffect(() => {
     try {
-      const prefill = sessionStorage.getItem('ccg.prefillSector');
+      const prefill = sessionStorage.getItem('calldom.prefillSector');
       if (prefill) {
         setForm(prev => ({ ...prev, sector: prefill }));
-        sessionStorage.removeItem('ccg.prefillSector');
+        sessionStorage.removeItem('calldom.prefillSector');
       }
     } catch { /* sessionStorage unavailable — silently skip */ }
   }, []);
@@ -142,7 +142,7 @@ export default function ContactModule({ onBack }: Props) {
       const body    = encodeURIComponent(
         `${ct.mailto.name}: ${form.nombre}\n${ct.mailto.company}: ${form.empresa}\n${ct.mailto.role}: ${form.cargo}\nEmail: ${form.email}\n${ct.mailto.phone}: ${form.telefono}\n${ct.mailto.service}: ${form.servicio}\n${ct.mailto.sector}: ${form.sector}\n\n${form.mensaje}`
       );
-      window.location.href = `mailto:commercial@ccgrupo.com.co?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:info@calldomdelcaribe.com?subject=${subject}&body=${body}`;
       setSending(false);
       setSubmitted(true);
     }

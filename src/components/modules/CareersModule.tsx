@@ -83,7 +83,7 @@ export default function CareersModule({ onBack }: Props) {
             EJ_TEMPLATE!,
             {
               from_name:  form.nombre,
-              company:    'Postulación - Trabajo con CCG',
+              company:    'Postulación - Trabajo con CallDom del Caribe',
               from_email: form.email,
               phone:      form.telefono,
               service:    'Postulación de empleo',
@@ -106,7 +106,7 @@ export default function CareersModule({ onBack }: Props) {
       const body    = encodeURIComponent(
         `${ca.mailto.name}: ${form.nombre}\n${ca.mailto.phone}: ${form.telefono}\nEmail: ${form.email}\n\n${form.mensaje}`
       );
-      window.location.href = `mailto:talento@ccgrupo.com.co?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:info@calldomdelcaribe.com?subject=${subject}&body=${body}`;
       setSending(false);
       setSubmitted(true);
     }

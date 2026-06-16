@@ -8,7 +8,7 @@ type ZoneType = 'posting' | 'joint' | 'ccg';
 
 function getZone(brand: string): ZoneType {
   if (brand === 'Posting') return 'posting';
-  if (brand === 'CCG + Posting') return 'joint';
+  if (brand === 'CallDom + Posting') return 'joint';
   return 'ccg';
 }
 
@@ -28,19 +28,19 @@ interface ZoneStyles {
 const ZONE_STYLES: Record<ZoneType, ZoneStyles> = {
   posting: {
     accentBar: 'bg-violet-500',
-    badge: 'journey-zone-posting font-mono text-[0.6rem] tracking-wide px-2 py-0.5 rounded-full whitespace-nowrap',
+    badge: 'journey-zone-posting font-mono text-[0.6rem] tracking-wide px-2 py-0.5 rounded-full',
     iconBox: 'journey-zone-posting-icon',
     iconColor: 'text-violet-300',
   },
   joint: {
     accentBar: 'bg-gradient-to-r from-violet-500 to-teal',
-    badge: 'journey-zone-joint font-mono text-[0.6rem] tracking-wide px-2 py-0.5 rounded-full whitespace-nowrap',
+    badge: 'journey-zone-joint font-mono text-[0.6rem] tracking-wide px-2 py-0.5 rounded-full',
     iconBox: 'journey-zone-joint-icon',
     iconColor: 'text-violet-200',
   },
   ccg: {
     accentBar: 'bg-teal',
-    badge: 'journey-zone-ccg font-mono text-[0.6rem] tracking-wide px-2 py-0.5 rounded-full whitespace-nowrap',
+    badge: 'journey-zone-ccg font-mono text-[0.6rem] tracking-wide px-2 py-0.5 rounded-full',
     iconBox: 'journey-zone-ccg-icon',
     iconColor: 'text-teal',
   },
@@ -106,7 +106,7 @@ export default function Journey() {
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
           variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4"
         >
           {s.steps.map((step, i) => {
             const Icon = STEP_ICONS[i];

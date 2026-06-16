@@ -102,7 +102,7 @@ function createWhyMocks(lang: string): FC[] {
       </div>
     ),
 
-    // 3 — Internal cost vs CCGrupo
+    // 3 — Internal cost vs CallDom del Caribe
     () => (
       <div className="p-3">
         <div className="font-mono text-[0.42rem] tracking-widest text-teal/60 uppercase mb-2">{s.scaleCost}</div>
@@ -118,7 +118,7 @@ function createWhyMocks(lang: string): FC[] {
             <div className="w-12 rounded-t-md bg-gradient-to-t from-teal/40 to-teal/10 border border-teal/30 flex items-start justify-center pt-1" style={{ height: '40px' }}>
               <span className="font-mono text-[0.4rem] text-teal">↑</span>
             </div>
-            <span className="font-mono text-[0.4rem] text-gray-400">CCGrupo</span>
+            <span className="font-mono text-[0.4rem] text-gray-400">CallDom del Caribe</span>
             <span className="font-mono text-[0.4rem] text-teal font-bold">$</span>
           </div>
         </div>
@@ -241,16 +241,16 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
   // SEO: dynamic page title
   useEffect(() => {
     const prev = document.title;
-    document.title = `${title} | CCGrupo`;
+    document.title = `${title} | CallDom del Caribe`;
     return () => { document.title = prev; };
   }, [title]);
 
   // SEO: dynamic OG / Twitter / description meta
   useEffect(() => {
-    const BASE = 'https://ccgrupo.com.co';
+    const BASE = 'https://www.calldomdelcaribe.com';
     const path = `/servicio/${serviceId}`;
     const desc = (sd?.longDesc ?? service.details.longDesc).slice(0, 160);
-    const fullTitle = `${title} | CCGrupo`;
+    const fullTitle = `${title} | CallDom del Caribe`;
 
     const selectors: Record<string, [string, string]> = {
       ogTitle:  ['meta[property="og:title"]',          'content'],
@@ -285,7 +285,7 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
 
   // SEO: BreadcrumbList + hreflang per service page
   useEffect(() => {
-    const BASE = 'https://ccgrupo.com.co';
+    const BASE = 'https://www.calldomdelcaribe.com';
     const path = `/servicio/${serviceId}`;
 
     const linkDefs = [
@@ -335,11 +335,11 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
           onClick={onBack}
         >
           <ThemedLogo
-            alt="CCGrupo Logo"
+            alt="CallDom del Caribe Logo"
             className="h-12 w-auto object-contain"
             fallback={(
               <div className="w-8 h-8 border-2 border-teal rounded-md flex items-center justify-center font-mono text-[0.55rem] font-bold text-teal">
-                CCG
+                CDM
               </div>
             )}
           />

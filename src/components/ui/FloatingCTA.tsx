@@ -4,7 +4,7 @@ import { useLang } from '../../i18n';
 
 // Número de WhatsApp con código de país, sin "+" ni espacios.
 // Si quieres cambiarlo, edítalo aquí — no necesita env var.
-const WA_NUMBER = '573016125291';
+const WA_NUMBER = '18299871507';
 
 interface Props {
   onNavigate?: (view: string) => void;
@@ -15,9 +15,9 @@ export default function FloatingCTA({ onNavigate: _onNavigate }: Props) {
   const { lang } = useLang();
 
   const waMessage =
-    lang === 'en' ? 'Hi CCGrupo, I would like more information'
-    : lang === 'pt' ? 'Olá CCGrupo, gostaria de mais informações'
-    : 'Hola CCGrupo, quisiera más información';
+    lang === 'en' ? 'Hi CallDom, I would like more information'
+    : lang === 'pt' ? 'Olá CallDom, gostaria de mais informações'
+    : 'Hola CallDom, quisiera más información';
   const waLabel =
     lang === 'en' ? 'Chat with us on WhatsApp'
     : lang === 'pt' ? 'Fale conosco no WhatsApp'

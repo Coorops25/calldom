@@ -86,7 +86,7 @@ export default function Talento() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="grid grid-cols-3 gap-3"
+            className="grid grid-cols-1 sm:grid-cols-3 gap-3"
           >
             {ta.modalities.map((mod, i) => {
               const Icon = modalityIcons[i];
@@ -170,7 +170,7 @@ export default function Talento() {
                 </div>
                 {country.active && (
                   <span className="flex-shrink-0 bg-teal !text-white text-[9px] font-bold px-2 py-0.5 rounded-full ml-auto whitespace-nowrap">
-                    Activa
+                    {ta.activeBadge}
                   </span>
                 )}
               </motion.div>

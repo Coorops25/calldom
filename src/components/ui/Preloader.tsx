@@ -143,7 +143,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
           {!hideLogo ? (
             <img
               src={logoSrc}
-              alt="CCGrupo"
+              alt="CallDom del Caribe"
               width={160}
               height={160}
               decoding="async"
@@ -158,7 +158,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
               }}
             />
           ) : (
-            <span className="font-mono text-2xl font-bold text-teal">CCG</span>
+            <span className="font-mono text-2xl font-bold text-teal">CDM</span>
           )}
         </div>
       </div>

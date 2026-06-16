@@ -9,7 +9,7 @@
  * stays consistent across the two forms.
  *
  * Column layout on the sheet (must match the Apps Script):
- *   A  ID                  ← generated server-side (CCG-NNN)
+ *   A  ID                  ← generated server-side (CDM-NNN)
  *   B  Fecha               ← server-side, dd/MM/yyyy America/Bogota
  *   C  Tipo de lead        ← "CONTACTO" | "NOSOTROS"
  *   D  Nombre Completo

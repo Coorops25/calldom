@@ -418,7 +418,7 @@ export default function Sectors({ onModalOpenChange, onNavigate }: Props) {
                     <button
                       type="button"
                       onClick={() => {
-                        try { sessionStorage.setItem('ccg.prefillSector', active.name); } catch { /* ignore */ }
+                        try { sessionStorage.setItem('calldom.prefillSector', active.name); } catch { /* ignore */ }
                         close();
                         onNavigate?.('contact');
                       }}

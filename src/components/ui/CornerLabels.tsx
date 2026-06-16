@@ -36,12 +36,12 @@ export default function CornerLabels() {
 
       {/* Bottom-left: domain */}
       <div className="absolute bottom-8 left-10 font-mono text-[0.45rem] tracking-[0.25em] uppercase text-gray-400 select-none">
-        ccgrupo.com.co
+        calldomdelcaribe.com
       </div>
 
       {/* Bottom-right: city */}
       <div className="absolute bottom-8 right-10 font-mono text-[0.45rem] tracking-[0.25em] uppercase text-gray-400 select-none">
-        Bogotá, Colombia
+        Santo Domingo, RD
       </div>
     </div>
   );

@@ -35,7 +35,7 @@ export default function NotFoundModule({ onBack }: Props) {
         </div>
 
         <div className="w-14 h-14 sm:w-16 sm:h-16 border-2 border-teal/40 rounded-xl flex items-center justify-center mx-auto -mt-5 sm:-mt-6 mb-8 bg-navy-deep">
-          <span className="font-mono text-sm font-bold text-teal tracking-wider">CCG</span>
+          <span className="font-mono text-sm font-bold text-teal tracking-wider">CDM</span>
         </div>
 
         <div className="font-mono text-[0.55rem] tracking-[0.35em] uppercase text-teal mb-4">
@@ -67,7 +67,7 @@ export default function NotFoundModule({ onBack }: Props) {
       </motion.div>
 
       <div className="absolute bottom-8 font-mono text-[0.45rem] tracking-[0.25em] uppercase text-gray-600 select-none">
-        ccgrupo.com.co
+        calldomdelcaribe.com
       </div>
     </div>
   );
