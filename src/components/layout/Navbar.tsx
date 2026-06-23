@@ -82,8 +82,7 @@ export default function Navbar({ onNavigate, hidden = false }: Props) {
           aria-label={labels.goHome}
         >
           <ThemedLogo
-            trimWhitespace
-            className="h-9 w-[11.8125rem] sm:h-10 sm:w-[13.125rem] md:h-10 md:w-[13.125rem] lg:h-11 lg:w-[14.4375rem] xl:h-12 xl:w-[15.75rem]"
+            className="h-9 w-[11.8125rem] sm:h-10 sm:w-[13.125rem] md:h-10 md:w-[13.125rem] lg:h-11 lg:w-[14.4375rem] xl:h-12 xl:w-[15.75rem] object-cover"
           />
         </button>
 

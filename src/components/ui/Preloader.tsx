@@ -1,4 +1,4 @@
-import { useEffect, useState, type CSSProperties } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import { useLang } from '../../i18n';
 import { BRAND_ASSETS } from '../../config/branding';
@@ -34,19 +34,6 @@ const LOADER_CSS = `
   }
 `;
 
-const LOGO_TRIM_FRAME_STYLE: CSSProperties = {
-  aspectRatio: '892 / 170',
-};
-
-const LOGO_TRIM_IMAGE_STYLE: CSSProperties = {
-  height: '635.294%',
-  left: '-10.538%',
-  maxWidth: 'none',
-  objectFit: 'fill',
-  position: 'absolute',
-  top: '-268.235%',
-  width: '121.076%',
-};
 
 export default function Preloader({ onComplete }: { onComplete: () => void }) {
   const [count, setCount]     = useState(0);
@@ -155,27 +142,22 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
           }}
         >
           {!hideLogo ? (
-            <span
-              className="ccg-loader-logo-img relative h-12 w-[15.75rem] overflow-hidden"
-              style={LOGO_TRIM_FRAME_STYLE}
-            >
-              <img
-                src={logoSrc}
-                alt="CallDom del Caribe"
-                width={1080}
-                height={1080}
-                decoding="async"
-                fetchPriority="high"
-                style={LOGO_TRIM_IMAGE_STYLE}
-                onError={() => {
-                  if (logoSrc !== BRAND_ASSETS.legacyLogo) {
-                    setLogoSrc(BRAND_ASSETS.legacyLogo);
-                    return;
-                  }
-                  setHideLogo(true);
-                }}
-              />
-            </span>
+            <img
+              className="ccg-loader-logo-img h-12 w-[15.75rem] object-cover"
+              src={logoSrc}
+              alt="CallDom del Caribe"
+              width={1080}
+              height={1080}
+              decoding="async"
+              fetchPriority="high"
+              onError={() => {
+                if (logoSrc !== BRAND_ASSETS.legacyLogo) {
+                  setLogoSrc(BRAND_ASSETS.legacyLogo);
+                  return;
+                }
+                setHideLogo(true);
+              }}
+            />
           ) : (
             <span className="font-mono text-2xl font-bold text-teal">CDM</span>
           )}
