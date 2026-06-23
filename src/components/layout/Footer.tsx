@@ -56,7 +56,7 @@ export default function Footer({ onNavigate }: Props) {
                   <ThemedLogo
                     trimWhitespace
                     alt="CallDom del Caribe Logo"
-                    className="h-9 w-[11.8125rem] sm:h-10 sm:w-[13.125rem] lg:h-12 lg:w-[15.75rem]"
+                    className="h-9 sm:h-10 lg:h-12"
                     fallback={logoFallback}
                   />
                 </motion.div>

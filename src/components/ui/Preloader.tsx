@@ -50,7 +50,7 @@ const LOGO_TRIM_IMAGE_STYLE: CSSProperties = {
 
 export default function Preloader({ onComplete }: { onComplete: () => void }) {
   const [count, setCount]     = useState(0);
-  const [logoSrc, setLogoSrc] = useState(BRAND_ASSETS.loaderLogo);
+  const [logoSrc, setLogoSrc] = useState(BRAND_ASSETS.logoDark);
   const [hideLogo, setHideLogo] = useState(false);
   const { t } = useLang();
 

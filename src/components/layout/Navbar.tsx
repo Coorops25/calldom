@@ -83,7 +83,7 @@ export default function Navbar({ onNavigate, hidden = false }: Props) {
         >
           <ThemedLogo
             trimWhitespace
-            className="h-7 w-[9.2rem] sm:h-8 sm:w-[10.5rem] md:h-8 md:w-[10.5rem] lg:h-9 lg:w-[11.8125rem] xl:h-10 xl:w-[13.125rem]"
+            className="h-7 sm:h-8 md:h-8 lg:h-9 xl:h-10"
           />
         </button>
 

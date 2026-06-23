@@ -17,7 +17,7 @@ const LOGO_TRIM_IMAGE_STYLE: CSSProperties = {
 };
 
 export default function PageLoader() {
-  const [logoSrc, setLogoSrc] = useState(BRAND_ASSETS.loaderLogo);
+  const [logoSrc, setLogoSrc] = useState(BRAND_ASSETS.logoDark);
   const [showFallbackMark, setShowFallbackMark] = useState(false);
 
   return (
