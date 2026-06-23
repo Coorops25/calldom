@@ -5,28 +5,22 @@
   <!-- Teal bottom accent bar -->
   <rect x="8" y="56" width="48" height="3" rx="1.5" fill="#00b4d8" opacity="0.6"/>
 
-  <!-- C1 — left bar -->
-  <rect x="7" y="17" width="4" height="28" rx="1.5" fill="#00b4d8"/>
-  <!-- C1 — top bar -->
-  <rect x="7" y="17" width="14" height="4" rx="1.5" fill="#00b4d8"/>
-  <!-- C1 — bottom bar -->
-  <rect x="7" y="41" width="14" height="4" rx="1.5" fill="#00b4d8"/>
+  <!-- C — left bar -->
+  <rect x="5" y="16" width="5" height="30" rx="2" fill="#00b4d8"/>
+  <!-- C — top bar -->
+  <rect x="5" y="16" width="23" height="5" rx="2" fill="#00b4d8"/>
+  <!-- C — bottom bar -->
+  <rect x="5" y="41" width="23" height="5" rx="2" fill="#00b4d8"/>
 
-  <!-- C2 — left bar -->
-  <rect x="26" y="17" width="4" height="28" rx="1.5" fill="#00b4d8"/>
-  <!-- C2 — top bar -->
-  <rect x="26" y="17" width="14" height="4" rx="1.5" fill="#00b4d8"/>
-  <!-- C2 — bottom bar -->
-  <rect x="26" y="41" width="14" height="4" rx="1.5" fill="#00b4d8"/>
+  <!-- D — left bar -->
+  <rect x="34" y="16" width="5" height="30" rx="2" fill="#ffffff"/>
+  <!-- D — top bar -->
+  <rect x="34" y="16" width="22" height="5" rx="2" fill="#ffffff"/>
+  <!-- D — bottom bar -->
+  <rect x="34" y="41" width="22" height="5" rx="2" fill="#ffffff"/>
+  <!-- D — right bar -->
+  <rect x="51" y="16" width="5" height="30" rx="2" fill="#ffffff"/>
 
-  <!-- G — left bar -->
-  <rect x="45" y="17" width="4" height="28" rx="1.5" fill="#ffffff"/>
-  <!-- G — top bar -->
-  <rect x="45" y="17" width="14" height="4" rx="1.5" fill="#ffffff"/>
-  <!-- G — bottom bar -->
-  <rect x="45" y="41" width="14" height="4" rx="1.5" fill="#ffffff"/>
-  <!-- G — right bar (bottom half only) -->
-  <rect x="55" y="30" width="4" height="15" rx="1.5" fill="#ffffff"/>
-  <!-- G — middle stub -->
-  <rect x="49" y="30" width="10" height="4" rx="1.5" fill="#ffffff"/>
+  <!-- Caribbean dot — teal accent between C and D -->
+  <circle cx="31" cy="32" r="2.5" fill="#00e5ff" opacity="0.9"/>
 </svg>

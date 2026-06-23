@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type CSSProperties } from 'react';
 import { motion } from 'motion/react';
 import { useLang } from '../../i18n';
 import { BRAND_ASSETS } from '../../config/branding';
@@ -33,6 +33,20 @@ const LOADER_CSS = `
     animation: ccg-logo-glow 2s ease-in-out infinite;
   }
 `;
+
+const LOGO_TRIM_FRAME_STYLE: CSSProperties = {
+  aspectRatio: '892 / 170',
+};
+
+const LOGO_TRIM_IMAGE_STYLE: CSSProperties = {
+  height: '635.294%',
+  left: '-10.538%',
+  maxWidth: 'none',
+  objectFit: 'fill',
+  position: 'absolute',
+  top: '-268.235%',
+  width: '121.076%',
+};
 
 export default function Preloader({ onComplete }: { onComplete: () => void }) {
   const [count, setCount]     = useState(0);
@@ -72,16 +86,16 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
       <style>{LOADER_CSS}</style>
 
       {/* ── Box ring + logo ─────────────────────────── */}
-      <div className="relative flex items-center justify-center" style={{ width: 220, height: 220 }}>
+      <div className="relative flex items-center justify-center" style={{ width: 290, height: 290 }}>
 
         {/* Orbit ring (subtle) */}
         <div
           className="absolute rounded-full border border-teal/10"
-          style={{ width: 180, height: 180 }}
+          style={{ width: 220, height: 220 }}
         />
         <div
           className="absolute rounded-full border border-teal/5"
-          style={{ width: 142, height: 142 }}
+          style={{ width: 172, height: 172 }}
         />
 
         {/* 4 orbiting boxes */}
@@ -90,8 +104,8 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
             key={i}
             className="absolute"
             style={{
-              width: 24,
-              height: 24,
+              width: 28,
+              height: 28,
               ...pos,
             }}
           >
@@ -132,7 +146,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
 
         {/* Center logo */}
         <div
-          className="relative z-10 w-[160px] h-[160px] rounded-3xl flex items-center justify-center"
+          className="relative z-10 flex h-[100px] w-[264px] items-center justify-center rounded-3xl"
           style={{
             background: 'linear-gradient(135deg, rgba(0,180,216,0.15), rgba(0,229,255,0.08))',
             border: '1px solid rgba(0,180,216,0.3)',
@@ -141,22 +155,27 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
           }}
         >
           {!hideLogo ? (
-            <img
-              src={logoSrc}
-              alt="CallDom del Caribe"
-              width={160}
-              height={160}
-              decoding="async"
-              fetchPriority="high"
-              className="ccg-loader-logo-img w-[160px] max-w-none h-auto object-contain"
-              onError={() => {
-                if (logoSrc !== BRAND_ASSETS.legacyLogo) {
-                  setLogoSrc(BRAND_ASSETS.legacyLogo);
-                  return;
-                }
-                setHideLogo(true);
-              }}
-            />
+            <span
+              className="ccg-loader-logo-img relative h-12 w-[15.75rem] overflow-hidden"
+              style={LOGO_TRIM_FRAME_STYLE}
+            >
+              <img
+                src={logoSrc}
+                alt="CallDom del Caribe"
+                width={1080}
+                height={1080}
+                decoding="async"
+                fetchPriority="high"
+                style={LOGO_TRIM_IMAGE_STYLE}
+                onError={() => {
+                  if (logoSrc !== BRAND_ASSETS.legacyLogo) {
+                    setLogoSrc(BRAND_ASSETS.legacyLogo);
+                    return;
+                  }
+                  setHideLogo(true);
+                }}
+              />
+            </span>
           ) : (
             <span className="font-mono text-2xl font-bold text-teal">CDM</span>
           )}

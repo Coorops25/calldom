@@ -78,10 +78,13 @@ export default function Navbar({ onNavigate, hidden = false }: Props) {
         {/* Logo container */}
         <button
           onClick={() => scrollToSection('#hero')}
-          className="relative z-50 transition-transform duration-300 hover:scale-[1.02]"
+          className="relative z-50 shrink-0 transition-transform duration-300 hover:scale-[1.02]"
           aria-label={labels.goHome}
         >
-          <ThemedLogo className="h-10 sm:h-11 w-auto" />
+          <ThemedLogo
+            trimWhitespace
+            className="h-7 w-[9.2rem] sm:h-8 sm:w-[10.5rem] md:h-8 md:w-[10.5rem] lg:h-9 lg:w-[11.8125rem] xl:h-10 xl:w-[13.125rem]"
+          />
         </button>
 
         {/* Desktop navigation */}

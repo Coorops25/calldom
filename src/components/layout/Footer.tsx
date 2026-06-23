@@ -30,7 +30,7 @@ export default function Footer({ onNavigate }: Props) {
   const { t } = useLang();
 
   const logoFallback = (
-    <div className="w-8 h-8 border-2 border-teal rounded-md flex items-center justify-center font-mono text-[0.55rem] font-bold text-teal">
+    <div className="w-12 h-12 border-2 border-teal rounded-md flex items-center justify-center font-mono text-[0.62rem] font-bold text-teal">
       CDM
     </div>
   );
@@ -40,7 +40,7 @@ export default function Footer({ onNavigate }: Props) {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-12 lg:gap-14 mb-12 sm:mb-16">
         <div className="lg:col-span-2 min-w-0 text-center sm:text-left">
           <div
-            className="flex items-center justify-center sm:justify-start gap-3 mb-5 sm:mb-6 min-h-[2.5rem] min-w-0"
+            className="flex items-center justify-center sm:justify-start gap-3 mb-5 sm:mb-6 min-h-[2.25rem] sm:min-h-[2.5rem] min-w-0"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
@@ -54,8 +54,9 @@ export default function Footer({ onNavigate }: Props) {
                   transition={{ duration: 0.3 }}
                 >
                   <ThemedLogo
+                    trimWhitespace
                     alt="CallDom del Caribe Logo"
-                    className="h-16 sm:h-20 w-auto max-w-[11rem] sm:max-w-none object-contain"
+                    className="h-9 w-[11.8125rem] sm:h-10 sm:w-[13.125rem] lg:h-12 lg:w-[15.75rem]"
                     fallback={logoFallback}
                   />
                 </motion.div>
@@ -68,7 +69,7 @@ export default function Footer({ onNavigate }: Props) {
                   transition={{ duration: 0.3 }}
                   className="flex items-center gap-3"
                 >
-                  <div className="w-8 h-8 border-2 border-teal rounded-md flex items-center justify-center font-mono text-[0.55rem] font-bold text-teal">
+                  <div className="w-12 h-12 border-2 border-teal rounded-md flex items-center justify-center font-mono text-[0.62rem] font-bold text-teal">
                     CDM
                   </div>
                   <div className="font-mono text-[0.65rem] tracking-[0.25em] uppercase text-white font-normal">

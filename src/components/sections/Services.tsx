@@ -156,8 +156,13 @@ export default function Services({ onNavigate }: ServicesProps) {
               >
                 <div className="flex items-center justify-center h-full w-full">
                   <div className="relative z-10 text-center pointer-events-none">
-                    <div className="w-20 h-20 border border-teal/20 rounded-2xl flex items-center justify-center text-3xl mb-5 bg-teal/5 backdrop-blur-md mx-auto text-teal">
-                      <svc.icon size={32} strokeWidth={1.5} />
+                    <div className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 border border-teal/20 rounded-[2rem] sm:rounded-[2.5rem] flex items-center justify-center mb-5 sm:mb-6 bg-teal/5 backdrop-blur-md mx-auto text-teal">
+                      <svc.icon
+                        className="w-16 h-16 sm:w-24 sm:h-24 lg:w-28 lg:h-28"
+                        strokeWidth={1.25}
+                        aria-hidden="true"
+                        focusable="false"
+                      />
                     </div>
                     <div className="font-mono text-[0.5rem] tracking-[0.3em] uppercase text-gray-300">
                       {title}
