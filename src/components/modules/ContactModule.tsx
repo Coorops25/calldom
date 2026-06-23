@@ -304,13 +304,13 @@ export default function ContactModule({ onBack }: Props) {
                     <PhoneInput
                       id="f-telefono"
                       international
-                      defaultCountry="CO"
-                      value={form.telefono}
+                      defaultCountry="DO"
+                      value={form.telefono || undefined}
                       onChange={(value) => {
                         setForm(prev => ({ ...prev, telefono: value || '' }));
                         if (errors.telefono) setErrors(prev => ({ ...prev, telefono: undefined }));
                       }}
-                      placeholder="300 000 0000"
+                      placeholder="809 000 0000"
                       className={`ccg-phone-input ${inputBase}`}
                     />
                   </Field>
