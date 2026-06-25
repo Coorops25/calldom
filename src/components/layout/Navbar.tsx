@@ -82,7 +82,7 @@ export default function Navbar({ onNavigate, hidden = false }: Props) {
           aria-label={labels.goHome}
         >
           <span className="logo-liquid-glass h-[2.75rem] w-[11.8125rem] sm:h-12 sm:w-[13.125rem] md:h-12 md:w-[13.125rem] lg:h-[3.3125rem] lg:w-[14.4375rem] xl:h-[3.625rem] xl:w-[15.75rem]">
-            <ThemedLogo className="h-full w-full object-cover" />
+            <ThemedLogo className="h-full w-full" trimWhitespace />
           </span>
         </button>
 
