@@ -81,9 +81,9 @@ export default function Navbar({ onNavigate, hidden = false }: Props) {
           className="relative z-50 shrink-0 transition-transform duration-300 hover:scale-[1.02]"
           aria-label={labels.goHome}
         >
-          <ThemedLogo
-            className="h-9 w-[11.8125rem] sm:h-10 sm:w-[13.125rem] md:h-10 md:w-[13.125rem] lg:h-11 lg:w-[14.4375rem] xl:h-12 xl:w-[15.75rem] object-cover"
-          />
+          <span className="logo-liquid-glass h-[2.75rem] w-[11.8125rem] sm:h-12 sm:w-[13.125rem] md:h-12 md:w-[13.125rem] lg:h-[3.3125rem] lg:w-[14.4375rem] xl:h-[3.625rem] xl:w-[15.75rem]">
+            <ThemedLogo className="h-full w-full object-cover" />
+          </span>
         </button>
 
         {/* Desktop navigation */}
