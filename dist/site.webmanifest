@@ -1,7 +1,7 @@
 {
-  "name": "CCGrupo — BPO Colombia",
-  "short_name": "CCGrupo",
-  "description": "BPO de nueva generación. CX, Leads & Ventas, Agentes Autónomos con IA y Digital Studio. +15 años de experiencia en Colombia.",
+  "name": "CallDom del Caribe | BPO Caribe",
+  "short_name": "CallDom",
+  "description": "BPO de nueva generación en el Caribe. CX, Leads & Ventas, Agentes Autónomos con IA y Digital Studio. Santo Domingo, RD.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#060d1f",
@@ -9,6 +9,8 @@
   "lang": "es",
   "categories": ["business", "productivity"],
   "icons": [
-    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+    { "src": "/images/Isotipo.png", "sizes": "1080x1080", "type": "image/png", "purpose": "any" },
+    { "src": "/images/Isotipo.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
   ]
 }
