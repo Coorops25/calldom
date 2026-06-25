@@ -1,0 +1,22 @@
+Options -MultiViews
+RewriteEngine On
+
+# Serve compiled SPA from dist/ without exposing the subdirectory
+RewriteRule ^$ dist/index.html [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{DOCUMENT_ROOT}/dist%{REQUEST_URI} -f [OR]
+RewriteCond %{DOCUMENT_ROOT}/dist%{REQUEST_URI} -d
+RewriteRule ^(.+)$ dist/$1 [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ dist/index.html [L]
+
+# Block direct access to source files
+<FilesMatch "\.(tsx|ts|jsx|env|gitignore|yml|yaml)$">
+  Order deny,allow
+  Deny from all
+</FilesMatch>
+RedirectMatch 403 ^/(src|node_modules|scripts)/
