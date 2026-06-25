@@ -1,4 +1,4 @@
 ---
 deployment:
   tasks:
-    - /bin/cp -Rf dist/. /home2/ljdesymy/public_html/calldom/
+    - /usr/bin/unzip -o /home2/ljdesymy/public_html/calldom/dist.zip -d /home2/ljdesymy/public_html/calldom/
