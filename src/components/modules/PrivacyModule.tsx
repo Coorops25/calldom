@@ -40,9 +40,10 @@ export default function PrivacyModule({ onBack, onNavigate }: Props) {
         <button type="button" onClick={onBack} className="flex items-center gap-3 min-w-0 cursor-pointer bg-transparent border-0 p-0" aria-label={t.common.goHome}>
           <ThemedLogo
             alt="CallDom del Caribe Logo"
-            className="h-12 w-auto object-contain"
+            trimWhitespace
+            className="h-6 w-32 sm:h-7 sm:w-40"
             fallback={(
-              <div className="w-8 h-8 border-2 border-teal rounded-md flex items-center justify-center font-mono text-[0.55rem] font-bold text-teal">
+              <div className="w-12 h-12 border-2 border-teal rounded-md flex items-center justify-center font-mono text-[0.62rem] font-bold text-teal">
                 CDM
               </div>
             )}

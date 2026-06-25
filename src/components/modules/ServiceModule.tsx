@@ -336,9 +336,10 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
         >
           <ThemedLogo
             alt="CallDom del Caribe Logo"
-            className="h-12 w-auto object-contain"
+            trimWhitespace
+            className="h-6 w-32 sm:h-7 sm:w-40"
             fallback={(
-              <div className="w-8 h-8 border-2 border-teal rounded-md flex items-center justify-center font-mono text-[0.55rem] font-bold text-teal">
+              <div className="w-12 h-12 border-2 border-teal rounded-md flex items-center justify-center font-mono text-[0.62rem] font-bold text-teal">
                 CDM
               </div>
             )}
@@ -410,8 +411,8 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
                 >
                   <div className="flex items-center justify-center h-full w-full relative z-10">
                     <div className="text-center">
-                      <div className="w-20 h-20 sm:w-24 sm:h-24 border border-teal/30 rounded-3xl flex items-center justify-center bg-navy-deep/60 backdrop-blur-md mx-auto mb-4">
-                        <service.icon size={48} className="text-teal" strokeWidth={0.75} />
+                      <div className="w-24 h-24 sm:w-32 sm:h-32 border border-teal/30 rounded-3xl flex items-center justify-center bg-navy-deep/60 backdrop-blur-md mx-auto mb-5">
+                        <service.icon className="w-14 h-14 sm:w-20 sm:h-20 text-teal" strokeWidth={0.85} aria-hidden="true" focusable="false" />
                       </div>
                       <div className="font-mono text-[0.55rem] tracking-[0.3em] uppercase text-gray-300">
                         {title}
@@ -434,8 +435,8 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
             )}
 
             {/* Decorative icon badge — hidden on small screens to avoid overflow */}
-            <div className="hidden sm:flex absolute -bottom-8 -left-8 lg:-bottom-10 lg:-left-10 w-32 h-32 sm:w-40 sm:h-40 border border-teal/20 rounded-full items-center justify-center bg-navy-deep/80 backdrop-blur-md">
-              <service.icon size={48} className="text-teal" strokeWidth={1} />
+            <div className="hidden sm:flex absolute -bottom-8 -left-8 lg:-bottom-10 lg:-left-10 w-36 h-36 sm:w-44 sm:h-44 border border-teal/20 rounded-full items-center justify-center bg-navy-deep/80 backdrop-blur-md">
+              <service.icon className="w-16 h-16 sm:w-20 sm:h-20 text-teal" strokeWidth={1} aria-hidden="true" focusable="false" />
             </div>
           </motion.div>
         </div>
@@ -510,11 +511,16 @@ export default function ServiceModule({ serviceId, onBack, onNavigate }: Service
                   transition={{ delay: i * 0.1 }}
                   className="service-module-card service-module-feature p-6 sm:p-8 border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] hover:border-teal/30 hover:-translate-y-1 transition-all duration-300 rounded-2xl group"
                 >
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-12 h-12 rounded-xl border border-teal/20 bg-teal/5 flex items-center justify-center shrink-0 group-hover:border-teal/50 transition-colors">
-                      <product.icon size={22} className="text-teal" strokeWidth={1.5} />
+                  <div className="flex items-center gap-4 sm:gap-5 mb-5 min-w-0">
+                    <div className="w-16 h-16 sm:w-[4.5rem] sm:h-[4.5rem] rounded-2xl border border-teal/20 bg-teal/5 flex items-center justify-center shrink-0 group-hover:border-teal/50 transition-colors">
+                      <product.icon
+                        className="w-8 h-8 sm:w-9 sm:h-9 text-teal"
+                        strokeWidth={1.5}
+                        aria-hidden="true"
+                        focusable="false"
+                      />
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <div className="font-mono text-[0.5rem] tracking-[0.2em] uppercase text-gray-400 mb-0.5">
                         AVA {product.number}
                       </div>
